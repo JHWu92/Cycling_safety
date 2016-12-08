@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Safe Cycling Create Account</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/script.js"></script>
+  <link href="css/style.css" rel="stylesheet" >
+</head>
+<body>
+
+  <div class="container" id = 'create-account'>
+    <form class="form-signin" method="post" action="create_account.php">
+      <h2 class="form-signin-heading">Create Account</h2>
+      <label for="inputEmail" >Email address</label>
+      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="Email">
+      <label for="inputName" >Username</label>
+      <input type="text" id="inputName" class="form-control" placeholder="Username" name="userName">
+      <label for="inputPassword" >Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="Password">
+      <label style = 'margin-bottom: 5px;display:inline;'>Select Your Experience Level.</label>
+      <div id='skill-btns' class="btn-group" data-toggle="buttons">
+        <label class="btn btn-danger">
+          <input type="radio" name="experienceLevel" id="option1" autocomplete="off" required value="exlv 1">Option 1
+        </label>
+        <label class="btn btn-danger">
+          <input type="radio" name="experienceLevel" id="option2" autocomplete="off" value="exlv 2">Option 2
+        </label>
+        <label class="btn btn-danger">
+          <input type="radio" name="experienceLevel" id="option3" autocomplete="off" value="exlv 3">Option 3
+        </label>
+        <label class="btn btn-danger">
+          <input type="radio" name="experienceLevel" id="option4" autocomplete="off" value="exlv 4">Option 4
+        </label>
+      </div>
+      <button id='btn-create' class="btn btn-lg btn-primary" type="submit">Create Account</button>
+    </form> 
+  </div> <!-- /container --> 
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap 101 Template</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <link href="css/style.css" rel="stylesheet" >
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/script.js"></script>
+</head>
+<body>
+
+  <div class="container" id = 'sign-in'>
+    <form class="form-signin" onsubmit="show('sign-in', 'create-account');" action="conn_db.php" method="post">
+      <h2 class="form-signin-heading">Please sign in</h2>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="cemail">
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="pwd">
+      <div class="checkbox">
+        <label style = 'display:inline;margin-right:18px;'>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label> 
+        <a style = 'text-align: right;' role='button' onclick="create_account();">Create an account</a>
+      </div>
+      <button id='btn-signin' class="btn btn-lg btn-primary" type="submit">Sign in</button>
+    </form>
+  </div> <!-- /sign-in container -->
+  </div> <!-- /container --> 
+
+
+</body>
+</html>
