@@ -1,3 +1,5 @@
 *.pyc
 */.ipytnb_checkpoints/*
 .ipynb_checkpoints/
+open_data_analysis/data/*.osm
+open_data_analysis/data/*.sqlite3
