@@ -31,10 +31,10 @@ def grid_line(mini, maxi, ngrid=10):
     return [(mini + i * delta, mini + (i + 1) * delta) for i in range(ngrid)]
 
 
-def grid_area(s, w, n, e, ngrid=10):
+def grid_area(w, s, e, n, ngrid=10):
     """
     grid area into ngrid^2 grids
-    :param s, w, n, e: the s,w,n,e lat lon points of the bound box
+    :param w, s, e, n,: the w, s, e, n (min_lon, min_lat, max_lon, max_lat) of the bound box
     :param ngrid: divide area into ngrid^2 grids
     :return: list of grid represented by bound box with s,w,n,e
     """
@@ -45,7 +45,7 @@ def grid_area(s, w, n, e, ngrid=10):
         for j in range(ngrid):
             si, ni = grid_lat[i]
             wj, ej = grid_lon[j]
-            grids.append((si, wj, ni, ej))
+            grids.append((wj, si, ej, ni))
     return grids
 
 

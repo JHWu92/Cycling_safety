@@ -24,7 +24,7 @@ def oid_in_city(osm_container, city):
     way_ids = set([way.id for way in ways if len(set(way.nodes)&node_ids)>0])
     rltn_ids = set()
 
-    for rltn in osm_container.osm_objs['Relation']:
+    for rltn in rltns:
         try:
             list_shps = rltn2shps(osm_container, rltn, to='list')
         except KeyError as e:
