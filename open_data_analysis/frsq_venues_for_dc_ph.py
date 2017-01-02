@@ -37,4 +37,4 @@ city_segments_ph = data_dir + fn_segments_ph
 raw_venues_in_city(city_ph, frsq_raw_venues_ph)
 show_grids_used(city_ph, frsq_raw_venues_ph)
 frsq_venues_in_city_geojson(city_ph, frsq_raw_venues_ph, frsq_venues_in_city_ph)
-frsq_near_segments(frsq_venues_in_city_ph, city_segments_ph, epsg_ph, bfr_20m)
+# frsq_near_segments(frsq_venues_in_city_ph, city_segments_ph, epsg_ph, bfr_20m)
