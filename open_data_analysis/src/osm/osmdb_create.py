@@ -1,10 +1,6 @@
 # coding=utf-8
 import sqlite3
-
-TB_GEOM = 'geometry'
-TB_MMBR = 'member'
-TB_TAG = 'tag'
-
+from osmdb_constants import TB_GEOM, TB_MMBR, TB_TAG
 
 def build_db_from_osm(osm_container, city, osm_db_path):
     """
