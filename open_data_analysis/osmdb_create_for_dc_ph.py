@@ -3,7 +3,7 @@
 from src.osm.container import OSMContainer
 from src.osm.osm_clean import get_city
 from src.constants import fn_city_poly_dc, fn_osm_db_dc, fn_osm_raw_dc, fn_city_poly_ph, fn_osm_db_ph, fn_osm_raw_ph
-from src.osm.osm2db import build_db_from_osm
+from src.osm.osmdb_create import build_db_from_osm
 
 data_dir = 'data/'
 city_dc = get_city(data_dir+fn_city_poly_dc)
