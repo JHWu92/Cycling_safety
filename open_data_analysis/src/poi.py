@@ -25,3 +25,4 @@ def frsq_near_segments(frsq_venues_in_city_path, city_segments_path, bfr_crs, bf
         print 'wrote frsq_near_segments:', new_path
 
     return frsq_venues_near_segments
+

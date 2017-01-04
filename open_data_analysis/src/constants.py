@@ -39,4 +39,6 @@ fn_frsq_taxonomy_json = 'frsq_taxonomy_raw.json'
 fn_frsq_taxonomy_csv = 'frsq_taxonomy_parsed.csv'
 fn_frsq_taxonomy_tree = 'frsq_taxonomy_tree.txt'
 
-
+# Poi mapping
+fn_mapping_for_fs = 'manual/poi_mapping_for_fs.txt'
+fn_mapping_for_osm = 'manual/poi_mapping_for_osm.txt'
