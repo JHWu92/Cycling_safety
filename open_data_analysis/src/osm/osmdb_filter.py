@@ -87,8 +87,9 @@ def filter_tbtag(osm_db, in_tags=((None, None),), ex_tags=((None, None),), ot=No
     :param debug: if True, print sql and basic statistics of rows
     :return: rows fitting where clause
     """
+    from osmdb_constants import FIELDS_TB_TAG
+    assert FIELDS_TB_TAG==['ot', 'oid', 'key', 'value'], 'filter_tbtag assumes fields of table tag are ot,oid,key,value'
     sql = "SELECT * FROM {tb}".format(tb=TB_TAG)  # tag=(*,*), any objs with any tag
-
     assert is_list_tuple(in_tags[0]), 'elements of in_tags should be tuple or list, tags={}'.format(in_tags)
     assert is_list_tuple(ex_tags[0]), 'elements of ex_tags should be tuple or list, tags={}'.format(ex_tags)
     in_tags_clause = build_clause(in_tags)
@@ -110,7 +111,6 @@ def filter_tbtag(osm_db, in_tags=((None, None),), ex_tags=((None, None),), ot=No
 
     if debug:
         import pandas as pd
-        from osmdb_constants import FIELDS_TB_TAG
         print 'filter table tag', sql
         df = pd.DataFrame(rows, columns=FIELDS_TB_TAG)
         print '# rows', len(rows)
