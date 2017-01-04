@@ -10,6 +10,7 @@ fn_city_poly_ph_png = fn_city_poly_ph.replace('geojson','png')
 fn_osm_raw_ph = 'osm_raw_ph.osm'
 fn_osm_db_ph = 'osm_db_ph.sqlite3'
 # Segments
+# TODO: get segments for philly
 fn_segments_ph = 'segments_ph.geojson'
 # FourSquare Venues
 dir_frsq_raw_venues_ph = 'frsq_raw_venues/ph/'
