@@ -72,6 +72,19 @@ def ptfromln(pt, ln):
 # ##############
 
 
+def gpdf_equal(l,r,output='idx'):
+    allow_values = ['idx','gpdf']
+    if output not in allow_values:
+        raise ValueError('output allow_values is {}'.format(allow_values))
+    contains = gp.tools.sjoin(l, r, op='contains').reset_index()
+    equal_idx = [(idx,idxr) for idx, idxr in contains[['index', 'index_right']].values
+         if l.loc[idx].geometry.equals(r.loc[idxr].geometry)]
+    equal_idx = gp.GeoDataFrame(equal_idx, columns=['index', 'index_right'])
+    if output=='gpdf':
+        return contains.merge(equal_idx)
+    return equal_idx
+
+
 def crs_prepossess(gpdf, init_crs, bfr_crs):
     """
     create a shallow copy of gpdf; check the init crs of gpdf, if None, assign init_crs; change crs of copy to bfr_crs
@@ -93,14 +106,14 @@ def bfr_20m(seg):
 
 def objs_near_segs(objs, segs, bfr_func, bfr_crs, init_crs=4326, output='seg_obj_index', crs_ready=False):
     """
-    obj indexes of whom are near segments
     :param objs: geopandas.GeoDataFrame
     :param segs: geopandas.GeoDataFrame
     :param bfr_func: define "near"
     :param init_crs: init_crs epsg code
     :param bfr_crs: target crs epsg code used for buffering
     :param output: one kind of ('seg_obj_index', 'objs')
-    :return: geopandas.GeoDataFrame objs[near segs]
+    :return: seg_obj_index: (pd.df)obj indexes of whom are near segments,
+         or  objs: (geopandas.GeoDataFrame) objs[near seg]
     """
     allow_output = ('seg_obj_index', 'objs')
     if output not in allow_output:
@@ -120,14 +133,22 @@ def objs_near_segs(objs, segs, bfr_func, bfr_crs, init_crs=4326, output='seg_obj
         return objs_nearby
 
 
-def objs_near_segs_store(objs_near, path_objs, path_segs):
+def objs_near_segs_store(objs_near, dir, fn_objs, fn_segs):
+    """
+    store objs_near to path: dir/fn_objs+fn_segs.geojson
+    :param objs_near: geopandas.GeoDataFrame
+    :param path_objs: dir/fn_objs.ext
+    :param path_segs: dir/fn_segs.ext
+    :return: output path
+    """
     import os
-    dir_fn_objs, ext = os.path.splitext(path_objs)
-    fn_segs, ext = os.path.splitext(os.path.basename(path_segs))
-    new_path = '{}_near_{}{}'.format(dir_fn_objs, fn_segs, ext)
+    fn_objs, _ = os.path.splitext(fn_objs)
+    fn_segs, _ = os.path.splitext(os.path.basename(fn_segs))
+    new_path = '{}{}_near_{}.geojson'.format(dir,fn_objs, fn_segs)
     with open(new_path, 'w') as f:
         f.write(objs_near.to_json())
     print 'wrote obj near segments:', new_path
+    return new_path
 
 
 # ########## functions assigning ln(segment) to objs #############

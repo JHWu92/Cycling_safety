@@ -33,6 +33,9 @@ fn_segments_dc = 'segments_dc_opendc.geojson'
 # FourSquare Venues
 dir_frsq_raw_venues_dc = 'frsq_raw_venues/dc/'
 fn_frsq_venues_dc = 'frsq_venues_dc.geojson'
+# Poi
+fn_poi_frsq_dc = 'poi_frsq_dc.geojson'
+fn_poi_osm_dc = 'poi_osm_dc.geojson'
 
 # FourSquare Taxonomy
 fn_frsq_taxonomy_json = 'frsq_taxonomy_raw.json'

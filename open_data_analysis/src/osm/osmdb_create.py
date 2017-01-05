@@ -82,7 +82,6 @@ def create_tb_idx(osm_db_path):
 
 
 def insert_geom(osm_container,osm_db_path, keep_oids):
-
     from osm2shp import node2pt, way2lineOrpoly, rltn2geocltn
     values = []
     for otype in ['Node','Way','Relation']:

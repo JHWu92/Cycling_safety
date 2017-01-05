@@ -80,6 +80,13 @@ def build_clause(tags):
     return clause
 
 
+def filter_tbtag_to_df(osm_db, in_tags=((None, None),), ex_tags=((None, None),), ot=None, debug=False):
+    from osmdb_constants import FIELDS_TB_TAG
+    import pandas as pd
+    rows = filter_tbtag(osm_db, in_tags, ex_tags, ot, debug)
+    return pd.DataFrame(rows, columns=FIELDS_TB_TAG)
+
+
 def filter_tbtag(osm_db, in_tags=((None, None),), ex_tags=((None, None),), ot=None, debug=False):
     """
     filter table tag where row has ot, one of the tag in in_tags and none of the ex_tags
