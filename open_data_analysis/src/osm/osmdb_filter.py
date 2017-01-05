@@ -31,29 +31,32 @@ def filter_geom_by_otoids(osm_db, otoids, debug=False):
     """
     :return: rows of table geometry
     """
-    sql = 'SELECT * FROM {}'.format(TB_GEOM)
     assert otoids, 'otoids should not be empty'
     assert is_list_tuple(otoids[0]), 'elements of otoids should be list or tuple: otoids={}'.format(str(otoids))
-
-    pair_clause = []
-    for cnt, (ot, oid) in enumerate(otoids):
-        if cnt==0:
-            pair_clause.append("SELECT '{}' AS ot, {} AS oid".format(ot, oid))
-        else:
-            pair_clause.append("SELECT '{}', {}".format(ot, oid))
-    pair_clause = ' UNION ALL '.join(pair_clause)
-    sql = '{sql} NATURAL JOIN ({pair_clause})'.format(sql=sql, pair_clause=pair_clause)
-    if debug:
-        print sql
-    rows = exec_sql(osm_db, sql, text_factory_str=True)
+    chunk_size = 400
+    rows = []
+    for i in range(0, len(otoids), chunk_size):
+        sub_otoids = otoids[i:i+chunk_size]
+        pair_clause = []
+        for cnt, (ot, oid) in enumerate(sub_otoids):
+            if cnt==0:
+                pair_clause.append("SELECT '{}' AS ot, {} AS oid".format(ot, oid))
+            else:
+                pair_clause.append("SELECT '{}', {}".format(ot, oid))
+        pair_clause = ' UNION ALL '.join(pair_clause)
+        sql = 'SELECT * FROM {}'.format(TB_GEOM)
+        sql = '{sql} NATURAL JOIN ({pair_clause})'.format(sql=sql, pair_clause=pair_clause)
+        if debug:
+            print sql
+        rows.extend(exec_sql(osm_db, sql, text_factory_str=True))
     return rows
 
 
-def filter_geom_by_otoids_to_gpdf(osm_db, otoids):
+def filter_geom_by_otoids_to_gpdf(osm_db, otoids, debug=False):
     import geopandas as gp
     from shapely.wkb import loads as load_wkb_str
     from osmdb_constants import FIELDS_TB_GEOM_LOADED
-    rows = filter_geom_by_otoids(osm_db, otoids)
+    rows = filter_geom_by_otoids(osm_db, otoids, debug)
     gpdf = gp.GeoDataFrame(rows, columns=FIELDS_TB_GEOM_LOADED)
     gpdf.geometry = gpdf.geometry.apply(lambda x: load_wkb_str(x))
     return gpdf

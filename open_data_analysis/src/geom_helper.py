@@ -120,6 +120,16 @@ def objs_near_segs(objs, segs, bfr_func, bfr_crs, init_crs=4326, output='seg_obj
         return objs_nearby
 
 
+def objs_near_segs_store(objs_near, path_objs, path_segs):
+    import os
+    dir_fn_objs, ext = os.path.splitext(path_objs)
+    fn_segs, ext = os.path.splitext(os.path.basename(path_segs))
+    new_path = '{}_near_{}{}'.format(dir_fn_objs, fn_segs, ext)
+    with open(new_path, 'w') as f:
+        f.write(objs_near.to_json())
+    print 'wrote obj near segments:', new_path
+
+
 # ########## functions assigning ln(segment) to objs #############
 def pts2lns(pts, lns, bfr_crs, init_crs=4326, close_jn_dist=5, far_jn_dist=20):
     """
