@@ -46,3 +46,7 @@ fn_frsq_taxonomy_tree = 'frsq_taxonomy_tree.txt'
 fn_mapping_for_fs = 'manual/poi_mapping_for_fs.txt'
 fn_mapping_for_osm = 'manual/poi_mapping_for_osm.txt'
 var_exclude_category_for_osm = 'exclude'
+similar_name_threshold = 0.8  # used in detecting frsq and osm duplicates
+no_name_value = -1.0
+poi_categories = ['art','outdoors and recreation', 'retail shop', 'professional service', 'food',
+                  'nightlife spot','residence','schools&university','cycling facilities','transportation']

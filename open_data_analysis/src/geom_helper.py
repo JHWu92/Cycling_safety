@@ -85,6 +85,18 @@ def gpdf_equal(l,r,output='idx'):
     return equal_idx
 
 
+def connected_nodes(edges):
+    """
+    find connected components in graph specified by edges. It can used to find equal groups
+    :param edges: list of (n1, n2) meaning n1 points to n2
+    :return: connected component
+    """
+    import networkx as nx
+    G = nx.Graph()
+    G.add_edges_from(edges)
+    return [x.nodes() for x in nx.connected_component_subgraphs(G)]
+
+
 def crs_prepossess(gpdf, init_crs, bfr_crs):
     """
     create a shallow copy of gpdf; check the init crs of gpdf, if None, assign init_crs; change crs of copy to bfr_crs
@@ -115,22 +127,25 @@ def objs_near_segs(objs, segs, bfr_func, bfr_crs, init_crs=4326, output='seg_obj
     :return: seg_obj_index: (pd.df)obj indexes of whom are near segments,
          or  objs: (geopandas.GeoDataFrame) objs[near seg]
     """
-    allow_output = ('seg_obj_index', 'objs')
+    allow_output = ('seg_obj_index', 'objs', 'index_and_objs')
     if output not in allow_output:
-        raise ValueError('output should be one of (seg_obj_index, objs)')
+        raise ValueError('output should be one of {}'.format(str(allow_output)))
     seg_crs = segs.copy() if crs_ready else crs_prepossess(segs, init_crs, bfr_crs)
     obj_crs = objs if crs_ready else crs_prepossess(objs, init_crs, bfr_crs)
     seg_crs.geometry = seg_crs.apply(bfr_func, axis=1)
 
     sjoin = gp.tools.sjoin(seg_crs, obj_crs, how='left', op='intersects')
-    if output == 'seg_obj_index':
-        seg_obj_index = sjoin['index_right'].reset_index()
-        seg_obj_index.columns = ['seg_index', 'obj_index']
+    seg_obj_index = sjoin['index_right'].reset_index()
+    seg_obj_index.columns = ['seg_index', 'obj_index']
+    obj_idx_nearby = set(sjoin[~sjoin.index_right.isnull()].index_right)
+    objs_nearby = objs[objs.index.isin(obj_idx_nearby)]
+    if output == allow_output[0]:
         return seg_obj_index
-    elif output == 'objs':
-        obj_idx_nearby = set(sjoin[~sjoin.index_right.isnull()].index_right)
-        objs_nearby = objs[objs.index.isin(obj_idx_nearby)]
+    elif output == allow_output[1]:
         return objs_nearby
+    elif output == allow_output[2]:
+        return seg_obj_index, objs_nearby
+
 
 
 def objs_near_segs_store(objs_near, dir, fn_objs, fn_segs):

@@ -10,8 +10,9 @@ def make_type_consistent(s1, s2):
 
 def similarity(a,b):
     import difflib
+    from constants import no_name_value
     if len(a)==0 or len(b)==0:
-        return -1.0
+        return no_name_value
     a,b = make_type_consistent(a,b)
     a,b = a.lower(), b.lower()
     match_size = sum([m.size for m in difflib.SequenceMatcher(a=a, b=b, autojunk=False).get_matching_blocks()])*1.0
