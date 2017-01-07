@@ -36,6 +36,10 @@ fn_frsq_venues_dc = 'frsq_venues_dc.geojson'
 # Poi
 fn_poi_frsq_dc = 'poi_frsq_dc.geojson'
 fn_poi_osm_dc = 'poi_osm_dc.geojson'
+fn_poi_distr_dc = 'poi_distr_dc.csv'
+fn_poi_seg_cvrg_dc = 'poi_seg_coverage_dc.html'
+fn_poi_boxplot_per_seg_dc = 'poi_boxplot_per_seg_dc.html'
+fn_feature_poi_dc = 'feature_poi_dc.csv'
 
 # FourSquare Taxonomy
 fn_frsq_taxonomy_json = 'frsq_taxonomy_raw.json'

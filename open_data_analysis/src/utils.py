@@ -20,3 +20,17 @@ def similarity(a,b):
     longer_size = shorter_size if (longer_size/1.5)<=shorter_size else longer_size/1.5
 #     return match_size/(longer_size+shorter_size)*2
     return match_size/shorter_size
+
+
+def change_ext(fn, new_ext):
+    import os
+    base = os.path.splitext(fn)[0]
+    if not new_ext.startswith('.'):
+        new_ext = '.' + new_ext
+    return base + new_ext
+
+
+def add_suffix(fn, suf):
+    import os
+    base, ext = os.path.splitext(fn)
+    return base + suf + ext
