@@ -35,7 +35,7 @@ def poi_near_segs(path_frsq, path_osm_db, path_segs, path_mapping_frsq, path_map
     plot_poi_distribution(poi_distr, ipynb=False, path=path_plot_poi_distr)
     seg_poi_features = poi_per_seg_distribution(seg_poi_index, poi_near_segs, segs)
     segs_cnt = segs.shape[0]
-    print '# segs with poi = {}/{}'.format(len(seg_poi_features), segs_cnt)
+    print '# segs with poi: {}/{}={}%'.format(len(seg_poi_features), segs_cnt, len(seg_poi_features)*100.0/segs_cnt)
     seg_poi_features.to_csv(path_feature_poi, encoding='utf-8')
     plot_poi_per_seg(seg_poi_features, segs_cnt, ipynb=False, path_cvrg=path_cvrg, path_box=path_box)
     return seg_poi_features, poi_distr, poi_near_segs, seg_poi_index
@@ -65,6 +65,7 @@ def map_frsq_venues_to_poi_category(frsq_venues_gpdf, path_mapping_for_fs, debug
 
     if debug:
         unmapped = poi_frsq[poi_frsq.mapped == 'no category']
+        print '# venues with poi =', len(poi_frsq) - len(unmapped)
         print 'venues without poi category: #venues={}, #frsq_categories={}'.format(len(unmapped), len(pd.unique(unmapped.category)))
         print 'top ten unmapped frsq_categories', unmapped.category.value_counts().order(ascending=False).head(10).to_dict()
 

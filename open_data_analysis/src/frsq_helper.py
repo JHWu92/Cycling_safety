@@ -21,7 +21,11 @@ def fs_api():
                clients_id_secret]
     return clients
 
+
 def raw_venues_in_city(city_path,frsq_venues_raw_path):
+    """
+    :return: file line structure: ( (w,s,e,n) of the searching bbox,  cnt of venues, json return by frsq api )
+    """
     from geom_helper import grid_area
     import time
     clients = fs_api()
