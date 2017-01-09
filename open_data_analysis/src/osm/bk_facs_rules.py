@@ -249,3 +249,4 @@ def bikable_assignment(tags):
                     return ''
 
 
+ftr_func = {"side_walk": side_walk_assignment, "cycle_lane": cycle_lane_assignment, "cycle_way": cycle_way_assignment, "bikable": bikable_assignment, "is_shared": is_shared_assignment}
