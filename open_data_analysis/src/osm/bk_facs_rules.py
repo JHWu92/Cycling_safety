@@ -2,7 +2,7 @@ def cycle_lane_assignment(tags):
     if tags['cycleway'] == 'lane':
         if tags['oneway'] == 'yes':
             if tags['highway'] == 'cycleway':
-                return 'unk'
+                return ''
             else:  # tags['highway'] != 'cycleway'
                 return 'one'
         else:  # tags['oneway'] != 'yes'
@@ -22,11 +22,11 @@ def cycle_lane_assignment(tags):
                         if tags['oneway:bicycle'] == '':
                             if tags['sidewalk'] == 'no':
                                 if tags['highway'] == 'tertiary':
-                                    return 'unk'
+                                    return ''
                                 else:  # tags['highway'] != 'tertiary'
-                                    return 'unk'
+                                    return ''
                             else:  # tags['sidewalk'] != 'no'
-                                return 'unk'
+                                return ''
                         else:  # tags['oneway:bicycle'] != ''
                             return 'both'
                     else:  # tags['cycleway:left'] != ''
@@ -45,7 +45,7 @@ def cycle_lane_assignment(tags):
                         if tags['highway'] == 'residential':
                             return 'both'
                         else:  # tags['highway'] != 'residential'
-                            return 'unk'
+                            return ''
             else:  # tags['cycleway:left'] != ''
                 if tags['cycleway:left'] == 'shared_lane':
                     return 'one'
@@ -58,7 +58,7 @@ def is_shared_assignment(tags):
         if tags['lanes'] == '4':
             if tags['highway'] == 'tertiary':
                 if tags['sidewalk'] == '':
-                    return 'unk'
+                    return ''
                 else:  # tags['sidewalk'] != ''
                     return 1.0
             else:  # tags['highway'] != 'tertiary'
@@ -73,18 +73,18 @@ def is_shared_assignment(tags):
                 if tags['sidewalk'] == 'no':
                     if tags['highway'] == 'tertiary':
                         if tags['bicycle'] == '':
-                            return 'unk'
+                            return ''
                         else:  # tags['bicycle'] != ''
                             return 1.0
                     else:  # tags['highway'] != 'tertiary'
-                        return 'unk'
+                        return ''
                 else:  # tags['sidewalk'] != 'no'
-                    return 'unk'
+                    return ''
             else:  # tags['oneway:bicycle'] != ''
                 if tags['highway'] == 'residential':
                     return 1.0
                 else:  # tags['highway'] != 'residential'
-                    return 'unk'
+                    return ''
 
 
 def cycle_way_assignment(tags):
@@ -103,7 +103,7 @@ def cycle_way_assignment(tags):
             if tags['cycleway:right'] == 'track':
                 return 'right'
             else:  # tags['cycleway:right'] != 'track'
-                return 'unk'
+                return ''
 
 
 def side_walk_assignment(tags):
@@ -112,9 +112,9 @@ def side_walk_assignment(tags):
             if tags['foot'] == 'yes':
                 return 'right'
             else:  # tags['foot'] != 'yes'
-                return 'unk'
+                return ''
         else:  # tags['highway'] != 'trunk'
-            return 'unk'
+            return ''
     else:  # tags['sidewalk'] != ''
         if tags['sidewalk'] == 'both':
             return 'both'
@@ -133,16 +133,16 @@ def side_walk_assignment(tags):
             else:  # tags['sidewalk'] != 'right'
                 if tags['sidewalk'] == 'left':
                     if tags['highway'] == 'footway':
-                        return 'unk'
+                        return ''
                     else:  # tags['highway'] != 'footway'
                         return 'left'
                 else:  # tags['sidewalk'] != 'left'
                     if tags['sidewalk'] == 'yes':
                         if tags['highway'] == 'footway':
-                            return 'unk'
+                            return ''
                         else:  # tags['highway'] != 'footway'
                             if tags['highway'] == 'pedestrian':
-                                return 'unk'
+                                return ''
                             else:  # tags['highway'] != 'pedestrian'
                                 return 'both'
                     else:  # tags['sidewalk'] != 'yes'
@@ -151,14 +151,14 @@ def side_walk_assignment(tags):
                         else:  # tags['sidewalk'] != 'separate'
                             if tags['bicycle'] == '':
                                 if tags['highway'] == 'footway':
-                                    return 'unk'
+                                    return ''
                                 else:  # tags['highway'] != 'footway'
                                     return 'no'
                             else:  # tags['bicycle'] != ''
                                 if tags['oneway'] == '':
                                     return 'no'
                                 else:  # tags['oneway'] != ''
-                                    return 'unk'
+                                    return ''
 
 
 def bikable_assignment(tags):
@@ -179,26 +179,26 @@ def bikable_assignment(tags):
                             if tags['cycleway'] == 'no':
                                 return 'no'
                             else:  # tags['cycleway'] != 'no'
-                                return 'unk'
+                                return ''
         else:  # tags['foot'] != ''
             if tags['foot'] == 'no':
                 if tags['sidewalk'] == 'right':
-                    return 'unk'
+                    return ''
                 else:  # tags['sidewalk'] != 'right'
                     if tags['highway'] == 'cycleway':
-                        return 'unk'
+                        return ''
                     else:  # tags['highway'] != 'cycleway'
                         if tags['sidewalk'] == 'none':
-                            return 'unk'
+                            return ''
                         else:  # tags['sidewalk'] != 'none'
                             return 'no'
             else:  # tags['foot'] != 'no'
                 if tags['sidewalk'] == '':
                     if tags['highway'] == 'cycleway':
-                        return 'unk'
+                        return ''
                     else:  # tags['highway'] != 'cycleway'
                         if tags['highway'] == 'trunk':
-                            return 'unk'
+                            return ''
                         else:  # tags['highway'] != 'trunk'
                             if tags['cycleway'] == '':
                                 if tags['highway'] == 'steps':
@@ -206,16 +206,16 @@ def bikable_assignment(tags):
                                 else:  # tags['highway'] != 'steps'
                                     return 'yes'
                             else:  # tags['cycleway'] != ''
-                                return 'unk'
+                                return ''
                 else:  # tags['sidewalk'] != ''
                     if tags['highway'] == 'pedestrian':
                         return 'yes'
                     else:  # tags['highway'] != 'pedestrian'
-                        return 'unk'
+                        return ''
     else:  # tags['bicycle'] != ''
         if tags['bicycle'] == 'no':
             if tags['highway'] == 'cycleway':
-                return 'unk'
+                return ''
             else:  # tags['highway'] != 'cycleway'
                 if tags['lanes'] == '1':
                     if tags['highway'] == 'motorway':
@@ -227,7 +227,7 @@ def bikable_assignment(tags):
         else:  # tags['bicycle'] != 'no'
             if tags['cycleway'] == '':
                 if tags['highway'] == 'cycleway':
-                    return 'unk'
+                    return ''
                 else:  # tags['highway'] != 'cycleway'
                     if tags['bicycle'] == 'dismount':
                         if tags['highway'] == 'pedestrian':
@@ -237,7 +237,7 @@ def bikable_assignment(tags):
                     else:  # tags['bicycle'] != 'dismount'
                         if tags['sidewalk'] == 'no':
                             if tags['highway'] == 'tertiary':
-                                return 'unk'
+                                return ''
                             else:  # tags['highway'] != 'tertiary'
                                 return 'yes'
                         else:  # tags['sidewalk'] != 'no'
@@ -246,6 +246,6 @@ def bikable_assignment(tags):
                 if tags['cycleway'] == 'no':
                     return 'yes'
                 else:  # tags['cycleway'] != 'no'
-                    return 'unk'
+                    return ''
 
 
