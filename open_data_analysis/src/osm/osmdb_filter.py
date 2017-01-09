@@ -162,6 +162,9 @@ def filter_tbtag(osm_db, in_tags=((None, None),), ex_tags=((None, None),), ot=No
 
 
 def select_bk_facs(osm_db, ot=None, debug=False, df=False):
+    """
+    depricated version. return all rows in table tag whose (ot,oid) has one of the tag_bk_facs
+    """
     from osmdb_constants import tag_bk_facs, FIELDS_TB_TAG
     otoids = filter_tbtag(osm_db, ot=ot, in_tags=tag_bk_facs, debug=debug, distinct_otoid=True)
     rows = filter_tag_by_otoids(osm_db, otoids)
@@ -171,7 +174,19 @@ def select_bk_facs(osm_db, ot=None, debug=False, df=False):
     return rows
 
 
+def select_bk_facs_with_geom(osm_db, ot=None, debug=False):
+    """
+    get osm objs whose has one of the tag_bk_facs with geometry and tags as dict
+    :return: geopandas.GeoDataFrame, columns = ot, oid, geometry, tags(dict)
+    """
+    from osmdb_constants import tag_bk_facs
+    bk_facs = get_objs_by_tags(osm_db, ot=ot, in_tags=tag_bk_facs, debug=debug)
+    return bk_facs
+
+
 def get_objs_by_tags(osm_db, ot=None,  in_tags=((None, None),), ex_tags=((None, None),), debug=False):
+    # TODO: tags is dict, meaning it lose information of cases when
+    # TODO: objs have two values in one key(after removing duplicate objs)
     import geopandas as gp
     from osmdb_constants import FIELDS_TB_TAG
     otoids = filter_tbtag(osm_db, ot=ot, in_tags=in_tags, ex_tags=ex_tags, debug=debug, distinct_otoid=True)
@@ -183,3 +198,5 @@ def get_objs_by_tags(osm_db, ot=None,  in_tags=((None, None),), ex_tags=((None, 
         otoidtags.append([ot, oid, tags])
     otoidtags = gp.GeoDataFrame(otoidtags, columns=['ot','oid','tags'])
     geoms = filter_geom_by_otoids_to_gpdf(osm_db, otoids=otoids)
+    objs = geoms.merge(otoidtags)
+    return objs
