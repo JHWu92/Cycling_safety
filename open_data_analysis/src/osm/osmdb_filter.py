@@ -171,4 +171,15 @@ def select_bk_facs(osm_db, ot=None, debug=False, df=False):
     return rows
 
 
-# def get_objs_by_
+def get_objs_by_tags(osm_db, ot=None,  in_tags=((None, None),), ex_tags=((None, None),), debug=False):
+    import geopandas as gp
+    from osmdb_constants import FIELDS_TB_TAG
+    otoids = filter_tbtag(osm_db, ot=ot, in_tags=in_tags, ex_tags=ex_tags, debug=debug, distinct_otoid=True)
+    rows = filter_tag_by_otoids(osm_db, otoids)
+    gpdf = gp.GeoDataFrame(rows, columns=FIELDS_TB_TAG)
+    otoidtags = []
+    for (ot, oid), grp in gpdf.groupby(['ot','oid']):
+        tags = {key:value for key, value in grp[['key','value']].values}
+        otoidtags.append([ot, oid, tags])
+    otoidtags = gp.GeoDataFrame(otoidtags, columns=['ot','oid','tags'])
+    geoms = filter_geom_by_otoids_to_gpdf(osm_db, otoids=otoids)
