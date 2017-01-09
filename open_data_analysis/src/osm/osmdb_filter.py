@@ -136,7 +136,11 @@ def filter_tbtag(osm_db, in_tags=((None, None),), ex_tags=((None, None),), ot=No
     return rows
 
 
-def select_bk_facs(osm_db_dc, debug=False):
-    from osmdb_constants import tag_bk_facs
-    rows = filter_tbtag(osm_db_dc, in_tags=tag_bk_facs, debug=debug)
+def select_bk_facs(osm_db_dc, ot=None, debug=False, df=False):
+    from osmdb_constants import tag_bk_facs, FIELDS_TB_TAG
+    rows = filter_tbtag(osm_db_dc, ot=ot, in_tags=tag_bk_facs, debug=debug)
+    if df:
+        import pandas as pd
+        rows = pd.DataFrame(rows, columns=FIELDS_TB_TAG)
     return rows
+
