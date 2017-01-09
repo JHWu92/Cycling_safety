@@ -116,18 +116,19 @@ def bfr_20m(seg):
     return seg.geometry.buffer(20)
 
 
-def objs_near_segs(objs, segs, bfr_func, bfr_crs, init_crs=4326, output='seg_obj_index', crs_ready=False):
+def objs_near_segs(objs, segs, bfr_func, bfr_crs, init_crs=4326, output='index_seg_obj', crs_ready=False):
     """
     :param objs: geopandas.GeoDataFrame
     :param segs: geopandas.GeoDataFrame
     :param bfr_func: define "near"
     :param init_crs: init_crs epsg code
     :param bfr_crs: target crs epsg code used for buffering
-    :param output: one kind of ('seg_obj_index', 'objs')
-    :return: seg_obj_index: (pd.df)obj indexes of whom are near segments,
+    :param output: one kind of ('index_seg_obj', 'objs')
+    :return: index_seg_obj: (pd.df)obj indexes of whom are near segments,
          or  objs: (geopandas.GeoDataFrame) objs[near seg]
     """
-    allow_output = ('seg_obj_index', 'objs', 'index_and_objs')
+    from constants import index_seg, index_obj
+    allow_output = ('index_seg_obj', 'objs', 'index_and_objs')
     if output not in allow_output:
         raise ValueError('output should be one of {}'.format(str(allow_output)))
     seg_crs = segs.copy() if crs_ready else crs_prepossess(segs, init_crs, bfr_crs)
@@ -135,16 +136,16 @@ def objs_near_segs(objs, segs, bfr_func, bfr_crs, init_crs=4326, output='seg_obj
     seg_crs.geometry = seg_crs.apply(bfr_func, axis=1)
 
     sjoin = gp.tools.sjoin(seg_crs, obj_crs, how='left', op='intersects')
-    seg_obj_index = sjoin['index_right'].reset_index()
-    seg_obj_index.columns = ['seg_index', 'obj_index']
+    index_seg_obj = sjoin['index_right'].reset_index()
+    index_seg_obj.columns = [index_seg, index_obj]
     obj_idx_nearby = set(sjoin[~sjoin.index_right.isnull()].index_right)
     objs_nearby = objs[objs.index.isin(obj_idx_nearby)]
     if output == allow_output[0]:
-        return seg_obj_index
+        return index_seg_obj
     elif output == allow_output[1]:
         return objs_nearby
     elif output == allow_output[2]:
-        return seg_obj_index, objs_nearby
+        return index_seg_obj, objs_nearby
 
 
 
@@ -167,7 +168,7 @@ def objs_near_segs_store(objs_near, dir, fn_objs, fn_segs):
 
 
 # ########## functions assigning ln(segment) to objs #############
-def pts2lns(pts, lns, bfr_crs, init_crs=4326, close_jn_dist=5, far_jn_dist=20):
+def pts2segs(pts, lns, bfr_crs, init_crs=4326, close_jn_dist=5, far_jn_dist=20):
     """
     1. close jn: buffer pts in bfr_crs with close_jn_dist, use sjoin to find segment(s) intersected with buffered pts
     2. far jn: for pts without any segment in close jn, buffer them with far_jn_dist and find nearest segment
@@ -181,6 +182,7 @@ def pts2lns(pts, lns, bfr_crs, init_crs=4326, close_jn_dist=5, far_jn_dist=20):
     """
 
     import pandas as pd
+    from constants import index_pt, index_ln
 
     lns_crs = crs_prepossess(lns, init_crs, bfr_crs)
     pts_crs = crs_prepossess(pts, init_crs, bfr_crs)
@@ -201,13 +203,17 @@ def pts2lns(pts, lns, bfr_crs, init_crs=4326, close_jn_dist=5, far_jn_dist=20):
     far_jn = far_jn.groupby(level=0).apply(lambda x: x.iloc[x.dis.values.argmin()][['index_right']])
 
     pts_has_ln = close_jn.append(far_jn).reset_index()
-    pts_has_ln.columns = ['pt_index', 'ln_index']
+    pts_has_ln.columns = [index_pt, index_ln]
 
     pts_no_ln = pts[~pts.index.isin(pd.unique(pts_has_ln.pt_index))].copy()
     return pts_has_ln, pts_no_ln
 
 
 def lns_polys2lns(lns_polys, segs, bfr_crs, bfr_func, init_crs=4326, cvr_thres=0.3, sum_thres=0.8):
+    """
+    return: geopandas.GeoDataFrame, columns = ['index_seg','index_ln','cvr']
+    """
+    from constants import index_ln, index_seg
     # keep polys' exteriors
     lns = lns_polys.copy()
     lns.geometry = lns.geometry.apply(lambda x: x.exterior if isinstance(x, Polygon) else x)
@@ -221,19 +227,19 @@ def lns_polys2lns(lns_polys, segs, bfr_crs, bfr_func, init_crs=4326, cvr_thres=0
     # get candidate seg-ln pairs
     sjoin = gp.tools.sjoin(segs_bfr, lns_crs, how='left', op='intersects')
     sjoin = sjoin.reset_index()[['index', 'index_right', 'geometry']]
-    sjoin.columns = ['index_seg', 'index_ln', 'geometry_seg_bfr']
-    sjoin = sjoin.merge(lns_crs[['geometry']], left_on='index_ln', right_index=True)
-    sjoin = sjoin.merge(segs_crs[['geometry']], left_on='index_seg', right_index=True)
+    sjoin.columns = [index_seg, index_ln, 'geometry_seg_bfr']
+    sjoin = sjoin.merge(lns_crs[['geometry']], left_on=index_ln, right_index=True)
+    sjoin = sjoin.merge(segs_crs[['geometry']], left_on=index_seg, right_index=True)
     sjoin.columns = list(sjoin.columns[:3]) + ['geometry_ln', 'geometry_seg']
 
     # compute coverage of ln over seg
     sjoin['cvr'] = sjoin.apply(len_cvr, axis=1)
 
     # filter by cvr_thres and sum_thres
-    sum_len = sjoin[sjoin.cvr > cvr_thres][['index_seg', 'cvr']].groupby('index_seg').agg(sum)
+    sum_len = sjoin[sjoin.cvr > cvr_thres][[index_seg, 'cvr']].groupby(index_seg).agg(sum)
     seg_indexes = set(sum_len[sum_len.cvr > sum_thres].index)
 
-    return sjoin[(sjoin.index_seg.isin(seg_indexes)) & (sjoin.cvr > cvr_thres)][['index_seg', 'index_ln', 'cvr']]
+    return sjoin[(sjoin.index_seg.isin(seg_indexes)) & (sjoin.cvr > cvr_thres)][[index_seg, index_ln, 'cvr']]
 
 
 def dot(va, vb):

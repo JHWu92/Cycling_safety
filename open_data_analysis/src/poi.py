@@ -2,9 +2,22 @@
 import geopandas as gp
 import pandas as pd
 import numpy as np
+from constants import index_seg, index_obj
 
 
-def poi_near_segs(path_frsq, path_osm_db, path_segs, path_mapping_frsq, path_mapping_osm, path_poi_distr, path_feature_poi, path_cvrg, path_box, segs_bfr_func, pts_bfr_range, bfr_crs, init_crs=4326, debug=False):
+def get_feature_poi(path_frsq, path_osm_db, path_segs, path_mapping_frsq, path_mapping_osm, path_poi_distr, path_feature_poi, path_cvrg, path_box, segs_bfr_func, pts_bfr_range, bfr_crs, init_crs=4326, debug=False):
+    """
+    1. mapped frsq venues to poi categories --> filter frsq venues by obj_near_segment
+    2. mapped osm data to poi categories, filter osm data by obj_near_segment
+    3. remove overlap between osm and frsq
+    4. Visalization:
+        - poi categories distribution
+            1. frsq venues near segments
+            2. osm venues near segments
+            3. final poi near segments(after removing overlap)
+        - poi categories per segment distribution
+    :return seg_poi_features, poi_distr, poi_near_segs, seg_poi_index
+    """
     from utils import change_ext
     from geom_helper import objs_near_segs
     # map frsq to poi
@@ -33,7 +46,7 @@ def poi_near_segs(path_frsq, path_osm_db, path_segs, path_mapping_frsq, path_map
     poi_distr.to_csv(path_poi_distr, encoding='utf-8')
     path_plot_poi_distr = change_ext(path_poi_distr, '.html')
     plot_poi_distribution(poi_distr, ipynb=False, path=path_plot_poi_distr)
-    seg_poi_features = poi_per_seg_distribution(seg_poi_index, poi_near_segs, segs)
+    seg_poi_features = poi_per_seg_distribution(seg_poi_index, poi_near_segs)
     segs_cnt = segs.shape[0]
     print '# segs with poi: {}/{}={}%'.format(len(seg_poi_features), segs_cnt, len(seg_poi_features)*100.0/segs_cnt)
     seg_poi_features.to_csv(path_feature_poi, encoding='utf-8')
@@ -296,13 +309,13 @@ def poi_distribution(poi_frsq, poi_osm, poi):
     return poi_frsq_distr.merge(poi_osm_distr).merge(poi_distr)
 
 
-def poi_per_seg_distribution(seg_poi_index, poi_near_seg, segs):
+def poi_per_seg_distribution(seg_poi_index, poi_near_seg):
     from constants import poi_categories
-    seg_poi_index_category = seg_poi_index.merge(poi_near_seg[['category']], left_on='obj_index', right_index=True)
+    seg_poi_index_category = seg_poi_index.merge(poi_near_seg[['category']], left_on=index_obj, right_index=True)
     poi_per_seg = {}
-    for idx, grp in seg_poi_index_category.groupby('seg_index'):
+    for idx, grp in seg_poi_index_category.groupby(index_seg):
         poi_per_seg[idx] = dict(get_sum_categories(grp.category.values))
-    poi_per_seg = pd.DataFrame(poi_per_seg.items(),columns=['seg_index','category'])
+    poi_per_seg = pd.DataFrame(poi_per_seg.items(),columns=[index_seg,'category'])
     for l in poi_categories:
         poi_per_seg[l] = poi_per_seg.category.apply(lambda x: x.get(l,0) if type(x)!=float else 0)
     poi_per_seg['total'] = poi_per_seg[poi_categories].sum(axis=1)
