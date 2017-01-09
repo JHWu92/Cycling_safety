@@ -27,16 +27,19 @@ def get_geom_by_otoid(osm_db, ot, oid):
     return None
 
 
-def filter_geom_by_otoids(osm_db, otoids, debug=False):
+def chunk(l, size=400):
+    for i in range(0, len(l), size):
+        yield l[i:i+size]
+
+
+def filter_table_by_otoids(osm_db, otoids, table, debug=False, text_factory_str=False):
     """
     :return: rows of table geometry
     """
     assert otoids, 'otoids should not be empty'
     assert is_list_tuple(otoids[0]), 'elements of otoids should be list or tuple: otoids={}'.format(str(otoids))
-    chunk_size = 400
     rows = []
-    for i in range(0, len(otoids), chunk_size):
-        sub_otoids = otoids[i:i+chunk_size]
+    for sub_otoids in chunk(otoids):
         pair_clause = []
         for cnt, (ot, oid) in enumerate(sub_otoids):
             if cnt==0:
@@ -44,11 +47,19 @@ def filter_geom_by_otoids(osm_db, otoids, debug=False):
             else:
                 pair_clause.append("SELECT '{}', {}".format(ot, oid))
         pair_clause = ' UNION ALL '.join(pair_clause)
-        sql = 'SELECT * FROM {}'.format(TB_GEOM)
+        sql = 'SELECT * FROM {}'.format(table)
         sql = '{sql} NATURAL JOIN ({pair_clause})'.format(sql=sql, pair_clause=pair_clause)
         if debug:
             print sql
-        rows.extend(exec_sql(osm_db, sql, text_factory_str=True))
+        rows.extend(exec_sql(osm_db, sql,text_factory_str))
+    return rows
+
+
+def filter_geom_by_otoids(osm_db, otoids, debug=False):
+    """
+    :return: rows of table geometry
+    """
+    rows = filter_table_by_otoids(osm_db, otoids, TB_GEOM, debug=debug, text_factory_str=True)
     return rows
 
 
@@ -80,6 +91,11 @@ def build_clause(tags):
     return clause
 
 
+def filter_tag_by_otoids(osm_db, otoids, debug=False):
+    rows = filter_table_by_otoids(osm_db, otoids, TB_TAG, debug=debug)
+    return rows
+
+
 def filter_tbtag_to_df(osm_db, in_tags=((None, None),), ex_tags=((None, None),), ot=None, debug=False):
     from osmdb_constants import FIELDS_TB_TAG
     import pandas as pd
@@ -87,7 +103,7 @@ def filter_tbtag_to_df(osm_db, in_tags=((None, None),), ex_tags=((None, None),),
     return pd.DataFrame(rows, columns=FIELDS_TB_TAG)
 
 
-def filter_tbtag(osm_db, in_tags=((None, None),), ex_tags=((None, None),), ot=None, debug=False):
+def filter_tbtag(osm_db, in_tags=((None, None),), ex_tags=((None, None),), ot=None, debug=False, distinct_otoid=False):
     """
     filter table tag where row has ot, one of the tag in in_tags and none of the ex_tags
     :param osm_db: osm db file path
@@ -100,6 +116,8 @@ def filter_tbtag(osm_db, in_tags=((None, None),), ex_tags=((None, None),), ot=No
     from osmdb_constants import FIELDS_TB_TAG
     assert FIELDS_TB_TAG==['ot', 'oid', 'key', 'value'], 'filter_tbtag assumes fields of table tag are ot,oid,key,value'
     sql = "SELECT * FROM {tb}".format(tb=TB_TAG)  # tag=(*,*), any objs with any tag
+    if distinct_otoid:
+        sql = "SELECT distinct ot, oid FROM {tb}".format(tb=TB_TAG)
     assert is_list_tuple(in_tags[0]), 'elements of in_tags should be tuple or list, tags={}'.format(in_tags)
     assert is_list_tuple(ex_tags[0]), 'elements of ex_tags should be tuple or list, tags={}'.format(ex_tags)
     in_tags_clause = build_clause(in_tags)
@@ -117,30 +135,40 @@ def filter_tbtag(osm_db, in_tags=((None, None),), ex_tags=((None, None),), ot=No
     where_clause = ') AND ('.join(where_clause)
 
     sql = '{sql} WHERE ({where})'.format(sql=sql, where=where_clause) if where_clause else sql
+    if debug:
+        print 'filter table tag:', sql
+
     rows = exec_sql(osm_db, sql)
 
     if debug:
         import pandas as pd
-        print 'filter table tag', sql
-        df = pd.DataFrame(rows, columns=FIELDS_TB_TAG)
-        print '# rows', len(rows)
-        print 'ot:', pd.unique(df.ot)
-        print '# keys', len(pd.unique(df.key))
-        if len(pd.unique(df.key)) < 5:
-            print 'keys:', pd.unique(df.key)
-            for key in pd.unique(df.key):
-                print 'key =', key, 'value:', pd.unique(df[df.key == key].value)
+        if distinct_otoid:
+            df = pd.DataFrame(rows, columns=FIELDS_TB_TAG[:2])
+            print '# rows', len(rows)
+            print 'ot:', pd.unique(df.ot)
+        else:
+            df = pd.DataFrame(rows, columns=FIELDS_TB_TAG)
+            print '# rows', len(rows)
+            print 'ot:', pd.unique(df.ot)
+            print '# keys', len(pd.unique(df.key))
+            if len(pd.unique(df.key)) < 5:
+                print 'keys:', pd.unique(df.key)
+                for key in pd.unique(df.key):
+                    print 'key =', key, 'value:', pd.unique(df[df.key == key].value)
         print '==========================='
         print
 
     return rows
 
 
-def select_bk_facs(osm_db_dc, ot=None, debug=False, df=False):
+def select_bk_facs(osm_db, ot=None, debug=False, df=False):
     from osmdb_constants import tag_bk_facs, FIELDS_TB_TAG
-    rows = filter_tbtag(osm_db_dc, ot=ot, in_tags=tag_bk_facs, debug=debug)
+    otoids = filter_tbtag(osm_db, ot=ot, in_tags=tag_bk_facs, debug=debug, distinct_otoid=True)
+    rows = filter_tag_by_otoids(osm_db, otoids)
     if df:
         import pandas as pd
         rows = pd.DataFrame(rows, columns=FIELDS_TB_TAG)
     return rows
 
+
+# def get_objs_by_
