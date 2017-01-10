@@ -2,7 +2,7 @@
 # Philly
 # =========================
 # CRS
-epsg_ph = None
+epsg_ph = 32617
 # OSM
 osm_ph_poly_rid = 188022
 fn_city_poly_ph = 'city_poly_ph.geojson'
