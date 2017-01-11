@@ -107,10 +107,13 @@ def frsq_venues_in_city_geojson(city_path, frsq_venues_raw_path, frsq_venues_in_
         f.write(gp.GeoDataFrame(df_no_dup_in_city).to_json())
 
 
-def parse_frsq_taxonomy(frsq_taxonomy_json_path, frsq_taxonomy_csv_path, frsq_taxonomy_tree_path):
-    # API for frsq taxonomy: https://developer.foursquare.com/docs/venues/categories
-    # json used on 2017-01-01 is accessed by
-    # https://api.foursquare.com/v2/venues/categories?oauth_token=1AY1GV2K2SXJW0OQGD0XXE440H5W21FX50FK5OOFE2B5EOUN&v=20170101
+def parse_frsq_taxonomy(frsq_taxonomy_json_path, frsq_taxonomy_csv_path, frsq_taxonomy_tree_path, max_level=6):
+    """
+    output parsed_tree(top parent is absent, need manual assignment); direct_parent and node name csv
+    API for frsq taxonomy: https://developer.foursquare.com/docs/venues/categories
+    json used on 2017-01-01 is accessed by
+    https://api.foursquare.com/v2/venues/categories?oauth_token=1AY1GV2K2SXJW0OQGD0XXE440H5W21FX50FK5OOFE2B5EOUN&v=20170101
+    """
 
     import json
     import pandas as pd
@@ -136,7 +139,7 @@ def parse_frsq_taxonomy(frsq_taxonomy_json_path, frsq_taxonomy_csv_path, frsq_ta
     df.columns = ['parent_id', 'cid', 'pluralName', 'shortName', 'name', 'icon', 'level','order']
 
     print 'parsed FourSquare taxonomy'
-    for i in range(1,7):
+    for i in range(1,max_level+1):
         sub_df = df.query('level==%d' %i)
         print 'level=', i, '# categories', sub_df.shape[0], 'parent categories', sub_df.parent_id.value_counts().shape[0]
 

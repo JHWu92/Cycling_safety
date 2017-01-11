@@ -54,7 +54,7 @@ def get_feature_poi(path_frsq, path_osm_db, path_segs, path_mapping_frsq, path_m
     return seg_poi_features, poi_distr, poi_near_segs, seg_poi_index
 
 
-def mapping_for_fs(path_mapping_for_fs):
+def mapping_for_fs(path_mapping_for_fs, top_parent_only=True):
     result = []
     with open(path_mapping_for_fs) as f:
         lvs = ['', '', '', '', '', '', '', '', '']
@@ -66,7 +66,9 @@ def mapping_for_fs(path_mapping_for_fs):
             parent = '/'.join(lvs[:lv])
             result.append([lv, node, parent, lvs[1]])
     new_taxonomy = pd.DataFrame(result, columns=['lv', 'tag', 'parents', 'top_parent'])
-    return pd.Series(new_taxonomy.top_parent.values, index=new_taxonomy.tag).to_dict()
+    if top_parent_only:
+        return pd.Series(new_taxonomy.top_parent.values, index=new_taxonomy.tag).to_dict()
+    return new_taxonomy
 
 
 def map_frsq_venues_to_poi_category(frsq_venues_gpdf, path_mapping_for_fs, debug=False):
