@@ -72,21 +72,24 @@ def mapping_for_fs(path_mapping_for_fs, top_parent_only=True):
 
 
 def map_frsq_venues_to_poi_category(frsq_venues_gpdf, path_mapping_for_fs, debug=False):
+    from constants import var_exclude_category_for_fs
     print '===========mapping  frsq venues to poi categories==========='
     mapping = mapping_for_fs(path_mapping_for_fs)
     poi_frsq = frsq_venues_gpdf.copy()
     poi_frsq['mapped'] = poi_frsq.category.apply(
-        lambda x: mapping[x.encode('utf-8')] if x.encode('utf-8') in mapping else 'no category')
-
-    if debug:
-        unmapped = poi_frsq[poi_frsq.mapped == 'no category']
-        print '# venues with poi =', len(poi_frsq) - len(unmapped)
-        print 'venues without poi category: #venues={}, #frsq_categories={}'.format(len(unmapped), len(pd.unique(unmapped.category)))
-        print 'top ten unmapped frsq_categories', unmapped.category.value_counts().order(ascending=False).head(10).to_dict()
+        lambda x: mapping[x.encode('utf-8')] if x.encode('utf-8') in mapping else var_exclude_category_for_fs)
 
     poi_frsq = poi_frsq[['id', 'name', 'mapped', 'geometry']]
     poi_frsq.columns = ['id', 'name', 'category', 'geometry']
-    return poi_frsq
+    poi_frsq_mapped = poi_frsq[poi_frsq.category != var_exclude_category_for_fs]
+
+    if debug:
+        print '# venues with poi =', len(poi_frsq_mapped)
+        unmapped = poi_frsq[poi_frsq.category == var_exclude_category_for_fs]
+        print 'venues without poi category: #venues={}, #frsq_categories={}'.format(len(unmapped), len(pd.unique(unmapped.category)))
+        print 'top ten unmapped frsq_categories', unmapped.category.value_counts().order(ascending=False).head(10).to_dict()
+
+    return poi_frsq_mapped
 
 
 def mapping_for_osm(path_mapping_for_osm):
