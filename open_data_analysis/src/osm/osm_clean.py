@@ -38,12 +38,16 @@ def oid_in_city(osm_container, city):
 
 def duplicate_osm(osm_container, oic):
     """
-    find duplicate osm obj: Nodes with same lat lon pair; Ways with same node list(orderless) and ways with one node;
-    Relations with same members (orderless)
+    find duplicate osm obj:
+    1. Nodes with same lat lon pair;
+    2. Ways with same node list(orderless) and ways with one node; empty polygon
+    3. Relations with same members (orderless)
     :param osm_container: osm raw data loaded by src.osm.container.OSMContainer
     :param oic: Osm obj id In City, computed by :func oid_in_city
     :return: keep_oids={'Node':nids, 'Way':wids, 'Relation':rid}, merge_oids(similar with keep_oids), one_node_ways(ids)
     """
+    print '=====duplicate osm====='
+    from osm2shp import way2lineOrpoly
     # duplicate nodes
     seen_latlons = {}
     same_nodes = {}
@@ -65,14 +69,22 @@ def duplicate_osm(osm_container, oic):
         nodelist = [same_nodes[node] if node in same_nodes else node for node in way.nodes]
         nodelist = list(set(nodelist))  # node could be duplicated within one way
         nodelist = tuple(sorted(nodelist))  # sort nodes to find duplicates
-        # not keeping one-node ways
+        # discard one-node ways
         if len(nodelist)==1:
             one_node_ways.append(way.id)
+            print 'one node ways: http://www.openstreetmap.org/way/{}'.format(way.id)
+            continue
+        # discard empty polygon ways
+        ln_or_poly = way2lineOrpoly((way))
+        if ln_or_poly.is_empty:
+            print 'empty polygon way: http://www.openstreetmap.org/way/{}'.format(way.id)
             continue
         if not nodelist in seen_nodelists:
             seen_nodelists[nodelist] = way.id
         else:
             same_ways[way.id] = seen_nodelists[nodelist]
+
+
 
     # duplicate relations
     seen_mlists = {}
