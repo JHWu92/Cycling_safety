@@ -24,12 +24,11 @@ def lon_lats_closed(lon_lats):
 
 
 def way2lineOrpoly(osm_container, way):
-    import warnings
     nodes = [osm_container.get_osm_node_by_id(nid) for nid in way.nodes]
     lon_lats = [(node.lon, node.lat) for node in nodes]
     obj = shpgeo.Polygon(lon_lats) if lon_lats_closed(lon_lats) and len(lon_lats) > 3 else shpgeo.LineString(lon_lats)
     if not obj.is_valid:
-        warnings.warn("way id={} is not valid as a {}".format(way.id, type(obj)))
+        print "way id={} is not valid as a {}".format(way.id, type(obj))
         obj = obj.buffer(0)
     return obj
 

@@ -48,6 +48,8 @@ def duplicate_osm(osm_container, oic):
     """
     print '=====duplicate osm====='
     from osm2shp import way2lineOrpoly
+    import warnings
+
     # duplicate nodes
     seen_latlons = {}
     same_nodes = {}
@@ -72,12 +74,12 @@ def duplicate_osm(osm_container, oic):
         # discard one-node ways
         if len(nodelist)==1:
             one_node_ways.append(way.id)
-            print 'one node ways: http://www.openstreetmap.org/way/{}'.format(way.id)
+            warnings.warn('one node ways: http://www.openstreetmap.org/way/{}'.format(way.id))
             continue
         # discard empty polygon ways
-        ln_or_poly = way2lineOrpoly((way))
+        ln_or_poly = way2lineOrpoly(osm_container, way)
         if ln_or_poly.is_empty:
-            print 'empty polygon way: http://www.openstreetmap.org/way/{}'.format(way.id)
+            warnings.warn('empty polygon way: http://www.openstreetmap.org/way/{}'.format(way.id))
             continue
         if not nodelist in seen_nodelists:
             seen_nodelists[nodelist] = way.id
