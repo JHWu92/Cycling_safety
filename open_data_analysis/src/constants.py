@@ -2,7 +2,8 @@
 # Philly
 # =========================
 # CRS
-epsg_ph = 32617
+# epsg_ph = 32617  # Kiran said it is the code saved in qgis project
+epsg_ph = 3559  # I find this better in buffer 10 meter
 # OSM
 osm_ph_poly_rid = 188022
 fn_city_poly_ph = 'city_poly_ph.geojson'
@@ -15,6 +16,15 @@ fn_segments_ph = 'segments_ph.geojson'
 # FourSquare Venues
 dir_frsq_raw_venues_ph = 'frsq_raw_venues/ph/'
 fn_frsq_venues_ph = 'frsq_venues_ph.geojson'
+# Poi
+fn_poi_frsq_ph = 'poi_frsq_ph.geojson'
+fn_poi_osm_ph = 'poi_osm_ph.geojson'
+fn_poi_distr_ph = 'poi_distr_ph.csv'
+fn_poi_seg_cvrg_ph = 'poi_seg_coverage_ph.html'
+fn_poi_boxplot_per_seg_ph = 'poi_boxplot_per_seg_ph.html'
+fn_feature_poi_ph = 'feature_poi_ph.csv'
+# Bike facilities
+fn_feature_bk_facs_ph = 'feature_bk_facs_ph.csv'
 
 
 # =========================
@@ -42,6 +52,7 @@ fn_poi_boxplot_per_seg_dc = 'poi_boxplot_per_seg_dc.html'
 fn_feature_poi_dc = 'feature_poi_dc.csv'
 # Bike facilities
 fn_feature_bk_facs_dc = 'feature_bk_facs_dc.csv'
+
 
 # =========================
 # non city specific constants
