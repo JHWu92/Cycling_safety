@@ -97,7 +97,7 @@ def mapping_for_osm(path_mapping_for_osm):
     with open(path_mapping_for_osm) as f:
         category, key, value = '', '', ''
         for line in f:
-            line_ = line
+            # line_ = line
             line = line.split('\t')
             type_ = len(line)
             txt = line[-1].strip()
