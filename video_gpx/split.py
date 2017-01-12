@@ -135,8 +135,7 @@ def main(args):
         if len(args) >=2:
             # args[2] is command line argument for the number of seconds
             # args[1] is the option (will be a 10 second split default if nothing is supplied
-            # args[0[ is the file location
-            print "hello" + args[1]
+            # args[0] is the file location
             if args[1] == '-l':
                 split_length = int(args[2])
             elif args[1] == '-b': #Split number of chunks desired
