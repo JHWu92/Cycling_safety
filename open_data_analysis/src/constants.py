@@ -52,6 +52,10 @@ fn_poi_boxplot_per_seg_dc = 'poi_boxplot_per_seg_dc.html'
 fn_feature_poi_dc = 'feature_poi_dc.csv'
 # Bike facilities
 fn_feature_bk_facs_dc = 'feature_bk_facs_dc.csv'
+# network feature
+fn_intxn_dc = 'intxn_dc.csv'
+fn_feature_seg_as_node = 'feature_seg_as_node_dc.csv'
+
 
 
 # =========================
