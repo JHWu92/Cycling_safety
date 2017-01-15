@@ -3,6 +3,22 @@ import snap
 import pandas as pd
 import geopandas as gp
 
+
+def ftr_for_dc(path_intxn, path_segs, path_ftr_seg_as_node):
+    from src.constants import index_seg
+    gpdf_segs = gp.read_file(path_segs)
+    df_intxn = pd.read_csv(path_intxn)
+    edges = df_intxn[['STREET1SEGID','STREET2SEGID']].values
+    nodes = pd.unique(edges.flatten())
+    features = ftr_segs_as_nodes(nodes, edges, True)
+    df_ftr = pd.DataFrame.from_dict(features).T
+    df_ftr.index.name = 'STREETSEGID'
+    df = gpdf_segs[['STREETSEGID']].reset_index().merge(df_ftr.reset_index())
+    df.columns = [index_seg] + list(df.columns[1:])
+    df.to_csv(path_ftr_seg_as_node)
+    return df
+
+
 def ftr_directed(G, features, nodes_size):
 
     for NI in G.Nodes():
