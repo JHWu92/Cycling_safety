@@ -72,15 +72,15 @@ def ptfromln(pt, ln):
 # ##############
 
 
-def gpdf_equal(l,r,output='idx'):
-    allow_values = ['idx','gpdf']
+def gpdf_equal(l, r, output='idx'):
+    allow_values = ['idx', 'gpdf']
     if output not in allow_values:
         raise ValueError('output allow_values is {}'.format(allow_values))
     contains = gp.tools.sjoin(l, r, op='contains').reset_index()
-    equal_idx = [(idx,idxr) for idx, idxr in contains[['index', 'index_right']].values
-         if l.loc[idx].geometry.equals(r.loc[idxr].geometry)]
+    equal_idx = [(idx, idxr) for idx, idxr in contains[['index', 'index_right']].values
+                 if l.loc[idx].geometry.equals(r.loc[idxr].geometry)]
     equal_idx = gp.GeoDataFrame(equal_idx, columns=['index', 'index_right'])
-    if output=='gpdf':
+    if output == 'gpdf':
         return contains.merge(equal_idx)
     return equal_idx
 
@@ -95,6 +95,67 @@ def connected_nodes(edges):
     G = nx.Graph()
     G.add_edges_from(edges)
     return [x.nodes() for x in nx.connected_component_subgraphs(G)]
+
+
+def intxn_from_segs(segs):
+    """
+    find intersection pairs of segments: spatial join segments --> keep pairs that index_t intersect with index_f when
+    the intersection point(s) are at project point 0.0 or 1.0 of index_f
+    :param segs: path or geopandas.GeoDataFrame
+    :return: pandas.DataFrame, columns=['index_f', 'index_t', 'intx_f_start_point', 'intx_f_end_point']
+    """
+    if isinstance(segs,str):
+        segs = gp.read_file(segs)
+
+    segs_type = list(set(segs.geometry.apply(lambda x: x.type)))
+    assert len(segs_type) == 1 and segs_type[0] == 'LineString', 'type of segs is assumed to be shapely.geometry.linestring.LineString only'
+
+    # deprecated, if two lineStrings don't share the exact same point, chance is they don't intersect at all
+    # e.g. 422290 and 422125, 40111 and 40226 (SEG_ID) in ph
+    # buffer a small range to find intersection intersection in case of linestrings not sharing the exact same point
+    # segs_bfr = crs_prepossess(segs, init_crs=latlon_crs, bfr_crs=epsg_ph)
+    # segs_bfr.geometry = segs_bfr.buffer(bfr_range)
+
+    intxn_cand = gp.tools.sjoin(segs[['geometry']], segs[['geometry']])
+    # intxn_cand is a symmetric matrix
+    # print intxn_cand.apply(lambda x: tuple(sorted([x.index_f, x.index_t])), axis=1).value_counts().value_counts()
+
+    # exclude self-intersected pairs
+    intxn_cand = intxn_cand[intxn_cand.index != intxn_cand.index_right]
+    # keep index only
+    intxn_cand = intxn_cand.reset_index()[['index', 'index_right']]
+    intxn_cand.columns = ['index_f', 'index_t']
+    # add geometry for F and T
+    intxn_cand = intxn_cand.merge(segs[['geometry']], how='left', left_on='index_f', right_index=True)
+    intxn_cand = intxn_cand.merge(segs[['geometry']], how='left', left_on='index_t', right_index=True)
+    intxn_cand.columns = ['index_f', 'index_t', 'geometry_f', 'geometry_t']
+
+    intxn_cand['intxn'] = intxn_cand.apply(lambda x: x.geometry_f.intersection(x.geometry_t), axis=1)
+
+    def get_proj(x):
+        pts = []
+        intxn = x.intxn
+        if intxn.type == 'MultiPoint' or intxn.type == 'GeometryCollection':
+            for obj in intxn:
+                if obj.type == 'Point':
+                    pts.append(obj)
+        elif intxn.type == 'Point':
+            pts.append(intxn)
+
+        projs = [x.geometry_f.project(pt, normalized=True) for pt in pts]
+        projs = tuple([proj for proj in projs if (proj == 0 or proj == 1)])
+        return projs
+
+    intxn_cand['project'] = intxn_cand.apply(get_proj, axis=1)
+    intxn_cand['intx_f_start_point'] = intxn_cand.project.apply(lambda x: 0 in x)
+    intxn_cand['intx_f_end_point'] = intxn_cand.project.apply(lambda x: 1 in x)
+
+    print 'intersction project', intxn_cand.project.value_counts().to_dict()
+
+    # remove fake intersection
+    intxn_cand = intxn_cand[(intxn_cand.intx_f_start_point) | (intxn_cand.intx_f_end_point)]
+    # keep columns
+    return intxn_cand[['index_f', 'index_t', 'intx_f_start_point', 'intx_f_end_point']].sort(['index_f', 'intx_f_start_point'])
 
 
 def crs_prepossess(gpdf, init_crs, bfr_crs):
@@ -148,7 +209,6 @@ def objs_near_segs(objs, segs, bfr_func, bfr_crs, init_crs=4326, output='index_s
         return index_seg_obj, objs_nearby
 
 
-
 def objs_near_segs_store(objs_near, dir, fn_objs, fn_segs):
     """
     store objs_near to path: dir/fn_objs+fn_segs.geojson
@@ -160,7 +220,7 @@ def objs_near_segs_store(objs_near, dir, fn_objs, fn_segs):
     import os
     fn_objs, _ = os.path.splitext(fn_objs)
     fn_segs, _ = os.path.splitext(os.path.basename(fn_segs))
-    new_path = '{}{}_near_{}.geojson'.format(dir,fn_objs, fn_segs)
+    new_path = '{}{}_near_{}.geojson'.format(dir, fn_objs, fn_segs)
     with open(new_path, 'w') as f:
         f.write(objs_near.to_json())
     print 'wrote obj near segments:', new_path
