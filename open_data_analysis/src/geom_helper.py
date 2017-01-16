@@ -104,6 +104,7 @@ def intxn_from_segs(segs):
     :param segs: path or geopandas.GeoDataFrame
     :return: pandas.DataFrame, columns=['index_f', 'index_t', 'intx_f_start_point', 'intx_f_end_point']
     """
+    from constants import index_from, index_to, index_from_start_point, index_from_end_point
     if isinstance(segs,str):
         segs = gp.read_file(segs)
 
@@ -128,7 +129,7 @@ def intxn_from_segs(segs):
     # add geometry for F and T
     intxn_cand = intxn_cand.merge(segs[['geometry']], how='left', left_on='index_f', right_index=True)
     intxn_cand = intxn_cand.merge(segs[['geometry']], how='left', left_on='index_t', right_index=True)
-    intxn_cand.columns = ['index_f', 'index_t', 'geometry_f', 'geometry_t']
+    intxn_cand.columns = [index_from, index_to, 'geometry_f', 'geometry_t']
 
     intxn_cand['intxn'] = intxn_cand.apply(lambda x: x.geometry_f.intersection(x.geometry_t), axis=1)
 
@@ -147,15 +148,15 @@ def intxn_from_segs(segs):
         return projs
 
     intxn_cand['project'] = intxn_cand.apply(get_proj, axis=1)
-    intxn_cand['intx_f_start_point'] = intxn_cand.project.apply(lambda x: 0 in x)
-    intxn_cand['intx_f_end_point'] = intxn_cand.project.apply(lambda x: 1 in x)
+    intxn_cand[index_from_start_point] = intxn_cand.project.apply(lambda x: 0 in x)
+    intxn_cand[index_from_end_point] = intxn_cand.project.apply(lambda x: 1 in x)
 
     print 'intersction project', intxn_cand.project.value_counts().to_dict()
 
     # remove fake intersection
     intxn_cand = intxn_cand[(intxn_cand.intx_f_start_point) | (intxn_cand.intx_f_end_point)]
     # keep columns
-    return intxn_cand[['index_f', 'index_t', 'intx_f_start_point', 'intx_f_end_point']].sort(['index_f', 'intx_f_start_point'])
+    return intxn_cand[[index_from, index_to, index_from_start_point, index_from_end_point]].sort(['index_f', 'intx_f_start_point'])
 
 
 def crs_prepossess(gpdf, init_crs, bfr_crs):
