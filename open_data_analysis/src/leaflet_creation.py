@@ -155,11 +155,13 @@ def create_map_visualization(html_title, file_path, file_name, lat, lon, zoom,
     html_title = 'openstreetmap elements'
     file_path = ''
     file_name = 'test creation of leaflet'
-    lon, lat  = -77.0908494, 38.9045525
-    zoom = 18
+    lon, lat = -77.0908494, 38.9045525  #D.C.
+    zoom = 12
     init_layers = ['streets', 'stsg']
-    map_layers = ['light','streets']
+    map_layers = ['light','streets', 'satellite']
     binding_data=[['stsg','street segment'],['stsg1','street segment1']]
+    # gpdf1['color'] = '#aa0'
+    # gpdf2['color'] = '#0a0'
     gpdfs = [gpdf1, gpdf2]
     create_map_visualization(html_title, file_path, file_name, lat, lon, zoom, init_layers, map_layers, binding_data, gpdfs)
     """
@@ -172,10 +174,10 @@ def test():
     html_title = 'openstreetmap elements'
     file_path = ''
     file_name = 'test creation of leaflet'
-    lon, lat  = -77.0908494, 38.9045525
-    zoom = 18
+    lon, lat = -77.0908494, 38.9045525  #D.C.
+    zoom = 12
     init_layers = ['streets', 'stsg']
-    map_layers = ['light','streets']
+    map_layers = ['light','streets', 'satellite']
     binding_data=[['stsg','street segment'],['stsg1','street segment1']]
     import geopandas as gp
     from shapely.geometry import Point
