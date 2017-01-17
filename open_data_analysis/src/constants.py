@@ -72,6 +72,10 @@ index_from = 'index_f'  # directed intersection network: from segment, to segmen
 index_to = 'index_t'
 index_from_start_point = 'intx_f_start_point'  # intersected at start/end point of from segment
 index_from_end_point = 'intx_f_end_point'
+index_to_start_point = 'intx_t_start_point'  # intersected at start/end point of to segment
+index_to_end_point = 'intx_t_end_point'
+
+
 # FourSquare Taxonomy
 fn_frsq_taxonomy_json = 'frsq_taxonomy_raw.json'
 fn_frsq_taxonomy_csv = 'frsq_taxonomy_parsed.csv'

@@ -97,14 +97,51 @@ def connected_nodes(edges):
     return [x.nodes() for x in nx.connected_component_subgraphs(G)]
 
 
-def intxn_from_segs(segs):
+
+
+
+def intxn_from_segs(segs, directionality_column=None):
     """
     find intersection pairs of segments: spatial join segments --> keep pairs that index_t intersect with index_f when
     the intersection point(s) are at project point 0.0 or 1.0 of index_f
     :param segs: path or geopandas.GeoDataFrame
-    :return: pandas.DataFrame, columns=['index_f', 'index_t', 'intx_f_start_point', 'intx_f_end_point']
+    :return: pandas.DataFrame, columns=['index_f', 'index_t', 'intx_f_start_point', 'intx_f_end_point', 'intx_t_start_point', 'intx_t_end_point']
     """
-    from constants import index_from, index_to, index_from_start_point, index_from_end_point
+    def get_proj(intxn, line):
+        pts = []
+        if intxn.type == 'MultiPoint' or intxn.type == 'GeometryCollection':
+            for obj in intxn:
+                if obj.type == 'Point':
+                    pts.append(obj)
+        elif intxn.type == 'Point':
+            pts.append(intxn)
+
+        projs = [line.project(pt, normalized=True) for pt in pts]
+        projs = tuple([proj for proj in projs if (proj == 0 or proj == 1)])
+        return projs
+
+    def directed_intxn(x):
+        drtn_f = x['drtn_f']
+        drtn_t = x['drtn_t']
+        from_end_pt = False
+        to_start_pt = False
+        if drtn_f=='B' or drtn_f==2:
+            from_end_pt = (x[index_from_start_point] or x[index_from_end_point])
+        elif drtn_f=='FT' or drtn_f==0:
+            from_end_pt = x[index_from_end_point]
+        elif drtn_f=='TF' or drtn_f==1:
+            from_end_pt = x[index_from_start_point]
+
+        if drtn_t=='B' or drtn_t==2:
+            to_start_pt = (x[index_to_start_point] or x[index_to_end_point])
+        elif drtn_t=='FT' or drtn_t==0:
+            to_start_pt = x[index_to_start_point]
+        elif drtn_t=='TF' or drtn_t==1:
+            to_start_pt = x[index_to_end_point]
+
+        return from_end_pt and to_start_pt
+
+    from constants import index_from, index_to, index_from_start_point, index_from_end_point, index_to_start_point, index_to_end_point
     if isinstance(segs,str):
         segs = gp.read_file(segs)
 
@@ -130,34 +167,29 @@ def intxn_from_segs(segs):
     intxn_cand = intxn_cand.merge(segs[['geometry']], how='left', left_on='index_f', right_index=True)
     intxn_cand = intxn_cand.merge(segs[['geometry']], how='left', left_on='index_t', right_index=True)
     intxn_cand.columns = [index_from, index_to, 'geometry_f', 'geometry_t']
-
+    # get intersection geometry
     intxn_cand['intxn'] = intxn_cand.apply(lambda x: x.geometry_f.intersection(x.geometry_t), axis=1)
+    # get project of intersection points and determine whether the intersection is at the from or to point of seg
+    intxn_cand['project_f'] = intxn_cand.apply(lambda x: get_proj(x.intxn, x.geometry_f), axis=1)
+    intxn_cand['project_t'] = intxn_cand.apply(lambda x: get_proj(x.intxn, x.geometry_t), axis=1)
+    intxn_cand[index_from_start_point] = intxn_cand.project_f.apply(lambda x: 0 in x)
+    intxn_cand[index_from_end_point] = intxn_cand.project_f.apply(lambda x: 1 in x)
+    intxn_cand[index_to_start_point] = intxn_cand.project_t.apply(lambda x: 0 in x)
+    intxn_cand[index_to_end_point] = intxn_cand.project_t.apply(lambda x: 1 in x)
 
-    def get_proj(x):
-        pts = []
-        intxn = x.intxn
-        if intxn.type == 'MultiPoint' or intxn.type == 'GeometryCollection':
-            for obj in intxn:
-                if obj.type == 'Point':
-                    pts.append(obj)
-        elif intxn.type == 'Point':
-            pts.append(intxn)
+    print 'intersction project', intxn_cand.project_f.value_counts().to_dict()
 
-        projs = [x.geometry_f.project(pt, normalized=True) for pt in pts]
-        projs = tuple([proj for proj in projs if (proj == 0 or proj == 1)])
-        return projs
-
-    intxn_cand['project'] = intxn_cand.apply(get_proj, axis=1)
-    intxn_cand[index_from_start_point] = intxn_cand.project.apply(lambda x: 0 in x)
-    intxn_cand[index_from_end_point] = intxn_cand.project.apply(lambda x: 1 in x)
-
-    print 'intersction project', intxn_cand.project.value_counts().to_dict()
-
-    # remove fake intersection
+    # remove fake intersection: intersected at neither the from point or to point of a segment
     intxn_cand = intxn_cand[(intxn_cand.intx_f_start_point) | (intxn_cand.intx_f_end_point)]
-    # keep columns
-    return intxn_cand[[index_from, index_to, index_from_start_point, index_from_end_point]].sort(['index_f', 'intx_f_start_point'])
+    # if no specification of directionality column, return symmetric intersection matrix
+    if not directionality_column:
+        return intxn_cand[[index_from, index_to]]
 
+    intxn_cand = intxn_cand.merge(segs[[directionality_column]], left_on=index_from, right_index=True)
+    intxn_cand = intxn_cand.merge(segs[[directionality_column]], left_on=index_to, right_index=True)
+    intxn_cand.columns = list(intxn_cand.columns[:-2]) + ['drtn_f', 'drtn_t']
+    intxn_cand['directed_intxn'] = intxn_cand.apply(directed_intxn, axis=1)
+    return intxn_cand[intxn_cand['directed_intxn']][[index_from, index_to]]
 
 def crs_prepossess(gpdf, init_crs, bfr_crs):
     """
