@@ -8,13 +8,13 @@ epsg_ph = 3559  # I find this better in buffer 10 meter
 osm_ph_poly_rid = 188022
 fn_city_poly_ph = 'city_poly_ph.geojson'
 fn_city_poly_ph_png = fn_city_poly_ph.replace('geojson', 'png')
-fn_osm_raw_ph = 'osm_raw_ph.osm'
+fn_osm_raw_ph = 'raw_data/osm_raw_ph.osm'
 fn_osm_db_ph = 'osm_db_ph.sqlite3'
 # Segments
 fn_segments_ph = 'segments_ph.geojson'
 var_directionality_column_ph = 'ONEWAY'
 # FourSquare Venues
-dir_frsq_raw_venues_ph = 'frsq_raw_venues/ph/'
+dir_frsq_raw_venues_ph = 'raw_data/frsq_raw_venues/ph/'
 fn_frsq_venues_ph = 'frsq_venues_ph.geojson'
 # Poi
 fn_poi_frsq_ph = 'poi_frsq_ph.geojson'
@@ -39,13 +39,14 @@ epsg_dc = 3559
 osm_dc_poly_rid = 162069
 fn_city_poly_dc = 'city_poly_dc.geojson'
 fn_city_poly_dc_png = fn_city_poly_dc.replace('geojson', 'png')
-fn_osm_raw_dc = 'osm_raw_dc.osm'
+fn_osm_raw_dc = 'raw_data/osm_raw_dc.osm'
 fn_osm_db_dc = 'osm_db_dc.sqlite3'
 # Segments
-fn_segments_dc = 'segments_dc_opendc.geojson'
+fn_segments_dc_raw = 'raw_data/segments_dc_opendc.geojson'
+fn_segments_dc = 'segments_d.geojson'
 var_directionality_column_dc = 'DIRECTIONALITY'
 # FourSquare Venues
-dir_frsq_raw_venues_dc = 'frsq_raw_venues/dc/'
+dir_frsq_raw_venues_dc = 'raw_data/frsq_raw_venues/dc/'
 fn_frsq_venues_dc = 'frsq_venues_dc.geojson'
 # Poi
 fn_poi_frsq_dc = 'poi_frsq_dc.geojson'
