@@ -11,8 +11,8 @@ fn_city_poly_ph_png = fn_city_poly_ph.replace('geojson', 'png')
 fn_osm_raw_ph = 'osm_raw_ph.osm'
 fn_osm_db_ph = 'osm_db_ph.sqlite3'
 # Segments
-# TODO: get segments for philly
 fn_segments_ph = 'segments_ph.geojson'
+var_directionality_column_ph = 'ONEWAY'
 # FourSquare Venues
 dir_frsq_raw_venues_ph = 'frsq_raw_venues/ph/'
 fn_frsq_venues_ph = 'frsq_venues_ph.geojson'
@@ -43,6 +43,7 @@ fn_osm_raw_dc = 'osm_raw_dc.osm'
 fn_osm_db_dc = 'osm_db_dc.sqlite3'
 # Segments
 fn_segments_dc = 'segments_dc_opendc.geojson'
+var_directionality_column_dc = 'DIRECTIONALITY'
 # FourSquare Venues
 dir_frsq_raw_venues_dc = 'frsq_raw_venues/dc/'
 fn_frsq_venues_dc = 'frsq_venues_dc.geojson'
