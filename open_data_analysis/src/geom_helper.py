@@ -100,13 +100,18 @@ def connected_nodes(edges):
 
 
 
-def intxn_from_segs(segs, directionality_column=None):
+def intxn_from_segs(segs, directionality_column=None, debug=False):
     """
     find intersection pairs of segments: spatial join segments --> keep pairs that index_t intersect with index_f when
     the intersection point(s) are at project point 0.0 or 1.0 of index_f
     :param segs: path or geopandas.GeoDataFrame
     :return: pandas.DataFrame, columns=['index_f', 'index_t', 'intx_f_start_point', 'intx_f_end_point', 'intx_t_start_point', 'intx_t_end_point']
     """
+    # check whether the intersection output is correct, by picking some examples for both B, FT, TF.
+    # 1. FT/0 type: DC STREETSEGID = 876(-77.01239193659748 38.950836102255), checked; 14713(-76.9902413493931 38.8773984704994), checked; 8891(-77.01366204332678 38.899295772364), checked
+    # 2. TF/1 type: DC STREETSEGID = 13161(-77.01163764014346 38.953383268855), checked; 8292(-77.0100561260908 38.9555132405171), checked; 92(-77.01618238255742 38.896139800171), checked
+    # 3. B/2 type: DC STREETSEGID = 10395(-77.0116155077942 38.9556194835925), checked; 10090(-77.0116172263626 38.9576690437764), checked; 15306(-77.01885842791256 38.836994168269), checked; 15284(-76.99377942384207 38.875606235068)
+
     def get_proj(intxn, line):
         pts = []
         if intxn.type == 'MultiPoint' or intxn.type == 'GeometryCollection':
@@ -185,12 +190,16 @@ def intxn_from_segs(segs, directionality_column=None):
     intxn_cand = intxn_cand[(intxn_cand.intx_f_start_point) | (intxn_cand.intx_f_end_point)]
     # if no specification of directionality column, return symmetric intersection matrix
     if not directionality_column:
+        if debug:
+            return intxn_cand
         return intxn_cand[[index_from, index_to]]
 
     intxn_cand = intxn_cand.merge(segs[[directionality_column]], left_on=index_from, right_index=True)
     intxn_cand = intxn_cand.merge(segs[[directionality_column]], left_on=index_to, right_index=True)
     intxn_cand.columns = list(intxn_cand.columns[:-2]) + ['drtn_f', 'drtn_t']
     intxn_cand['directed_intxn'] = intxn_cand.apply(directed_intxn, axis=1)
+    if debug:
+        return intxn_cand
     return intxn_cand[intxn_cand['directed_intxn']][[index_from, index_to]]
 
 def crs_prepossess(gpdf, init_crs, bfr_crs):
