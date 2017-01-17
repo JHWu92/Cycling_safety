@@ -5,7 +5,7 @@ import geopandas as gp
 
 
 def ftr_for_dc(path_intxn, path_segs, path_ftr_seg_as_node):
-    from src.constants import index_seg
+    from constants import index_seg
     gpdf_segs = gp.read_file(path_segs)
     df_intxn = pd.read_csv(path_intxn)
     edges = df_intxn[['STREET1SEGID','STREET2SEGID']].values
@@ -17,6 +17,23 @@ def ftr_for_dc(path_intxn, path_segs, path_ftr_seg_as_node):
     df.columns = [index_seg] + list(df.columns[1:])
     df.to_csv(path_ftr_seg_as_node)
     return df
+
+
+def ftr_segs_as_nodes(nodes, edges, is_dir=False):
+    from collections import defaultdict
+    nodes_size = len(nodes)
+    G = snap.TNGraph.New()
+    for n in nodes:
+        G.AddNode(int(n))
+    for ein, eout in edges:
+        G.AddEdge(int(ein), int(eout))
+    UG = snap.ConvertGraph(snap.PUNGraph, G)
+    print 'node size = {}, directed edges = {}, undirected edges = {}'.format(nodes_size, len([0 for e in G.Edges()]), len([0 for e in UG.Edges()]))
+    features = defaultdict(lambda: defaultdict(int))
+    if is_dir:
+        ftr_directed(G, features, nodes_size)
+    ftr_undirected(UG, features)
+    return features
 
 
 def ftr_directed(G, features, nodes_size):
@@ -92,19 +109,3 @@ def ftr_undirected(UG, features):
         features[edge.GetVal1()]['ud_bridge']+=1
         features[edge.GetVal2()]['ud_bridge']+=1
 
-
-def ftr_segs_as_nodes(nodes, edges, is_dir=False):
-    from collections import defaultdict
-    nodes_size = len(nodes)
-    G = snap.TNGraph.New()
-    for n in nodes:
-        G.AddNode(int(n))
-    for ein, eout in edges:
-        G.AddEdge(int(ein), int(eout))
-    UG = snap.ConvertGraph(snap.PUNGraph, G)
-    print 'node size = {}, directed edges = {}, undirected edges = {}'.format(nodes_size, len([0 for e in G.Edges()]), len([0 for e in UG.Edges()]))
-    features = defaultdict(lambda: defaultdict(int))
-    if is_dir:
-        ftr_directed(G, features, nodes_size)
-    ftr_undirected(UG, features)
-    return features
