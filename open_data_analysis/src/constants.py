@@ -43,7 +43,7 @@ fn_osm_raw_dc = 'raw_data/osm_raw_dc.osm'
 fn_osm_db_dc = 'osm_db_dc.sqlite3'
 # Segments
 fn_segments_dc_raw = 'raw_data/segments_dc_opendc.geojson'
-fn_segments_dc = 'segments_d.geojson'
+fn_segments_dc = 'segments_dc.geojson'
 var_directionality_column_dc = 'DIRECTIONALITY'
 # FourSquare Venues
 dir_frsq_raw_venues_dc = 'raw_data/frsq_raw_venues/dc/'
