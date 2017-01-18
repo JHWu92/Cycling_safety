@@ -97,9 +97,6 @@ def connected_nodes(edges):
     return [x.nodes() for x in nx.connected_component_subgraphs(G)]
 
 
-
-
-
 def intxn_from_segs(segs, directionality_column=None, debug=False):
     """
     find intersection pairs of segments: spatial join segments --> keep pairs that index_t intersect with index_f when
@@ -149,8 +146,6 @@ def intxn_from_segs(segs, directionality_column=None, debug=False):
     from constants import index_from, index_to, index_from_start_point, index_from_end_point, index_to_start_point, index_to_end_point
     if isinstance(segs,str):
         segs = gp.read_file(segs)
-    from shapely.ops import linemerge
-    segs.geometry = segs.geometry.apply(lambda x: x if x.type!='MultiLineString' else linemerge(x))
 
     segs_type = list(set(segs.geometry.apply(lambda x: x.type)))
     assert len(segs_type) == 1 and segs_type[0] == 'LineString', 'type of segs is assumed to be shapely.geometry.linestring.LineString only'
