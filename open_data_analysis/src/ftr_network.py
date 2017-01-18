@@ -5,8 +5,8 @@ import geopandas as gp
 
 
 def ftr_network_SgAsNd(path_segs, path_ftr_seg_as_node, directionality_column=None, is_dird=False):
-    from src.constants import index_seg
-    from src.geom_helper import intxn_from_segs
+    from constants import index_seg
+    from geom_helper import intxn_from_segs
     print '----segments as nodes network----'
     intxn_matrix = intxn_from_segs(path_segs, directionality_column=directionality_column)
     print 'got intxn_matrix'
