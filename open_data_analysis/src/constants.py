@@ -28,6 +28,7 @@ fn_feature_bk_facs_ph = 'feature_bk_facs_ph.csv'
 # network feature
 # fn_intxn_ph = 'intxn_ph.csv'
 fn_feature_seg_as_node_ph = 'feature_seg_as_node_ph.csv'
+fn_feature_seg_as_edge_ph = 'feature_seg_as_edge_ph.csv'
 
 
 # =========================
@@ -60,7 +61,7 @@ fn_feature_bk_facs_dc = 'feature_bk_facs_dc.csv'
 # network feature
 fn_intxn_dc = 'intxn_dc.csv'
 fn_feature_seg_as_node_dc = 'feature_seg_as_node_dc.csv'
-
+fn_feature_seg_as_edge_dc = 'feature_seg_as_edge_dc.csv'
 
 
 # =========================
@@ -80,7 +81,6 @@ index_from_end_point = 'intx_f_end_point'
 index_to_start_point = 'intx_t_start_point'  # intersected at start/end point of to segment
 index_to_end_point = 'intx_t_end_point'
 
-
 # FourSquare Taxonomy
 fn_frsq_taxonomy_json = 'frsq_taxonomy_raw.json'
 fn_frsq_taxonomy_csv = 'frsq_taxonomy_parsed.csv'
@@ -95,6 +95,11 @@ similar_name_threshold = 0.8  # used in detecting frsq and osm duplicates
 no_name_value = -1.0
 poi_categories = ['art', 'outdoors and recreation', 'retail shop', 'professional service', 'food',
                   'nightlife spot', 'residence', 'schools&university', 'cycling facilities', 'transportation']
+
+# Network features
+ftr_name_d_btw_cntr_SgAsEd = 'ftr_name_d_btw_cntr_SgAsEd'
+ftr_name_ud_btw_cntr_SgAsEd = 'ud_btw_cntr_SgAsEd'
+ftr_name_ud_bridge_SgAsEd = 'ud_bridge_SgAsEd'
 
 # Bike facilities
 # TODO: highway='footway', footway=sidewalk
