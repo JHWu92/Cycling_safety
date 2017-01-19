@@ -1,6 +1,6 @@
-# =========================
-# Philly
-# =========================
+# ###################################################################### =========================
+# ###################################################################### Philly
+# ###################################################################### =========================
 # CRS
 # epsg_ph = 32617  # Kiran said it is the code saved in qgis project
 epsg_ph = 3559  # I find this better in buffer 10 meter
@@ -31,9 +31,9 @@ fn_feature_seg_as_node_ph = 'feature_seg_as_node_ph.csv'
 fn_feature_seg_as_edge_ph = 'feature_seg_as_edge_ph.csv'
 
 
-# =========================
-# D.C.
-# =========================
+# ###################################################################### =========================
+# ###################################################################### D.C.
+# ###################################################################### =========================
 # CRS
 epsg_dc = 3559
 # OSM
@@ -64,12 +64,12 @@ fn_feature_seg_as_node_dc = 'feature_seg_as_node_dc.csv'
 fn_feature_seg_as_edge_dc = 'feature_seg_as_edge_dc.csv'
 
 
-# =========================
-# non city specific constants
-# =========================
-# crs
+# ====================================================================== =========================
+# ###################################################################### non city specific constants
+# ====================================================================== =========================
+# ###################################################################### crs
 latlon_crs = 4326
-# geom_helper
+# ###################################################################### geom_helper
 index_seg = 'index_seg'
 index_obj = 'index_obj'
 index_ln = 'index_ln'
@@ -81,12 +81,12 @@ index_from_end_point = 'intx_f_end_point'
 index_to_start_point = 'intx_t_start_point'  # intersected at start/end point of to segment
 index_to_end_point = 'intx_t_end_point'
 
-# FourSquare Taxonomy
+# ###################################################################### FourSquare Taxonomy
 fn_frsq_taxonomy_json = 'frsq_taxonomy_raw.json'
 fn_frsq_taxonomy_csv = 'frsq_taxonomy_parsed.csv'
 fn_frsq_taxonomy_tree = 'frsq_taxonomy_tree.txt'
 
-# Poi mapping
+# ###################################################################### Poi mapping
 fn_mapping_for_fs = 'manual/poi_mapping_for_fs.txt'
 var_exclude_category_for_fs = 'no category'
 fn_mapping_for_osm = 'manual/poi_mapping_for_osm.txt'
@@ -96,12 +96,34 @@ no_name_value = -1.0
 poi_categories = ['art', 'outdoors and recreation', 'retail shop', 'professional service', 'food',
                   'nightlife spot', 'residence', 'schools&university', 'cycling facilities', 'transportation']
 
-# Network features
-ftr_name_d_btw_cntr_SgAsEd = 'ftr_name_d_btw_cntr_SgAsEd'
-ftr_name_ud_btw_cntr_SgAsEd = 'ud_btw_cntr_SgAsEd'
-ftr_name_ud_bridge_SgAsEd = 'ud_bridge_SgAsEd'
+# ###################################################################### Network features
+# #################################################### segments as edges
+ftr_name_d_btw_cntr_SgAsEg = 'd_btw_cntr_SgAsEg'
+ftr_name_ud_btw_cntr_SgAsEg = 'ud_btw_cntr_SgAsEg'
+ftr_name_ud_bridge_SgAsEg = 'ud_bridge_SgAsEg'
+# #################################################### segments as nodes
+ftr_name_d_in_deg_SgAsNd = 'd_in_deg_SgAsNd'
+ftr_name_d_out_deg_SgAsNd = 'd_out_deg_SgAsNd'
+ftr_name_d_node_ecc_SgAsNd = 'd_node_ecc_SgAsNd'
+ftr_name_d_clo_cntr_SgAsNd = 'd_clo_cntr_SgAsNd'
+ftr_name_d_far_cntr_SgAsNd = 'd_far_cntr_SgAsNd'
+ftr_name_d_btw_cntr_SgAsNd = 'd_btw_cntr_SgAsNd'
+ftr_name_d_page_rank_SgAsNd = 'd_page_rank_SgAsNd'
+ftr_name_d_hub_score_SgAsNd = 'd_hub_score_SgAsNd'
+ftr_name_d_auth_score_SgAsNd = 'd_auth_score_SgAsNd'
+ftr_name_ud_deg_cntr_SgAsNd = 'ud_deg_cntr_SgAsNd'
+ftr_name_ud_node_ecc_SgAsNd = 'ud_node_ecc_SgAsNd'
+ftr_name_ud_clo_cntr_SgAsNd = 'ud_clo_cntr_SgAsNd'
+ftr_name_ud_far_cntr_SgAsNd = 'ud_far_cntr_SgAsNd'
+ftr_name_ud_eig_cntr_SgAsNd = 'ud_eig_cntr_SgAsNd'
+ftr_name_ud_btw_cntr_SgAsNd = 'ud_btw_cntr_SgAsNd'
+ftr_name_ud_page_rank_SgAsNd = 'ud_page_rank_SgAsNd'
+ftr_name_ud_hub_score_SgAsNd = 'ud_hub_score_SgAsNd'
+ftr_name_ud_auth_score_SgAsNd = 'ud_auth_score_SgAsNd'
+ftr_name_ud_art_pt_SgAsNd = 'ud_art_pt_SgAsNd'
+ftr_name_ud_bridge_SgAsNd = 'ud_bridge_SgAsNd'
 
-# Bike facilities
+# ###################################################################### Bike facilities
 # TODO: highway='footway', footway=sidewalk
 tag_for_pattern = ['highway', 'cycleway', 'cycleway:left', 'cycleway:right', 'cycleway:both',
                    'oneway:bicycle', 'bicycle', 'bicycle:lanes', 'bicycle:backward',
