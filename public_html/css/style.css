@@ -1,0 +1,143 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+  height:100%;
+  width:100%;
+}
+
+.form-signin {
+  max-width: 350px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  width: 74%;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/*
+.container{
+  width:100%;
+  height:100%;
+}
+*/
+
+#btn-signin, #btn-create{
+  width:74%;
+}
+
+[role=button]{
+  cursor:pointer;
+}
+
+#skill-btns{
+  margin-bottom:20px;
+}
+
+iframe{
+  display:block;
+  margin:auto;
+  margin-top:-3%;
+}
+
+.radio-inline{
+  margin-right:10px;
+}
+
+.radio{
+  margin-left:15px;
+  margin-bottom:15px;
+}
+
+.rate-vid{
+  width:550px;
+  padding:10px 25px 10px 25px;
+  margin:auto;
+  margin-top:15px;
+  border: 4px solid #516991;
+  border-radius:10px ;
+  background-color:white;
+  box-shadow: 15px 15px 25px #888;
+}
+
+.divider{
+  margin:8px 0px 6px 0px;
+  border-bottom: 1px solid #888;
+}
+
+#description{
+  margin-bottom:10px;
+}
+
+#btn-rate{
+  display:inline;
+  position:relative;
+  left:0;
+}
+#btn-done{
+  display:inline;
+  float:right;
+}
+
+
+/* tooltip wrapper for disable btn */
+.tooltip-wrapper {display: inline-block; /* display: block works as well */}
+.tooltip-wrapper .btn[disabled] {  /* don't let button block mouse events from reaching wrapper */
+  pointer-events: none;
+}
+.tooltip-wrapper.disabled {  /* OPTIONAL pointer-events setting above blocks cursor setting, so set it here */
+  cursor: not-allowed;
+}
+
+/* for <label> with radio*/
+.not-bold {
+    font-weight: normal !important;
+    margin: 0px 0px 0px 0px
+}
+.margin-top{
+    margin-top:18px
+}
+.margin-left-bottom{
+  margin-left:15px;
+  margin-bottom:15px;
+}
+
+/* border for rate-vid.html*/
+.border{
+    
+  margin:8px 0px 6px 0px;
+  padding:10px 10px 10px 10px;
+  border: 4px solid #516991;
+  border-radius:10px ;
+  background-color:white;
+  height: 300px;
+}
+
+
