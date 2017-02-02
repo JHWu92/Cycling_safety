@@ -1,0 +1,887 @@
+,parent_id,cid,pluralName,shortName,name,level,order
+0,root,4d4b7104d754a06370d81259,Arts & Entertainment,Arts & Entertainment,Arts & Entertainment,1,0
+1,4d4b7104d754a06370d81259,56aa371be4b08b9a8d5734db,Amphitheaters,Amphitheater,Amphitheater,2,0
+2,4d4b7104d754a06370d81259,4fceea171983d5d06c3e9823,Aquariums,Aquarium,Aquarium,2,1
+3,4d4b7104d754a06370d81259,4bf58dd8d48988d1e1931735,Arcades,Arcade,Arcade,2,2
+4,4d4b7104d754a06370d81259,4bf58dd8d48988d1e2931735,Art Galleries,Art Gallery,Art Gallery,2,3
+5,4d4b7104d754a06370d81259,4bf58dd8d48988d1e4931735,Bowling Alleys,Bowling Alley,Bowling Alley,2,4
+6,4d4b7104d754a06370d81259,4bf58dd8d48988d17c941735,Casinos,Casino,Casino,2,5
+7,4d4b7104d754a06370d81259,52e81612bcbc57f1066b79e7,Circuses,Circus,Circus,2,6
+8,4d4b7104d754a06370d81259,4bf58dd8d48988d18e941735,Comedy Clubs,Comedy Club,Comedy Club,2,7
+9,4d4b7104d754a06370d81259,5032792091d4c4b30a586d5c,Concert Halls,Concert Hall,Concert Hall,2,8
+10,4d4b7104d754a06370d81259,52e81612bcbc57f1066b79ef,Country Dance Clubs,Country Dance Club,Country Dance Club,2,9
+11,4d4b7104d754a06370d81259,52e81612bcbc57f1066b79e8,Disc Golf Courses,Disc Golf,Disc Golf,2,10
+12,4d4b7104d754a06370d81259,56aa371be4b08b9a8d573532,Exhibits,Exhibit,Exhibit,2,11
+13,4d4b7104d754a06370d81259,4bf58dd8d48988d1f1931735,General Entertainment,Entertainment,General Entertainment,2,12
+14,4d4b7104d754a06370d81259,52e81612bcbc57f1066b79ea,Go Kart Tracks,Go Kart,Go Kart Track,2,13
+15,4d4b7104d754a06370d81259,4deefb944765f83613cdba6e,Historic Sites,Historic Site,Historic Site,2,14
+16,4d4b7104d754a06370d81259,5744ccdfe4b0c0459246b4bb,Karaoke Boxes,Karaoke,Karaoke Box,2,15
+17,4d4b7104d754a06370d81259,52e81612bcbc57f1066b79e6,Laser Tag Places,Laser Tag,Laser Tag,2,16
+18,4d4b7104d754a06370d81259,5642206c498e4bfca532186c,Memorial Sites,Memorial Site,Memorial Site,2,17
+19,4d4b7104d754a06370d81259,52e81612bcbc57f1066b79eb,Mini Golf Courses,Mini Golf,Mini Golf,2,18
+20,4d4b7104d754a06370d81259,4bf58dd8d48988d17f941735,Movie Theaters,Movie Theater,Movie Theater,2,19
+21,4bf58dd8d48988d17f941735,56aa371be4b08b9a8d5734de,Drive-in Theaters,Drive-in Theater,Drive-in Theater,3,0
+22,4bf58dd8d48988d17f941735,4bf58dd8d48988d17e941735,Indie Movie Theaters,Indie Movies,Indie Movie Theater,3,1
+23,4bf58dd8d48988d17f941735,4bf58dd8d48988d180941735,Multiplexes,Cineplex,Multiplex,3,2
+24,4d4b7104d754a06370d81259,4bf58dd8d48988d181941735,Museums,Museum,Museum,2,20
+25,4bf58dd8d48988d181941735,4bf58dd8d48988d18f941735,Art Museums,Art Museum,Art Museum,3,0
+26,4bf58dd8d48988d181941735,559acbe0498e472f1a53fa23,Erotic Museums,Erotic Museum,Erotic Museum,3,1
+27,4bf58dd8d48988d181941735,4bf58dd8d48988d190941735,History Museums,History Museum,History Museum,3,2
+28,4bf58dd8d48988d181941735,4bf58dd8d48988d192941735,Planetariums,Planetarium,Planetarium,3,3
+29,4bf58dd8d48988d181941735,4bf58dd8d48988d191941735,Science Museums,Science Museum,Science Museum,3,4
+30,4d4b7104d754a06370d81259,4bf58dd8d48988d1e5931735,Music Venues,Music Venue,Music Venue,2,21
+31,4bf58dd8d48988d1e5931735,4bf58dd8d48988d1e7931735,Jazz Clubs,Jazz Club,Jazz Club,3,0
+32,4bf58dd8d48988d1e5931735,4bf58dd8d48988d1e8931735,Piano Bars,Piano Bar,Piano Bar,3,1
+33,4bf58dd8d48988d1e5931735,4bf58dd8d48988d1e9931735,Rock Clubs,Rock Club,Rock Club,3,2
+34,4d4b7104d754a06370d81259,5744ccdfe4b0c0459246b4b8,Pachinko Parlors,Pachinko Parlor,Pachinko Parlor,2,22
+35,4d4b7104d754a06370d81259,4bf58dd8d48988d1f2931735,Performing Arts Venues,Performing Arts,Performing Arts Venue,2,23
+36,4bf58dd8d48988d1f2931735,4bf58dd8d48988d134941735,Dance Studios,Dance Studio,Dance Studio,3,0
+37,4bf58dd8d48988d1f2931735,4bf58dd8d48988d135941735,Indie Theaters,Indie,Indie Theater,3,1
+38,4bf58dd8d48988d1f2931735,4bf58dd8d48988d136941735,Opera Houses,Opera House,Opera House,3,2
+39,4bf58dd8d48988d1f2931735,4bf58dd8d48988d137941735,Theaters,Theater,Theater,3,3
+40,4d4b7104d754a06370d81259,4bf58dd8d48988d1e3931735,Pool Halls,Billiards,Pool Hall,2,24
+41,4d4b7104d754a06370d81259,507c8c4091d498d9fc8c67a9,Public Art,Public Art,Public Art,2,25
+42,507c8c4091d498d9fc8c67a9,52e81612bcbc57f1066b79ed,Outdoor Sculptures,Outdoor Sculpture,Outdoor Sculpture,3,0
+43,507c8c4091d498d9fc8c67a9,52e81612bcbc57f1066b79ee,Street Art Installations,Street Art,Street Art,3,1
+44,4d4b7104d754a06370d81259,56aa371be4b08b9a8d573514,Racecourses,Racecourse,Racecourse,2,26
+45,4d4b7104d754a06370d81259,4bf58dd8d48988d1f4931735,Racetracks,Racetrack,Racetrack,2,27
+46,4d4b7104d754a06370d81259,52e81612bcbc57f1066b79e9,Roller Rinks,Roller Rink,Roller Rink,2,28
+47,4d4b7104d754a06370d81259,52e81612bcbc57f1066b79ec,Salsa Clubs,Salsa Club,Salsa Club,2,29
+48,4d4b7104d754a06370d81259,56aa371be4b08b9a8d5734f9,Samba Schools,Samba School,Samba School,2,30
+49,4d4b7104d754a06370d81259,4bf58dd8d48988d184941735,Stadiums,Stadium,Stadium,2,31
+50,4bf58dd8d48988d184941735,4bf58dd8d48988d18c941735,Baseball Stadiums,Baseball,Baseball Stadium,3,0
+51,4bf58dd8d48988d184941735,4bf58dd8d48988d18b941735,Basketball Stadiums,Basketball,Basketball Stadium,3,1
+52,4bf58dd8d48988d184941735,4bf58dd8d48988d18a941735,Cricket Grounds,Cricket,Cricket Ground,3,2
+53,4bf58dd8d48988d184941735,4bf58dd8d48988d189941735,Football Stadiums,Football,Football Stadium,3,3
+54,4bf58dd8d48988d184941735,4bf58dd8d48988d185941735,Hockey Arenas,Hockey,Hockey Arena,3,4
+55,4bf58dd8d48988d184941735,56aa371be4b08b9a8d573556,Rugby Stadiums,Rugby,Rugby Stadium,3,5
+56,4bf58dd8d48988d184941735,4bf58dd8d48988d188941735,Soccer Stadiums,Soccer,Soccer Stadium,3,6
+57,4bf58dd8d48988d184941735,4e39a891bd410d7aed40cbc2,Tennis Stadiums,Tennis,Tennis Stadium,3,7
+58,4bf58dd8d48988d184941735,4bf58dd8d48988d187941735,Track Stadiums,Track,Track Stadium,3,8
+59,4d4b7104d754a06370d81259,4bf58dd8d48988d182941735,Theme Parks,Theme Park,Theme Park,2,32
+60,4bf58dd8d48988d182941735,5109983191d435c0d71c2bb1,Theme Park Rides/Attractions,Theme Park,Theme Park Ride / Attraction,3,0
+61,4d4b7104d754a06370d81259,56aa371be4b08b9a8d573520,Tour Providers,Tour Provider,Tour Provider,2,33
+62,4d4b7104d754a06370d81259,4bf58dd8d48988d193941735,Water Parks,Water Park,Water Park,2,34
+63,4d4b7104d754a06370d81259,4bf58dd8d48988d17b941735,Zoos,Zoo,Zoo,2,35
+64,root,4d4b7105d754a06372d81259,Colleges & Universities,College & Education,College & University,1,1
+65,4d4b7105d754a06372d81259,4bf58dd8d48988d198941735,College Academic Buildings,Academic Building,College Academic Building,2,0
+66,4bf58dd8d48988d198941735,4bf58dd8d48988d199941735,College Arts Buildings,Arts,College Arts Building,3,0
+67,4bf58dd8d48988d198941735,4bf58dd8d48988d19a941735,College Communications Buildings,Communications,College Communications Building,3,1
+68,4bf58dd8d48988d198941735,4bf58dd8d48988d19e941735,College Engineering Buildings,Engineering,College Engineering Building,3,2
+69,4bf58dd8d48988d198941735,4bf58dd8d48988d19d941735,College History Buildings,History,College History Building,3,3
+70,4bf58dd8d48988d198941735,4bf58dd8d48988d19c941735,College Math Buildings,Math,College Math Building,3,4
+71,4bf58dd8d48988d198941735,4bf58dd8d48988d19b941735,College Science Buildings,Science,College Science Building,3,5
+72,4bf58dd8d48988d198941735,4bf58dd8d48988d19f941735,College Technology Buildings,Technology,College Technology Building,3,6
+73,4d4b7105d754a06372d81259,4bf58dd8d48988d197941735,College Administrative Buildings,Administrative Building,College Administrative Building,2,1
+74,4d4b7105d754a06372d81259,4bf58dd8d48988d1af941735,College Auditoriums,Auditorium,College Auditorium,2,2
+75,4d4b7105d754a06372d81259,4bf58dd8d48988d1b1941735,College Bookstores,College Bookstore,College Bookstore,2,3
+76,4d4b7105d754a06372d81259,4bf58dd8d48988d1a1941735,College Cafeterias,Cafeteria,College Cafeteria,2,4
+77,4d4b7105d754a06372d81259,4bf58dd8d48988d1a0941735,College Classrooms,Classroom,College Classroom,2,5
+78,4d4b7105d754a06372d81259,4bf58dd8d48988d1b2941735,College Gyms,Gym,College Gym,2,6
+79,4d4b7105d754a06372d81259,4bf58dd8d48988d1a5941735,College Labs,Lab,College Lab,2,7
+80,4d4b7105d754a06372d81259,4bf58dd8d48988d1a7941735,College Libraries,Library,College Library,2,8
+81,4d4b7105d754a06372d81259,4bf58dd8d48988d1aa941735,College Quads,Quad,College Quad,2,9
+82,4d4b7105d754a06372d81259,4bf58dd8d48988d1a9941735,College Rec Centers,Rec Center,College Rec Center,2,10
+83,4d4b7105d754a06372d81259,4bf58dd8d48988d1a3941735,College Residence Halls,Residence Hall,College Residence Hall,2,11
+84,4d4b7105d754a06372d81259,4bf58dd8d48988d1b4941735,College Stadiums,Stadium,College Stadium,2,12
+85,4bf58dd8d48988d1b4941735,4bf58dd8d48988d1bb941735,College Baseball Diamonds,Baseball,College Baseball Diamond,3,0
+86,4bf58dd8d48988d1b4941735,4bf58dd8d48988d1ba941735,College Basketball Courts,Basketball,College Basketball Court,3,1
+87,4bf58dd8d48988d1b4941735,4bf58dd8d48988d1b9941735,College Cricket Pitches,Cricket,College Cricket Pitch,3,2
+88,4bf58dd8d48988d1b4941735,4bf58dd8d48988d1b8941735,College Football Fields,Football,College Football Field,3,3
+89,4bf58dd8d48988d1b4941735,4bf58dd8d48988d1b5941735,College Hockey Rinks,Hockey,College Hockey Rink,3,4
+90,4bf58dd8d48988d1b4941735,4bf58dd8d48988d1b7941735,College Soccer Fields,Soccer,College Soccer Field,3,5
+91,4bf58dd8d48988d1b4941735,4e39a9cebd410d7aed40cbc4,College Tennis Courts,Tennis Court,College Tennis Court,3,6
+92,4bf58dd8d48988d1b4941735,4bf58dd8d48988d1b6941735,College Tracks,Track,College Track,3,7
+93,4d4b7105d754a06372d81259,4bf58dd8d48988d1ac941735,College Theaters,Theater,College Theater,2,13
+94,4d4b7105d754a06372d81259,4bf58dd8d48988d1a2941735,Community Colleges,Community College,Community College,2,14
+95,4d4b7105d754a06372d81259,4bf58dd8d48988d1b0941735,Fraternity Houses,Frat House,Fraternity House,2,15
+96,4d4b7105d754a06372d81259,4bf58dd8d48988d1a8941735,General Colleges & Universities,Education,General College & University,2,16
+97,4d4b7105d754a06372d81259,4bf58dd8d48988d1a6941735,Law Schools,Law School,Law School,2,17
+98,4d4b7105d754a06372d81259,4bf58dd8d48988d1b3941735,Medical Schools,Medical School,Medical School,2,18
+99,4d4b7105d754a06372d81259,4bf58dd8d48988d141941735,Sorority Houses,Sorority House,Sorority House,2,19
+100,4d4b7105d754a06372d81259,4bf58dd8d48988d1ab941735,Student Centers,Student Center,Student Center,2,20
+101,4d4b7105d754a06372d81259,4bf58dd8d48988d1ad941735,Trade Schools,Trade School,Trade School,2,21
+102,4d4b7105d754a06372d81259,4bf58dd8d48988d1ae941735,Universities,University,University,2,22
+103,root,4d4b7105d754a06373d81259,Events,Event,Event,1,2
+104,4d4b7105d754a06373d81259,52f2ab2ebcbc57f1066b8b3b,Christmas Markets,Christmas Market,Christmas Market,2,0
+105,4d4b7105d754a06373d81259,5267e4d9e4b0ec79466e48c6,Conferences,Conference,Conference,2,1
+106,4d4b7105d754a06373d81259,5267e4d9e4b0ec79466e48c9,Conventions,Convention,Convention,2,2
+107,4d4b7105d754a06373d81259,5267e4d9e4b0ec79466e48c7,Festivals,Festival,Festival,2,3
+108,4d4b7105d754a06373d81259,5267e4d9e4b0ec79466e48d1,Music Festivals,Music Festival,Music Festival,2,4
+109,4d4b7105d754a06373d81259,5267e4d9e4b0ec79466e48c8,Other Events,Other Event,Other Event,2,5
+110,4d4b7105d754a06373d81259,52741d85e4b0d5d1e3c6a6d9,Parades,Parade,Parade,2,6
+111,4d4b7105d754a06373d81259,52f2ab2ebcbc57f1066b8b54,Stoop Sales,Stoop Sale,Stoop Sale,2,7
+112,4d4b7105d754a06373d81259,5267e4d8e4b0ec79466e48c5,Street Fairs,Fair,Street Fair,2,8
+113,root,4d4b7105d754a06374d81259,Food,Food,Food,1,3
+114,4d4b7105d754a06374d81259,503288ae91d4c4b30a586d67,Afghan Restaurants,Afghan,Afghan Restaurant,2,0
+115,4d4b7105d754a06374d81259,4bf58dd8d48988d1c8941735,African Restaurants,African,African Restaurant,2,1
+116,4bf58dd8d48988d1c8941735,4bf58dd8d48988d10a941735,Ethiopian Restaurants,Ethiopian,Ethiopian Restaurant,3,0
+117,4d4b7105d754a06374d81259,4bf58dd8d48988d14e941735,American Restaurants,American,American Restaurant,2,2
+118,4bf58dd8d48988d14e941735,4bf58dd8d48988d157941735,New American Restaurants,New American,New American Restaurant,3,0
+119,4d4b7105d754a06374d81259,4bf58dd8d48988d142941735,Asian Restaurants,Asian,Asian Restaurant,2,3
+120,4bf58dd8d48988d142941735,56aa371be4b08b9a8d573568,Burmese Restaurants,Burmese,Burmese Restaurant,3,0
+121,4bf58dd8d48988d142941735,52e81612bcbc57f1066b7a03,Cambodian Restaurants,Cambodian,Cambodian Restaurant,3,1
+122,4bf58dd8d48988d142941735,4bf58dd8d48988d145941735,Chinese Restaurants,Chinese,Chinese Restaurant,3,2
+123,4bf58dd8d48988d145941735,52af3a5e3cf9994f4e043bea,Anhui Restaurants,Anhui,Anhui Restaurant,4,0
+124,4bf58dd8d48988d145941735,52af3a723cf9994f4e043bec,Beijing Restaurants,Beijing,Beijing Restaurant,4,1
+125,4bf58dd8d48988d145941735,52af3a7c3cf9994f4e043bed,Cantonese Restaurants,Cantonese,Cantonese Restaurant,4,2
+126,4bf58dd8d48988d145941735,52af3a673cf9994f4e043beb,Chinese Aristocrat Restaurants,Aristocrat,Chinese Aristocrat Restaurant,4,3
+127,4bf58dd8d48988d145941735,52af3a903cf9994f4e043bee,Chinese Breakfast Places,Chinese Breakfast,Chinese Breakfast Place,4,4
+128,4bf58dd8d48988d145941735,4bf58dd8d48988d1f5931735,Dim Sum Restaurants,Dim Sum,Dim Sum Restaurant,4,5
+129,4bf58dd8d48988d145941735,52af3a9f3cf9994f4e043bef,Dongbei Restaurants,Dongbei,Dongbei Restaurant,4,6
+130,4bf58dd8d48988d145941735,52af3aaa3cf9994f4e043bf0,Fujian Restaurants,Fujian,Fujian Restaurant,4,7
+131,4bf58dd8d48988d145941735,52af3ab53cf9994f4e043bf1,Guizhou Restaurants,Guizhou,Guizhou Restaurant,4,8
+132,4bf58dd8d48988d145941735,52af3abe3cf9994f4e043bf2,Hainan Restaurants,Hainan,Hainan Restaurant,4,9
+133,4bf58dd8d48988d145941735,52af3ac83cf9994f4e043bf3,Hakka Restaurants,Hakka,Hakka Restaurant,4,10
+134,4bf58dd8d48988d145941735,52af3ad23cf9994f4e043bf4,Henan Restaurants,Henan,Henan Restaurant,4,11
+135,4bf58dd8d48988d145941735,52af3add3cf9994f4e043bf5,Hong Kong Restaurants,Hong Kong,Hong Kong Restaurant,4,12
+136,4bf58dd8d48988d145941735,52af3af23cf9994f4e043bf7,Huaiyang Restaurants,Huaiyang,Huaiyang Restaurant,4,13
+137,4bf58dd8d48988d145941735,52af3ae63cf9994f4e043bf6,Hubei Restaurants,Hubei,Hubei Restaurant,4,14
+138,4bf58dd8d48988d145941735,52af3afc3cf9994f4e043bf8,Hunan Restaurants,Hunan,Hunan Restaurant,4,15
+139,4bf58dd8d48988d145941735,52af3b053cf9994f4e043bf9,Imperial Restaurants,Imperial,Imperial Restaurant,4,16
+140,4bf58dd8d48988d145941735,52af3b213cf9994f4e043bfa,Jiangsu Restaurants,Jiangsu,Jiangsu Restaurant,4,17
+141,4bf58dd8d48988d145941735,52af3b293cf9994f4e043bfb,Jiangxi Restaurants,Jiangxi,Jiangxi Restaurant,4,18
+142,4bf58dd8d48988d145941735,52af3b343cf9994f4e043bfc,Macanese Restaurants,Macanese,Macanese Restaurant,4,19
+143,4bf58dd8d48988d145941735,52af3b3b3cf9994f4e043bfd,Manchu Restaurants,Manchu,Manchu Restaurant,4,20
+144,4bf58dd8d48988d145941735,52af3b463cf9994f4e043bfe,Peking Duck Restaurants,Peking Duck,Peking Duck Restaurant,4,21
+145,4bf58dd8d48988d145941735,52af3b633cf9994f4e043c01,Shaanxi Restaurants,Shaanxi,Shaanxi Restaurant,4,22
+146,4bf58dd8d48988d145941735,52af3b513cf9994f4e043bff,Shandong Restaurants,Shandong,Shandong Restaurant,4,23
+147,4bf58dd8d48988d145941735,52af3b593cf9994f4e043c00,Shanghai Restaurants,Shanghai,Shanghai Restaurant,4,24
+148,4bf58dd8d48988d145941735,52af3b6e3cf9994f4e043c02,Shanxi Restaurants,Shanxi,Shanxi Restaurant,4,25
+149,4bf58dd8d48988d145941735,52af3b773cf9994f4e043c03,Szechuan Restaurants,Szechuan,Szechuan Restaurant,4,26
+150,4bf58dd8d48988d145941735,52af3b813cf9994f4e043c04,Taiwanese Restaurants,Taiwanese,Taiwanese Restaurant,4,27
+151,4bf58dd8d48988d145941735,52af3b893cf9994f4e043c05,Tianjin Restaurants,Tianjin,Tianjin Restaurant,4,28
+152,4bf58dd8d48988d145941735,52af3b913cf9994f4e043c06,Xinjiang Restaurants,Xinjiang,Xinjiang Restaurant,4,29
+153,4bf58dd8d48988d145941735,52af3b9a3cf9994f4e043c07,Yunnan Restaurants,Yunnan,Yunnan Restaurant,4,30
+154,4bf58dd8d48988d145941735,52af3ba23cf9994f4e043c08,Zhejiang Restaurants,Zhejiang,Zhejiang Restaurant,4,31
+155,4bf58dd8d48988d142941735,4eb1bd1c3b7b55596b4a748f,Filipino Restaurants,Filipino,Filipino Restaurant,3,3
+156,4bf58dd8d48988d142941735,52e81612bcbc57f1066b79fb,Himalayan Restaurants,Himalayan,Himalayan Restaurant,3,4
+157,4bf58dd8d48988d142941735,52af0bd33cf9994f4e043bdd,Hotpot Restaurants,Hotpot,Hotpot Restaurant,3,5
+158,4bf58dd8d48988d142941735,4deefc054765f83613cdba6f,Indonesian Restaurants,Indonesian,Indonesian Restaurant,3,6
+159,4deefc054765f83613cdba6f,52960eda3cf9994f4e043ac9,Acehnese Restaurants,Acehnese,Acehnese Restaurant,4,0
+160,4deefc054765f83613cdba6f,52960eda3cf9994f4e043acb,Balinese Restaurants,Balinese,Balinese Restaurant,4,1
+161,4deefc054765f83613cdba6f,52960eda3cf9994f4e043aca,Betawinese Restaurants,Betawinese,Betawinese Restaurant,4,2
+162,4deefc054765f83613cdba6f,52960eda3cf9994f4e043acc,Indonesian Meatball Places,Indonesian Meatball Place,Indonesian Meatball Place,4,3
+163,4deefc054765f83613cdba6f,52960eda3cf9994f4e043ac7,Javanese Restaurants,Javanese,Javanese Restaurant,4,4
+164,4deefc054765f83613cdba6f,52960eda3cf9994f4e043ac8,Manadonese Restaurants,Manadonese,Manadonese Restaurant,4,5
+165,4deefc054765f83613cdba6f,52960eda3cf9994f4e043ac5,Padangnese Restaurants,Padangnese,Padangnese Restaurant,4,6
+166,4deefc054765f83613cdba6f,52960eda3cf9994f4e043ac6,Sundanese Restaurants,Sundanese,Sundanese Restaurant,4,7
+167,4bf58dd8d48988d142941735,4bf58dd8d48988d111941735,Japanese Restaurants,Japanese,Japanese Restaurant,3,7
+168,4bf58dd8d48988d111941735,55a59bace4b013909087cb0c,Donburi Restaurants,Donburi,Donburi Restaurant,4,0
+169,4bf58dd8d48988d111941735,55a59bace4b013909087cb30,Japanese Curry Restaurants,Japanese Curry,Japanese Curry Restaurant,4,1
+170,4bf58dd8d48988d111941735,55a59bace4b013909087cb21,Kaiseki Restaurants,Kaiseki,Kaiseki Restaurant,4,2
+171,4bf58dd8d48988d111941735,55a59bace4b013909087cb06,Kushikatsu Restaurants,Kushikatsu,Kushikatsu Restaurant,4,3
+172,4bf58dd8d48988d111941735,55a59bace4b013909087cb1b,Monjayaki Restaurants,Monjayaki,Monjayaki Restaurant,4,4
+173,4bf58dd8d48988d111941735,55a59bace4b013909087cb1e,Nabe Restaurants,Nabe,Nabe Restaurant,4,5
+174,4bf58dd8d48988d111941735,55a59bace4b013909087cb18,Okonomiyaki Restaurants,Okonomiyaki,Okonomiyaki Restaurant,4,6
+175,4bf58dd8d48988d111941735,55a59bace4b013909087cb24,Ramen Restaurants,Ramen,Ramen Restaurant,4,7
+176,4bf58dd8d48988d111941735,55a59bace4b013909087cb15,Shabu-Shabu Restaurants,Shabu-Shabu,Shabu-Shabu Restaurant,4,8
+177,4bf58dd8d48988d111941735,55a59bace4b013909087cb27,Soba Restaurants,Soba,Soba Restaurant,4,9
+178,4bf58dd8d48988d111941735,55a59bace4b013909087cb12,Sukiyaki Restaurants,Sukiyaki,Sukiyaki Restaurant,4,10
+179,4bf58dd8d48988d111941735,4bf58dd8d48988d1d2941735,Sushi Restaurants,Sushi,Sushi Restaurant,4,11
+180,4bf58dd8d48988d111941735,55a59bace4b013909087cb2d,Takoyaki Places,Takoyaki,Takoyaki Place,4,12
+181,4bf58dd8d48988d111941735,55a59a31e4b013909087cb00,Tempura Restaurants,Tempura,Tempura Restaurant,4,13
+182,4bf58dd8d48988d111941735,55a59af1e4b013909087cb03,Tonkatsu Restaurants,Tonkatsu,Tonkatsu Restaurant,4,14
+183,4bf58dd8d48988d111941735,55a59bace4b013909087cb2a,Udon Restaurants,Udon,Udon Restaurant,4,15
+184,4bf58dd8d48988d111941735,55a59bace4b013909087cb0f,Unagi Restaurants,Unagi,Unagi Restaurant,4,16
+185,4bf58dd8d48988d111941735,55a59bace4b013909087cb33,Wagashi Places,Wagashi,Wagashi Place,4,17
+186,4bf58dd8d48988d111941735,55a59bace4b013909087cb09,Yakitori Restaurants,Yakitori,Yakitori Restaurant,4,18
+187,4bf58dd8d48988d111941735,55a59bace4b013909087cb36,Yoshoku Restaurants,Yoshoku,Yoshoku Restaurant,4,19
+188,4bf58dd8d48988d142941735,4bf58dd8d48988d113941735,Korean Restaurants,Korean,Korean Restaurant,3,8
+189,4bf58dd8d48988d113941735,56aa371be4b08b9a8d5734e4,Bossam/Jokbal Restaurants,Bossam/Jokbal,Bossam/Jokbal Restaurant,4,0
+190,4bf58dd8d48988d113941735,56aa371be4b08b9a8d5734f0,Bunsik Restaurants,Bunsik,Bunsik Restaurant,4,1
+191,4bf58dd8d48988d113941735,56aa371be4b08b9a8d5734e7,Gukbap Restaurants,Gukbap,Gukbap Restaurant,4,2
+192,4bf58dd8d48988d113941735,56aa371be4b08b9a8d5734ed,Janguh Restaurants,Janguh,Janguh Restaurant,4,3
+193,4bf58dd8d48988d113941735,56aa371be4b08b9a8d5734ea,Samgyetang Restaurants,Samgyetang,Samgyetang Restaurant,4,4
+194,4bf58dd8d48988d142941735,4bf58dd8d48988d156941735,Malay Restaurants,Malay,Malay Restaurant,3,9
+195,4bf58dd8d48988d142941735,4eb1d5724b900d56c88a45fe,Mongolian Restaurants,Mongolian,Mongolian Restaurant,3,10
+196,4bf58dd8d48988d142941735,4bf58dd8d48988d1d1941735,Noodle Houses,Noodles,Noodle House,3,11
+197,4bf58dd8d48988d142941735,56aa371be4b08b9a8d57350e,Satay Restaurants,Satay,Satay Restaurant,3,12
+198,4bf58dd8d48988d142941735,4bf58dd8d48988d149941735,Thai Restaurants,Thai,Thai Restaurant,3,13
+199,4bf58dd8d48988d149941735,56aa371be4b08b9a8d573502,Som Tum Restaurants,Som Tum,Som Tum Restaurant,4,0
+200,4bf58dd8d48988d142941735,52af39fb3cf9994f4e043be9,Tibetan Restaurants,Tibetan,Tibetan Restaurant,3,14
+201,4bf58dd8d48988d142941735,4bf58dd8d48988d14a941735,Vietnamese Restaurants,Vietnamese,Vietnamese Restaurant,3,15
+202,4d4b7105d754a06374d81259,4bf58dd8d48988d169941735,Australian Restaurants,Australian,Australian Restaurant,2,4
+203,4d4b7105d754a06374d81259,52e81612bcbc57f1066b7a01,Austrian Restaurants,Austrian,Austrian Restaurant,2,5
+204,4d4b7105d754a06374d81259,4bf58dd8d48988d1df931735,BBQ Joints,BBQ,BBQ Joint,2,6
+205,4d4b7105d754a06374d81259,4bf58dd8d48988d179941735,Bagel Shops,Bagels,Bagel Shop,2,7
+206,4d4b7105d754a06374d81259,4bf58dd8d48988d16a941735,Bakeries,Bakery,Bakery,2,8
+207,4d4b7105d754a06374d81259,52e81612bcbc57f1066b7a02,Belgian Restaurants,Belgian,Belgian Restaurant,2,9
+208,4d4b7105d754a06374d81259,52e81612bcbc57f1066b79f1,Bistros,Bistro,Bistro,2,10
+209,4d4b7105d754a06374d81259,4bf58dd8d48988d143941735,Breakfast Spots,Breakfast,Breakfast Spot,2,11
+210,4d4b7105d754a06374d81259,52e81612bcbc57f1066b7a0c,Bubble Tea Shops,Bubble Tea,Bubble Tea Shop,2,12
+211,4d4b7105d754a06374d81259,52e81612bcbc57f1066b79f4,Buffets,Buffet,Buffet,2,13
+212,4d4b7105d754a06374d81259,4bf58dd8d48988d16c941735,Burger Joints,Burgers,Burger Joint,2,14
+213,4d4b7105d754a06374d81259,4bf58dd8d48988d128941735,Cafeterias,Cafeteria,Cafeteria,2,15
+214,4d4b7105d754a06374d81259,4bf58dd8d48988d16d941735,Cafés,Café,Café,2,16
+215,4d4b7105d754a06374d81259,4bf58dd8d48988d17a941735,Cajun / Creole Restaurants,Cajun / Creole,Cajun / Creole Restaurant,2,17
+216,4d4b7105d754a06374d81259,4bf58dd8d48988d144941735,Caribbean Restaurants,Caribbean,Caribbean Restaurant,2,18
+217,4bf58dd8d48988d144941735,4bf58dd8d48988d154941735,Cuban Restaurants,Cuban,Cuban Restaurant,3,0
+218,4d4b7105d754a06374d81259,5293a7d53cf9994f4e043a45,Caucasian Restaurants,Caucasian,Caucasian Restaurant,2,19
+219,4d4b7105d754a06374d81259,4bf58dd8d48988d1e0931735,Coffee Shops,Coffee Shop,Coffee Shop,2,20
+220,4d4b7105d754a06374d81259,52e81612bcbc57f1066b7a00,Comfort Food Restaurants,Comfort Food,Comfort Food Restaurant,2,21
+221,4d4b7105d754a06374d81259,52e81612bcbc57f1066b79f2,Creperies,Creperie,Creperie,2,22
+222,4d4b7105d754a06374d81259,52f2ae52bcbc57f1066b8b81,Czech Restaurants,Czech,Czech Restaurant,2,23
+223,4d4b7105d754a06374d81259,4bf58dd8d48988d146941735,Delis / Bodegas,Deli / Bodega,Deli / Bodega,2,24
+224,4d4b7105d754a06374d81259,4bf58dd8d48988d1d0941735,Dessert Shops,Desserts,Dessert Shop,2,25
+225,4bf58dd8d48988d1d0941735,4bf58dd8d48988d1bc941735,Cupcake Shops,Cupcakes,Cupcake Shop,3,0
+226,4bf58dd8d48988d1d0941735,512e7cae91d4cbb4e5efe0af,Frozen Yogurt Shops,Yogurt,Frozen Yogurt Shop,3,1
+227,4bf58dd8d48988d1d0941735,4bf58dd8d48988d1c9941735,Ice Cream Shops,Ice Cream,Ice Cream Shop,3,2
+228,4bf58dd8d48988d1d0941735,5744ccdfe4b0c0459246b4e2,Pastry Shops,Pastry,Pastry Shop,3,3
+229,4bf58dd8d48988d1d0941735,52e81612bcbc57f1066b7a0a,Pie Shops,Pie Shop,Pie Shop,3,4
+230,4d4b7105d754a06374d81259,4bf58dd8d48988d147941735,Diners,Diner,Diner,2,26
+231,4d4b7105d754a06374d81259,4bf58dd8d48988d148941735,Donut Shops,Donuts,Donut Shop,2,27
+232,4d4b7105d754a06374d81259,4bf58dd8d48988d108941735,Dumpling Restaurants,Dumplings,Dumpling Restaurant,2,28
+233,4d4b7105d754a06374d81259,5744ccdfe4b0c0459246b4d0,Dutch Restaurants,Dutch,Dutch Restaurant,2,29
+234,4d4b7105d754a06374d81259,4bf58dd8d48988d109941735,Eastern European Restaurants,Eastern European,Eastern European Restaurant,2,30
+235,4bf58dd8d48988d109941735,52e928d0bcbc57f1066b7e97,Belarusian Restaurants,Belarusian,Belarusian Restaurant,3,0
+236,4bf58dd8d48988d109941735,56aa371be4b08b9a8d5734f3,Bulgarian Restaurants,Bulgarian,Bulgarian Restaurant,3,1
+237,4bf58dd8d48988d109941735,52960bac3cf9994f4e043ac4,Romanian Restaurants,Romanian,Romanian Restaurant,3,2
+238,4bf58dd8d48988d109941735,52e928d0bcbc57f1066b7e98,Tatar Restaurants,Tatar,Tatar Restaurant,3,3
+239,4d4b7105d754a06374d81259,52e81612bcbc57f1066b7a05,English Restaurants,English,English Restaurant,2,31
+240,4d4b7105d754a06374d81259,4bf58dd8d48988d10b941735,Falafel Restaurants,Falafel,Falafel Restaurant,2,32
+241,4d4b7105d754a06374d81259,4bf58dd8d48988d16e941735,Fast Food Restaurants,Fast Food,Fast Food Restaurant,2,33
+242,4d4b7105d754a06374d81259,4edd64a0c7ddd24ca188df1a,Fish & Chips Shops,Fish & Chips,Fish & Chips Shop,2,34
+243,4d4b7105d754a06374d81259,52e81612bcbc57f1066b7a09,Fondue Restaurants,Fondue,Fondue Restaurant,2,35
+244,4d4b7105d754a06374d81259,4bf58dd8d48988d120951735,Food Courts,Food Court,Food Court,2,36
+245,4d4b7105d754a06374d81259,56aa371be4b08b9a8d57350b,Food Stands,Food Stand,Food Stand,2,37
+246,4d4b7105d754a06374d81259,4bf58dd8d48988d1cb941735,Food Trucks,Food Truck,Food Truck,2,38
+247,4d4b7105d754a06374d81259,4bf58dd8d48988d10c941735,French Restaurants,French,French Restaurant,2,39
+248,4bf58dd8d48988d10c941735,57558b36e4b065ecebd306b6,Alsatian Restaurants,Alsatian,Alsatian Restaurant,3,0
+249,4bf58dd8d48988d10c941735,57558b36e4b065ecebd306b8,Auvergne Restaurants,Auvergne,Auvergne Restaurant,3,1
+250,4bf58dd8d48988d10c941735,57558b36e4b065ecebd306bc,Basque Restaurants,Basque,Basque Restaurant,3,2
+251,4bf58dd8d48988d10c941735,57558b36e4b065ecebd306b0,Brasseries,Brasserie,Brasserie,3,3
+252,4bf58dd8d48988d10c941735,57558b36e4b065ecebd306c5,Breton Restaurants,Breton,Breton Restaurant,3,4
+253,4bf58dd8d48988d10c941735,57558b36e4b065ecebd306c0,Burgundian Restaurants,Burgundian,Burgundian Restaurant,3,5
+254,4bf58dd8d48988d10c941735,57558b36e4b065ecebd306cb,Catalan Restaurants,Catalan,Catalan Restaurant,3,6
+255,4bf58dd8d48988d10c941735,57558b36e4b065ecebd306ce,Ch'ti Restaurants,Ch'ti,Ch'ti Restaurant,3,7
+256,4bf58dd8d48988d10c941735,57558b36e4b065ecebd306d1,Corsican Restaurants,Corsican,Corsican Restaurant,3,8
+257,4bf58dd8d48988d10c941735,57558b36e4b065ecebd306b4,Estaminets,Estaminet,Estaminet,3,9
+258,4bf58dd8d48988d10c941735,57558b36e4b065ecebd306b2,Labour Canteens,Labour Canteen,Labour Canteen,3,10
+259,4bf58dd8d48988d10c941735,57558b35e4b065ecebd306ad,Lyonese Bouchons,Bouchon,Lyonese Bouchon,3,11
+260,4bf58dd8d48988d10c941735,57558b36e4b065ecebd306d4,Norman Restaurants,Norman,Norman Restaurant,3,12
+261,4bf58dd8d48988d10c941735,57558b36e4b065ecebd306d7,Provençal Restaurants,Provençal,Provençal Restaurant,3,13
+262,4bf58dd8d48988d10c941735,57558b36e4b065ecebd306da,Savoyard Restaurants,Savoyard,Savoyard Restaurant,3,14
+263,4bf58dd8d48988d10c941735,57558b36e4b065ecebd306ba,Southwestern French Restaurants,Southwestern French,Southwestern French Restaurant,3,15
+264,4d4b7105d754a06374d81259,4d4ae6fc7a7b7dea34424761,Fried Chicken Joints,Fried Chicken,Fried Chicken Joint,2,40
+265,4d4b7105d754a06374d81259,55d25775498e9f6a0816a37a,Friteries,Friterie,Friterie,2,41
+266,4d4b7105d754a06374d81259,4bf58dd8d48988d155941735,Gastropubs,Gastropub,Gastropub,2,42
+267,4d4b7105d754a06374d81259,4bf58dd8d48988d10d941735,German Restaurants,German,German Restaurant,2,43
+268,4bf58dd8d48988d10d941735,56aa371ce4b08b9a8d573583,Apple Wine Pubs,Apple Wine,Apple Wine Pub,3,0
+269,4bf58dd8d48988d10d941735,56aa371ce4b08b9a8d573572,Bavarian Restaurants,Bavarian,Bavarian Restaurant,3,1
+270,4bf58dd8d48988d10d941735,56aa371ce4b08b9a8d57358e,Bratwurst Joints,Bratwurst,Bratwurst Joint,3,2
+271,4bf58dd8d48988d10d941735,56aa371ce4b08b9a8d57358b,Currywurst Joints,Currywurst,Currywurst Joint,3,3
+272,4bf58dd8d48988d10d941735,56aa371ce4b08b9a8d573574,Franconian Restaurants,Franconian,Franconian Restaurant,3,4
+273,4bf58dd8d48988d10d941735,56aa371ce4b08b9a8d573592,German Pop-Up Restaurants,German Pop-Up Restaurant,German Pop-Up Restaurant,3,5
+274,4bf58dd8d48988d10d941735,56aa371ce4b08b9a8d573578,Palatine Restaurants,Palatine,Palatine Restaurant,3,6
+275,4bf58dd8d48988d10d941735,56aa371ce4b08b9a8d57357b,Rhenisch Restaurants,Rhenisch,Rhenisch Restaurant,3,7
+276,4bf58dd8d48988d10d941735,56aa371ce4b08b9a8d573587,Schnitzel Restaurants,Schnitzel,Schnitzel Restaurant,3,8
+277,4bf58dd8d48988d10d941735,56aa371ce4b08b9a8d57357f,Silesian Restaurants,Silesian,Silesian Restaurant,3,9
+278,4bf58dd8d48988d10d941735,56aa371ce4b08b9a8d573576,Swabian Restaurants,Swabian,Swabian Restaurant,3,10
+279,4d4b7105d754a06374d81259,4c2cd86ed066bed06c3c5209,Gluten-free Restaurants,Gluten-free,Gluten-free Restaurant,2,44
+280,4d4b7105d754a06374d81259,4bf58dd8d48988d10e941735,Greek Restaurants,Greek,Greek Restaurant,2,45
+281,4bf58dd8d48988d10e941735,53d6c1b0e4b02351e88a83e8,Bougatsa Shops,Bougatsa Shops,Bougatsa Shop,3,0
+282,4bf58dd8d48988d10e941735,53d6c1b0e4b02351e88a83e2,Cretan Restaurants,Cretan Restaurants,Cretan Restaurant,3,1
+283,4bf58dd8d48988d10e941735,53d6c1b0e4b02351e88a83d8,Fish Tavernas,Fish Tavernas,Fish Taverna,3,2
+284,4bf58dd8d48988d10e941735,53d6c1b0e4b02351e88a83d6,Grilled Meat Restaurants,Grilled Meat Restaurants,Grilled Meat Restaurant,3,3
+285,4bf58dd8d48988d10e941735,53d6c1b0e4b02351e88a83e6,Kafenia,Kafenia,Kafenio,3,4
+286,4bf58dd8d48988d10e941735,53d6c1b0e4b02351e88a83e4,Magirio,Magirio,Magirio,3,5
+287,4bf58dd8d48988d10e941735,53d6c1b0e4b02351e88a83da,Meze Restaurants,Meze Restaurants,Meze Restaurant,3,6
+288,4bf58dd8d48988d10e941735,53d6c1b0e4b02351e88a83d4,Modern Greek Restaurants,Modern Greek Restaurants,Modern Greek Restaurant,3,7
+289,4bf58dd8d48988d10e941735,53d6c1b0e4b02351e88a83dc,Ouzeries,Ouzeries,Ouzeri,3,8
+290,4bf58dd8d48988d10e941735,53d6c1b0e4b02351e88a83e0,Patsa Restaurants,Patsa Restaurants,Patsa Restaurant,3,9
+291,4bf58dd8d48988d10e941735,52e81612bcbc57f1066b79f3,Souvlaki Shops,Souvlaki,Souvlaki Shop,3,10
+292,4bf58dd8d48988d10e941735,53d6c1b0e4b02351e88a83d2,Tavernas,Tavernas,Taverna,3,11
+293,4bf58dd8d48988d10e941735,53d6c1b0e4b02351e88a83de,Tsipouro Restaurants,Tsipouro Restaurants,Tsipouro Restaurant,3,12
+294,4d4b7105d754a06374d81259,52e81612bcbc57f1066b79ff,Halal Restaurants,Halal,Halal Restaurant,2,46
+295,4d4b7105d754a06374d81259,52e81612bcbc57f1066b79fe,Hawaiian Restaurants,Hawaiian,Hawaiian Restaurant,2,47
+296,4d4b7105d754a06374d81259,4bf58dd8d48988d16f941735,Hot Dog Joints,Hot Dogs,Hot Dog Joint,2,48
+297,4d4b7105d754a06374d81259,52e81612bcbc57f1066b79fa,Hungarian Restaurants,Hungarian,Hungarian Restaurant,2,49
+298,4d4b7105d754a06374d81259,4bf58dd8d48988d10f941735,Indian Restaurants,Indian,Indian Restaurant,2,50
+299,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfe5,Andhra Restaurants,Andhra,Andhra Restaurant,3,0
+300,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dff3,Awadhi Restaurants,Awadhi,Awadhi Restaurant,3,1
+301,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dff5,Bengali Restaurants,Bengali,Bengali Restaurant,3,2
+302,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfe2,Chaat Places,Chaat,Chaat Place,3,3
+303,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dff2,Chettinad Restaurants,Chettinad,Chettinad Restaurant,3,4
+304,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfe1,Dhabas,Dhaba,Dhaba,3,5
+305,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfe3,Dosa Places,Dosa,Dosa Place,3,6
+306,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfe8,Goan Restaurants,Goan,Goan Restaurant,3,7
+307,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfe9,Gujarati Restaurants,Gujarati,Gujarati Restaurant,3,8
+308,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfe6,Hyderabadi Restaurants,Hyderabadi,Hyderabadi Restaurant,3,9
+309,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfdf,Indian Chinese Restaurants,Indian Chinese,Indian Chinese Restaurant,3,10
+310,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfe4,Indian Sweet Shops,Indian Sweets,Indian Sweet Shop,3,11
+311,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfe7,Irani Cafes,Irani,Irani Cafe,3,12
+312,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfea,Jain Restaurants,Jain,Jain Restaurant,3,13
+313,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfeb,Karnataka Restaurants,Karnataka,Karnataka Restaurant,3,14
+314,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfed,Kerala Restaurants,Kerala,Kerala Restaurant,3,15
+315,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfee,Maharashtrian Restaurants,Maharashtrian,Maharashtrian Restaurant,3,16
+316,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dff4,Mughlai Restaurants,Mughlai,Mughlai Restaurant,3,17
+317,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfe0,Multicuisine Indian Restaurants,Multicuisine Indian,Multicuisine Indian Restaurant,3,18
+318,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfdd,North Indian Restaurants,North Indian,North Indian Restaurant,3,19
+319,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dff6,Northeast Indian Restaurants,Northeast Indian,Northeast Indian Restaurant,3,20
+320,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfef,Parsi Restaurants,Parsi,Parsi Restaurant,3,21
+321,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dff0,Punjabi Restaurants,Punjabi,Punjabi Restaurant,3,22
+322,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dff1,Rajasthani Restaurants,Rajasthani,Rajasthani Restaurant,3,23
+323,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfde,South Indian Restaurants,South Indian,South Indian Restaurant,3,24
+324,4bf58dd8d48988d10f941735,54135bf5e4b08f3d2429dfec,Udupi Restaurants,Udupi,Udupi Restaurant,3,25
+325,4d4b7105d754a06374d81259,52e81612bcbc57f1066b7a06,Irish Pubs,Irish,Irish Pub,2,51
+326,4d4b7105d754a06374d81259,4bf58dd8d48988d110941735,Italian Restaurants,Italian,Italian Restaurant,2,52
+327,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cbb6,Abruzzo Restaurants,Abruzzo,Abruzzo Restaurant,3,0
+328,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cb7c,Agriturismos,Agriturismo,Agriturismo,3,1
+329,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cba7,Aosta Restaurants,Aosta,Aosta Restaurant,3,2
+330,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cba1,Basilicata Restaurants,Basilicata,Basilicata Restaurant,3,3
+331,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cba4,Calabria Restaurants,Calabria,Calabria Restaurant,3,4
+332,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cb95,Campanian Restaurants,Campanian,Campanian Restaurant,3,5
+333,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cb89,Emilia Restaurants,Emilia,Emilia Restaurant,3,6
+334,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cb9b,Friuli Restaurants,Friuli,Friuli Restaurant,3,7
+335,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cb98,Ligurian Restaurants,Ligurian,Ligurian Restaurant,3,8
+336,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cbbf,Lombard Restaurants,Lombard,Lombard Restaurant,3,9
+337,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cb79,Malgas,Malga,Malga,3,10
+338,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cbb0,Marche Restaurants,Marche,Marche Restaurant,3,11
+339,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cbb3,Molise Restaurants,Molise,Molise Restaurant,3,12
+340,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cb74,Piadinerias,Piadineria,Piadineria,3,13
+341,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cbaa,Piedmontese Restaurants,Piedmontese,Piedmontese Restaurant,3,14
+342,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cb83,Puglia Restaurants,Puglia,Puglia Restaurant,3,15
+343,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cb8c,Romagna Restaurants,Romagna,Romagna Restaurant,3,16
+344,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cb92,Roman Restaurants,Roman,Roman Restaurant,3,17
+345,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cb8f,Sardinian Restaurants,Sardinian,Sardinian Restaurant,3,18
+346,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cb86,Sicilian Restaurants,Sicilian,Sicilian Restaurant,3,19
+347,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cbb9,South Tyrolean Restaurants,South Tyrolean,South Tyrolean Restaurant,3,20
+348,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cb7f,Trattorias/Osterias,Trattoria/Osteria,Trattoria/Osteria,3,21
+349,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cbbc,Trentino Restaurants,Trentino,Trentino Restaurant,3,22
+350,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cb9e,Tuscan Restaurants,Tuscan,Tuscan Restaurant,3,23
+351,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cbc2,Umbrian Restaurants,Umbrian,Umbrian Restaurant,3,24
+352,4bf58dd8d48988d110941735,55a5a1ebe4b013909087cbad,Veneto Restaurants,Veneto,Veneto Restaurant,3,25
+353,4d4b7105d754a06374d81259,52e81612bcbc57f1066b79fd,Jewish Restaurants,Jewish,Jewish Restaurant,2,53
+354,52e81612bcbc57f1066b79fd,52e81612bcbc57f1066b79fc,Kosher Restaurants,Kosher,Kosher Restaurant,3,0
+355,4d4b7105d754a06374d81259,4bf58dd8d48988d112941735,Juice Bars,Juice Bar,Juice Bar,2,54
+356,4d4b7105d754a06374d81259,5283c7b4e4b094cb91ec88d7,Kebab Restaurants,Kebab,Kebab Restaurant,2,55
+357,4d4b7105d754a06374d81259,4bf58dd8d48988d1be941735,Latin American Restaurants,Latin American,Latin American Restaurant,2,56
+358,4bf58dd8d48988d1be941735,4bf58dd8d48988d152941735,Arepa Restaurants,Arepas,Arepa Restaurant,3,0
+359,4bf58dd8d48988d1be941735,52939a8c3cf9994f4e043a35,Empanada Restaurants,Empanada,Empanada Restaurant,3,1
+360,4bf58dd8d48988d1be941735,5745c7ac498e5d0483112fdb,Salvadoran Restaurants,Salvadoran,Salvadoran Restaurant,3,2
+361,4bf58dd8d48988d1be941735,4bf58dd8d48988d1cd941735,South American Restaurants,South American,South American Restaurant,3,3
+362,4bf58dd8d48988d1cd941735,4bf58dd8d48988d107941735,Argentinian Restaurants,Argentinian,Argentinian Restaurant,4,0
+363,4bf58dd8d48988d1cd941735,4bf58dd8d48988d16b941735,Brazilian Restaurants,Brazilian,Brazilian Restaurant,4,1
+364,4bf58dd8d48988d16b941735,5294c7523cf9994f4e043a62,Acai Houses,Acai,Acai House,5,0
+365,4bf58dd8d48988d16b941735,52939ae13cf9994f4e043a3b,Baiano Restaurants,Baiano,Baiano Restaurant,5,1
+366,4bf58dd8d48988d16b941735,52939a9e3cf9994f4e043a36,Central Brazilian Restaurants,Central Brazilian,Central Brazilian Restaurant,5,2
+367,4bf58dd8d48988d16b941735,52939a643cf9994f4e043a33,Churrascarias,Churrascaria,Churrascaria,5,3
+368,4bf58dd8d48988d16b941735,5294c55c3cf9994f4e043a61,Empada Houses,Empadas,Empada House,5,4
+369,4bf58dd8d48988d16b941735,52939af83cf9994f4e043a3d,Goiano Restaurants,Goiano,Goiano Restaurant,5,5
+370,4bf58dd8d48988d16b941735,52939aed3cf9994f4e043a3c,Mineiro Restaurants,Mineiro,Mineiro Restaurant,5,6
+371,4bf58dd8d48988d16b941735,52939aae3cf9994f4e043a37,Northeastern Brazilian Restaurants,Northeastern Brazilian,Northeastern Brazilian Restaurant,5,7
+372,4bf58dd8d48988d16b941735,52939ab93cf9994f4e043a38,Northern Brazilian Restaurants,Northern Brazilian,Northern Brazilian Restaurant,5,8
+373,4bf58dd8d48988d16b941735,5294cbda3cf9994f4e043a63,Pastelarias,Pastelaria,Pastelaria,5,9
+374,4bf58dd8d48988d16b941735,52939ac53cf9994f4e043a39,Southeastern Brazilian Restaurants,Southeastern Brazilian,Southeastern Brazilian Restaurant,5,10
+375,4bf58dd8d48988d16b941735,52939ad03cf9994f4e043a3a,Southern Brazilian Restaurants,Southern Brazilian,Southern Brazilian Restaurant,5,11
+376,4bf58dd8d48988d16b941735,52939a7d3cf9994f4e043a34,Tapiocarias,Tapiocaria,Tapiocaria,5,12
+377,4bf58dd8d48988d1cd941735,4eb1bfa43b7b52c0e1adc2e8,Peruvian Restaurants,Peruvian,Peruvian Restaurant,4,2
+378,4bf58dd8d48988d1cd941735,56aa371be4b08b9a8d573558,Venezuelan Restaurants,Venezuelan,Venezuelan Restaurant,4,3
+379,4d4b7105d754a06374d81259,4bf58dd8d48988d1bf941735,Mac & Cheese Joints,Mac & Cheese,Mac & Cheese Joint,2,57
+380,4d4b7105d754a06374d81259,4bf58dd8d48988d1c0941735,Mediterranean Restaurants,Mediterranean,Mediterranean Restaurant,2,58
+381,4bf58dd8d48988d1c0941735,4bf58dd8d48988d1c3941735,Moroccan Restaurants,Moroccan,Moroccan Restaurant,3,0
+382,4d4b7105d754a06374d81259,4bf58dd8d48988d1c1941735,Mexican Restaurants,Mexican,Mexican Restaurant,2,59
+383,4bf58dd8d48988d1c1941735,4bf58dd8d48988d153941735,Burrito Places,Burritos,Burrito Place,3,0
+384,4bf58dd8d48988d1c1941735,4bf58dd8d48988d151941735,Taco Places,Tacos,Taco Place,3,1
+385,4bf58dd8d48988d1c1941735,56aa371ae4b08b9a8d5734ba,Tex-Mex Restaurants,Tex-Mex,Tex-Mex Restaurant,3,2
+386,4bf58dd8d48988d1c1941735,5744ccdfe4b0c0459246b4d3,Yucatecan Restaurants,Yucatecan,Yucatecan Restaurant,3,3
+387,4d4b7105d754a06374d81259,4bf58dd8d48988d115941735,Middle Eastern Restaurants,Middle Eastern,Middle Eastern Restaurant,2,60
+388,4bf58dd8d48988d115941735,56aa371be4b08b9a8d573529,Israeli Restaurants,Israeli,Israeli Restaurant,3,0
+389,4bf58dd8d48988d115941735,5744ccdfe4b0c0459246b4ca,Kurdish Restaurants,Kurdish,Kurdish Restaurant,3,1
+390,4bf58dd8d48988d115941735,52e81612bcbc57f1066b79f7,Persian Restaurants,Persian,Persian Restaurant,3,2
+391,52e81612bcbc57f1066b79f7,5744ccdfe4b0c0459246b4a8,Tabbakhis,Tabbakhi,Tabbakhi,4,0
+392,4d4b7105d754a06374d81259,52e81612bcbc57f1066b79f9,Modern European Restaurants,Modern European,Modern European Restaurant,2,61
+393,4d4b7105d754a06374d81259,4bf58dd8d48988d1c2941735,Molecular Gastronomy Restaurants,Molecular Gastronomy,Molecular Gastronomy Restaurant,2,62
+394,4d4b7105d754a06374d81259,52e81612bcbc57f1066b79f8,Pakistani Restaurants,Pakistani,Pakistani Restaurant,2,63
+395,4d4b7105d754a06374d81259,56aa371be4b08b9a8d573508,Pet Cafés,Pet Café,Pet Café,2,64
+396,4d4b7105d754a06374d81259,4bf58dd8d48988d1ca941735,Pizza Places,Pizza,Pizza Place,2,65
+397,4d4b7105d754a06374d81259,52e81612bcbc57f1066b7a04,Polish Restaurants,Polish,Polish Restaurant,2,66
+398,4d4b7105d754a06374d81259,4def73e84765ae376e57713a,Portuguese Restaurants,Portuguese,Portuguese Restaurant,2,67
+399,4d4b7105d754a06374d81259,56aa371be4b08b9a8d5734c7,Poutine Places,Poutine Place,Poutine Place,2,68
+400,4d4b7105d754a06374d81259,4bf58dd8d48988d1c4941735,Restaurants,Restaurant,Restaurant,2,69
+401,4d4b7105d754a06374d81259,5293a7563cf9994f4e043a44,Russian Restaurants,Russian,Russian Restaurant,2,70
+402,5293a7563cf9994f4e043a44,52e928d0bcbc57f1066b7e9d,Blini Houses,Blini,Blini House,3,0
+403,5293a7563cf9994f4e043a44,52e928d0bcbc57f1066b7e9c,Pelmeni Houses,Pelmeni,Pelmeni House,3,1
+404,4d4b7105d754a06374d81259,4bf58dd8d48988d1bd941735,Salad Places,Salad,Salad Place,2,71
+405,4d4b7105d754a06374d81259,4bf58dd8d48988d1c5941735,Sandwich Places,Sandwiches,Sandwich Place,2,72
+406,4d4b7105d754a06374d81259,4bf58dd8d48988d1c6941735,Scandinavian Restaurants,Scandinavian,Scandinavian Restaurant,2,73
+407,4d4b7105d754a06374d81259,5744ccdde4b0c0459246b4a3,Scottish Restaurants,Scottish,Scottish Restaurant,2,74
+408,4d4b7105d754a06374d81259,4bf58dd8d48988d1ce941735,Seafood Restaurants,Seafood,Seafood Restaurant,2,75
+409,4d4b7105d754a06374d81259,56aa371be4b08b9a8d57355a,Slovak Restaurants,Slovak,Slovak Restaurant,2,76
+410,4d4b7105d754a06374d81259,4bf58dd8d48988d1c7941735,Snack Places,Snacks,Snack Place,2,77
+411,4d4b7105d754a06374d81259,4bf58dd8d48988d1dd931735,Soup Places,Soup,Soup Place,2,78
+412,4d4b7105d754a06374d81259,4bf58dd8d48988d14f941735,Southern / Soul Food Restaurants,Southern / Soul,Southern / Soul Food Restaurant,2,79
+413,4d4b7105d754a06374d81259,4bf58dd8d48988d150941735,Spanish Restaurants,Spanish,Spanish Restaurant,2,80
+414,4bf58dd8d48988d150941735,4bf58dd8d48988d14d941735,Paella Restaurants,Paella,Paella Restaurant,3,0
+415,4bf58dd8d48988d150941735,4bf58dd8d48988d1db931735,Tapas Restaurants,Tapas,Tapas Restaurant,3,1
+416,4d4b7105d754a06374d81259,5413605de4b0ae91d18581a9,Sri Lankan Restaurants,Sri Lankan,Sri Lankan Restaurant,2,81
+417,4d4b7105d754a06374d81259,4bf58dd8d48988d1cc941735,Steakhouses,Steakhouse,Steakhouse,2,82
+418,4d4b7105d754a06374d81259,4bf58dd8d48988d158941735,Swiss Restaurants,Swiss,Swiss Restaurant,2,83
+419,4d4b7105d754a06374d81259,4bf58dd8d48988d1dc931735,Tea Rooms,Tea Room,Tea Room,2,84
+420,4d4b7105d754a06374d81259,56aa371be4b08b9a8d573538,Theme Restaurants,Theme Restaurant,Theme Restaurant,2,85
+421,4d4b7105d754a06374d81259,57558b36e4b065ecebd306dd,Truck Stops,Truck Stop,Truck Stop,2,86
+422,4d4b7105d754a06374d81259,4f04af1f2fb6e1c99f3db0bb,Turkish Restaurants,Turkish,Turkish Restaurant,2,87
+423,4f04af1f2fb6e1c99f3db0bb,530faca9bcbc57f1066bc2f3,Borek Places,Borek,Borek Place,3,0
+424,4f04af1f2fb6e1c99f3db0bb,530faca9bcbc57f1066bc2f4,Cigkofte Places,Cigkofte,Cigkofte Place,3,1
+425,4f04af1f2fb6e1c99f3db0bb,5283c7b4e4b094cb91ec88d8,Doner Restaurants,Doner,Doner Restaurant,3,2
+426,4f04af1f2fb6e1c99f3db0bb,5283c7b4e4b094cb91ec88d9,Gozleme Places,Gozleme,Gozleme Place,3,3
+427,4f04af1f2fb6e1c99f3db0bb,5283c7b4e4b094cb91ec88db,Kofte Places,Kofte,Kofte Place,3,4
+428,4f04af1f2fb6e1c99f3db0bb,5283c7b4e4b094cb91ec88d6,Kokoreç Restaurants,Kokoreç,Kokoreç Restaurant,3,5
+429,4f04af1f2fb6e1c99f3db0bb,56aa371be4b08b9a8d573535,Kumpir Restaurants,Kumpir,Kumpir Restaurant,3,6
+430,4f04af1f2fb6e1c99f3db0bb,56aa371be4b08b9a8d5734bd,Kumru Restaurants,Kumru,Kumru Restaurant,3,7
+431,4f04af1f2fb6e1c99f3db0bb,5283c7b4e4b094cb91ec88d5,Manti Places,Manti,Manti Place,3,8
+432,4f04af1f2fb6e1c99f3db0bb,5283c7b4e4b094cb91ec88da,Meyhanes,Meyhane,Meyhane,3,9
+433,4f04af1f2fb6e1c99f3db0bb,530faca9bcbc57f1066bc2f2,Pide Places,Pide,Pide Place,3,10
+434,4f04af1f2fb6e1c99f3db0bb,56aa371be4b08b9a8d5734bf,Tantuni Restaurants,Tantuni,Tantuni Restaurant,3,11
+435,4f04af1f2fb6e1c99f3db0bb,56aa371be4b08b9a8d5734c1,Turkish Coffeehouses,Turkish Coffeehouse,Turkish Coffeehouse,3,12
+436,4f04af1f2fb6e1c99f3db0bb,5283c7b4e4b094cb91ec88d4,Turkish Home Cooking Restaurants,Turkish Home Cooking,Turkish Home Cooking Restaurant,3,13
+437,4d4b7105d754a06374d81259,52e928d0bcbc57f1066b7e96,Ukrainian Restaurants,Ukrainian,Ukrainian Restaurant,2,88
+438,52e928d0bcbc57f1066b7e96,52e928d0bcbc57f1066b7e9a,Varenyky Restaurants,Varenyky,Varenyky restaurant,3,0
+439,52e928d0bcbc57f1066b7e96,52e928d0bcbc57f1066b7e9b,West-Ukrainian Restaurants,West-Ukrainian,West-Ukrainian Restaurant,3,1
+440,4d4b7105d754a06374d81259,4bf58dd8d48988d1d3941735,Vegetarian / Vegan Restaurants,Vegetarian / Vegan,Vegetarian / Vegan Restaurant,2,89
+441,4d4b7105d754a06374d81259,4bf58dd8d48988d14c941735,Wings Joints,Wings,Wings Joint,2,90
+442,root,4d4b7105d754a06376d81259,Nightlife Spots,Nightlife,Nightlife Spot,1,4
+443,4d4b7105d754a06376d81259,4bf58dd8d48988d116941735,Bars,Bar,Bar,2,0
+444,4bf58dd8d48988d116941735,52e81612bcbc57f1066b7a0d,Beach Bars,Beach Bar,Beach Bar,3,0
+445,4bf58dd8d48988d116941735,56aa371ce4b08b9a8d57356c,Beer Bars,Beer Bar,Beer Bar,3,1
+446,4bf58dd8d48988d116941735,4bf58dd8d48988d117941735,Beer Gardens,Beer Garden,Beer Garden,3,2
+447,4bf58dd8d48988d116941735,52e81612bcbc57f1066b7a0e,Champagne Bars,Champagne Bar,Champagne Bar,3,3
+448,4bf58dd8d48988d116941735,4bf58dd8d48988d11e941735,Cocktail Bars,Cocktail,Cocktail Bar,3,4
+449,4bf58dd8d48988d116941735,4bf58dd8d48988d118941735,Dive Bars,Dive Bar,Dive Bar,3,5
+450,4bf58dd8d48988d116941735,4bf58dd8d48988d1d8941735,Gay Bars,Gay Bar,Gay Bar,3,6
+451,4bf58dd8d48988d116941735,4bf58dd8d48988d119941735,Hookah Bars,Hookah Bar,Hookah Bar,3,7
+452,4bf58dd8d48988d116941735,4bf58dd8d48988d1d5941735,Hotel Bars,Hotel Bar,Hotel Bar,3,8
+453,4bf58dd8d48988d116941735,4bf58dd8d48988d120941735,Karaoke Bars,Karaoke,Karaoke Bar,3,9
+454,4bf58dd8d48988d116941735,4bf58dd8d48988d11b941735,Pubs,Pub,Pub,3,10
+455,4bf58dd8d48988d116941735,4bf58dd8d48988d11c941735,Sake Bars,Sake Bar,Sake Bar,3,11
+456,4bf58dd8d48988d116941735,4bf58dd8d48988d11d941735,Sports Bars,Sports Bar,Sports Bar,3,12
+457,4bf58dd8d48988d116941735,56aa371be4b08b9a8d57354d,Tiki Bars,Tiki Bar,Tiki Bar,3,13
+458,4bf58dd8d48988d116941735,4bf58dd8d48988d122941735,Whisky Bars,Whisky Bar,Whisky Bar,3,14
+459,4bf58dd8d48988d116941735,4bf58dd8d48988d123941735,Wine Bars,Wine Bar,Wine Bar,3,15
+460,4d4b7105d754a06376d81259,50327c8591d4c4b30a586d5d,Breweries,Brewery,Brewery,2,1
+461,4d4b7105d754a06376d81259,4bf58dd8d48988d121941735,Lounges,Lounge,Lounge,2,2
+462,4d4b7105d754a06376d81259,53e510b7498ebcb1801b55d4,Night Markets,Night Market,Night Market,2,3
+463,4d4b7105d754a06376d81259,4bf58dd8d48988d11f941735,Nightclubs,Nightclub,Nightclub,2,4
+464,4d4b7105d754a06376d81259,4bf58dd8d48988d11a941735,Other Nightlife,Nightlife,Other Nightlife,2,5
+465,4d4b7105d754a06376d81259,4bf58dd8d48988d1d4941735,Speakeasies,Speakeasy,Speakeasy,2,6
+466,4d4b7105d754a06376d81259,4bf58dd8d48988d1d6941735,Strip Clubs,Strip Club,Strip Club,2,7
+467,root,4d4b7105d754a06377d81259,Outdoors & Recreation,Outdoors & Recreation,Outdoors & Recreation,1,5
+468,4d4b7105d754a06377d81259,4f4528bc4b90abdf24c9de85,Athletics & Sports,Athletics & Sports,Athletics & Sports,2,0
+469,4f4528bc4b90abdf24c9de85,52e81612bcbc57f1066b7a2b,Badminton Courts,Badminton Court,Badminton Court,3,0
+470,4f4528bc4b90abdf24c9de85,4bf58dd8d48988d1e8941735,Baseball Fields,Baseball Field,Baseball Field,3,1
+471,4f4528bc4b90abdf24c9de85,4bf58dd8d48988d1e1941735,Basketball Courts,Basketball Court,Basketball Court,3,2
+472,4f4528bc4b90abdf24c9de85,52e81612bcbc57f1066b7a2f,Bowling Greens,Bowling Green,Bowling Green,3,3
+473,4f4528bc4b90abdf24c9de85,56aa371be4b08b9a8d57351a,Curling Ices,Curling Ice,Curling Ice,3,4
+474,4f4528bc4b90abdf24c9de85,4bf58dd8d48988d1e6941735,Golf Courses,Golf Course,Golf Course,3,5
+475,4f4528bc4b90abdf24c9de85,4bf58dd8d48988d175941735,Gyms or Fitness Centers,Gym / Fitness,Gym / Fitness Center,3,6
+476,4bf58dd8d48988d175941735,52f2ab2ebcbc57f1066b8b47,Boxing Gyms,Boxing Gym,Boxing Gym,4,0
+477,4bf58dd8d48988d175941735,503289d391d4c4b30a586d6a,Climbing Gyms,Climbing Gym,Climbing Gym,4,1
+478,4bf58dd8d48988d175941735,52f2ab2ebcbc57f1066b8b49,Cycle Studios,Cycle Studio,Cycle Studio,4,2
+479,4bf58dd8d48988d175941735,4bf58dd8d48988d105941735,Gym Pools,Pool,Gym Pool,4,3
+480,4bf58dd8d48988d175941735,52f2ab2ebcbc57f1066b8b48,Gymnastics Gyms,Gymnastics Gym,Gymnastics Gym,4,4
+481,4bf58dd8d48988d175941735,4bf58dd8d48988d176941735,Gyms,Gym,Gym,4,5
+482,4bf58dd8d48988d175941735,4bf58dd8d48988d101941735,Martial Arts Dojos,Martial Arts,Martial Arts Dojo,4,6
+483,4bf58dd8d48988d175941735,5744ccdfe4b0c0459246b4b2,Pilates Studios,Pilates Studio,Pilates Studio,4,7
+484,4bf58dd8d48988d175941735,4bf58dd8d48988d106941735,Tracks,Track,Track,4,8
+485,4bf58dd8d48988d175941735,4bf58dd8d48988d102941735,Yoga Studios,Yoga Studio,Yoga Studio,4,9
+486,4f4528bc4b90abdf24c9de85,4f452cd44b9081a197eba860,Hockey Fields,Hockey Field,Hockey Field,3,7
+487,4f4528bc4b90abdf24c9de85,56aa371be4b08b9a8d57352c,Hockey Rinks,Hockey Rink,Hockey Rink,3,8
+488,4f4528bc4b90abdf24c9de85,5032829591d4c4b30a586d5e,Paintball Fields,Paintball Field,Paintball Field,3,9
+489,4f4528bc4b90abdf24c9de85,52e81612bcbc57f1066b7a2c,Rugby Pitches,Pitch,Rugby Pitch,3,10
+490,4f4528bc4b90abdf24c9de85,4bf58dd8d48988d167941735,Skate Parks,Skate Park,Skate Park,3,11
+491,4f4528bc4b90abdf24c9de85,4bf58dd8d48988d168941735,Skating Rinks,Skating Rink,Skating Rink,3,12
+492,4f4528bc4b90abdf24c9de85,4cce455aebf7b749d5e191f5,Soccer Fields,Soccer Field,Soccer Field,3,13
+493,4f4528bc4b90abdf24c9de85,52e81612bcbc57f1066b7a2e,Sports Clubs,Sports Club,Sports Club,3,14
+494,4f4528bc4b90abdf24c9de85,52e81612bcbc57f1066b7a2d,Squash Courts,Squash Court,Squash Court,3,15
+495,4f4528bc4b90abdf24c9de85,4e39a956bd410d7aed40cbc3,Tennis Courts,Tennis Court,Tennis Court,3,16
+496,4f4528bc4b90abdf24c9de85,4eb1bf013b7b6f98df247e07,Volleyball Courts,Volleyball Court,Volleyball Court,3,17
+497,4d4b7105d754a06377d81259,52e81612bcbc57f1066b7a28,Bathing Areas,Bathing Area,Bathing Area,2,1
+498,4d4b7105d754a06377d81259,56aa371be4b08b9a8d573544,Bays,Bay,Bay,2,2
+499,4d4b7105d754a06377d81259,4bf58dd8d48988d1e2941735,Beaches,Beach,Beach,2,3
+500,4bf58dd8d48988d1e2941735,52e81612bcbc57f1066b7a30,Nudist Beaches,Nudist Beach,Nudist Beach,3,0
+501,4bf58dd8d48988d1e2941735,4bf58dd8d48988d1e3941735,Surf Spots,Surf Spot,Surf Spot,3,1
+502,4d4b7105d754a06377d81259,56aa371be4b08b9a8d57355e,Bike Trails,Bike Trail,Bike Trail,2,4
+503,4d4b7105d754a06377d81259,52e81612bcbc57f1066b7a22,Botanical Gardens,Botanical Garden,Botanical Garden,2,5
+504,4d4b7105d754a06377d81259,4bf58dd8d48988d1df941735,Bridges,Bridge,Bridge,2,6
+505,4d4b7105d754a06377d81259,4bf58dd8d48988d1e4941735,Campgrounds,Campground,Campground,2,7
+506,4d4b7105d754a06377d81259,56aa371be4b08b9a8d57353b,Canal Locks,Canal Lock,Canal Lock,2,8
+507,4d4b7105d754a06377d81259,56aa371be4b08b9a8d573562,Canals,Canal,Canal,2,9
+508,4d4b7105d754a06377d81259,50aaa49e4b90af0d42d5de11,Castles,Castle,Castle,2,10
+509,4d4b7105d754a06377d81259,56aa371be4b08b9a8d573511,Caves,Cave,Cave,2,11
+510,4d4b7105d754a06377d81259,4bf58dd8d48988d15c941735,Cemeteries,Cemetery,Cemetery,2,12
+511,4d4b7105d754a06377d81259,52e81612bcbc57f1066b7a12,Dive Spots,Dive Spot,Dive Spot,2,13
+512,4d4b7105d754a06377d81259,4bf58dd8d48988d1e5941735,Dog Runs,Dog Run,Dog Run,2,14
+513,4d4b7105d754a06377d81259,4bf58dd8d48988d15b941735,Farms,Farm,Farm,2,15
+514,4d4b7105d754a06377d81259,4bf58dd8d48988d15f941735,Fields,Field,Field,2,16
+515,4d4b7105d754a06377d81259,52e81612bcbc57f1066b7a0f,Fishing Spots,Fishing Spot,Fishing Spot,2,17
+516,4d4b7105d754a06377d81259,52e81612bcbc57f1066b7a23,Forests,Forest,Forest,2,18
+517,4d4b7105d754a06377d81259,56aa371be4b08b9a8d573547,Fountains,Fountain,Fountain,2,19
+518,4d4b7105d754a06377d81259,4bf58dd8d48988d15a941735,Gardens,Garden,Garden,2,20
+519,4d4b7105d754a06377d81259,52e81612bcbc57f1066b7a11,Gun Ranges,Gun Range,Gun Range,2,21
+520,4d4b7105d754a06377d81259,4bf58dd8d48988d1e0941735,Harbors / Marinas,Harbor / Marina,Harbor / Marina,2,22
+521,4d4b7105d754a06377d81259,4bf58dd8d48988d160941735,Hot Springs,Hot Spring,Hot Spring,2,23
+522,4d4b7105d754a06377d81259,5744ccdfe4b0c0459246b4b5,Indoor Play Areas,Indoor Play Area,Indoor Play Area,2,24
+523,4d4b7105d754a06377d81259,50aaa4314b90af0d42d5de10,Islands,Island,Island,2,25
+524,4d4b7105d754a06377d81259,4bf58dd8d48988d161941735,Lakes,Lake,Lake,2,26
+525,4d4b7105d754a06377d81259,4bf58dd8d48988d15d941735,Lighthouses,Lighthouse,Lighthouse,2,27
+526,4d4b7105d754a06377d81259,55a5a1ebe4b013909087cb77,Mountain Hut,Mountain Hut,Mountain Hut,2,28
+527,4d4b7105d754a06377d81259,4eb1d4d54b900d56c88a45fc,Mountains,Mountain,Mountain,2,29
+528,4d4b7105d754a06377d81259,52e81612bcbc57f1066b7a21,National Parks,National Park,National Park,2,30
+529,4d4b7105d754a06377d81259,52e81612bcbc57f1066b7a13,Nature Preserves,Preserve,Nature Preserve,2,31
+530,4d4b7105d754a06377d81259,4bf58dd8d48988d162941735,Other Great Outdoors,Other Outdoors,Other Great Outdoors,2,32
+531,4d4b7105d754a06377d81259,52e81612bcbc57f1066b7a14,Palaces,Palace,Palace,2,33
+532,4d4b7105d754a06377d81259,4bf58dd8d48988d163941735,Parks,Park,Park,2,34
+533,4d4b7105d754a06377d81259,52e81612bcbc57f1066b7a25,Pedestrian Plazas,Pedestrian Street/Plaza,Pedestrian Plaza,2,35
+534,4d4b7105d754a06377d81259,4bf58dd8d48988d1e7941735,Playgrounds,Playground,Playground,2,36
+535,4d4b7105d754a06377d81259,4bf58dd8d48988d164941735,Plazas,Plaza,Plaza,2,37
+536,4d4b7105d754a06377d81259,4bf58dd8d48988d15e941735,Pools,Pool,Pool,2,38
+537,4d4b7105d754a06377d81259,52e81612bcbc57f1066b7a29,Rafting Spots,Rafting,Rafting,2,39
+538,4d4b7105d754a06377d81259,52e81612bcbc57f1066b7a26,Recreation Centers,Recreation Center,Recreation Center,2,40
+539,4d4b7105d754a06377d81259,56aa371be4b08b9a8d573541,Reservoirs,Reservoir,Reservoir,2,41
+540,4d4b7105d754a06377d81259,4eb1d4dd4b900d56c88a45fd,Rivers,River,River,2,42
+541,4d4b7105d754a06377d81259,50328a4b91d4c4b30a586d6b,Rock Climbing Spots,Rock Climbing,Rock Climbing Spot,2,43
+542,4d4b7105d754a06377d81259,4bf58dd8d48988d165941735,Scenic Lookouts,Scenic Lookout,Scenic Lookout,2,44
+543,4d4b7105d754a06377d81259,4bf58dd8d48988d166941735,Sculpture Gardens,Sculpture,Sculpture Garden,2,45
+544,4d4b7105d754a06377d81259,4bf58dd8d48988d1e9941735,Ski Areas,Ski Area,Ski Area,2,46
+545,4bf58dd8d48988d1e9941735,4bf58dd8d48988d1ea941735,Apres Ski Bars,Apres Ski Bar,Apres Ski Bar,3,0
+546,4bf58dd8d48988d1e9941735,4eb1c0ed3b7b52c0e1adc2ea,Ski Chairlifts,Chairlift,Ski Chairlift,3,1
+547,4bf58dd8d48988d1e9941735,4bf58dd8d48988d1ec941735,Ski Chalets,Ski Chalet,Ski Chalet,3,2
+548,4bf58dd8d48988d1e9941735,4bf58dd8d48988d1eb941735,Ski Lodges,Lodge,Ski Lodge,3,3
+549,4bf58dd8d48988d1e9941735,4eb1c0f63b7b52c0e1adc2eb,Ski Trails,Trail,Ski Trail,3,4
+550,4d4b7105d754a06377d81259,4eb1baf03b7b2c5b1d4306ca,Stables,Stables,Stables,2,47
+551,4d4b7105d754a06377d81259,530e33ccbcbc57f1066bbfe4,States & Municipalities,States & Municipalities,States & Municipalities,2,48
+552,530e33ccbcbc57f1066bbfe4,50aa9e094b90af0d42d5de0d,Cities,City,City,3,0
+553,530e33ccbcbc57f1066bbfe4,5345731ebcbc57f1066c39b2,Counties,County,County,3,1
+554,530e33ccbcbc57f1066bbfe4,530e33ccbcbc57f1066bbff7,Countries,Country,Country,3,2
+555,530e33ccbcbc57f1066bbfe4,4f2a25ac4b909258e854f55f,Neighborhoods,Neighborhood,Neighborhood,3,3
+556,530e33ccbcbc57f1066bbfe4,530e33ccbcbc57f1066bbff8,States,State,State,3,4
+557,530e33ccbcbc57f1066bbfe4,530e33ccbcbc57f1066bbff3,Towns,Town,Town,3,5
+558,530e33ccbcbc57f1066bbfe4,530e33ccbcbc57f1066bbff9,Villages,Village,Village,3,6
+559,4d4b7105d754a06377d81259,52e81612bcbc57f1066b7a10,Summer Camps,Summer Camp,Summer Camp,2,49
+560,4d4b7105d754a06377d81259,4bf58dd8d48988d159941735,Trails,Trail,Trail,2,50
+561,4d4b7105d754a06377d81259,52e81612bcbc57f1066b7a24,Trees,Tree,Tree,2,51
+562,4d4b7105d754a06377d81259,4bf58dd8d48988d1de941735,Vineyards,Vineyard,Vineyard,2,52
+563,4d4b7105d754a06377d81259,5032848691d4c4b30a586d61,Volcanoes,Volcano,Volcano,2,53
+564,4d4b7105d754a06377d81259,56aa371be4b08b9a8d573560,Waterfalls,Waterfall,Waterfall,2,54
+565,4d4b7105d754a06377d81259,56aa371be4b08b9a8d5734c3,Waterfronts,Waterfront,Waterfront,2,55
+566,4d4b7105d754a06377d81259,4fbc1be21983fc883593e321,Wells,Well,Well,2,56
+567,root,4d4b7105d754a06375d81259,Professional & Other Places,Professional,Professional & Other Places,1,6
+568,4d4b7105d754a06375d81259,4e52d2d203646f7c19daa8ae,Animal Shelters,Animal Shelter,Animal Shelter,2,0
+569,4d4b7105d754a06375d81259,4bf58dd8d48988d173941735,Auditoriums,Auditorium,Auditorium,2,1
+570,4d4b7105d754a06375d81259,56aa371be4b08b9a8d5734cf,Ballrooms,Ballroom,Ballroom,2,2
+571,4d4b7105d754a06375d81259,4bf58dd8d48988d130941735,Buildings,Building,Building,2,3
+572,4d4b7105d754a06375d81259,56aa371be4b08b9a8d573517,Business Centers,Business Center,Business Center,2,4
+573,4d4b7105d754a06375d81259,52e81612bcbc57f1066b7a35,Club Houses,Club,Club House,2,5
+574,4d4b7105d754a06375d81259,52e81612bcbc57f1066b7a34,Community Centers,Community Center,Community Center,2,6
+575,4d4b7105d754a06375d81259,4bf58dd8d48988d1ff931735,Convention Centers,Convention Center,Convention Center,2,7
+576,4bf58dd8d48988d1ff931735,4bf58dd8d48988d100941735,Meeting Rooms,Meeting Room,Meeting Room,3,0
+577,4d4b7105d754a06375d81259,52e81612bcbc57f1066b7a32,Cultural Centers,Cultural Center,Cultural Center,2,8
+578,4d4b7105d754a06375d81259,4e0e22f5a56208c4ea9a85a0,Distilleries,Distillery,Distillery,2,9
+579,4d4b7105d754a06375d81259,52e81612bcbc57f1066b7a37,Distribution Centers,Distributor,Distribution Center,2,10
+580,4d4b7105d754a06375d81259,4bf58dd8d48988d171941735,Event Spaces,Event Space,Event Space,2,11
+581,4bf58dd8d48988d171941735,56aa371be4b08b9a8d57356a,Outdoor Event Spaces,Outdoor Event Space,Outdoor Event Space,3,0
+582,4d4b7105d754a06375d81259,4eb1bea83b7b6f98df247e06,Factories,Factory,Factory,2,12
+583,4d4b7105d754a06375d81259,4eb1daf44b900d56c88a4600,Fairs,Fair,Fair,2,13
+584,4d4b7105d754a06375d81259,4f4534884b9074f6e4fb0174,Funeral Homes,Funeral Home,Funeral Home,2,14
+585,4d4b7105d754a06375d81259,4bf58dd8d48988d126941735,Government Buildings,Government,Government Building,2,15
+586,4bf58dd8d48988d126941735,4bf58dd8d48988d12a941735,Capitol Buildings,Capitol Building,Capitol Building,3,0
+587,4bf58dd8d48988d126941735,4bf58dd8d48988d129941735,City Halls,City Hall,City Hall,3,1
+588,4bf58dd8d48988d126941735,4bf58dd8d48988d12b941735,Courthouses,Courthouse,Courthouse,3,2
+589,4bf58dd8d48988d126941735,4bf58dd8d48988d12c951735,Embassies / Consulates,Embassy,Embassy / Consulate,3,3
+590,4bf58dd8d48988d126941735,4bf58dd8d48988d12c941735,Fire Stations,Fire Station,Fire Station,3,4
+591,4bf58dd8d48988d126941735,4bf58dd8d48988d12d941735,Monuments / Landmarks,Landmark,Monument / Landmark,3,5
+592,4bf58dd8d48988d126941735,4bf58dd8d48988d12e941735,Police Stations,Police Station,Police Station,3,6
+593,4bf58dd8d48988d126941735,52e81612bcbc57f1066b7a38,Town Halls,Town Hall,Town Hall,3,7
+594,4d4b7105d754a06375d81259,56aa371be4b08b9a8d5734d7,Industrial Estates,Industrial Estate,Industrial Estate,2,16
+595,4d4b7105d754a06375d81259,5744ccdfe4b0c0459246b4d6,Laboratories,Laboratory,Laboratory,2,17
+596,4d4b7105d754a06375d81259,4bf58dd8d48988d12f941735,Libraries,Library,Library,2,18
+597,4d4b7105d754a06375d81259,4bf58dd8d48988d104941735,Medical Centers,Medical,Medical Center,2,19
+598,4bf58dd8d48988d104941735,52e81612bcbc57f1066b7a3b,Acupuncturists,Acupuncturist,Acupuncturist,3,0
+599,4bf58dd8d48988d104941735,52e81612bcbc57f1066b7a3c,Alternative Healers,Alternative Healer,Alternative Healer,3,1
+600,4bf58dd8d48988d104941735,52e81612bcbc57f1066b7a3a,Chiropractors,Chiropractors,Chiropractor,3,2
+601,4bf58dd8d48988d104941735,4bf58dd8d48988d178941735,Dentist's Offices,Dentist's Office,Dentist's Office,3,3
+602,4bf58dd8d48988d104941735,4bf58dd8d48988d177941735,Doctor's Offices,Doctor's Office,Doctor's Office,3,4
+603,4bf58dd8d48988d104941735,4bf58dd8d48988d194941735,Emergency Rooms,Emergency Room,Emergency Room,3,5
+604,4bf58dd8d48988d104941735,522e32fae4b09b556e370f19,Eye Doctors,Eye Doctor,Eye Doctor,3,6
+605,4bf58dd8d48988d104941735,4bf58dd8d48988d196941735,Hospitals,Hospital,Hospital,3,7
+606,4bf58dd8d48988d104941735,56aa371be4b08b9a8d5734ff,Maternity Clinics,Maternity Clinic,Maternity Clinic,3,8
+607,4bf58dd8d48988d104941735,4f4531b14b9074f6e4fb0103,Medical Labs,Medical Lab,Medical Lab,3,9
+608,4bf58dd8d48988d104941735,52e81612bcbc57f1066b7a39,Mental Health Offices,Mental Health,Mental Health Office,3,10
+609,4bf58dd8d48988d104941735,5744ccdfe4b0c0459246b4af,Physical Therapists,Physical Therapist,Physical Therapist,3,11
+610,4bf58dd8d48988d104941735,56aa371be4b08b9a8d57351d,Rehab Centers,Rehab Center,Rehab Center,3,12
+611,4bf58dd8d48988d104941735,56aa371be4b08b9a8d573526,Urgent Care Centers,Urgent Care Center,Urgent Care Center,3,13
+612,4bf58dd8d48988d104941735,4d954af4a243a5684765b473,Veterinarians,Veterinarians,Veterinarian,3,14
+613,4d4b7105d754a06375d81259,4e52adeebd41615f56317744,Military Bases,Military Base,Military Base,2,20
+614,4d4b7105d754a06375d81259,50328a8e91d4c4b30a586d6c,Non-Profits,Non-Profit,Non-Profit,2,21
+615,4d4b7105d754a06375d81259,5744ccdfe4b0c0459246b4d9,Observatories,Observatory,Observatory,2,22
+616,4d4b7105d754a06375d81259,4bf58dd8d48988d124941735,Offices,Office,Office,2,23
+617,4bf58dd8d48988d124941735,52e81612bcbc57f1066b7a3d,Advertising Agencies,Advertising Agency,Advertising Agency,3,0
+618,4bf58dd8d48988d124941735,5032764e91d4c4b30a586d5a,Campaign Offices,Campaign,Campaign Office,3,1
+619,4bf58dd8d48988d124941735,4bf58dd8d48988d127941735,Conference Rooms,Conference room,Conference Room,3,2
+620,4bf58dd8d48988d124941735,5665ef1d498ec706735f0e59,Corporate Amenities,Corporate Amenity,Corporate Amenity,3,3
+621,4bf58dd8d48988d124941735,54f4ba06498e2cf5561da814,Corporate Cafeterias,Corporate Cafeteria,Corporate Cafeteria,3,4
+622,4bf58dd8d48988d124941735,5665c7b9498e7d8a4f2c0f06,Corporate Coffee Shops,Corporate Coffee Shop,Corporate Coffee Shop,3,5
+623,4bf58dd8d48988d124941735,4bf58dd8d48988d174941735,Coworking Spaces,Coworking Space,Coworking Space,3,6
+624,4bf58dd8d48988d124941735,4bf58dd8d48988d125941735,Tech Startups,Tech Startup,Tech Startup,3,7
+625,4d4b7105d754a06375d81259,4c38df4de52ce0d596b336e1,Parking,Parking,Parking,2,24
+626,4d4b7105d754a06375d81259,4bf58dd8d48988d172941735,Post Offices,Post Office,Post Office,2,25
+627,4d4b7105d754a06375d81259,5310b8e5bcbc57f1066bcbf1,Prisons,Prison,Prison,2,26
+628,4d4b7105d754a06375d81259,5032856091d4c4b30a586d63,Radio Stations,Radio Station,Radio Station,2,27
+629,4d4b7105d754a06375d81259,52f2ab2ebcbc57f1066b8b57,Recruiting Agencies,Recruiting Agency,Recruiting Agency,2,28
+630,4d4b7105d754a06375d81259,4bf58dd8d48988d13b941735,Schools,School,School,2,29
+631,4bf58dd8d48988d13b941735,56aa371ce4b08b9a8d573570,Adult Education Centers,Adult Education Center,Adult Education Center,3,0
+632,4bf58dd8d48988d13b941735,52e81612bcbc57f1066b7a43,Circus Schools,Circus School,Circus School,3,1
+633,4bf58dd8d48988d13b941735,52e81612bcbc57f1066b7a42,Driving Schools,Driving School,Driving School,3,2
+634,4bf58dd8d48988d13b941735,4f4533804b9074f6e4fb0105,Elementary Schools,Elementary School,Elementary School,3,3
+635,4bf58dd8d48988d13b941735,52e81612bcbc57f1066b7a49,Flight Schools,Flight School,Flight School,3,4
+636,4bf58dd8d48988d13b941735,4bf58dd8d48988d13d941735,High Schools,High School,High School,3,5
+637,4bf58dd8d48988d13b941735,52e81612bcbc57f1066b7a48,Language Schools,Language School,Language School,3,6
+638,4bf58dd8d48988d13b941735,4f4533814b9074f6e4fb0106,Middle Schools,Middle School,Middle School,3,7
+639,4bf58dd8d48988d13b941735,4f04b10d2fb6e1c99f3db0be,Music Schools,Music School,Music School,3,8
+640,4bf58dd8d48988d13b941735,4f4533814b9074f6e4fb0107,Nursery Schools,Nursery School,Nursery School,3,9
+641,4bf58dd8d48988d13b941735,52e81612bcbc57f1066b7a45,Preschools,Preschool,Preschool,3,10
+642,4bf58dd8d48988d13b941735,52e81612bcbc57f1066b7a46,Private Schools,Private School,Private School,3,11
+643,4bf58dd8d48988d13b941735,52e81612bcbc57f1066b7a47,Religious Schools,Religious School,Religious School,3,12
+644,4bf58dd8d48988d13b941735,52e81612bcbc57f1066b7a44,Swim Schools,Swim School,Swim School,3,13
+645,4d4b7105d754a06375d81259,52e81612bcbc57f1066b7a33,Social Clubs,Social Club,Social Club,2,30
+646,4d4b7105d754a06375d81259,4bf58dd8d48988d131941735,Spiritual Centers,Spiritual,Spiritual Center,2,31
+647,4bf58dd8d48988d131941735,52e81612bcbc57f1066b7a3e,Buddhist Temples,Buddhist Temple,Buddhist Temple,3,0
+648,4bf58dd8d48988d131941735,4bf58dd8d48988d132941735,Churches,Church,Church,3,1
+649,4bf58dd8d48988d131941735,56aa371be4b08b9a8d5734fc,Confucian Temples,Confucian Temple,Confucian Temple,3,2
+650,4bf58dd8d48988d131941735,52e81612bcbc57f1066b7a3f,Hindu Temples,Hindu Temple,Hindu Temple,3,3
+651,4bf58dd8d48988d131941735,5744ccdfe4b0c0459246b4ac,Kingdom Halls,Kingdom Hall,Kingdom Hall,3,4
+652,4bf58dd8d48988d131941735,52e81612bcbc57f1066b7a40,Monasteries,Monastery,Monastery,3,5
+653,4bf58dd8d48988d131941735,4bf58dd8d48988d138941735,Mosques,Mosque,Mosque,3,6
+654,4bf58dd8d48988d131941735,52e81612bcbc57f1066b7a41,Prayer Rooms,Prayer Room,Prayer Room,3,7
+655,4bf58dd8d48988d131941735,4eb1d80a4b900d56c88a45ff,Shrines,Shrine,Shrine,3,8
+656,4bf58dd8d48988d131941735,4bf58dd8d48988d139941735,Synagogues,Synagogue,Synagogue,3,9
+657,4bf58dd8d48988d131941735,4bf58dd8d48988d13a941735,Temples,Temple,Temple,3,10
+658,4bf58dd8d48988d131941735,56aa371be4b08b9a8d5734f6,Terreiros,Terreiro,Terreiro,3,11
+659,4d4b7105d754a06375d81259,52e81612bcbc57f1066b7a31,TV Stations,TV Station,TV Station,2,32
+660,4d4b7105d754a06375d81259,4cae28ecbf23941eb1190695,Voting Booths,Voting Booth,Voting Booth,2,33
+661,4d4b7105d754a06375d81259,52e81612bcbc57f1066b7a36,Warehouses,Warehouse,Warehouse,2,34
+662,4d4b7105d754a06375d81259,56aa371be4b08b9a8d5734c5,Wedding Halls,Wedding Hall,Wedding Hall,2,35
+663,4d4b7105d754a06375d81259,4bf58dd8d48988d14b941735,Wineries,Winery,Winery,2,36
+664,root,4e67e38e036454776db1fb3a,Residences,Residence,Residence,1,7
+665,4e67e38e036454776db1fb3a,5032891291d4c4b30a586d68,Assisted Living,Assisted Living,Assisted Living,2,0
+666,4e67e38e036454776db1fb3a,4bf58dd8d48988d103941735,Homes (private),Home,Home (private),2,1
+667,4e67e38e036454776db1fb3a,4f2a210c4b9023bd5841ed28,Housing Developments,Housing Development,Housing Development,2,2
+668,4e67e38e036454776db1fb3a,4d954b06a243a5684965b473,Residential Buildings (Apartments / Condos),Residential,Residential Building (Apartment / Condo),2,3
+669,4e67e38e036454776db1fb3a,52f2ab2ebcbc57f1066b8b55,Trailer Parks,Trailer Park,Trailer Park,2,4
+670,root,4d4b7105d754a06378d81259,Shops & Services,Shops,Shop & Service,1,8
+671,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b56,ATMs,ATM,ATM,2,0
+672,4d4b7105d754a06378d81259,5267e446e4b0ec79466e48c4,Adult Boutiques,Adult Boutique,Adult Boutique,2,1
+673,4d4b7105d754a06378d81259,4bf58dd8d48988d116951735,Antique Shops,Antiques,Antique Shop,2,2
+674,4d4b7105d754a06378d81259,4bf58dd8d48988d127951735,Arts & Crafts Stores,Arts & Crafts,Arts & Crafts Store,2,3
+675,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b43,Astrologers,Astrologer,Astrologer,2,4
+676,4d4b7105d754a06378d81259,4eb1c1623b7b52c0e1adc2ec,Auto Dealerships,Auto Dealer,Auto Dealership,2,5
+677,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b44,Auto Garages,Auto Garage,Auto Garage,2,6
+678,4d4b7105d754a06378d81259,56aa371be4b08b9a8d5734d3,Auto Workshops,Auto Workshop,Auto Workshop,2,7
+679,4d4b7105d754a06378d81259,4bf58dd8d48988d124951735,Automotive Shops,Automotive,Automotive Shop,2,8
+680,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b32,Baby Stores,Baby Store,Baby Store,2,9
+681,4d4b7105d754a06378d81259,4bf58dd8d48988d10a951735,Banks,Bank,Bank,2,10
+682,4d4b7105d754a06378d81259,52e81612bcbc57f1066b7a27,Bath Houses,Bath House,Bath House,2,11
+683,4d4b7105d754a06378d81259,56aa371be4b08b9a8d5734cb,Batik Shops,Batik Shop,Batik Shop,2,12
+684,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b40,Betting Shops,Betting Shop,Betting Shop,2,13
+685,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b42,Big Box Stores,Big Box Store,Big Box Store,2,14
+686,4d4b7105d754a06378d81259,4bf58dd8d48988d115951735,Bike Shops,Bike Shop,Bike Shop,2,15
+687,4d4b7105d754a06378d81259,4bf58dd8d48988d1f1941735,Board Shops,Board Shop,Board Shop,2,16
+688,4d4b7105d754a06378d81259,4bf58dd8d48988d114951735,Bookstores,Bookstore,Bookstore,2,17
+689,4d4b7105d754a06378d81259,4bf58dd8d48988d11a951735,Bridal Shops,Bridal,Bridal Shop,2,18
+690,4d4b7105d754a06378d81259,5453de49498eade8af355881,Business Services,Business Services,Business Service,2,19
+691,4d4b7105d754a06378d81259,4eb1bdf03b7b55596b4a7491,Camera Stores,Camera Store,Camera Store,2,20
+692,4d4b7105d754a06378d81259,4bf58dd8d48988d117951735,Candy Stores,Candy Store,Candy Store,2,21
+693,4d4b7105d754a06378d81259,4f04ae1f2fb6e1c99f3db0ba,Car Washes,Car Washes,Car Wash,2,22
+694,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b2a,Carpet Stores,Carpet Store,Carpet Store,2,23
+695,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b2d,Check Cashing Services,Check Cashing Service,Check Cashing Service,2,24
+696,4d4b7105d754a06378d81259,5744ccdfe4b0c0459246b4c7,Child Care Services,Child Care,Child Care Service,2,25
+697,5744ccdfe4b0c0459246b4c7,4f4532974b9074f6e4fb0104,Daycares,Daycare,Daycare,3,0
+698,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b31,Chocolate Shops,Chocolate Shop,Chocolate Shop,2,26
+699,4d4b7105d754a06378d81259,4bf58dd8d48988d103951735,Clothing Stores,Apparel,Clothing Store,2,27
+700,4bf58dd8d48988d103951735,4bf58dd8d48988d102951735,Accessories Stores,Accessories,Accessories Store,3,0
+701,4bf58dd8d48988d103951735,4bf58dd8d48988d104951735,Boutiques,Boutique,Boutique,3,1
+702,4bf58dd8d48988d103951735,4bf58dd8d48988d105951735,Kids Stores,Kids Store,Kids Store,3,2
+703,4bf58dd8d48988d103951735,4bf58dd8d48988d109951735,Lingerie Stores,Lingerie,Lingerie Store,3,3
+704,4bf58dd8d48988d103951735,4bf58dd8d48988d106951735,Men's Stores,Men's Store,Men's Store,3,4
+705,4bf58dd8d48988d103951735,4bf58dd8d48988d107951735,Shoe Stores,Shoes,Shoe Store,3,5
+706,4bf58dd8d48988d103951735,4bf58dd8d48988d108951735,Women's Stores,Women's Store,Women's Store,3,6
+707,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b18,Comic Shops,Comic Shop,Comic Shop,2,28
+708,4d4b7105d754a06378d81259,5454144b498ec1f095bff2f2,Construction & Landscaping,Construction,Construction & Landscaping,2,29
+709,4d4b7105d754a06378d81259,4d954b0ea243a5684a65b473,Convenience Stores,Convenience Store,Convenience Store,2,30
+710,4d4b7105d754a06378d81259,4bf58dd8d48988d10c951735,Cosmetics Shops,Cosmetics,Cosmetics Shop,2,31
+711,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b17,Costume Shops,Costume Shop,Costume Shop,2,32
+712,4d4b7105d754a06378d81259,5032850891d4c4b30a586d62,Credit Unions,Credit Union,Credit Union,2,33
+713,4d4b7105d754a06378d81259,5744ccdfe4b0c0459246b4be,Currency Exchanges,Currency Exchange,Currency Exchange,2,34
+714,4d4b7105d754a06378d81259,4bf58dd8d48988d1f6941735,Department Stores,Department Store,Department Store,2,35
+715,4d4b7105d754a06378d81259,4bf58dd8d48988d1f4941735,Design Studios,Design,Design Studio,2,36
+716,4d4b7105d754a06378d81259,52dea92d3cf9994f4e043dbb,Discount Stores,Discount Store,Discount Store,2,37
+717,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b1a,Dive Shops,Dive Shop,Dive Shop,2,38
+718,4d4b7105d754a06378d81259,5745c2e4498e11e7bccabdbd,Drugstores,Drugstore,Drugstore,2,39
+719,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b1d,Dry Cleaners,Dry Cleaner,Dry Cleaner,2,40
+720,4d4b7105d754a06378d81259,5032872391d4c4b30a586d64,EV Charging Stations,EV Charging,EV Charging Station,2,41
+721,4d4b7105d754a06378d81259,4bf58dd8d48988d122951735,Electronics Stores,Electronics,Electronics Store,2,42
+722,4d4b7105d754a06378d81259,56aa371be4b08b9a8d573554,Entertainment Services,Entertainment Service,Entertainment Service,2,43
+723,4d4b7105d754a06378d81259,5454152e498ef71e2b9132c6,Event Services,Event Services,Event Service,2,44
+724,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b26,Fabric Shops,Fabric Shop,Fabric Shop,2,45
+725,4d4b7105d754a06378d81259,56aa371be4b08b9a8d573523,Film Studios,Film Studio,Film Studio,2,46
+726,4d4b7105d754a06378d81259,503287a291d4c4b30a586d65,Financial or Legal Services,Financial / Legal,Financial or Legal Service,2,47
+727,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b3a,Fireworks Stores,Fireworks Store,Fireworks Store,2,48
+728,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b16,Fishing Stores,Fishing Store,Fishing Store,2,49
+729,4d4b7105d754a06378d81259,4bf58dd8d48988d1f7941735,Flea Markets,Flea Market,Flea Market,2,50
+730,4d4b7105d754a06378d81259,56aa371be4b08b9a8d573505,Floating Markets,Floating Market,Floating Market,2,51
+731,4d4b7105d754a06378d81259,4bf58dd8d48988d11b951735,Flower Shops,Flower Shop,Flower Shop,2,52
+732,4d4b7105d754a06378d81259,4bf58dd8d48988d1f9941735,Food & Drink Shops,Food & Drink,Food & Drink Shop,2,53
+733,4bf58dd8d48988d1f9941735,5370f356bcbc57f1066c94c2,Beer Stores,Beer Store,Beer Store,3,0
+734,4bf58dd8d48988d1f9941735,4bf58dd8d48988d11d951735,Butchers,Butcher,Butcher,3,1
+735,4bf58dd8d48988d1f9941735,4bf58dd8d48988d11e951735,Cheese Shops,Cheese Shop,Cheese Shop,3,2
+736,4bf58dd8d48988d1f9941735,4bf58dd8d48988d1fa941735,Farmers Markets,Farmer's Market,Farmers Market,3,3
+737,4bf58dd8d48988d1f9941735,4bf58dd8d48988d10e951735,Fish Markets,Fish Market,Fish Market,3,4
+738,4bf58dd8d48988d1f9941735,56aa371be4b08b9a8d573550,Food Services,Food Service,Food Service,3,5
+739,4bf58dd8d48988d1f9941735,4bf58dd8d48988d1f5941735,Gourmet Shops,Gourmet,Gourmet Shop,3,6
+740,4bf58dd8d48988d1f9941735,4bf58dd8d48988d118951735,Grocery Stores,Grocery Store,Grocery Store,3,7
+741,4bf58dd8d48988d1f9941735,50aa9e744b90af0d42d5de0e,Health Food Stores,Health Food Store,Health Food Store,3,8
+742,4bf58dd8d48988d1f9941735,4bf58dd8d48988d186941735,Liquor Stores,Liquor Store,Liquor Store,3,9
+743,4bf58dd8d48988d1f9941735,52f2ab2ebcbc57f1066b8b45,Organic Groceries,Organic Grocery,Organic Grocery,3,10
+744,4bf58dd8d48988d1f9941735,56aa371be4b08b9a8d573564,Sausage Shops,Sausage Shop,Sausage Shop,3,11
+745,4bf58dd8d48988d1f9941735,53e0feef498e5aac066fd8a9,Street Food Gatherings,Street Food Gathering,Street Food Gathering,3,12
+746,4bf58dd8d48988d1f9941735,52f2ab2ebcbc57f1066b8b46,Supermarkets,Supermarket,Supermarket,3,13
+747,4bf58dd8d48988d1f9941735,4bf58dd8d48988d119951735,Wine Shops,Wine Shop,Wine Shop,3,14
+748,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b24,Frame Stores,Frame Store,Frame Store,2,54
+749,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b1c,Fruit & Vegetable Stores,Fruit & Vegetable Store,Fruit & Vegetable Store,2,55
+750,4d4b7105d754a06378d81259,4bf58dd8d48988d1f8941735,Furniture / Home Stores,Furniture / Home,Furniture / Home Store,2,56
+751,4bf58dd8d48988d1f8941735,55888a5a498e782e3303b43a,Lighting Stores,Lighting,Lighting Store,3,0
+752,4d4b7105d754a06378d81259,4bf58dd8d48988d18d941735,Gaming Cafes,Gaming Cafe,Gaming Cafe,2,57
+753,4d4b7105d754a06378d81259,4eb1c0253b7b52c0e1adc2e9,Garden Centers,Garden Center,Garden Center,2,58
+754,4d4b7105d754a06378d81259,4bf58dd8d48988d113951735,Gas Stations,Gas Station,Gas Station,2,59
+755,4d4b7105d754a06378d81259,4bf58dd8d48988d128951735,Gift Shops,Gift Shop,Gift Shop,2,60
+756,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b19,Gun Shops,Gun Shop,Gun Shop,2,61
+757,4d4b7105d754a06378d81259,4bf58dd8d48988d112951735,Hardware Stores,Hardware,Hardware Store,2,62
+758,4d4b7105d754a06378d81259,54541900498ea6ccd0202697,Health & Beauty Services,Health & Beauty,Health & Beauty Service,2,63
+759,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b2c,Herbs & Spices Stores,Herbs & Spices Store,Herbs & Spices Store,2,64
+760,4d4b7105d754a06378d81259,4bf58dd8d48988d1fb941735,Hobby Shops,Hobbies,Hobby Shop,2,65
+761,4d4b7105d754a06378d81259,545419b1498ea6ccd0202f58,Home Services & Repairs,Home Services,Home Service,2,66
+762,4d4b7105d754a06378d81259,50aaa5234b90af0d42d5de12,Hunting Supplies,Hunting Supply,Hunting Supply,2,67
+763,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b36,IT Services,IT Services,IT Services,2,68
+764,4d4b7105d754a06378d81259,4bf58dd8d48988d1f0941735,Internet Cafes,Internet Cafe,Internet Cafe,2,69
+765,4d4b7105d754a06378d81259,4bf58dd8d48988d111951735,Jewelry Stores,Jewelry,Jewelry Store,2,70
+766,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b25,Knitting Stores,Knitting Supplies,Knitting Store,2,71
+767,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b33,Laundromats,Laundromat,Laundromat,2,72
+768,4d4b7105d754a06378d81259,4bf58dd8d48988d1fc941735,Laundry Services,Laundry,Laundry Service,2,73
+769,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b3f,Lawyers,Lawyer,Lawyer,2,74
+770,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b2b,Leather Goods Stores,Leather Goods,Leather Goods Store,2,75
+771,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b1e,Locksmiths,Locksmith,Locksmith,2,76
+772,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b38,Lottery Retailers,Lottery,Lottery Retailer,2,77
+773,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b29,Luggage Stores,Luggage Store,Luggage Store,2,78
+774,4d4b7105d754a06378d81259,52c71aaf3cf9994f4e043d17,Marijuana Dispensaries,Dispensary,Marijuana Dispensary,2,79
+775,4d4b7105d754a06378d81259,50be8ee891d4fa8dcc7199a7,Markets,Market,Market,2,80
+776,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b3c,Massage Studios,Massage Studio,Massage Studio,2,81
+777,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b27,Mattress Stores,Mattress Store,Mattress Store,2,82
+778,4d4b7105d754a06378d81259,4bf58dd8d48988d1ff941735,Miscellaneous Shops,Shop,Miscellaneous Shop,2,83
+779,4d4b7105d754a06378d81259,4f04afc02fb6e1c99f3db0bc,Mobile Phone Shops,Mobile Phones,Mobile Phone Shop,2,84
+780,4d4b7105d754a06378d81259,56aa371be4b08b9a8d57354a,Mobility Stores,Mobility Store,Mobility Store,2,85
+781,4d4b7105d754a06378d81259,5032833091d4c4b30a586d60,Motorcycle Shops,Motorcycle Shop,Motorcycle Shop,2,86
+782,4d4b7105d754a06378d81259,4bf58dd8d48988d1fe941735,Music Stores,Music Store,Music Store,2,87
+783,4d4b7105d754a06378d81259,4f04aa0c2fb6e1c99f3db0b8,Nail Salons,Nail Salon,Nail Salon,2,88
+784,4d4b7105d754a06378d81259,4f04ad622fb6e1c99f3db0b9,Newsstands,Newsstand,Newsstand,2,89
+785,4d4b7105d754a06378d81259,4d954afda243a5684865b473,Optical Shops,Optical,Optical Shop,2,90
+786,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b2f,Other Repair Shops,Other Repair,Other Repair Shop,2,91
+787,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b22,Outdoor Supply Stores,Outdoor Supplies,Outdoor Supply Store,2,92
+788,4d4b7105d754a06378d81259,5744ccdfe4b0c0459246b4df,Outlet Malls,Outlet Mall,Outlet Mall,2,93
+789,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b35,Outlet Stores,Outlet Store,Outlet Store,2,94
+790,4d4b7105d754a06378d81259,4bf58dd8d48988d121951735,Paper / Office Supplies Stores,Office Supplies,Paper / Office Supplies Store,2,95
+791,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b34,Pawn Shops,Pawn Shop,Pawn Shop,2,96
+792,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b23,Perfume Shops,Perfume Shop,Perfume Shop,2,97
+793,4d4b7105d754a06378d81259,5032897c91d4c4b30a586d69,Pet Services,Pet Service,Pet Service,2,98
+794,4d4b7105d754a06378d81259,4bf58dd8d48988d100951735,Pet Stores,Pet Store,Pet Store,2,99
+795,4d4b7105d754a06378d81259,4bf58dd8d48988d10f951735,Pharmacies,Pharmacy,Pharmacy,2,100
+796,4d4b7105d754a06378d81259,4eb1bdde3b7b55596b4a7490,Photography Labs,Photography Lab,Photography Lab,2,101
+797,4d4b7105d754a06378d81259,554a5e17498efabeda6cc559,Photography Studios,Photo Studio,Photography Studio,2,102
+798,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b20,Piercing Parlors,Piercing Parlor,Piercing Parlor,2,103
+799,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b3d,Pop-Up Shops,Pop-Up Shop,Pop-Up Shop,2,104
+800,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b28,Print Shops,Print Shop,Print Shop,2,105
+801,4d4b7105d754a06378d81259,5744ccdfe4b0c0459246b4c4,Public Bathrooms,Public Bathroom,Public Bathroom,2,106
+802,4d4b7105d754a06378d81259,5032885091d4c4b30a586d66,Real Estate Offices,Real Estate,Real Estate Office,2,107
+803,4d4b7105d754a06378d81259,4bf58dd8d48988d10d951735,Record Shops,Record Shop,Record Shop,2,108
+804,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b37,Recording Studios,Recording Studio,Recording Studio,2,109
+805,4d4b7105d754a06378d81259,4f4531084b9074f6e4fb0101,Recycling Facilities,Recycling,Recycling Facility,2,110
+806,4d4b7105d754a06378d81259,56aa371be4b08b9a8d573552,Rental Services,Rental Service,Rental Service,2,111
+807,4d4b7105d754a06378d81259,4bf58dd8d48988d110951735,Salons / Barbershops,Salon / Barbershop,Salon / Barbershop,2,112
+808,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b1f,Shipping Stores,Shipping Store,Shipping Store,2,113
+809,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b39,Shoe Repair Shops,Shoe Repair,Shoe Repair,2,114
+810,4d4b7105d754a06378d81259,4bf58dd8d48988d1fd941735,Shopping Malls,Mall,Shopping Mall,2,115
+811,4d4b7105d754a06378d81259,5744ccdfe4b0c0459246b4dc,Shopping Plazas,Shopping Plaza,Shopping Plaza,2,116
+812,4d4b7105d754a06378d81259,56aa371be4b08b9a8d573566,Ski Shops,Ski Shop,Ski Shop,2,117
+813,4d4b7105d754a06378d81259,4bf58dd8d48988d123951735,Smoke Shops,Smoke Shop,Smoke Shop,2,118
+814,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b41,Smoothie Shops,Smoothie Shop,Smoothie Shop,2,119
+815,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b1b,Souvenir Shops,Souvenir Shop,Souvenir Shop,2,120
+816,4d4b7105d754a06378d81259,4bf58dd8d48988d1ed941735,Spas,Spa,Spa,2,121
+817,4d4b7105d754a06378d81259,4bf58dd8d48988d1f2941735,Sporting Goods Shops,Sporting Goods,Sporting Goods Shop,2,122
+818,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b21,Stationery Stores,Stationery Store,Stationery Store,2,123
+819,4d4b7105d754a06378d81259,4f04b1572fb6e1c99f3db0bf,Storage Facilities,Storage,Storage Facility,2,124
+820,4d4b7105d754a06378d81259,5744ccdfe4b0c0459246b4cd,Supplement Shops,Supplement Shop,Supplement Shop,2,125
+821,4d4b7105d754a06378d81259,5032781d91d4c4b30a586d5b,Tailor Shops,Tailor,Tailor Shop,2,126
+822,4d4b7105d754a06378d81259,4d1cf8421a97d635ce361c31,Tanning Salons,Tanning Salon,Tanning Salon,2,127
+823,4d4b7105d754a06378d81259,4bf58dd8d48988d1de931735,Tattoo Parlors,Tattoo,Tattoo Parlor,2,128
+824,4d4b7105d754a06378d81259,4bf58dd8d48988d101951735,Thrift / Vintage Stores,Thrift / Vintage,Thrift / Vintage Store,2,129
+825,4d4b7105d754a06378d81259,4bf58dd8d48988d1f3941735,Toy / Game Stores,Toys & Games,Toy / Game Store,2,130
+826,4d4b7105d754a06378d81259,4f04b08c2fb6e1c99f3db0bd,Travel Agencies,Travel Agency,Travel Agency,2,131
+827,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b30,Used Bookstores,Used Bookstore,Used Bookstore,2,132
+828,4d4b7105d754a06378d81259,56aa371be4b08b9a8d57355c,Vape Stores,Vape Store,Vape Store,2,133
+829,4d4b7105d754a06378d81259,4bf58dd8d48988d10b951735,Video Game Stores,Video Games,Video Game Store,2,134
+830,4d4b7105d754a06378d81259,4bf58dd8d48988d126951735,Video Stores,Video Store,Video Store,2,135
+831,4d4b7105d754a06378d81259,52e816a6bcbc57f1066b7a54,Warehouse Stores,Warehouse Store,Warehouse Store,2,136
+832,4d4b7105d754a06378d81259,52f2ab2ebcbc57f1066b8b2e,Watch Shops,Watch Shops,Watch Shop,2,137
+833,root,4d4b7105d754a06379d81259,Travel & Transport,Travel,Travel & Transport,1,9
+834,4d4b7105d754a06379d81259,4bf58dd8d48988d1ed931735,Airports,Airport,Airport,2,0
+835,4bf58dd8d48988d1ed931735,4bf58dd8d48988d1ef931735,Airport Food Courts,Food Court,Airport Food Court,3,0
+836,4bf58dd8d48988d1ed931735,4bf58dd8d48988d1f0931735,Airport Gates,Gate,Airport Gate,3,1
+837,4bf58dd8d48988d1ed931735,4eb1bc533b7b2c5b1d4306cb,Airport Lounges,Lounge,Airport Lounge,3,2
+838,4bf58dd8d48988d1ed931735,56aa371be4b08b9a8d57352f,Airport Services,Airport Service,Airport Service,3,3
+839,4bf58dd8d48988d1ed931735,4bf58dd8d48988d1eb931735,Airport Terminals,Terminal,Airport Terminal,3,4
+840,4bf58dd8d48988d1ed931735,4bf58dd8d48988d1ec931735,Airport Trams,Tram,Airport Tram,3,5
+841,4bf58dd8d48988d1ed931735,5744ccdfe4b0c0459246b4e5,Baggage Claims,Baggage Claim,Baggage Claim,3,6
+842,4bf58dd8d48988d1ed931735,4bf58dd8d48988d1f7931735,Planes,Plane,Plane,3,7
+843,4d4b7105d754a06379d81259,5744ccdfe4b0c0459246b4e8,Baggage Lockers,Baggage Locker,Baggage Locker,2,1
+844,4d4b7105d754a06379d81259,4e4c9077bd41f78e849722f9,Bike Rentals / Bike Shares,Bike,Bike Rental / Bike Share,2,2
+845,4d4b7105d754a06379d81259,5744ccdfe4b0c0459246b4c1,Boat Rentals,Boat Rental,Boat Rental,2,3
+846,4d4b7105d754a06379d81259,4bf58dd8d48988d12d951735,Boats or Ferries,Boat / Ferry,Boat or Ferry,2,4
+847,4d4b7105d754a06379d81259,52f2ab2ebcbc57f1066b8b4b,Border Crossings,Border Crossing,Border Crossing,2,5
+848,4d4b7105d754a06379d81259,4bf58dd8d48988d1fe931735,Bus Stations,Bus Station,Bus Station,2,6
+849,4bf58dd8d48988d1fe931735,4bf58dd8d48988d12b951735,Bus Lines,Bus,Bus Line,3,0
+850,4d4b7105d754a06379d81259,52f2ab2ebcbc57f1066b8b4f,Bus Stops,Bus Stop,Bus Stop,2,7
+851,4d4b7105d754a06379d81259,52f2ab2ebcbc57f1066b8b50,Cable Cars,Cable Car,Cable Car,2,8
+852,4d4b7105d754a06379d81259,55077a22498e5e9248869ba2,Cruises,Cruise,Cruise,2,9
+853,4d4b7105d754a06379d81259,4bf58dd8d48988d1f6931735,General Travel,Travel,General Travel,2,10
+854,4d4b7105d754a06379d81259,56aa371ce4b08b9a8d57356e,Heliports,Heliport,Heliport,2,11
+855,4d4b7105d754a06379d81259,4bf58dd8d48988d1fa931735,Hotels,Hotel,Hotel,2,12
+856,4bf58dd8d48988d1fa931735,4bf58dd8d48988d1f8931735,Bed & Breakfasts,B & B,Bed & Breakfast,3,0
+857,4bf58dd8d48988d1fa931735,4f4530a74b9074f6e4fb0100,Boarding Houses,Boarding,Boarding House,3,1
+858,4bf58dd8d48988d1fa931735,4bf58dd8d48988d1ee931735,Hostels,Hostel,Hostel,3,2
+859,4bf58dd8d48988d1fa931735,4bf58dd8d48988d132951735,Hotel Pools,Pool,Hotel Pool,3,3
+860,4bf58dd8d48988d1fa931735,4bf58dd8d48988d1fb931735,Motels,Motel,Motel,3,4
+861,4bf58dd8d48988d1fa931735,4bf58dd8d48988d12f951735,Resorts,Resort,Resort,3,5
+862,4bf58dd8d48988d1fa931735,4bf58dd8d48988d133951735,Roof Decks,Roof Deck,Roof Deck,3,6
+863,4bf58dd8d48988d1fa931735,56aa371be4b08b9a8d5734e1,Vacation Rentals,Vacation Rental,Vacation Rental,3,7
+864,4d4b7105d754a06379d81259,52f2ab2ebcbc57f1066b8b4c,Intersections,Intersection,Intersection,2,13
+865,4d4b7105d754a06379d81259,4bf58dd8d48988d1fc931735,Light Rail Stations,Light Rail,Light Rail Station,2,14
+866,4d4b7105d754a06379d81259,4bf58dd8d48988d1fd931735,Metro Stations,Metro,Metro Station,2,15
+867,4d4b7105d754a06379d81259,4f2a23984b9023bd5841ed2c,Moving Targets,Moving Target,Moving Target,2,16
+868,4d4b7105d754a06379d81259,4e74f6cabd41c4836eac4c31,Piers,Piers,Pier,2,17
+869,4d4b7105d754a06379d81259,56aa371be4b08b9a8d57353e,Ports,Port,Port,2,18
+870,4d4b7105d754a06379d81259,52f2ab2ebcbc57f1066b8b53,RV Parks,RV Park,RV Park,2,19
+871,4d4b7105d754a06379d81259,4bf58dd8d48988d1ef941735,Rental Car Locations,Rental Car,Rental Car Location,2,20
+872,4d4b7105d754a06379d81259,4d954b16a243a5684b65b473,Rest Areas,Rest Areas,Rest Area,2,21
+873,4d4b7105d754a06379d81259,4bf58dd8d48988d1f9931735,Roads,Road,Road,2,22
+874,4d4b7105d754a06379d81259,53fca564498e1a175f32528b,Taxi Stands,Taxi Stand,Taxi Stand,2,23
+875,4d4b7105d754a06379d81259,4bf58dd8d48988d130951735,Taxis,Taxi,Taxi,2,24
+876,4d4b7105d754a06379d81259,52f2ab2ebcbc57f1066b8b4d,Toll Booths,Toll Booth,Toll Booth,2,25
+877,4d4b7105d754a06379d81259,52f2ab2ebcbc57f1066b8b4e,Toll Plazas,Toll Plaza,Toll Plaza,2,26
+878,4d4b7105d754a06379d81259,4f4530164b9074f6e4fb00ff,Tourist Information Centers,Tourist Information,Tourist Information Center,2,27
+879,4d4b7105d754a06379d81259,4bf58dd8d48988d129951735,Train Stations,Train Station,Train Station,2,28
+880,4bf58dd8d48988d129951735,4f4531504b9074f6e4fb0102,Platforms,Platform,Platform,3,0
+881,4bf58dd8d48988d129951735,4bf58dd8d48988d12a951735,Trains,Train,Train,3,1
+882,4d4b7105d754a06379d81259,52f2ab2ebcbc57f1066b8b51,Tram Stations,Tram,Tram Station,2,29
+883,4d4b7105d754a06379d81259,54541b70498ea6ccd0204bff,Transportation Services,Transportation Services,Transportation Service,2,30
+884,4d4b7105d754a06379d81259,4f04b25d2fb6e1c99f3db0c0,Travel Lounges,Lounge,Travel Lounge,2,31
+885,4d4b7105d754a06379d81259,52f2ab2ebcbc57f1066b8b4a,Tunnels,Tunnel,Tunnel,2,32

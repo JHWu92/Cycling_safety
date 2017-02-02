@@ -1,0 +1,109 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1,
+        "cnt": "two parallel"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -77.02191710472107,
+            38.89331670553235
+          ],
+          [
+            -77.01643466949463,
+            38.89180108650253
+          ],
+          [
+            -77.0151686668396,
+            38.89144200948675
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2,
+        "cnt": "one left two right"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -77.01990008354187,
+            38.89481559171691
+          ],
+          [
+            -77.01988935470581,
+            38.89211005829564
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3,
+        "cnt": "no tilted"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -77.01514720916748,
+            38.891450360135636
+          ],
+          [
+            -77.01525449752808,
+            38.893780152828434
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4,
+        "cnt": "no far distance"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -77.01988935470581,
+            38.89211840886598
+          ],
+          [
+            -77.01900959014893,
+            38.89211005829564
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5,
+        "cnt": "one up two down"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -77.0189881324768,
+            38.89211005829564
+          ],
+          [
+            -77.01855897903442,
+            38.89237727605987
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,897 @@
+schools&university
+	College & University
+	College Academic Building
+	College Arts Building
+	College Communications Building
+	College Engineering Building
+	College History Building
+	College Math Building
+	College Science Building
+	College Technology Building
+	College Administrative Building
+	College Auditorium
+	College Bookstore
+	College Cafeteria
+	College Classroom
+	College Gym
+	College Lab
+	College Library
+	College Quad
+	College Rec Center
+	College Residence Hall
+	College Baseball Diamond
+	College Basketball Court
+	College Football Field
+	College Hockey Rink
+	College Soccer Field
+	College Track
+	College Theater
+	Community College
+	Fraternity House
+	General College & University
+	Law School
+	Medical School
+	Sorority House
+	Student Center
+	Trade School
+	University
+	School
+	Elementary School
+	High School
+	Language School
+	Middle School
+	Music School
+	Nursery School
+	Preschool
+	Private School
+	College Stadium
+		College Cricket Pitch
+		College Tennis Court
+	Religious School
+	Driving School
+	Swim School
+	Adult Education Center
+	Circus School
+	Flight School
+transportation
+	Parking
+	Travel & Transport
+	Airport
+		Airport Food Court
+		Airport Service
+		Baggage Claim
+		Airport Tram
+	Airport Gate
+	Airport Lounge
+	Airport Terminal
+	Plane
+	Border Crossing
+	Bus Station
+	Bus Line
+	Bus Stop
+	General Travel
+	Heliport
+	Light Rail Station
+	Metro Station
+	Rental Car Location
+	Rest Area
+	Taxi
+	Train Station
+	Platform
+	Train
+	Transportation Service
+	Travel Lounge
+	Tunnel
+	Tram Station
+	RV Park
+	Cruise
+	Pier
+	Port
+	Taxi Stand
+	Toll Booth
+	Cable Car
+retail shop
+	Plaza
+	Shop & Service
+	Adult Boutique
+	Antique Shop
+	Arts & Crafts Store
+	Astrologer
+	Automotive Shop
+	Baby Store
+	Bath House
+	Bike Shop
+	Board Shop
+	Bookstore
+	Bridal Shop
+	Camera Store
+	Candy Store
+	Car Wash
+	Chocolate Shop
+	Clothing Store
+	Accessories Store
+	Boutique
+	Kids Store
+	Lingerie Store
+	Men's Store
+	Shoe Store
+	Women's Store
+	Comic Shop
+	Convenience Store
+	Cosmetics Shop
+	Costume Shop
+	Department Store
+	Design Studio
+	Discount Store
+	Dive Shop
+	Dry Cleaner
+	Electronics Store
+	Entertainment Service
+	Flea Market
+	Flower Shop
+	Food & Drink Shop
+	Butcher
+	Cheese Shop
+	Farmers Market
+	Fish Market
+	Gourmet Shop
+	Grocery Store
+	Health Food Store
+	Liquor Store
+	Organic Grocery
+	Supermarket
+	Wine Shop
+	Frame Store
+	Fruit & Vegetable Store
+	Furniture / Home Store
+	Gas Station
+	Gift Shop
+	Hardware Store
+	Health & Beauty Service
+	Herbs & Spices Store
+	Hobby Shop
+	Home Service
+	Jewelry Store
+	Laundromat
+	Laundry Service
+	Leather Goods Store
+	Locksmith
+	Luggage Store
+	Market
+	Massage Studio
+	Mattress Store
+	Miscellaneous Shop
+	Mobile Phone Shop
+	Music Store
+	Nail Salon
+	Optical Shop
+	Outdoor Supply Store
+	Outlet Store
+	Paper / Office Supplies Store
+	Perfume Shop
+	Pet Service
+	Pet Store
+	Pharmacy
+	Photography Lab
+	Photography Studio
+	Pop-Up Shop
+	Print Shop
+	Record Shop
+	Recording Studio
+	Salon / Barbershop
+	Shipping Store
+	Shoe Repair
+	Shopping Mall
+	Smoke Shop
+	Smoothie Shop
+	Spa
+	Sporting Goods Shop
+	Storage Facility
+	Supplement Shop
+	Tailor Shop
+	Tanning Salon
+	Tattoo Parlor
+	Thrift / Vintage Store
+	Toy / Game Store
+	Travel Agency
+	Video Game Store
+	Video Store
+	Warehouse Store
+	Beer Store
+	Street Food Gathering
+	Sausage Shop
+	Food Service
+	Other Repair Shop
+	Gun Shop
+	Mobility Store
+	Drugstore
+	Rental Service
+	Stationery Store
+	Vape Store
+	Outlet Mall
+	Marijuana Dispensary
+	Auto Dealership
+	Film Studio
+	Carpet Store
+	Batik Shop
+	Watch Shop
+	Ski Shop
+	Fishing Store
+	Betting Shop
+	Knitting Store
+	Gaming Cafe
+	Fabric Shop
+	Lottery Retailer
+	Big Box Store
+	Shopping Plaza
+	Fireworks Store
+	Pawn Shop
+	Motorcycle Shop
+	Used Bookstore
+	Souvenir Shop
+	Floating Market
+	Hunting Supply
+	Public Bathroom
+	Piercing Parlor
+residence
+	Assisted Living
+	Housing Development
+	Residential Building (Apartment / Condo)
+	Trailer Park
+	Home (private)
+	Lighting Store
+professional service
+	Cemetery
+	Professional & Other Places
+	Animal Shelter
+	Auditorium
+	Business Center
+	Convention Center
+	Meeting Room
+	Distribution Center
+	Factory
+	Fair
+	Funeral Home
+	Government Building
+	Capitol Building
+	City Hall
+	Courthouse
+	Embassy / Consulate
+	Fire Station
+	Monument / Landmark
+	Police Station
+	Library
+	Medical Center
+	Acupuncturist
+	Chiropractor
+	Dentist's Office
+	Doctor's Office
+	Emergency Room
+	Eye Doctor
+	Hospital
+	Medical Lab
+	Mental Health Office
+	Physical Therapist
+	Urgent Care Center
+	Veterinarian
+	Military Base
+	Non-Profit
+	Office
+	Advertising Agency
+	Campaign Office
+	Conference Room
+	Corporate Amenity
+	Corporate Cafeteria
+	Coworking Space
+	Tech Startup
+	Post Office
+	Prison
+	Radio Station
+	Warehouse
+	Winery
+	ATM
+	Auto Garage
+	Auto Workshop
+	Bank
+	Business Service
+	Check Cashing Service
+	Child Care Service
+	Daycare
+	Construction & Landscaping
+	Credit Union
+	Currency Exchange
+	EV Charging Station
+	Financial or Legal Service
+	Garden Center
+	IT Services
+	Lawyer
+	Newsstand
+	Real Estate Office
+	Recycling Facility
+	Rehab Center
+	Alternative Healer
+	Maternity Clinic
+	Corporate Coffee Shop
+	Town Hall
+	Wedding Hall
+	Recruiting Agency
+	Laboratory
+	Industrial Estate
+	TV Station
+	Ballroom
+	Observatory
+	Voting Booth
+outdoors and recreation
+	Arcade
+	Disc Golf
+	General Entertainment
+	Mini Golf
+	Multiplex
+	Pool Hall
+	Racetrack
+	Stadium
+		Rugby Stadium
+		Track Stadium
+		Tennis Stadium
+		Cricket Ground
+		Baseball Stadium
+		Basketball Stadium
+	Football Stadium
+	Hockey Arena
+	Soccer Stadium
+	Theme Park
+	Theme Park Ride / Attraction
+	Water Park
+	Event
+		Christmas Market
+		Convention
+		Street Fair
+		Stoop Sale
+		Festival
+		Music Festival
+		Conference
+	Other Event
+	Parade
+	Outdoors & Recreation
+	Athletics & Sports
+		Badminton Court
+		Paintball Field
+		Hockey Field
+		Bowling Green
+		Hockey Rink
+		Squash Court
+		Curling Ice
+		Gym 
+			 Fitness Center
+				Climbing Gym
+	Baseball Field
+	Basketball Court
+	Golf Course
+	Gym / Fitness Center
+	Boxing Gym
+	Cycle Studio
+	Gym Pool
+	Gymnastics Gym
+	Martial Arts Dojo
+	Pilates Studio
+	Track
+	Yoga Studio
+	Rugby Pitch
+	Skate Park
+	Skating Rink
+	Soccer Field
+	Sports Club
+	Tennis Court
+	Volleyball Court
+	Bay
+	Botanical Garden
+	Bridge
+	Campground
+	Castle
+	Dive Spot
+	Dog Run
+	Farm
+	Field
+	Fountain
+	Garden
+	Gun Range
+	Harbor / Marina
+	Hot Spring
+	Lake
+	National Park
+	Nature Preserve
+	Other Great Outdoors
+	Park
+	Pedestrian Plaza
+	Playground
+	Pool
+	Recreation Center
+	River
+	Scenic Lookout
+	Sculpture Garden
+	Stables
+	States & Municipalities
+		Village
+		Town
+		State
+		Country
+		County
+	City
+	Neighborhood
+	Summer Camp
+	Trail
+	Tree
+	Vineyard
+	Club House
+	Community Center
+	Distillery
+	Event Space
+		Outdoor Event Space
+	Social Club
+	Spiritual Center
+		Buddhist Temple
+		Hindu Temple
+		Terreiro
+		Confucian Temple
+	Church
+	Kingdom Hall
+	Monastery
+	Mosque
+	Prayer Room
+	Shrine
+	Synagogue
+	Temple
+	Event Service
+	Internet Cafe
+	Boat or Ferry
+	Hotel
+	Bed & Breakfast
+	Boarding House
+	Hostel
+	Hotel Pool
+	Motel
+	Roof Deck
+	Vacation Rental
+	Tourist Information Center
+	Resort
+	Boat Rental
+	Baggage Locker
+	Bathing Area
+	Reservoir
+	Palace
+	Mountain Hut
+	Rafting
+	Volcano
+	Bike Trail
+	Canal Lock
+	Well
+	Island
+	Rock Climbing Spot
+	Indoor Play Area
+	Waterfront
+	Waterfall
+	Fishing Spot
+	Beach
+		Nudist Beach
+		Surf Spot
+	Ski Area
+		Ski Chairlift
+		Ski Lodge
+		Ski Trail
+		Ski Chalet
+		Apres Ski Bar
+	Forest
+	Cave
+	Lighthouse
+	Mountain
+	Canal
+	Samba School
+	Bowling Alley
+	Aquarium
+	Country Dance Club
+	Zoo
+	Amphitheater
+	Racecourse
+	Laser Tag
+	Casino
+	Tour Provider
+	Go Kart Track
+	Pachinko Parlor
+	Karaoke Box
+	Circus
+	Roller Rink
+	Exhibit
+nightlife spot
+	Gastropub
+	Irish Pub
+	Juice Bar
+	Nightlife Spot
+	Bar
+		Sake Bar
+		Champagne Bar
+	Beach Bar
+	Beer Bar
+	Beer Garden
+	Cocktail Bar
+	Dive Bar
+	Gay Bar
+	Hookah Bar
+	Hotel Bar
+	Karaoke Bar
+	Pub
+	Sports Bar
+	Tiki Bar
+	Whisky Bar
+	Wine Bar
+	Brewery
+	Lounge
+	Night Market
+	Nightclub
+	Other Nightlife
+	Speakeasy
+	Strip Club
+cycling facilities
+	Bike Rental / Bike Share
+food
+	Food
+	Afghan Restaurant
+	African Restaurant
+	Ethiopian Restaurant
+	American Restaurant
+	New American Restaurant
+	Cantonese Restaurant
+	Dim Sum Restaurant
+	Filipino Restaurant
+	Himalayan Restaurant
+	Ramen Restaurant
+	Sushi Restaurant
+	Noodle House
+	Vietnamese Restaurant
+	BBQ Joint
+	Bagel Shop
+	Bakery
+	Belgian Restaurant
+	Bistro
+	Breakfast Spot
+	Buffet
+	Burger Joint
+	Cafeteria
+	Café
+	Cajun / Creole Restaurant
+	Caribbean Restaurant
+	Cuban Restaurant
+	Coffee Shop
+	Comfort Food Restaurant
+	Creperie
+	Czech Restaurant
+	Deli / Bodega
+	Cupcake Shop
+	Frozen Yogurt Shop
+	Ice Cream Shop
+	Pie Shop
+	Diner
+	Donut Shop
+	Dumpling Restaurant
+	English Restaurant
+	Falafel Restaurant
+	Fast Food Restaurant
+	Fish & Chips Shop
+	Food Court
+	Food Stand
+	Food Truck
+	Fried Chicken Joint
+	Gluten-free Restaurant
+	Halal Restaurant
+	Hot Dog Joint
+	Dosa Place
+	North Indian Restaurant
+	Jewish Restaurant
+	Kosher Restaurant
+	Arepa Restaurant
+	Empanada Restaurant
+	Argentinian Restaurant
+	Peruvian Restaurant
+	Mac & Cheese Joint
+	Mediterranean Restaurant
+	Moroccan Restaurant
+	Burrito Place
+	Taco Place
+	Tex-Mex Restaurant
+	Modern European Restaurant
+	Molecular Gastronomy Restaurant
+	Pakistani Restaurant
+	Pizza Place
+	Portuguese Restaurant
+	Restaurant
+	Salad Place
+	Sandwich Place
+	Seafood Restaurant
+	Snack Place
+	Soup Place
+	Southern / Soul Food Restaurant
+	Spanish Restaurant
+	Paella Restaurant
+	Tapas Restaurant
+	Steakhouse
+	Tea Room
+	Theme Restaurant
+	Vegetarian / Vegan Restaurant
+	Wings Joint
+	Austrian Restaurant
+	Australian Restaurant
+	Polish Restaurant
+	Scottish Restaurant
+	Italian Restaurant
+		Piadineria
+		Piedmontese Restaurant
+		Tuscan Restaurant
+		Friuli Restaurant
+		Marche Restaurant
+		Sardinian Restaurant
+		Veneto Restaurant
+		Aosta Restaurant
+		Umbrian Restaurant
+		Emilia Restaurant
+		Agriturismo
+		Malga
+		South Tyrolean Restaurant
+		Ligurian Restaurant
+		Abruzzo Restaurant
+		Campanian Restaurant
+		Basilicata Restaurant
+		Trattoria/Osteria
+		Roman Restaurant
+		Calabria Restaurant
+		Puglia Restaurant
+		Trentino Restaurant
+		Romagna Restaurant
+		Molise Restaurant
+		Lombard Restaurant
+		Sicilian Restaurant
+	Dessert Shop
+		Pastry Shop
+	Caucasian Restaurant
+	Dutch Restaurant
+	French Restaurant
+		Southwestern French Restaurant
+		Alsatian Restaurant
+		Catalan Restaurant
+		Basque Restaurant
+		Savoyard Restaurant
+		Estaminet
+		Norman Restaurant
+		Lyonese Bouchon
+		Breton Restaurant
+		Burgundian Restaurant
+		Ch'ti Restaurant
+		Auvergne Restaurant
+		Corsican Restaurant
+		Brasserie
+		Labour Canteen
+		Provençal Restaurant
+	Latin American Restaurant
+		Salvadoran Restaurant
+		South American Restaurant
+			Brazilian Restaurant
+				Churrascaria
+				Northern Brazilian Restaurant
+				Southern Brazilian Restaurant
+				Baiano Restaurant
+				Pastelaria
+				Empada House
+				Goiano Restaurant
+				Acai House
+				Central Brazilian Restaurant
+				Northeastern Brazilian Restaurant
+				Tapiocaria
+				Southeastern Brazilian Restaurant
+				Mineiro Restaurant
+			Venezuelan Restaurant
+	Indian Restaurant
+		Punjabi Restaurant
+		Bengali Restaurant
+		Andhra Restaurant
+		Kerala Restaurant
+		Indian Chinese Restaurant
+		Chettinad Restaurant
+		Indian Sweet Shop
+		Parsi Restaurant
+		Maharashtrian Restaurant
+		Goan Restaurant
+		Irani Cafe
+		Awadhi Restaurant
+		Dhaba
+		Rajasthani Restaurant
+		Chaat Place
+		Multicuisine Indian Restaurant
+		Mughlai Restaurant
+		Northeast Indian Restaurant
+		Gujarati Restaurant
+		Udupi Restaurant
+		Hyderabadi Restaurant
+		South Indian Restaurant
+		Jain Restaurant
+		Karnataka Restaurant
+	Asian Restaurant
+		Indonesian Restaurant
+			Acehnese Restaurant
+			Manadonese Restaurant
+			Javanese Restaurant
+			Padangnese Restaurant
+			Betawinese Restaurant
+			Sundanese Restaurant
+			Balinese Restaurant
+			Indonesian Meatball Place
+		Malay Restaurant
+		Burmese Restaurant
+		Cambodian Restaurant
+		Mongolian Restaurant
+		Thai Restaurant
+			Som Tum Restaurant
+		Korean Restaurant
+			Bunsik Restaurant
+			Janguh Restaurant
+			Gukbap Restaurant
+			Samgyetang Restaurant
+			Bossam/Jokbal Restaurant
+		Chinese Restaurant
+			Hubei Restaurant
+			Manchu Restaurant
+			Huaiyang Restaurant
+			Zhejiang Restaurant
+			Chinese Aristocrat Restaurant
+			Hong Kong Restaurant
+			Shanxi Restaurant
+			Imperial Restaurant
+			Anhui Restaurant
+			Jiangxi Restaurant
+			Xinjiang Restaurant
+			Guizhou Restaurant
+			Macanese Restaurant
+			Hakka Restaurant
+			Fujian Restaurant
+			Szechuan Restaurant
+			Chinese Breakfast Place
+			Taiwanese Restaurant
+			Shanghai Restaurant
+			Henan Restaurant
+			Shaanxi Restaurant
+			Tianjin Restaurant
+			Hunan Restaurant
+			Yunnan Restaurant
+			Dongbei Restaurant
+			Jiangsu Restaurant
+			Beijing Restaurant
+			Shandong Restaurant
+			Hainan Restaurant
+			Peking Duck Restaurant
+		Hotpot Restaurant
+		Satay Restaurant
+		Japanese Restaurant
+			Yakitori Restaurant
+			Kushikatsu Restaurant
+			Nabe Restaurant
+			Sukiyaki Restaurant
+			Soba Restaurant
+			Wagashi Place
+			Unagi Restaurant
+			Kaiseki Restaurant
+			Monjayaki Restaurant
+			Yoshoku Restaurant
+			Tonkatsu Restaurant
+			Udon Restaurant
+			Japanese Curry Restaurant
+			Donburi Restaurant
+			Tempura Restaurant
+			Shabu-Shabu Restaurant
+			Takoyaki Place
+			Okonomiyaki Restaurant
+		Tibetan Restaurant
+	Middle Eastern Restaurant
+		Israeli Restaurant
+		Persian Restaurant
+			Tabbakhi
+		Kurdish Restaurant
+	Sri Lankan Restaurant
+	Bubble Tea Shop
+	Hungarian Restaurant
+	German Restaurant
+		Currywurst Joint
+		German Pop-Up Restaurant
+		Franconian Restaurant
+		Rhenisch Restaurant
+		Schnitzel Restaurant
+		Palatine Restaurant
+		Bavarian Restaurant
+		Bratwurst Joint
+		Apple Wine Pub
+		Silesian Restaurant
+		Swabian Restaurant
+	Turkish Restaurant
+		Kumpir Restaurant
+		Borek Place
+		Pide Place
+		Tantuni Restaurant
+		Kofte Place
+		Gozleme Place
+		Turkish Home Cooking Restaurant
+		Kumru Restaurant
+		Doner Restaurant
+		Cigkofte Place
+		Kokoreç Restaurant
+		Manti Place
+		Turkish Coffeehouse
+		Meyhane
+	Greek Restaurant
+		Modern Greek Restaurant
+		Magirio
+		Grilled Meat Restaurant
+		Taverna
+		Patsa Restaurant
+		Ouzeri
+		Souvlaki Shop
+		Kafenio
+		Fish Taverna
+		Bougatsa Shop
+		Meze Restaurant
+		Cretan Restaurant
+		Tsipouro Restaurant
+	Slovak Restaurant
+	Fondue Restaurant
+	Pet Café
+	Friterie
+	Russian Restaurant
+		Pelmeni House
+		Blini House
+	Swiss Restaurant
+	Poutine Place
+	Kebab Restaurant
+	Mexican Restaurant
+		Yucatecan Restaurant
+	Ukrainian Restaurant
+		West-Ukrainian Restaurant
+		Varenyky restaurant
+	Truck Stop
+	Eastern European Restaurant
+		Bulgarian Restaurant
+		Tatar Restaurant
+		Belarusian Restaurant
+		Romanian Restaurant
+	Scandinavian Restaurant
+	Hawaiian Restaurant
+	Toll Plaza
+questions
+	Building
+	Intersection
+	Moving Target
+	Road
+art
+	Arts & Entertainment
+	Art Gallery
+	Comedy Club
+	Concert Hall
+	Historic Site
+	Memorial Site
+	Museum
+		Erotic Museum
+	Art Museum
+	History Museum
+	Planetarium
+	Science Museum
+	Music Venue
+	Jazz Club
+	Piano Bar
+	Rock Club
+	Performing Arts Venue
+	Dance Studio
+	Indie Theater
+	Opera House
+	Theater
+		Movie Theater
+		Drive-in Theater
+		Indie Movie Theater
+	Public Art
+	Outdoor Sculpture
+	Street Art
+	Salsa Club
+	Cultural Center
