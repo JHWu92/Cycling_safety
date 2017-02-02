@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcom to Cycling Safety Project</title>
+  
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <script src="js/bootstrap.min.js"></script>
+  
+<!--  <link href="css/style.css" rel="stylesheet" > -->
+    <link href="css/main.css" rel="stylesheet" >
+    <!-- image radio -->
+    <style type="text/css">
+        label > input{ /* HIDE RADIO */
+           /* visibility: hidden; /* Makes input not-clickable, if not commented out, the Bootstrap required hint won't show up*/
+          position: absolute; /* Remove input from document flow */
+        }
+        label > input + img{ /* IMAGE STYLES */
+          cursor:pointer;
+          border:4px solid transparent;
+        }
+        label > input:hover + img{ /* (RADIO CHECKED) IMAGE STYLES */
+          border:4px solid #aaa;
+        }
+        label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+          border:4px solid #FFA800;
+        }
+        p{
+        font-size: 11px;
+            }
+    </style>
+
+</head>
+<body>
+    <div class="spacer30"></div>   
+    <!-- add space -->
+    <div class="container center" style="width:80%">
+        
+        <form method="post" action="user_info.php">
+            <div class="row">
+                <div class="col-md-8" >
+                  <h2 class="form-signin-heading">Welcome!</h2>
+                  <h5>Before you start, we would like to know your Email and cycling experience level.</h5>
+                </div>
+            </div>
+            
+            <div class="spacer20"></div>   
+            <!-- add space -->
+            
+            <div class="row">
+                  <label for="inputEmail" >Email address</label>
+                  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="Email"><br><br>
+            </div>
+            
+            <!-- row of experience level -->
+            <div class="row">
+                <label>Select Your Experience Level.</label>
+                <div class="btn-group">
+
+                    <div class="col-md-2">
+                        <label>
+                          <input type="radio" name="experienceLevel" id='e1' value="fearless" class="sr-only" required/>
+                          <img src="cyclingsafety_files/cyclist1.png" width="100%"/> 
+                            <p>Cycling is strong part of their identity</p>
+                            <p>Generally undeterred by motor vehicles</p>
+                            <p>Will consider cycling even in the absence of any visible bike facility</p>
+                        </label>
+                    </div>
+                    
+                    <div class="col-md-2">
+                        <label>
+                          <input type="radio" name="experienceLevel" id='e2'  value="confident" class="sr-only" required/>
+                          <img src="cyclingsafety_files/cyclist2.png" width="100%"/> 
+                            <p>Cycling is a part of their identity</p>
+                            <p>Slightly or moderately comfortable sharing the road with motor vehicles</p>
+                            <p>Will consider cycling if the route is mostly on a bike facility</p>
+                        </label>
+                    </div>
+                    
+                    <div class="col-md-2">
+                        <label>
+                          <input type="radio" name="experienceLevel" id='e3'  value="interested" class="sr-only" required/>
+                          <img src="cyclingsafety_files/cyclist3.png"width="100%"/> 
+                            <p>Do not identify as a cyclist</p>
+                            <p>Not comfortable sharing the road with motor vehicles without a visible bike facility</p>
+                            <p>Interested in cycling if the route is on a bike facility</p>
+                        </label>
+                    </div>
+                    
+                    <div class="col-md-2">
+                        <label>
+                          <input type="radio" name="experienceLevel" id='e4'  value="reluctant" class="sr-only" required/>
+                          <img src="cyclingsafety_files/cyclist4.png" width="100%"/> 
+                            <p>Do not identify as a cyclist</p>
+                            <p>Not comfortable sharing the road with motor vehicles without a visible bike facility</p>
+                            <p>Not interested in cycling</p>
+                        </label>
+                    </div>
+                </div>
+            </div><!-- /experience Level -->
+        
+            <div class="spacer20"></div>   <!-- add space -->
+        
+            <div class="row">
+                <div class="col-md-8" align="center">
+                    <button id='btn-create' class="btn btn-lg btn-primary" type="submit" style="width:30%">Go Rating!</button>
+                </div>
+            </div>
+        </form> 
+    </div> <!-- /container --> 
+</body>
+</html>
