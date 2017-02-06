@@ -1,8 +1,8 @@
 <?php
 session_start();    //Start session
+include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd, $TABLE_USERS, $DOMAIN_URL, $PAGE_RATE_VIDEO, $PAGE_SURVEY
 
 # Connect to MySQL database
-include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd 
 $con=mysqli_connect($host, $db_user, $db_pwd, $db_name);
 
 if(mysqli_connect_errno())
@@ -28,19 +28,18 @@ else{
     if($count >= 1){
         $row = mysqli_fetch_row($result);
         $_SESSION["user_id"] = $row[0];
-            header("Location: http://cyclingsafety.umd.edu/rate-vid.html"); 
+            header("Location: ".$DOMAIN_URL.$PAGE_RATE_VIDEO); 
             return true;
         }
         else{      
-            $table_name = "Users";
-            $sql="INSERT INTO ".$table_name." (Email, experienceLevel) VALUES ('".$email."', '".$explv."')";
+            $sql="INSERT INTO ".$TABLE_USERS." (Email, experienceLevel) VALUES ('".$email."', '".$explv."')";
             $result=mysqli_query($con, $sql);
             if(mysqli_connect_errno())
             {
               echo"failed to connect to mysql:".mysqli_connect_error();
             }
             else{
-                header("Location: http://cyclingsafety.umd.edu/survey.html"); 
+                header("Location: ".$DOMAIN_URL.$PAGE_SURVEY); 
                 return true;
             }
         }

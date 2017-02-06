@@ -2,7 +2,7 @@
 	session_start();	//resume the session
 
     # Connect to MySQL database
-    include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd 
+    include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd, $PAGE_RATE_VIDEO, $DOMAIN_URL
     $con=mysqli_connect($host, $db_user, $db_pwd, $db_name);
 
     // parse which button(rate/Done)
@@ -31,7 +31,7 @@
 		$sql="INSERT INTO ".$table_name." (comment, ratingScore, userid, email, videoid) VALUES ('".$comment."', '".$rating."', '".$_SESSION["user_id"]."', '".$_SESSION["email"]."', '".$_SESSION["videoid"]."')";
 		if (mysqli_query($con,$sql))
 		{
-			header("Location: http://cyclingsafety.umd.edu/rate-vid.html"); /* Redirect browser */
+			header("Location: "$DOMAIN_URL.$PAGE_RATE_VIDEO); /* Redirect browser */
 			exit();
 		}
 		else

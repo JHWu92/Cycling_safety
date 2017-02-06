@@ -2,7 +2,7 @@
 session_start();    //Start session
 
 # Connect to MySQL database
-include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd 
+include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd, $PAGE_RATE_VIDEO, $DOMAIN_URL
 $con=mysqli_connect($host, $db_user, $db_pwd, $db_name);
 
 if(mysqli_connect_errno())
@@ -24,7 +24,7 @@ else{
         echo"failed to connect to mysql:".mysqli_connect_error();
     }
     else{
-        header("Location: http://cyclingsafety.umd.edu/rate-video.html"); 
+        header("Location: ".$DOMAIN_URL.$PAGE_RATE_VIDEO); 
         return true;
     }
 }
