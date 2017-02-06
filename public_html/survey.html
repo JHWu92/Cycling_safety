@@ -9,21 +9,21 @@
   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
   <script src="js/bootstrap.min.js"></script>
   
+  <link href="css/main.css" rel="stylesheet" media="screen">
 </head>
 
 <body>
 
-<div class="jumbotron"  style="padding:20px;">
-  <h2>We appreciate your help!</h2>
-  <h4>There are 11 questions in this survey. None of these questions are required. If you feel uncomfortable with answering any question, just skip it.</h4>
-</div>
-
 <form method="post" action="survey.php">
     <div class="container" width="70%">
-        <br>
+        <div class="row">
+            <h2>We appreciate your help!</h2>
+            <h4>There are 11 questions in this survey. None of these questions are required. If you feel uncomfortable with answering any question, just skip it.</h4>
+        </div>
+        <div class="spacer20"></div>   
         <div class="row">
             <div class="col-sm-12">
-                <h4>(0) Which one of the following best describes your type of biking?</h4>
+                <h3>(0) Which one of the following best describes your type of biking?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="type_of_biking">Mainly utility biking – traveling from one location to another</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="type_of_biking">Mainly recreational biking – biking for recreation, leisure, and health</label></div>
                 <div class="radio"><label><input type="radio" value="3" name="type_of_biking">About 50 : 50 between 1 and 2 above.</label></div>
@@ -32,7 +32,7 @@
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <h4>(1) How old are you?</h4>
+                <h3>(1) How old are you?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="age">Under 18 years old</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="age">18-24 years old</label></div>
                 <div class="radio"><label><input type="radio" value="3" name="age">25-34 years old</label></div>
@@ -46,7 +46,7 @@
         <br>
         <div class="row">
             <div class="col-sm-12">
-            <h4>(2) Ethnicity origin (or Race): Please specify your ethnicity.</h4>
+            <h3>(2) Ethnicity origin (or Race): Please specify your ethnicity.</h3>
                 <div class="radio"><label><input type="radio" value="1" name="ethnicity">White</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="ethnicity">Hispanic or Latino</label></div>
                 <div class="radio"><label><input type="radio" value="3" name="ethnicity">Black or African American</label></div>
@@ -58,7 +58,7 @@
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <h4>(3) Education: What is the highest degree or level of school you have completed? If currently enrolled, highest degree received.</h4>
+                <h3>(3) Education: What is the highest degree or level of school you have completed? If currently enrolled, highest degree received.</h3>
                 <div class="radio"><label><input type="radio" value="1" name="education"></label>Nursery school to some high school, no diploma</div>
                 <div class="radio"><label><input type="radio" value="2" name="education">High school graduate, diploma or the equivalent (for example: GED)</label></div>
                 <div class="radio"><label><input type="radio" value="3" name="education">Some college credit, no degree</label></div>
@@ -72,7 +72,7 @@
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <h4>(4) Marital Status: What is your marital status?</h4>
+                <h3>(4) Marital Status: What is your marital status?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="marital">Single, never married</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="marital">Married or domestic partnership</label></div>
                 <div class="radio"><label><input type="radio" value="3" name="marital">Widowed</label></div>
@@ -83,7 +83,7 @@
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <h4>(5) Gender: to which gender identity do you most identify?</h4>
+                <h3>(5) Gender: to which gender identity do you most identify?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="gender">Female</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="gender">Male</label></div>
                 <div class="radio"><label><input type="radio" value="3" name="gender">Transgender – Female</label></div>
@@ -95,7 +95,7 @@
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <h4>(6) Driver's license: Do you currently have a valid driver's license?</h4>
+                <h3>(6) Driver's license: Do you currently have a valid driver's license?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="driver">Yes</label></div>
                 <div class="radio"><label><input type="radio" value="0" name="driver">No</label></div>
             </div>
@@ -103,7 +103,7 @@
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <h4>(7) Private car: Do you currently have an easy access to a car, including a Zip car, a Car2Go, etc.?</h4>
+                <h3>(7) Private car: Do you currently have an easy access to a car, including a Zip car, a Car2Go, etc.?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="private_car">Yes</label></div>
                 <div class="radio"><label><input type="radio" value="0" name="private_car">No</label></div>
             </div>
@@ -111,7 +111,7 @@
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <h4>(8) Household Income: What is your total household income?</h4>
+                <h3>(8) Household Income: What is your total household income?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="household_income">Less than $24,999</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="household_income">$25,000 to $39,999</label></div>
                 <div class="radio"><label><input type="radio" value="3" name="household_income">$40,000 to $54,999</label></div>
@@ -125,7 +125,7 @@
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <h4>(9) Time of Residence: How long have you lived in the DC region?</h4>
+                <h3>(9) Time of Residence: How long have you lived in the DC region?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="residence">Never</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="residence">Less than 3 months</label></div>
                 <div class="radio"><label><input type="radio" value="3" name="residence">3 to 6 months</label></div>
@@ -137,7 +137,7 @@
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <h4>(10) Types of bicycle : What type of bicycle do you usually ride?</h4>
+                <h3>(10) Types of bicycle : What type of bicycle do you usually ride?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="bike_type">CaBi Bike (Shared bike in the DC region)</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="bike_type">Road Bike</label></div>
                 <div class="radio"><label><input type="radio" value="3" name="bike_type">Mountain Bike</label></div>
