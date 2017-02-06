@@ -47,15 +47,14 @@
     }
     </script>
 </head>
-<body>
-    <div class="spacer30"></div>   
+<body style="padding: 20px;">
     <!-- add space -->
     <div class="container">
         
         <form id="myform" method="post" action="user_info.php">
             <div class="row">
-                <h2 class="form-signin-heading">Welcome!</h2>
-                <h5>Before you start, we would like to know your Email and cycling experience level.</h5>
+                <h1>Welcome!</h1>
+                <h3>Before you start, we would like to know your Email and cycling experience level.</h3>
             </div>
             
             <div class="spacer20"></div>   
@@ -70,7 +69,7 @@
             <div class="row">
                 <label>Select Your Experience Level.</label>
                 <div class="btn-group">
-
+                    <!-- exp lvl Fearless -->
                     <div class="col-md-3 text-center">
                             <label>
                               <input type="radio" name="experienceLevel" id='e1' value="fearless" class="sr-only" required/>
@@ -82,8 +81,9 @@
                                 <li>Generally undeterred by motor vehicles</li>
                                 <li>Will consider cycling even in the absence of any visible bike facility</li>
                             </ul>
-                    </div>
+                    </div><!-- End exp lvl Fearless -->
                     
+                    <!-- exp lvl confident -->
                     <div class="col-md-3 text-center">
                             <label>
                               <input type="radio" name="experienceLevel" id='e2'  value="confident" class="sr-only" required/>
@@ -95,8 +95,9 @@
                                 <li>Slightly or moderately comfortable sharing the road with motor vehicles</li>
                                 <li>Will consider cycling if the route is mostly on a bike facility</li>
                             </ul>
-                    </div>
+                    </div><!-- end exp lvl confident -->
                     
+                    <!-- exp lvl interested -->
                     <div class="col-md-3 text-center">
                             <label>
                               <input type="radio" name="experienceLevel" id='e3'  value="interested" class="sr-only" required/>
@@ -108,8 +109,9 @@
                                 <li>Not comfortable sharing the road with motor vehicles without a visible bike facility</li>
                                 <li>Interested in cycling if the route is on a bike facility</li>
                             </ul>
-                    </div>
+                    </div><!-- end exp lvl interested -->
                     
+                    <!-- exp lvl reluctant -->
                     <div class="col-md-3 text-center">
                             <label>
                               <input type="radio" name="experienceLevel" id='e4'  value="reluctant" class="sr-only" required/>
@@ -121,17 +123,27 @@
                                 <li>Not comfortable sharing the road with motor vehicles without a visible bike facility</li>
                                 <li>Not interested in cycling</li>
                             </ul>
-                    </div>
-                </div>
+                    </div><!-- end exp lvl reluctant -->
+                    
+                </div> <!-- end btn-group-->
             </div><!-- /experience Level -->
         
-            <div class="spacer20"></div>   <!-- add space -->
-        
+            <div class="spacer30"></div>   <!-- add space -->
+            <div class="row">
+                <h4>Additionally, it is of great help for the project to understand how cycling safety perceptions are affected by demographic and socioeconomic factors.</h4>
+                <h4>If you prefer to provide this information, click the "<b>Sure, survey please</b>" button; otherwise, click the "<b>No, start rating</b>".</h4>
+            </div>
+            
+            <div class="spacer10"></div>   <!-- add space -->
             <div class="row">
                 <div class="col-md-6" align="center">
-                    <button id='btn-no-survey' class="btn btn-lg btn-primary" type="submit" style="width:30%">Go Rating!</button>
+                    <button id='btn-no-survey' class="btn btn-lg btn-primary" type="submit" style="width:60%">Sure, survey please</button>
+                </div>
+               <div  class="col-md-6" align="center">
+                    <button id='btn-no-survey' class="btn btn-lg btn-default" type="submit" style="width:60%">No, start rating</button>
                 </div>
             </div>
+            
         </form> 
     </div> <!-- /container --> 
 </body>
