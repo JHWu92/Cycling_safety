@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Welcom to Cycling Safety Project</title>
+  <script src="js/jquery-3.1.1.min.js"></script>
   
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -11,6 +12,9 @@
     <link href="css/main.css" rel="stylesheet" >
     <!-- image radio -->
     <style type="text/css">
+        .text-align-left{
+            text-align:left;
+        }
         label > input{ /* HIDE RADIO */
            /* visibility: hidden; /* Makes input not-clickable, if not commented out, the Bootstrap required hint won't show up*/
           position: absolute; /* Remove input from document flow */
@@ -26,22 +30,32 @@
           border:4px solid #FFA800;
         }
         p{
-        font-size: 11px;
+        font-size: 12px;
             }
     </style>
+    <script>
+    var form = document.getElementById('myform');
+    form.onsubmit = function() {
+        alert('bb');
+        form.target = '_self';
+    };
 
+    document.getElementById('btn-no-survey').onclick = function() {
+        alert('aa');
+        form.target = 'rate-vid.html';
+        form.submit();
+    }
+    </script>
 </head>
 <body>
     <div class="spacer30"></div>   
     <!-- add space -->
-    <div class="container center" style="width:80%">
+    <div class="container">
         
-        <form method="post" action="user_info.php">
+        <form id="myform" method="post" action="user_info.php">
             <div class="row">
-                <div class="col-md-8" >
-                  <h2 class="form-signin-heading">Welcome!</h2>
-                  <h5>Before you start, we would like to know your Email and cycling experience level.</h5>
-                </div>
+                <h2 class="form-signin-heading">Welcome!</h2>
+                <h5>Before you start, we would like to know your Email and cycling experience level.</h5>
             </div>
             
             <div class="spacer20"></div>   
@@ -57,44 +71,56 @@
                 <label>Select Your Experience Level.</label>
                 <div class="btn-group">
 
-                    <div class="col-md-2">
-                        <label>
-                          <input type="radio" name="experienceLevel" id='e1' value="fearless" class="sr-only" required/>
-                          <img src="cyclingsafety_files/cyclist1.png" width="100%"/> 
-                            <p>Cycling is strong part of their identity</p>
-                            <p>Generally undeterred by motor vehicles</p>
-                            <p>Will consider cycling even in the absence of any visible bike facility</p>
-                        </label>
+                    <div class="col-md-3 text-center">
+                            <label>
+                              <input type="radio" name="experienceLevel" id='e1' value="fearless" class="sr-only" required/>
+                              <img src="cyclingsafety_files/c1.png" /> 
+                            </label>
+                            <ul class="text-align-left">
+                                <h3>Fearless</h3>
+                                <li>Cycling is strong part of their identity</li>
+                                <li>Generally undeterred by motor vehicles</li>
+                                <li>Will consider cycling even in the absence of any visible bike facility</li>
+                            </ul>
                     </div>
                     
-                    <div class="col-md-2">
-                        <label>
-                          <input type="radio" name="experienceLevel" id='e2'  value="confident" class="sr-only" required/>
-                          <img src="cyclingsafety_files/cyclist2.png" width="100%"/> 
-                            <p>Cycling is a part of their identity</p>
-                            <p>Slightly or moderately comfortable sharing the road with motor vehicles</p>
-                            <p>Will consider cycling if the route is mostly on a bike facility</p>
-                        </label>
+                    <div class="col-md-3 text-center">
+                            <label>
+                              <input type="radio" name="experienceLevel" id='e2'  value="confident" class="sr-only" required/>
+                              <img src="cyclingsafety_files/c2.png" /> 
+                            </label>
+                            <ul class="text-align-left">
+                                <h3>Confident</h3>
+                                <li>Cycling is a part of their identity</li>
+                                <li>Slightly or moderately comfortable sharing the road with motor vehicles</li>
+                                <li>Will consider cycling if the route is mostly on a bike facility</li>
+                            </ul>
                     </div>
                     
-                    <div class="col-md-2">
-                        <label>
-                          <input type="radio" name="experienceLevel" id='e3'  value="interested" class="sr-only" required/>
-                          <img src="cyclingsafety_files/cyclist3.png"width="100%"/> 
-                            <p>Do not identify as a cyclist</p>
-                            <p>Not comfortable sharing the road with motor vehicles without a visible bike facility</p>
-                            <p>Interested in cycling if the route is on a bike facility</p>
-                        </label>
+                    <div class="col-md-3 text-center">
+                            <label>
+                              <input type="radio" name="experienceLevel" id='e3'  value="interested" class="sr-only" required/>
+                              <img src="cyclingsafety_files/c3.png"/> 
+                            </label>
+                            <ul class="text-align-left">
+                                <h3>Interested</h3>
+                                <li>Do not identify as a cyclist</li>
+                                <li>Not comfortable sharing the road with motor vehicles without a visible bike facility</li>
+                                <li>Interested in cycling if the route is on a bike facility</li>
+                            </ul>
                     </div>
                     
-                    <div class="col-md-2">
-                        <label>
-                          <input type="radio" name="experienceLevel" id='e4'  value="reluctant" class="sr-only" required/>
-                          <img src="cyclingsafety_files/cyclist4.png" width="100%"/> 
-                            <p>Do not identify as a cyclist</p>
-                            <p>Not comfortable sharing the road with motor vehicles without a visible bike facility</p>
-                            <p>Not interested in cycling</p>
-                        </label>
+                    <div class="col-md-3 text-center">
+                            <label>
+                              <input type="radio" name="experienceLevel" id='e4'  value="reluctant" class="sr-only" required/>
+                              <img src="cyclingsafety_files/c4.png"/> 
+                            </label>
+                            <ul class="text-align-left">
+                                <h3>Reluctant</h3>
+                                <li>Do not identify as a cyclist</li>
+                                <li>Not comfortable sharing the road with motor vehicles without a visible bike facility</li>
+                                <li>Not interested in cycling</li>
+                            </ul>
                     </div>
                 </div>
             </div><!-- /experience Level -->
@@ -102,8 +128,8 @@
             <div class="spacer20"></div>   <!-- add space -->
         
             <div class="row">
-                <div class="col-md-8" align="center">
-                    <button id='btn-create' class="btn btn-lg btn-primary" type="submit" style="width:30%">Go Rating!</button>
+                <div class="col-md-6" align="center">
+                    <button id='btn-no-survey' class="btn btn-lg btn-primary" type="submit" style="width:30%">Go Rating!</button>
                 </div>
             </div>
         </form> 
