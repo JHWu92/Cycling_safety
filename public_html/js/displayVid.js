@@ -6,8 +6,8 @@ function changeVid() {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             player = new YT.Player('player', {
-                height: '390',
-                width: '640',
+                height: '480px',
+                width: '100%',
                 videoId: this.responseText,
                 events: {
                     'onStateChange': function (event) {

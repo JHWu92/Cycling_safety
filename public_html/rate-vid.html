@@ -14,36 +14,12 @@
 
 
 <!--Custom JS and CSS -->
-  <script src="js/script.js"></script>
   <link href="css/style.css" rel="stylesheet" >
-
+  <script src="js/displayVid.js"></script>
 <script>
 $(document).ready(function(){
     $('.tooltip-wrapper').tooltip({position: "bottom"}); 
 });
-window.addEventListener('load', changeVid);
-
-function changeVid() {
-    var player;
-    player = new YT.Player('player', {
-        height: '480',
-        width: '100%',
-        videoId: 'BVbQRrrsJo0',
-        events: {
-            'onStateChange': function (event) {
-                switch (event.data) {
-                    case 0:
-                        document.getElementById("btn-rate").className = document.getElementById("btn-rate").className.replace("disabled","");
-                        document.getElementById("btn-rate").disabled=false;
-                }
-            }
-        }
-    });
-
-
-}
-
-
 </script>
 </head>
 
@@ -107,7 +83,7 @@ function changeVid() {
                 </div>
             </div>
             <div class="col-md-1 margin-top">
-                <div class="tooltip-wrapper disabled" data-placement="top" data-title="Please finish the video before rating">
+                <div class="tooltip-wrapper disabled" data-placement="bottom" data-title="Please finish the video before rating">
                     <button id='btn-rate' class="btn btn-primary" type="submit"  disabled="">Rate <br>this<br> video</button>
                 </div><br><br><br><br><br><br><br><br>
                 <a href="show_map.php" class="btn btn-default">Done <br>for <br>today</a>
