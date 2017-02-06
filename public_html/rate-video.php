@@ -5,6 +5,17 @@
     include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd 
     $con=mysqli_connect($host, $db_user, $db_pwd, $db_name);
 
+    // parse which button(rate/Done)
+    // parse form data
+    // if btn==Done 
+    //      if safelvl is not None: insert to db
+    //      redirect to show_map.php
+    // else
+    //      if safelvl is not None: 
+    //          insert to db
+    //          show next video
+    
+    
 	if(mysqli_connect_errno())
 	{
 		echo"failed to connect to mysql:".mysqli_connect_error();
