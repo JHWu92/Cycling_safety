@@ -10,13 +10,13 @@
   
 <!--  <link href="css/style.css" rel="stylesheet" > -->
     <link href="css/main.css" rel="stylesheet" >
-    <!-- image radio -->
     <style type="text/css">
         .text-align-left{
             text-align:left;
         }
+        /* image radio , DOES NOT work in IE*/
         label > input{ /* HIDE RADIO */
-           /* visibility: hidden; /* Makes input not-clickable, if not commented out, the Bootstrap required hint won't show up*/
+           /*visibility: hidden; /* Makes input not-clickable, if not commented out, the Bootstrap required hint won't show up*/
           position: absolute; /* Remove input from document flow */
         }
         label > input + img{ /* IMAGE STYLES */
@@ -29,28 +29,21 @@
         label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
           border:4px solid #FFA800;
         }
-        p{
-        font-size: 12px;
-            }
     </style>
-    <script>
-    var form = document.getElementById('myform');
-    form.onsubmit = function() {
-        alert('bb');
-        form.target = '_self';
-    };
-
-    document.getElementById('btn-no-survey').onclick = function() {
-        alert('aa');
-        form.target = 'rate-vid.html';
-        form.submit();
-    }
+    <!-- client side different actions. but differentiating action should be on server side
+    <script type="text/javascript">
+        // change form action when click the "No, start rating" button
+        $(document).ready(function(){
+            $('#btn-no-survey').click(function() {
+                $('#myform').attr('action', 'rate-vid.html');
+                form.submit();
+            });
+        });
     </script>
+    -->
 </head>
 <body style="padding: 20px;">
-    <!-- add space -->
     <div class="container">
-        
         <form id="myform" method="post" action="user_info.php">
             <div class="row">
                 <h1>Welcome!</h1>
@@ -81,7 +74,7 @@
                                 <li>Generally undeterred by motor vehicles</li>
                                 <li>Will consider cycling even in the absence of any visible bike facility</li>
                             </ul>
-                    </div><!-- End exp lvl Fearless -->
+                    </div><!-- /exp lvl Fearless -->
                     
                     <!-- exp lvl confident -->
                     <div class="col-md-3 text-center">
@@ -95,7 +88,7 @@
                                 <li>Slightly or moderately comfortable sharing the road with motor vehicles</li>
                                 <li>Will consider cycling if the route is mostly on a bike facility</li>
                             </ul>
-                    </div><!-- end exp lvl confident -->
+                    </div><!-- /exp lvl confident -->
                     
                     <!-- exp lvl interested -->
                     <div class="col-md-3 text-center">
@@ -109,7 +102,7 @@
                                 <li>Not comfortable sharing the road with motor vehicles without a visible bike facility</li>
                                 <li>Interested in cycling if the route is on a bike facility</li>
                             </ul>
-                    </div><!-- end exp lvl interested -->
+                    </div><!-- /exp lvl interested -->
                     
                     <!-- exp lvl reluctant -->
                     <div class="col-md-3 text-center">
@@ -123,9 +116,9 @@
                                 <li>Not comfortable sharing the road with motor vehicles without a visible bike facility</li>
                                 <li>Not interested in cycling</li>
                             </ul>
-                    </div><!-- end exp lvl reluctant -->
+                    </div><!-- /exp lvl reluctant -->
                     
-                </div> <!-- end btn-group-->
+                </div> <!-- /btn-group-->
             </div><!-- /experience Level -->
         
             <div class="spacer30"></div>   <!-- add space -->
@@ -137,10 +130,10 @@
             <div class="spacer10"></div>   <!-- add space -->
             <div class="row">
                 <div class="col-md-6" align="center">
-                    <button id='btn-no-survey' class="btn btn-lg btn-primary" type="submit" style="width:60%">Sure, survey please</button>
+                    <button name="get_survey" value="survey" id='btn-survey' class="btn btn-lg btn-primary" type="submit" style="width:60%">Sure, survey please</button>
                 </div>
                <div  class="col-md-6" align="center">
-                    <button id='btn-no-survey' class="btn btn-lg btn-default" type="submit" style="width:60%">No, start rating</button>
+                    <button name="skip_survey" value="no_survey" id='btn-no-survey' class="btn btn-lg btn-default" type="submit"  style="width:60%">No, start rating</button>
                 </div>
             </div>
             
