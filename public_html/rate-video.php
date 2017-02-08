@@ -1,12 +1,6 @@
 <?php
     session_start();	//resume the session
-    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-        echo "Welcome to the member's area, " . $_SESSION['username'] . "!";
-    } else {
-        echo "Please log in first to see this page. Redirecting to log in page in 2 seconds. if it didn't refresh, click here <a href='user_info.html'>login</a>";
-        echo "<script>setTimeout(\"location.href = 'user_info.html';\",1000);</script>";
-        
-    }
+
     # Connect to MySQL database
     include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd, $PAGE_RATE_VIDEO, $DOMAIN_URL
     $con=mysqli_connect($host, $db_user, $db_pwd, $db_name);
