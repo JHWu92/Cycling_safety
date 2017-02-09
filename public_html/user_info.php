@@ -2,49 +2,54 @@
 session_start();    //Start session
 include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd, $TABLE_USERS, $DOMAIN_URL, $PAGE_RATE_VIDEO, $PAGE_SURVEY
 
+//parse data from form 
+$email=$_POST['Email'];
+$explv = $_POST['experienceLevel'];
+
+// check whether the email exist against DB
 # Connect to MySQL database
 $con=mysqli_connect($host, $db_user, $db_pwd, $db_name);
+# if connection succeed
+if(mysqli_connect_errno()){ die("failed to connect to mysql:" . mysqli_connect_error()); }
 
-if(mysqli_connect_errno())
-{
-    echo"failed to connect to mysql:".mysqli_connect_error();
-}
-else{
-    // parse data from form and which button is clicked
-    // check whether the email exist
-    //      if exist: retrieve user id into SESSION; update experience level
-    //      else insert email, retrieve user id into SESSION
-    // if survey btn is clicked:
-    //      redirect to survey.html
-    // else: redirect to rate-vid.html
-    $email=$_POST['Email'];
-    $explv = $_POST['experienceLevel'];
-    $_SESSION["Email"] = $email;  //Store the username and user_id in session variable
-    
-    $sql="SELECT * FROM Users WHERE email= '$email'";
-    $result=mysqli_query($con, $sql);
+# check if user exists
+$sql="SELECT * FROM " . $TABLE_USERS . " WHERE email= '$email'";
+$result=mysqli_query($con, $sql);
+$count=mysqli_num_rows($result);
 
-    $count=mysqli_num_rows($result);
-    if($count >= 1){
-        $row = mysqli_fetch_row($result);
-        $_SESSION["user_id"] = $row[0];
-            header("Location: ".$DOMAIN_URL.$PAGE_RATE_VIDEO); 
-            return true;
-        }
-        else{      
-            $sql="INSERT INTO ".$TABLE_USERS." (Email, experienceLevel) VALUES ('".$email."', '".$explv."')";
-            $result=mysqli_query($con, $sql);
-            if(mysqli_connect_errno())
-            {
-              echo"failed to connect to mysql:".mysqli_connect_error();
-            }
-            else{
-                header("Location: ".$DOMAIN_URL.$PAGE_SURVEY); 
-                return true;
-            }
-        }
-    
-    echo "unknown error";
-    return false;    
+if($count == 0){  # this is a new user
+    $sql_insert = "INSERT INTO ".$TABLE_USERS." (Email, experienceLevel) VALUES ('".$email."', '".$explv."')";
+    $result_insert = mysqli_query($con, $sql_insert);
+    if(!$result_insert){  # if error happens when inserting
+        die("<h3>error happens in creating your account, click <a href='/user_info.html'>HERE</a> to enter your email again</h3>");
+    }
+    # get the auto-id
+    $user_id = mysqli_insert_id($con);
+    echo "new user";
+}else{  # user exists
+    $row = mysqli_fetch_row($result);
+    $user_id = $row[0];
+    // update the experience level every time a user log in
+    $sql_update = "UPDATE " . $TABLE_USERS . " SET experienceLevel = '" . $explv . "' WHERE email='" . $email . "'";
+    mysqli_query($con, $sql_update);
 }
+
+// Store log in Info in session
+$_SESSION[$SESS_EMAIL] = $email;  
+$_SESSION[$SESS_USER_ID] = $user_id;
+$_SESSION[$SESS_LOGIN] = True;  // logged in
+
+// which button is clicked
+if (isset($_POST['skip_survey'])) {
+    $head_url = "Location: ".$DOMAIN_URL.$PAGE_RATE_VIDEO;
+} else if (isset($_POST['get_survey'])) {
+    $head_url = "Location: ".$DOMAIN_URL.$PAGE_SURVEY;
+} else {
+    $head_url = None;
+}   
+# redirect
+header($head_url); 
+return true;
+    
+
 ?>
