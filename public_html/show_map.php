@@ -1,5 +1,7 @@
 <?php
     session_start();
+    session_destroy();
+    
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +33,7 @@
 <div class="container">
 
     <h2>Thank you!</h2>
-     <h3>Here is our cycling safety map for D.C.  Want to rate more?  <a href="rate-vid.html" >keep rating</a> Or <a href="index.html">back to home page</a></h3>
+     <h3>Here is our cycling safety map for D.C.  Want to rate more?  <a href="user_info.html" >keep rating</a> Or <a href="index.html">back to home page</a></h3>
         
     <div id='map'></div>
 </div>
@@ -74,7 +76,7 @@
         
         var map = L.map('map', {
             center: [38.9047829846, -77.0163424758],
-            zoom: 12,
+            zoom: 13,
             layers: [streets, seg_rating_layer] // initial layer
         });
         
