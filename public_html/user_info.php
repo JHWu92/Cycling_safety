@@ -44,8 +44,7 @@
         $head_url = "Location: ".$DOMAIN_URL.$PAGE_RATE_VIDEO;
     } else if (isset($_POST['get_survey'])) {
         $head_url = "Location: ".$DOMAIN_URL.$PAGE_SURVEY;
-    } else {# from <a> keep rating</a> in show_map.php
-        $head_url = "Location: ".$DOMAIN_URL.$PAGE_RATE_VIDEO;
+    } else {
     }   
     # redirect
     header($head_url); 
