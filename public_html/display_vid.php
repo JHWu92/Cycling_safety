@@ -30,7 +30,7 @@ if(mysqli_connect_errno())
 }
 
 $sql = "SELECT videoid FROM Video";
-$all_vids = $conn->query($sql);
+$all_vids = $con->query($sql);
 $vids_arr = toArr($all_vids);
 $num_vids = count($vids_arr);
 
@@ -38,8 +38,8 @@ if( $all_vids->num_rows == 0){
 	echo "ERROR: Missing videos";
 }
 
-$sql = "SELECT videoid FROM Rating WHERE email ='" .$_SESSION["email"]."'";
-$rated_vids = $conn->query($sql);
+$sql = "SELECT videoid FROM Rating WHERE email ='" .$_SESSION[$SESS_EMAIL]."'";
+$rated_vids = $con->query($sql);
 $rated_arr = toArr($rated_vids);
 
 $valid_vids = array();
@@ -63,7 +63,7 @@ else{
 }
 
 $_SESSION["videoid"] = $valid_vids[$rand];
-$vid = $conn->query($sql);
+$vid = $con->query($sql);
 $res = $vid->fetch_assoc();
 echo($res["URL"]);
 

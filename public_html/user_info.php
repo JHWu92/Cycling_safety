@@ -25,7 +25,6 @@
         }
         # get the auto-id
         $user_id = mysqli_insert_id($con);
-        echo "new user";
     }else{  # user exists
         $row = mysqli_fetch_row($result);
         $user_id = $row[0];
