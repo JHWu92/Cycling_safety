@@ -13,7 +13,7 @@ function toArr($res){
 	$arr = array();
 
 	while($row = $res->fetch_assoc()){
-		arr.array_push($arr, $row["videoid"]);
+		arr.array_push($arr, $row["vid"]);
 	}
 	return $arr;
 }
@@ -29,7 +29,7 @@ if(mysqli_connect_errno())
 	echo"failed to connect to mysql:".mysqli_connect_error();
 }
 
-$sql = "SELECT videoid FROM Video";
+$sql = "SELECT vid FROM Video";
 $all_vids = $con->query($sql);
 $vids_arr = toArr($all_vids);
 $num_vids = count($vids_arr);
@@ -38,7 +38,7 @@ if( $all_vids->num_rows == 0){
 	echo "ERROR: Missing videos";
 }
 
-$sql = "SELECT videoid FROM Rating WHERE email ='" .$_SESSION[$SESS_EMAIL]."'";
+$sql = "SELECT vid FROM Rating WHERE uid =$_SESSION[$SESS_USER_ID]";
 $rated_vids = $con->query($sql);
 $rated_arr = toArr($rated_vids);
 
@@ -54,18 +54,19 @@ $rand = 0;
 
 if(count($valid_vids) == 0){
 	$rand = rand(0, $num_vids-1);
-	$sql = "SELECT URL FROM Video WHERE videoid=" .$vids_arr[$rand];
+        $vid = $vids_arr[$rand];
 }
 
 else{
 	$rand = rand(0, count($valid_vids)-1);
-	$sql = "SELECT URL FROM Video WHERE videoid=" .$valid_vids[$rand];
+        $vid = $valid_vids[$rand];
 }
 
-$_SESSION["videoid"] = $valid_vids[$rand];
-$vid = $con->query($sql);
-$res = $vid->fetch_assoc();
-echo($res["URL"]);
+$sql = "SELECT URL FROM Video WHERE vid=$vid";
+$_SESSION[$SESS_VIDEO_ID] = $vid;
+$url = $con->query($sql);
+$res = $url->fetch_assoc();
+echo($res[$TABL_VIDEO_FIELD_URL]);
 
 ?>
 
