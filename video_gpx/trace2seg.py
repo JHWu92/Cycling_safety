@@ -72,7 +72,9 @@ def snap2road(pts_lon_lat, timestamps=[], return_confidence=False):
             new_gps.extend(coords)
             properties = f['properties']
             if return_confidence:
-                confidences.append((num_batch, len(batch_pts), len(coords), properties['confidence']))
+                confidences.append({'#batch': num_batch, '#origin_pts': len(batch_pts),
+                                    '#snap_pts': len(coords), 'confidence': properties['confidence']})
+
     if return_confidence:
         return new_gps, confidences
     return new_gps
@@ -126,7 +128,7 @@ def seg_disambiguation(list_of_seg_candidates, window_size=3, debug=False, decre
 
 
 def trace2segs(segs, trace_pts, tss=[], return_confidence=False, close_jn_dist=10, far_jn_dist=30, cnsectv_stepsize=3,
-               cnsectv_thres=0.08):
+               cnsectv_thres=0.08, return_snap_coords=False):
     """
 
     """
@@ -166,4 +168,8 @@ def trace2segs(segs, trace_pts, tss=[], return_confidence=False, close_jn_dist=1
             round_s, round_e = float_round(s, direction='down'), float_round(e, direction='up')
             if e - s > cnsectv_thres:
                 segs_linear_reference.append((seg_index, round_s, round_e, round_e - round_s))
+
+    if return_snap_coords:
+        return segs_linear_reference, snap_pts
+
     return segs_linear_reference
