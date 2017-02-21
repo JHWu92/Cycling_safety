@@ -3,3 +3,5 @@
 .ipynb_checkpoints/
 *.osm
 *.sqlite3
+*.MP4
+*/config.inc.php
