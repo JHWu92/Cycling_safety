@@ -23,8 +23,7 @@ def parse_gpx(gpx_file):
     """
     with open(gpx_file) as f:
         doc = xmltodict.parse(f.read())['gpx']['trk']
-        video_raw_path = doc['link']['@href']
-        video_name = video_raw_path[video_raw_path.rfind('\\')+1:]
+        video_raw_path = doc['link']['@href'][1:].replace('\\','/')
 
         lon_lats = []
         timestamps = []
@@ -37,7 +36,10 @@ def parse_gpx(gpx_file):
             timestamps.append(ts)
 
         # duration of video in seconds
-        duration = int(doc['extensions']['gpxtrkx:TrackStatsExtension']['gpxtrkx:TotalElapsedTime'])
+        try:
+            duration = int(doc['extensions']['gpxtrkx:TrackStatsExtension']['gpxtrkx:TotalElapsedTime'])
+        except:
+            duration = None
 
     return video_name, lon_lats, timestamps, duration
 
