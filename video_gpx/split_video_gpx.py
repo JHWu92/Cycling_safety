@@ -8,29 +8,125 @@ import xmltodict
 import datetime
 import json
 from trace2seg import snap2road
-
-def costs(start_time):
-    dnow = datetime.datetime.now()
-    delta = dnow - start_time
-    del_secs = int(delta.total_seconds())
-    return 'now = %s, costs = %d days %02d:%02d:%02d' % (dnow.strftime('%Y-%m-%d %H:%M:%S'),
-           del_secs / 3600 / 24, del_secs / 3600 % 24, del_secs / 60 % 60, del_secs % 60)
+from utils import *
+from geom_helper import distance_diff
 
 
+# =============================================
+# GPX trace Quality Control
+# =============================================
+def duration_of_video(vpath):
+    """ use ffmpeg's ffprobe command to find video's duration in seconds, return a float number
+    :param vpath: The absolute (full) path of the video file, string.
+    """
+
+    command = ["ffprobe", "-loglevel", "quiet", "-print_format", "json", "-show_format", "-show_streams", vpath]
+    pipe = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    out, err = pipe.communicate()
+    _json = json.loads(out)
+
+    # parse duration
+    if 'format' in _json:
+        if 'duration' in _json['format']:
+            return float(_json['format']['duration'])
+
+    if 'streams' in _json:
+        # commonly stream 0 is the video
+        for s in _json['streams']:
+            if 'duration' in s:
+                return float(s['duration'])
+
+    # if everything didn't happen,
+    # we got here because no single 'return' in the above happen.
+    raise Exception('I found no duration')
+
+
+def get_time_diff_from_start(timestamps, form='%Y-%m-%dT%H:%M:%SZ'):
+    """
+    :return: the time differences for each timestamp from the start timestamp
+    """
+    first = timestamps[0]
+    return [diff_in_sec(t, first, form) for t in timestamps]
+
+
+def get_time_consecutive_diff(timestamps, form='%Y-%m-%dT%H:%M:%SZ'):
+    """
+    :return: the time differences between t(i+1) and t(i)
+    """
+    return [diff_in_sec(timestamps[i + 1], timestamps[i], form) for i in range(len(timestamps) - 1)]
+
+
+def bad_quality_diff_not_int(timestamps, form='%Y-%m-%dT%H:%M:%SZ'):
+    """
+    :return: quality determined by difference among timestamps has non int second
+    """
+    diff_consecutive = get_time_consecutive_diff(timestamps, form)
+    diff_not_int = [d for d in diff_consecutive if not d.is_integer()]
+    return len(diff_not_int) != 0
+
+
+def bad_quality_max_diff(timestamps, form='%Y-%m-%dT%H:%M:%SZ', thres=10):
+    """
+    :param thres: the threshold defining bad quality of GPX trace in terms of consecutive time difference
+    :return: whether the quality of the GPX is bad.
+    """
+    diff_consecutive = get_time_consecutive_diff(timestamps, form)
+    max_diff = max(diff_consecutive)
+    return max_diff > thres
+
+
+def fill_gpx_gap(locs, timestamps):
+    """
+    fill in the timestamp gap of the gpx trace; use this on raw gpx and before alignment
+    """
+    diff_consecutive = get_time_consecutive_diff(timestamps)
+    new_ts = []
+    new_locs = []
+    for i, d in enumerate(diff_consecutive):
+        for increasement in range(int(d)):
+            # append the current location for d times;
+            new_locs.append(locs[i])
+            # append the current timestamp for d times with increasement = 1 second each time
+            new_ts.append(add_secs(timestamps[i], increasement))
+
+    # append the last location and timestamp
+    new_locs.append(locs[-1])
+    new_ts.append(timestamps[-1])
+    return new_locs, new_ts
+
+
+def align_loc_ts_duration(lon_lats, timestamps, duration):
+    """
+    Assuming gpx is right aligned to the vtime. In other words, the first few seconds have no gpx coordinates
+    after aligned, the first few seconds share the same location with the first recorded coordinate.
+    aligned timestamps are back counted second by second
+    :return: lon_lats, timestamps
+    """
+    seconds = range(duration + 1)
+    diff = len(seconds) - len(lon_lats)
+    for _ in range(diff):
+        lon_lats.insert(0, lon_lats[0])
+        timestamps.insert(0, add_secs(timestamps[0],-1))
+    return lon_lats, timestamps
+
+
+# =============================================
+# parsing the gpx file
+# =============================================
 def parse_gpx(gpx_file):
     """ given gpx file, parse corresponding video name, lon lat coordinates, timestamps and duration of video
-    return video_name, lon_lats, timestamps, duration
+    :return: video_name, lon_lats, timestamps, duration
     """
     with open(gpx_file) as f:
         doc = xmltodict.parse(f.read())['gpx']['trk']
-        video_raw_path = doc['link']['@href'][1:].replace('\\','/')
+        video_name = doc['link']['@href'][1:].replace('\\', '/')
 
         lon_lats = []
         timestamps = []
         for seg in doc['trkseg']['trkpt']:
             lat = float(seg['@lat'])
             lon = float(seg['@lon'])
-            loc = (lon,lat)
+            loc = (lon, lat)
             ts = seg['time']
             lon_lats.append(loc)
             timestamps.append(ts)
@@ -41,66 +137,103 @@ def parse_gpx(gpx_file):
         except:
             duration = None
 
-    return video_name, lon_lats, timestamps, duration
+    return video_name, lon_lats, timestamps
 
 
+# =============================================
+# for splitting the videos
+# =============================================
 def second2vtime(sec):
     """given sec, return the timestamp in video. E.g. sec=0, vtime= 00:00:00; sec=61, vtime = 00:01:01
     """
-    hours = int(math.floor(sec/3600))
-    minutes = int(math.floor((sec - (hours*3600))/60))
-    seconds = int(math.floor(sec - (hours*3600) - (minutes*60)))
-    vtime = "%02d:%02d:%02d" % (hours,minutes,seconds)
+    hours = int(math.floor(sec / 3600))
+    minutes = int(math.floor((sec - (hours * 3600)) / 60))
+    seconds = int(math.floor(sec - (hours * 3600) - (minutes * 60)))
+    vtime = "%02d:%02d:%02d" % (hours, minutes, seconds)
     return vtime
-
-
-def align_loc_ts_duration(lon_lats, timestamps, duration):
-    """
-    assumming each video records gpx second by second, and gpx is right aligned to the vtime.
-    In other words, the first few seconds have no gpx coordinates
-    :return: zip(seconds, lon_lats, timestamps)
-    """
-    seconds = range(duration+1)
-    diff = len(seconds) - len(lon_lats)
-    for _ in range(diff):
-        lon_lats.insert(0, None)
-        timestamps.insert(0, None)
-    return zip(seconds, lon_lats, timestamps)
-
-
-def chunks(array, chunk_size, indices=False, right_close=False):
-    """Yield successive chunks with chunk_size from array.
-    params:
-        indices: if false, yield chunks of array; if True, yield indices pair (left, right) only
-        right_close: if False return elements with indices in [left, right); if True, return indices in [left, right]
-    """
-    for i in range(0, len(array), chunk_size):
-        left = i
-        right = min(len(array), i + chunk_size + right_close)
-        if indices:
-            yield (left, right)
-        else:
-            yield array[left: right]
-
-
-def get_chunk_size(args, size):
-    if args.l:
-        return args.l
-    return math.ceil(float(size)/args.b)
 
 
 def split_cmd_part(sub_vname, svtime, evtime):
     return "-vcodec copy -acodec copy -ss {} -to {} {}".format(svtime, evtime, sub_vname)
 
 
-def split(video_name, lon_lats, timestamps, duration, sub_vname_template, json_file):
+def smooth_nonstop(stops, window=3, percentage=0.8):
+    stops_size = len(stops)
+    for i in range(stops_size):
+        # do nothing about stops
+        if stops[i]:
+            continue
 
-    # assuming gpx is recorded second by second, and coordinates for the first few seconds are not recorded
-    aligned = align_loc_ts_duration(lon_lats, timestamps, duration)
+        left, right = max(0, i - window), min(stops_size, i + window + 1)
+
+        context = stops[left: i] + stops[i + 1: right]
+        stop_percentage = float(sum(context))/len(context)
+        if stop_percentage>=percentage:
+            stops[i] = True
+
+
+def split_points_indices_by_stop(locs, stop_thres=0.05, short_stop=10, smooth=True):
+    diff = distance_diff(locs)
+    stops = [d < stop_thres for d in diff]
+    if smooth:
+        smooth_nonstop(stops)
+    groups = group_consecutive(stops, stepsize=0)
+
+    # merge short stop
+    split_points_indices = []
+    i, j = 0, 0
+    for g in groups:
+        # long stop
+        if sum(g) and len(g) > short_stop:
+            # save nonstop left and right pointers
+            if i != j:
+                split_points_indices.append((i, j))
+            # move left pointer to current right pointer
+            j += len(g)
+            i = j
+        # nonstop or short stop
+        else:
+            j += len(g)  # move right pointer
+
+    # the last group is nonstop
+    if i != j:
+        split_points_indices.append((i, j))
+
+    return split_points_indices
+
+
+def get_chunk_size(args, size):
+    """
+    :return: get chunk size based on cmd arguments
+    """
+    if args.l:
+        return args.l
+    return math.ceil(float(size) / args.b)
+
+
+# =============================================
+# split one gpx and corresponding video
+# =============================================
+def split(args, video_name, lon_lats, timestamps, sub_vname_template, json_file):
+    # preprocess locations and timestamps
+    # fill in timestamps gap
+    fill_gpx, fill_timestamps = fill_gpx_gap(lon_lats, timestamps)
+    # alignment based on video duration
+    vdur_round = int(round(duration_of_video(video_name)))
+    aligned_gpx, aligned_timestamps = align_loc_ts_duration(fill_gpx, fill_timestamps,vdur_round)
+    aligned = zip(range(len(aligned_gpx)), aligned_gpx, aligned_timestamps)
+
+    # find separate points by long stop
+    split_points = split_points_indices_by_stop(aligned_gpx, stop_thres=args.stop_thres,
+                                                short_stop=args.short_stop, smooth=args.smooth)
 
     # get chunk size based on args
     chunk_size = get_chunk_size(args, len(aligned))
     if args.verbose: print 'video is cut by %d seconds' % chunk_size
+    # get chunks based on long stop and largest chunk second size
+    chunks = []
+    for i, j in split_points:
+        chunks.extend(list(even_chunks(aligned[i:j+1], chunk_size, right_close=True)))
 
     # get one cmd for split a video into server parts
     # one cmd is usually faster than several cmd
@@ -109,11 +242,11 @@ def split(video_name, lon_lats, timestamps, duration, sub_vname_template, json_f
     # store snapped gpx traces in json file
     json_data = []
 
-    for i, chunk in enumerate(chunks(aligned, chunk_size, right_close=True)):
+    for i, chunk in enumerate(chunks):
         # get information about a part of video
         # print chunk
         sub_vname = sub_vname_template.format(i)
-        svtime, evtime = second2vtime(chunk[0][0]),second2vtime(chunk[-1][0])
+        svtime, evtime = second2vtime(chunk[0][0]), second2vtime(chunk[-1][0])
         pts_lon_lat = [slt[1] for slt in chunk if slt[1]]
         tms = [slt[2] for slt in chunk if slt[2]]
 
@@ -125,7 +258,7 @@ def split(video_name, lon_lats, timestamps, duration, sub_vname_template, json_f
         json_data.append({'video_name': video_name, 'lonlat': snap_pts, 'confidences': confidences})
 
         if args.verbose:
-            print 'sub video name = %s, starting at %s and ending at %s, with %d locations and %d timestamps ' %(
+            print 'sub video name = %s, starting at %s and ending at %s, with %d locations and %d timestamps ' % (
                 sub_vname, svtime, evtime, len(pts_lon_lat), len(tms))
 
     # use command line tool ffmpeg to split video via subprocess
@@ -141,13 +274,17 @@ def split(video_name, lon_lats, timestamps, duration, sub_vname_template, json_f
         json.dump(json_data, f, indent=4)
 
 
+# =============================================
+# lopping through all gpx and corresponding video
+# =============================================
 def main(args):
+
     if args.verbose:
         print 'split videos with argments =', args
 
     # default split length
     if not args.l and not args.b:
-        args.l=10
+        args.l = 10
 
     # change to the directory with videos
     if args.p:
@@ -156,16 +293,20 @@ def main(args):
     start_time = datetime.datetime.now()
 
     # parse gpx_files
-    gpx_files = glob.glob("*.gpx")
+    gpx_files = glob.glob("GPX/*.gpx")
     gpx_video_match = []
     for gpx_f in gpx_files:
-        video_name, lon_lats, timestamps, duration = parse_gpx(gpx_f)
+        # extract information
+        video_name, lon_lats, timestamps = parse_gpx(gpx_f)
+        # quality control
+        has_video = os.path.isfile(video_name)
+        is_bad_max = bad_quality_max_diff(timestamps, thres=args.bad_quality_thres)
+        is_bad_int = bad_quality_diff_not_int(timestamps)
+        gpx_video_match.append((gpx_f, video_name, has_video, is_bad_max, is_bad_int))
 
-        # record the (gpx, video) pair when the video for a gpx can't be found
-        if not os.path.isfile(video_name):
-            gpx_video_match.append((gpx_f, video_name, False))
-            if args.verbose:
-                print "can't find video=%s for gpx=%s" % (video_name, gpx_f)
+        # skip parsing the trace,
+        # if the video for a gpx can't be found, or the quality of of gpx is bad
+        if not has_video or is_bad_max or is_bad_int:
             continue
 
         # the corresponding video is found
@@ -173,7 +314,7 @@ def main(args):
         # split video and gpx trace; store snap2road(trace) as json file
         sub_vname_template = video_name[:video_name.rfind(".")] + "_{0:03d}.MP4"
         json_file = video_name + '.json'
-        split(video_name, lon_lats, timestamps, duration, sub_vname_template, json_file)
+        split(args, video_name, lon_lats, timestamps, sub_vname_template, json_file)
 
         print 'handled video: %s, gpx: %s' % (video_name, gpx_f), costs(start_time)
 
@@ -181,11 +322,13 @@ def main(args):
     pd.DataFrame(gpx_video_match, columns=['gpx', 'video', 'found']).to_csv('gpx_video_match.csv')
 
 
-
-
-
 if __name__ == "__main__":
     import argparse
+
+    # bad_quality_thres=10
+    # stop_thres=0.05
+    # short_stop=10
+    # smooth=True
     parser = argparse.ArgumentParser(description='Split video and corresponding gpx trace')
     parser.add_argument('-l', help='split video by length (seconds)', type=int)
     parser.add_argument('-b', help='split video into N equal length parts', type=int)
