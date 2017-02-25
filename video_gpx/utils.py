@@ -7,6 +7,21 @@ def costs(start_time):
                                                          del_secs / 3600 % 24, del_secs / 60 % 60, del_secs % 60)
 
 
+def file_name_without_extension(fn):
+    import os
+    return os.path.splitext(fn)[0]
+
+
+def make_sure_path_exists(path_or_fn):
+    import os
+    import errno
+    try:
+        os.makedirs(path_or_fn)
+    except OSError as exception:
+        if exception.errno != errno.EEXIST:
+            raise
+
+
 def group_consecutive(data, stepsize=1):
     """
     group consecutive number as as sub list.
