@@ -1,46 +1,5 @@
 # coding=utf-8
-
-def consecutive(data, stepsize=1):
-    """
-    group consecutive number as as sub list.
-    E.g. data = [1, 2, 3, 5, 6, 7, 10, 11]
-    stepsize=1: return [[1,2,3], [5,6,7], [10,11]]
-            =2: return [[1,2,3,5,6,7], [10,11]]
-    :param data: list/array
-    :param stepsize: define consecutive.
-    """
-    import numpy as np
-    return np.split(data, np.where(np.diff(data) > stepsize)[0] + 1)
-
-
-def float_round(num, places=1, direction='up'):
-    from math import ceil, floor
-    assert direction in ['up', 'down'], 'direction options are: up and down'
-    func = {'up': ceil, 'down': floor}[direction]
-    return func(num * (10 ** places)) / float(10 ** places)
-
-
-def even_chunks(array, max_chunk_size, indices=False):
-    import math
-    size = len(array)
-    num_chunks = math.ceil(size * 1.0 / max_chunk_size)
-    new_chunk_size = int(math.ceil(size * 1.0 / num_chunks))
-    return chunks(array, new_chunk_size, indices)
-
-
-def chunks(array, chunk_size, indices=False, right_close=False):
-    """Yield successive chunks with chunk_size from array.
-    params:
-        indices: if false, yield chunks of array; if True, yield indices pair (left, right) only
-        right_close: if False return elements with indices in [left, right); if True, return indices in [left, right]
-    """
-    for i in range(0, len(array), chunk_size):
-        left = i
-        right = min(len(array), i + chunk_size + right_close)
-        if indices:
-            yield (left, right)
-        else:
-            yield array[left: right]
+from utils import *
 
 
 def snap2road(pts_lon_lat, timestamps=[], return_confidence=False):
@@ -83,6 +42,7 @@ def snap2road(pts_lon_lat, timestamps=[], return_confidence=False):
 def seg_disambiguation(list_of_seg_candidates, window_size=3, debug=False, decrease_weight=0.0, keep_tie=False):
     from itertools import chain
     from collections import Counter
+
     def debug_tie_count():
         max_count = counter.most_common(1)[0][1]
         tie_node = []
@@ -162,7 +122,7 @@ def trace2segs(segs, trace_pts, tss=[], return_confidence=False, close_jn_dist=1
         seg = segs.loc[seg_index, 'geometry']
         projected = snap_pts_gpdf[snap_pts_gpdf.index_ln.apply(lambda x: seg_index in x)].geometry.apply(
             lambda x: seg.project(x, normalized=True))
-        for sub_indices in consecutive(projected.index.values, stepsize=cnsectv_stepsize):
+        for sub_indices in group_consecutive(projected.index.values, stepsize=cnsectv_stepsize):
             sub = projected[sub_indices]
             s, e = sub.min(), sub.max()
             round_s, round_e = float_round(s, direction='down'), float_round(e, direction='up')

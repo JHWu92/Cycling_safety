@@ -2,6 +2,7 @@
 import geopandas as gp
 from shapely.geometry import Point, LineString, Polygon
 
+
 def haversine(lon1, lat1, lon2, lat2):
     """
     Calculate the great circle distance between two points
@@ -18,6 +19,10 @@ def haversine(lon1, lat1, lon2, lat2):
     km = 6367 * c
     m = km * 1000
     return m
+
+
+def distance_diff(locs):
+    return [haversine(loni, lati, loni1, lati1) for (loni, lati), (loni1, lati1) in zip(locs, locs[1:])]
 
 
 def ptfromln(pt, ln):
