@@ -27,12 +27,14 @@ def snap2road(pts_lon_lat, timestamps=[], return_confidence=False):
         var = response.geojson()
         features = var['features']
         for f in features:
-            coords = f['geometry']['coordinates']
-            new_gps.extend(coords)
+            coords = f['geometry']['coordinates']            
             properties = f['properties']
             if return_confidence:
                 confidences.append({'#batch': num_batch, '#origin_pts': len(batch_pts),
                                     '#snap_pts': len(coords), 'confidence': properties['confidence']})
+                new_gps.append(coords)
+            else:
+                new_gps.extend(coords)
 
     if return_confidence:
         return new_gps, confidences
