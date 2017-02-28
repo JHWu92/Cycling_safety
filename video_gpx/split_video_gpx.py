@@ -255,8 +255,9 @@ def split_one_gpx_video(args, video_name, lon_lats, timestamps, sub_vname_templa
         split_cmd.append(split_cmd_part(sub_vname, svtime, evtime))
 
         # snap to road
-        snap_pts, confidences = snap2road(pts_lon_lat, tms, return_confidence=True)
-        json_data.append({'video_name': sub_vname, 'lonlat': snap_pts, 'confidences': confidences})
+        snapped_res = snap2road(pts_lon_lat, tms)
+        snapped_res['video_name'] = sub_vname
+        json_data.append(snapped_res)
 
         if args.verbose:
             print 'sub video name = %s, starting at %s and ending at %s, with %d locations and %d timestamps ' % (
