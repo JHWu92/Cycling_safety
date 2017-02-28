@@ -270,11 +270,7 @@ def split_one_gpx_video(args, video_name, lon_lats, timestamps, sub_vname_templa
         output = subprocess.Popen(split_cmd, shell=True, stdout=subprocess.PIPE).stdout.read()
 
     # store snap to road coordinates and confidences
-    with open(json_file, 'wb') as f:
-        if args.json_indent:
-            json.dump(json_data, f, indent=4)
-        else:
-            json.dump(json_data, f)
+    save_json_to_file(json_data, json_file, indent=args.json_indent)
 
     if args.verbose:
         print 'spliting video: %s with ffmpeg' % video_name

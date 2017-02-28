@@ -7,6 +7,17 @@ def costs(start_time):
                                                          del_secs / 3600 % 24, del_secs / 60 % 60, del_secs % 60)
 
 
+# =============================================
+# file system related
+# =============================================
+def find_files(directory, pattern):
+    import os, fnmatch
+    for root, dirs, files in os.walk(directory):
+        for basename in files:
+            if fnmatch.fnmatch(basename, pattern):
+                filename = os.path.join(root, basename)
+                yield filename
+
 def file_name_without_extension(fn):
     import os
     return os.path.splitext(fn)[0]
@@ -21,7 +32,25 @@ def make_sure_path_exists(path_or_fn):
         if exception.errno != errno.EEXIST:
             raise
 
+def load_json_file(file_name):
+    import json
+    with open(file_name) as f:
+        json_data = json.load(f)
+    return json_data
 
+
+def save_json_to_file(json_data, json_file, indent=False):
+    import json
+    with open(json_file, 'wb') as f:
+        if indent:
+            json.dump(json_data, f, indent=4)
+        else:
+            json.dump(json_data, f)
+            
+
+# =============================================
+# list 
+# =============================================
 def group_consecutive(data, stepsize=1):
     """
     group consecutive number as as sub list.
@@ -57,6 +86,16 @@ def get_chunks(array, chunk_size, indices=False, right_close=False):
         else:
             yield array[left: right]
 
+
+def downsample_by_step(l, step):
+    return l[::step]
+
+def downsample_by_step_include_last(l, step=5):
+    down_l = downsample_by_step(l, step)
+    if len(l) % step != 1:
+        down_l.append(l[-1])
+    return down_l
+    
 
 # =============================================
 # basic type variable
@@ -100,3 +139,4 @@ def add_secs(time, secs, form='%Y-%m-%dT%H:%M:%SZ', return_str=True):
     new_time = time + datetime.timedelta(seconds=secs)
     new_time = strftime(new_time) if return_str else new_time
     return new_time
+    
