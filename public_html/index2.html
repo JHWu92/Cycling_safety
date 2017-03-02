@@ -1,7 +1,3 @@
-
-<!-- change the font size of caption, change the figure and makes it more suitable -->
-
-
 <html>
 <!--<html slick-uniqueid="3"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
 <head>
@@ -48,95 +44,77 @@
     </div>     
 
     <div class="container" >
-    <div class="row">
-    <div class="col-md-9">
-        <!-- Content: Two step -->
+        <!-- Row: left is project description; right is participate button -->
         <div class="row">
-            <div class="col-md-12 height-200-pixel">
-                <h1 class="text-center landing-page-header">
-                    Two simple step to help us build the clycling safety map for cities!
-                </h1>
-                <!-- left: step one pic+text -->
-                <div class="col-md-6" style="padding-left:10%">
-                    <figure>
-                        <img src="./cyclingsafety_files/Step1.png" class="img-responsive center-block" align="" width="90%">
-                        <figcaption class="text-center" align="right">Step1: Watch videos recorded by cyclists</figcaption>
-                    </figure>
-                   
-                </div>
-
-                <!-- right: step two pic+text -->
-                <div class="col-md-6" style="padding-right:10%">
-                    <figure>
-                        <img src="./cyclingsafety_files/Step2.png" class="img-responsive center-block" align="" width="90%">
-                        <figcaption class="text-center">Step2: Rating safety level for road segments</figcaption>
-                     </figure>
-                </div>
-            </div>
-        </div>
-        <!-- end row of "two step" -->
+            <div class="col-md-9">
+                <!-- Two step header -->
+                <div class="row">
+                    <div class="col-md-12 height-200-pixel">
+                        <h1 class="text-center landing-page-header">
+                            Two simple step to help us build the clycling safety map for cities!
+                        </h1>
+                    </div>
+                </div><!-- /two step header -->
+                
+                <!-- two step pic -->
+                <div class="row">            
+                    <!-- left: step one pic+text -->
+                    <div class="col-md-6" style="padding-left:10%">
+                        <figure>
+                            <img src="./cyclingsafety_files/Step1.png" class="img-responsive center-block" align="" width="90%">
+                            <figcaption class="text-center" align="right">Step1: Watch videos recorded by cyclists</figcaption>
+                        </figure>
+                       
+                    </div>
+                    <!-- right: step two pic+text -->
+                    <div class="col-md-6" style="padding-right:10%">
+                        <figure>
+                            <img src="./cyclingsafety_files/Step2.png" class="img-responsive center-block" align="" width="90%">
+                            <figcaption class="text-center">Step2: Rating safety level for road segments</figcaption>
+                         </figure>
+                    </div>
+                </div><!-- /two step pic -->
+                        
+                <div class="spacer20"></div><!-- add space -->
+                
+                <!-- Content: explaining the project  -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p style="margin:0 2%">We focus on the automatic computation of cycling safety maps (also known as stress or comfort maps) using various types of open and crowdsourced data, such as traffic history data, road condition etc. Your data will help us to train the machine learning model, so that we could use it to automatically detect safety level of road segment in other places and cities. These maps will help for cycling route choice.
+                        </p>
+                    </div>
+                </div> <!-- /Content: explaining the project  -->
+                
+                <div class="spacer20"></div><!-- add space -->
+                
+                <!-- demo of safety level map -->
+                <div class="row">
+                    <div class="col-md-6"><figure>
+                        <img src="./cyclingsafety_files/DCSafety0.png" alt="A map of Washington, D.C." class="img-responsive center-block" align="">
+                        <figcaption class="text-center">Part of Washington, D.C.</figcaption>
+                    </figure></div>
+                    <div class="col-md-6"><figure>
+                        <img src="./cyclingsafety_files/DCSafety1.png" alt="Safety level of each segment are visualized on the map" class="img-responsive center-block" align="">
+                        <figcaption class="text-center">Same Street Map with Safety Level Colored</figcaption>
+                    </figure></div>                    
+                    <div class="spacer20"></div>
+                </div><!-- /demo of safety level map -->
+            </div> <!-- /left column: description of project -->
         
-        <div class="spacer20"></div>     
-        <!-- add space -->
-        
-        <!-- Content: explaining the project  -->
-        <div class="row">
-            <div class="col-lg-12">
-                <p style="margin:0 2%">
-                    We focus on the automatic computation of cycling safety maps (also known as stress or comfort maps) using various types of open and crowdsourced data, such as traffic history data, road condition etc. Your data will help us to train the machine learning model, so that we could use it to automatically detect safety level of road segment in other places and cities. These maps will help for cycling route choice.
-                </p>
-            </div>
-        </div>
-        <!-- End Content: explaining the project  -->
-
-        <div class="spacer20"></div>
-        <!-- add space -->
-        
-        <!-- demo of safety level map -->
-        <div class="row">
-            <div class="col-md-6">
-                <figure>
-                    <img src="./cyclingsafety_files/DCSafety0.png" alt="A map of Washington, D.C." class="img-responsive center-block" align="">
-                    <figcaption class="text-center">Part of Washington, D.C.</figcaption>
-                </figure>
-                <div class="spacer20"></div>
-            </div>
-            <div class="col-md-6">
-                <figure>
-                    <img src="./cyclingsafety_files/DCSafety1.png" alt="Safety level of each segment are visualized on the map" class="img-responsive center-block" align="">
-                    <figcaption class="text-center">Same Street Map with Safety Level Colored</figcaption>
-                </figure>
-                <div class="spacer20"></div>
-            </div>
-        </div>
-        <!-- end demo of safety level map -->
-
-        <div class="spacer20"></div>   
-        <!-- add space -->
-        </div>
-        
-     <!-- Modal Sign in pop-up -->
-    <div class='col-md-3 center-block'>
-        <div class="spacer30"></div>   
-        <!-- add space -->
+             <!-- right column: participate button -->
+            <div class='col-md-3 center-block'>
                 <form id="myform" method="post" action="user_info.php">
-                            <label for="inputEmail" >Email address</label>
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="email">
-                            <div class="spacer30"></div>   <!-- add space -->
-                            <button class="btn" id="participate-button">Participate</button>
-        <div class="spacer20"></div>   
-        <!-- add space -->
-                      <p>We have a raffle for every participant. The more video you rate, the more likely you win. Winners will be notified via email.</p>
-
-
-
+                    <div class="spacer30"></div>   <!-- add space -->
+                    <label for="inputEmail" >Email address</label>
+                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="email">
+                    <div class="spacer30"></div>   <!-- add space -->
+                    <button class="btn" id="participate-button">Participate</button>
+                    <div class="spacer20"></div>   <!-- add space -->
+                    <p>We have a raffle for every participant. The more video you rate, the more likely you win. Winners will be notified via email.</p>
                 </form>
-        
-    </div>
-
-        </div>
-    </div>
-    <!-- End Container -->
+            </div> <!-- /right column: participate button -->
+        </div> <!-- /Row: left is project description; right is participate button -->
+    </div><!-- End Container -->
 
     <footer class="footer">
         <div class="container">
