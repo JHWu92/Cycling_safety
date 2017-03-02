@@ -31,54 +31,11 @@
         });
     </script>
     <style type="text/css">
-        .vertical-alignment-helper {
-            display:table;
-            height: 100%;
-            margin: 0 auto;
-            pointer-events:none;
-        }
-        .vertical-align-center {
-            /* To center vertically */
-            display: table-cell;
-            vertical-align: middle;
-            pointer-events:none;
-        }
-        .modal-content {
-            /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
-            width:inherit;
-            height:inherit;
-            /* To center horizontally */
-            margin: 0 auto;
-            pointer-events:all;
-        }
+        .container{width:90%}
     </style>
 </head>
 
 <body>
-
- <!-- Modal Sign in pop-up -->
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="vertical-alignment-helper">
-        <div class="modal-dialog vertical-align-center">
-            <form id="myform" method="post" action="user_info.php">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h3 class="modal-title">Welcome to Cycling Safety Project!</h3>
-                      <h4>We have a raffle for every participant. The more video you rate, the more likely you win. Winners will be notified via email.</h4>
-                    </div>
-                    <div class="modal-body">
-                        <label for="inputEmail" >Email address</label>
-                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="email">
-                        <div class="spacer30"></div>   <!-- add space -->
-                        <button id='btn-participate' class="btn btn-lg btn-primary center-block" type="submit">Sign in or Sign up</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 
     <!-- banner -->
@@ -90,7 +47,9 @@
          </div>
     </div>     
 
-    <div class="container">
+    <div class="container" >
+    <div class="row">
+    <div class="col-md-9">
         <!-- Content: Two step -->
         <div class="row">
             <div class="col-md-12 height-200-pixel">
@@ -120,20 +79,10 @@
         <div class="spacer20"></div>     
         <!-- add space -->
         
-        <!-- participate btn -->
-        <div class="row">
-            <div class="col-md-12 height-200-pixel">
-                <p class="text-center">
-                    <a class="btn" data-toggle="modal" data-target="#myModal" id="participate-button">Participate</a>
-                </p>
-            </div>
-        </div>
-        <!-- end participate btn -->
-        
         <!-- Content: explaining the project  -->
         <div class="row">
             <div class="col-lg-12">
-                <p>
+                <p style="margin:0 2%">
                     We focus on the automatic computation of cycling safety maps (also known as stress or comfort maps) using various types of open and crowdsourced data, such as traffic history data, road condition etc. Your data will help us to train the machine learning model, so that we could use it to automatically detect safety level of road segment in other places and cities. These maps will help for cycling route choice.
                 </p>
             </div>
@@ -164,17 +113,28 @@
 
         <div class="spacer20"></div>   
         <!-- add space -->
-        
-        <!-- participate btn -->
-        <div class="row">
-            <div class="col-md-12 height-200-pixel">
-                <p class="text-center">
-                    <a class="btn" data-toggle="modal" data-target="#myModal" id="participate-button">Participate</a>
-                </p>
-            </div>
         </div>
-        <!-- end participate btn -->
         
+     <!-- Modal Sign in pop-up -->
+    <div class='col-md-3 center-block'>
+        <div class="spacer30"></div>   
+        <!-- add space -->
+                <form id="myform" method="post" action="user_info.php">
+                            <label for="inputEmail" >Email address</label>
+                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="email">
+                            <div class="spacer30"></div>   <!-- add space -->
+                            <button class="btn" id="participate-button">Participate</button>
+        <div class="spacer20"></div>   
+        <!-- add space -->
+                      <p>We have a raffle for every participant. The more video you rate, the more likely you win. Winners will be notified via email.</p>
+
+
+
+                </form>
+        
+    </div>
+
+        </div>
     </div>
     <!-- End Container -->
 
