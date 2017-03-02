@@ -8,6 +8,7 @@ def snap2road(pts_lon_lat, timestamps=[]):
         confidences: [ (which batch, # origin pts, # snapped pts, confidence), (), ..]
     """
     import mapbox as mp
+    from utils import even_chunks, work_every_sec
     access = "pk.eyJ1Ijoic3VyYWpuYWlyIiwiYSI6ImNpdWoyZGQzYjAwMXkyb285b2Q5NmV6amEifQ.WBQAX7ur2T3kOLyi11Nybw"
     service = mp.MapMatcher(access_token=access)
     snapped = []
@@ -32,5 +33,5 @@ def snap2road(pts_lon_lat, timestamps=[]):
             properties = f['properties']
             snapped.append({'batch': bidx, 'sub_batch': fidx, 'snapped_len': len(coords), 
                                 'confidence': properties['confidence'], 'snapped': coords})
-    
+        work_every_sec(sec=0.5)
     return {'snapped': snapped, 'raw': raw}

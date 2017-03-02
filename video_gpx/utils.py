@@ -7,6 +7,14 @@ def costs(start_time):
                                                          del_secs / 3600 % 24, del_secs / 60 % 60, del_secs % 60)
 
 
+def work_every_sec(sec=1):
+    import time
+    sec = float(sec)
+    stop = sec - time.time() % sec
+    if stop>0.20:
+        time.sleep(stop)
+    else:
+        time.sleep(0.20)
 # =============================================
 # file system related
 # =============================================
