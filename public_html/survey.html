@@ -5,21 +5,29 @@
   <meta charset="utf-8">
   
   <script src="js/jquery-3.1.1.min.js"></script>
-  <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
   <script src="js/bootstrap.min.js"></script>
-  
   <link href="css/main.css" rel="stylesheet" media="screen">
+  <style type="text/css">
+    #fixedbutton {
+        position: fixed;
+        bottom: 20%;
+        right: 3%; 
+        font-size:20px;
+    }
+  </style>
 </head>
 
 <body>
-
+<div class="jumbotron" style="margin: 0 15%; padding: 10px 40px;">
+   <p>Additionally, it is of great help for the project to understand how cycling safety perceptions are affected by demographic and socioeconomic factors.</p>
+  <p>There are 11 questions in this survey. None of these questions are required. If a question is uncomfortable for you to answer, just skip it.</p> 
+  <p>if you prefer not to provide this information, please click <a href="rate-vid.html" class="btn btn-default">No, thank you</a></p>
+</div>
 <form method="post" action="survey.php">
+
+    <button id='fixedbutton' class="btn btn-primary center-block" type="submit">Submit and <br> Start Rating!</button>
     <div class="container" width="70%">
-        <div class="row">
-            <h2>We appreciate your help!</h2>
-            <h4>There are 11 questions in this survey. None of these questions are required. If you feel uncomfortable with answering any question, just skip it.</h4>
-        </div>
         <div class="spacer20"></div>   
         <div class="row">
             <div class="col-sm-12">
@@ -151,7 +159,6 @@
             </div>
         </div>
     </div>
-    <button id='btn-rate' class="btn btn-primary center-block" type="submit">Submit and Start Rating!</button><br><br><br><br><br>
     
 
 
