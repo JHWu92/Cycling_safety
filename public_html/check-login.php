@@ -9,11 +9,12 @@
         } else {
             return False;
         }     
-    }
+    } 
     
     function redirect_if_not_login($SESS){
         if(!login($SESS)){
-            header( "url=$DOMAIN_URL$PAGE_LOGIN_FIRST");
+            global $DOMAIN_URL, $PAGE_LOGIN_FIRST;
+            exit(header( "Location: $DOMAIN_URL$PAGE_LOGIN_FIRST"));
         }
         
     }

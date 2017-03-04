@@ -1,7 +1,8 @@
 <?php
    session_start();    //Start session
     include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd, $PAGE_RATE_VIDEO, $DOMAIN_URL
-    
+    include_once('check-login.php');
+    redirect_if_not_login($_SESSION);
 
     # Connect to MySQL database
     $con=mysqli_connect($host, $db_user, $db_pwd, $db_name);

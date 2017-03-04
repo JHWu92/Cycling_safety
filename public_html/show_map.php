@@ -1,5 +1,7 @@
 <?php
     session_start();
+    include_once('config.inc.php');
+    $email = $_SESSION[$SESS_EMAIL];
     session_destroy();
     
 ?>
@@ -32,8 +34,8 @@
     
 <div class="container">
 
-    <h2>Thank you!</h2>
-     <h3>Here is our cycling safety map for D.C.  Want to rate more?  <a href="user_info.html" >keep rating</a> Or <a href="index.html">back to home page</a></h3>
+    <h2>Thank you! <?=$email?>. Here is our cycling safety map for D.C. so far.</h2>
+     <h2>If you want to continue rating, go back to <a href="index.html">Home page</a>. Appreciate your contribution.</h2>
         
     <div id='map'></div>
 </div>
