@@ -1,6 +1,7 @@
 <?php
     session_start();    //Start session
     include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd, $TABLE_USERS, $DOMAIN_URL, $PAGE_RATE_VIDEO, $PAGE_SURVEY
+    
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +10,6 @@
     <title>Welcome to Cycling Safety Project</title>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/check-login.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/main.css" rel="stylesheet" >
     <link href="css/img-button.css" rel="stylesheet" >
