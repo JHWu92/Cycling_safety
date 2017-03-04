@@ -128,6 +128,9 @@ iframe{
   margin-left:15px;
   margin-bottom:15px;
 }
+.margin-left{
+  margin-left:15px;
+}
 
 /* border for rate-vid.html*/
 .border{
@@ -137,6 +140,8 @@ iframe{
   border: 4px solid #516991;
   border-radius:10px ;
   background-color:white;
+}
+.height-300{
   height: 300px;
 }
 
