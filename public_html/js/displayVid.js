@@ -9,11 +9,12 @@ function changeVid() {
                 height: '480px',
                 width: '100%',
                 videoId: this.responseText,
-                events: {
+                events: { 
                     'onStateChange': function (event) {
                         switch (event.data) {
                             case 0:
                                 document.getElementById("btn-rate").className = document.getElementById("btn-rate").className.replace("disabled","");
+                                $('#wrapper').tooltip('disable');
                                 document.getElementById("btn-rate").disabled=false;
                         }
                     }
