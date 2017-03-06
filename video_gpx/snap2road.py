@@ -1,4 +1,4 @@
-def snap2road(pts_lon_lat, timestamps=[]):
+def snap2road(pts_lon_lat, timestamps=(), pause=False):
     """
     params:
         pts_lon_lat: [[lon, lat], [], ...]
@@ -33,5 +33,6 @@ def snap2road(pts_lon_lat, timestamps=[]):
             properties = f['properties']
             snapped.append({'batch': bidx, 'sub_batch': fidx, 'snapped_len': len(coords), 
                                 'confidence': properties['confidence'], 'snapped': coords})
-        work_every_sec(sec=0.5)
+        if pause:
+            work_every_sec(sec=0.5)
     return {'snapped': snapped, 'raw': raw}

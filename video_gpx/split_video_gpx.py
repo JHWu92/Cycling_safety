@@ -7,7 +7,7 @@ import pandas as pd
 import xmltodict
 import datetime
 import json
-from trace2seg import snap2road
+from snap2road import snap2road
 from utils import *
 from geom_helper import distance_diff
 

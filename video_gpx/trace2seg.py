@@ -1,6 +1,5 @@
 # coding=utf-8
 from utils import *
-from snap2road import snap2road
 
 
 def seg_disambiguation(list_of_seg_candidates, window_size=3, debug=False, decrease_weight=0.0, keep_tie=False):
@@ -51,49 +50,80 @@ def seg_disambiguation(list_of_seg_candidates, window_size=3, debug=False, decre
     # print counter_left.most_common(1),counter_right.most_common(1),counter.most_common(1)
 
 
-def trace2segs(segs, trace_pts, tss=[], return_confidence=False, close_jn_dist=10, far_jn_dist=30, cnsectv_stepsize=3,
-               cnsectv_thres=0.08, return_snap_coords=False):
+def trace2segs(segs, trace, tms=(), need_snap=True, pause=False, bfr_crs=3559, close_jn_dist=10, far_jn_dist=30,
+               cnsectv_stepsize=3, cnsectv_thres=0.08):
     """
+    input:
+        segs: gpdf, one line per segment
+        trace: list of (lon, lat) points
+    return:
+        {'segs': segment_linear_reference_df, '#pts_no_segs': number of pts without segment assignment}
+        columns of 'segs': ['index_seg', 'start', 'end', 'ratio', 'ratio_before_round']
+    options:
+        # For snap2road()
+        tms: default (). list of "%Y-%m-%dT%H:%M:%SZ". It would help improve snapped quality
+        need_snap: default True. if True, perform snap2road on trace
+        pause: default False. If True, pause every 0.5 second between snap requests.
 
+        # For pts2segs()
+        bfr_crs: default 3559. Used in pts2segs().
+        close_jn_dist: default 10 meter. Allowing multiple segments for one point(assumed as intersection)
+        far_jn_dist: default 20 meter. Find the nearest segment for one point
+
+        # For finalizing segment assignment
+        consectv_stepsize: default 3. Used in group_consecutive(), define consecutive.
+        cnsectv_thres: default 0.08. The ratio threshold to determine whether a video covers a segment.
     """
-    from geom_helper import pts2segs
-    from itertools import chain
     import pandas as pd
     import geopandas as gp
     from shapely.geometry import Point
-    pts_lon_lat = list(trace_pts.geometry.apply(lambda x: x.coords[0]).values)
-    snap_pts = snap2road(pts_lon_lat, tss, return_confidence=return_confidence)
+    from itertools import chain
+    from geom_helper import pts2segs
 
-    if return_confidence:  # if return_confidence
-        snap_pts, confs = snap_pts
-        print 'confidence of snap to road', confs
+    if need_snap:
+        # snapped every point in trace to OSM road network
+        from snap2road import snap2road
+        snapped_res = snap2road(trace, tms, pause=pause)
+        snapped_df = pd.DataFrame.from_dict(snapped_res['snapped'])
+        snapped_trace = list(chain(*snapped_df.snapped.values))
+    else:
+        snapped_trace = trace
 
-    snap_pts_gpdf = gp.GeoDataFrame([Point(x) for x in snap_pts], columns=['geometry'])
+    # find segment index for each point, keep #points without segment assignment
+    snapped_trace_gpdf = gp.GeoDataFrame([Point(x) for x in snapped_trace], columns=['geometry'])
+    pts_segs, pts_no_segs = pts2segs(snapped_trace_gpdf, segs, bfr_crs=bfr_crs,
+                                     close_jn_dist=close_jn_dist, far_jn_dist=far_jn_dist)
 
-    pts_segs, _ = pts2segs(snap_pts_gpdf, segs, bfr_crs=3559, close_jn_dist=close_jn_dist, far_jn_dist=far_jn_dist)
+    # get the segment index(indices) for each point(index) and merge into snapped_trace_gpdf
+    pts_idx_ln_idx = snapped_trace_gpdf.merge(pts_segs, left_index=True, right_on='index_pt') \
+        .groupby('index_pt')['index_ln'].apply(list).to_frame()
+    snapped_trace_gpdf = snapped_trace_gpdf.merge(pts_idx_ln_idx, left_index=True, right_index=True)
 
-    snap_pts_gpdf = snap_pts_gpdf.merge(
-        snap_pts_gpdf.merge(pts_segs, left_index=True, right_on='index_pt').groupby('index_pt')['index_ln'].apply(
-            list).to_frame(),
-        left_index=True, right_index=True)
-    snap_pts_gpdf['clean_seg'] = seg_disambiguation(snap_pts_gpdf.index_ln.values, keep_tie=True)
+    # 2 phrases seg_disambiguation
+    snapped_trace_gpdf['clean_seg'] = seg_disambiguation(snapped_trace_gpdf.index_ln.values, keep_tie=True)
+    snapped_trace_gpdf['clean_seg2'] = seg_disambiguation(snapped_trace_gpdf.clean_seg.values)
 
-    snap_pts_gpdf['clean_seg2'] = seg_disambiguation(snap_pts_gpdf.clean_seg.values)
+    # get unique segment candidates
+    trace_segs_idx = pd.unique(chain(*snapped_trace_gpdf.clean_seg2.values))
 
-    trace_segs_idx = pd.unique(chain(*snap_pts_gpdf.clean_seg2.values))
+    # for each candidate, calculate the projected ratio of snapped traces to determine whether a segment is covered
     segs_linear_reference = []
     for seg_index in trace_segs_idx:
+        # select the geometry of a segment
         seg = segs.loc[seg_index, 'geometry']
-        projected = snap_pts_gpdf[snap_pts_gpdf.index_ln.apply(lambda x: seg_index in x)].geometry.apply(
-            lambda x: seg.project(x, normalized=True))
+        # use segment index before seg_disambiguation to find relevant points for this segment, and project the point.
+        projected = snapped_trace_gpdf[snapped_trace_gpdf.index_ln.apply(lambda x: seg_index in x)].geometry\
+            .apply(lambda x: seg.project(x, normalized=True))
+
+        # projected.index.values is the order of the points. consecutive points here is a consecutive trip on a segment
         for sub_indices in group_consecutive(projected.index.values, stepsize=cnsectv_stepsize):
             sub = projected[sub_indices]
             s, e = sub.min(), sub.max()
+            ratio_before_round = e - s
             round_s, round_e = float_round(s, direction='down'), float_round(e, direction='up')
-            if e - s > cnsectv_thres:
-                segs_linear_reference.append((seg_index, round_s, round_e, round_e - round_s))
+            # keep segment where the projected ratio is larger than threshold
+            if ratio_before_round > cnsectv_thres:
+                segs_linear_reference.append((seg_index, round_s, round_e, round_e - round_s, ratio_before_round))
 
-    if return_snap_coords:
-        return segs_linear_reference, snap_pts
-
-    return segs_linear_reference
+    res = pd.DataFrame(segs_linear_reference, columns=['index_seg', 'start', 'end', 'ratio', 'ratio_before_round'])
+    return {'segs': res, '#pts_no_segs': pts_no_segs.shape[0]}
