@@ -1,11 +1,18 @@
 # coding=utf-8
+from collections import Counter
+from itertools import chain
+
+import pandas as pd
+import geopandas as gp
+import numpy as np
+
+from shapely.geometry import Point
+
 from utils import *
+from geom_helper import pts2segs, haversine
 
 
 def seg_disambiguation(list_of_seg_candidates, window_size=3, debug=False, decrease_weight=0.0, keep_tie=False):
-    from itertools import chain
-    from collections import Counter
-
     def debug_tie_count():
         max_count = counter.most_common(1)[0][1]
         tie_node = []
@@ -51,7 +58,7 @@ def seg_disambiguation(list_of_seg_candidates, window_size=3, debug=False, decre
 
 
 def trace2segs(segs, trace, tms=(), need_snap=True, pause=False, bfr_crs=3559, close_jn_dist=10, far_jn_dist=30,
-               cnsectv_stepsize=3, cnsectv_thres=0.08):
+               cnsectv_stepsize=3, cnsectv_thres=0.08, length_col=None):
     """
     input:
         segs: gpdf, one line per segment
@@ -73,12 +80,11 @@ def trace2segs(segs, trace, tms=(), need_snap=True, pause=False, bfr_crs=3559, c
         # For finalizing segment assignment
         consectv_stepsize: default 3. Used in group_consecutive(), define consecutive.
         cnsectv_thres: default 0.08. The ratio threshold to determine whether a video covers a segment.
+
+        # For output:
+        tms: default (), if not null, calculate velocity.
+        length_col: default None, value for the output column length is NaN. Otherwise, value=segs[length_col]*ratio
     """
-    import pandas as pd
-    import geopandas as gp
-    from shapely.geometry import Point
-    from itertools import chain
-    from geom_helper import pts2segs
 
     if need_snap:
         # snapped every point in trace to OSM road network
@@ -107,12 +113,14 @@ def trace2segs(segs, trace, tms=(), need_snap=True, pause=False, bfr_crs=3559, c
     trace_segs_idx = pd.unique(chain(*snapped_trace_gpdf.clean_seg2.values))
 
     # for each candidate, calculate the projected ratio of snapped traces to determine whether a segment is covered
-    segs_linear_reference = []
+    segs_lin_ref = []
     for seg_index in trace_segs_idx:
         # select the geometry of a segment
-        seg = segs.loc[seg_index, 'geometry']
+        seg = segs.loc[seg_index]
+        length = seg[length_col] if length_col else None
+        seg = seg.geometry
         # use segment index before seg_disambiguation to find relevant points for this segment, and project the point.
-        projected = snapped_trace_gpdf[snapped_trace_gpdf.index_ln.apply(lambda x: seg_index in x)].geometry\
+        projected = snapped_trace_gpdf[snapped_trace_gpdf.index_ln.apply(lambda x: seg_index in x)].geometry \
             .apply(lambda x: seg.project(x, normalized=True))
 
         # projected.index.values is the order of the points. consecutive points here is a consecutive trip on a segment
@@ -121,9 +129,11 @@ def trace2segs(segs, trace, tms=(), need_snap=True, pause=False, bfr_crs=3559, c
             s, e = sub.min(), sub.max()
             ratio_before_round = e - s
             round_s, round_e = float_round(s, direction='down'), float_round(e, direction='up')
+            ratio = round_e - round_s
+            ratio_length = ratio * length if length else None
             # keep segment where the projected ratio is larger than threshold
             if ratio_before_round > cnsectv_thres:
-                segs_linear_reference.append((seg_index, round_s, round_e, round_e - round_s, ratio_before_round))
+                segs_lin_ref.append((seg_index, round_s, round_e, ratio, ratio_length, ratio_before_round))
 
-    res = pd.DataFrame(segs_linear_reference, columns=['index_seg', 'start', 'end', 'ratio', 'ratio_before_round'])
+    res = pd.DataFrame(segs_lin_ref, columns=['index_seg', 'start', 'end', 'ratio', 'length', 'ratio_before_round'])
     return {'segs': res, '#pts_no_segs': pts_no_segs.shape[0]}

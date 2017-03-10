@@ -15,6 +15,8 @@ def work_every_sec(sec=1):
         time.sleep(stop)
     else:
         time.sleep(0.20)
+
+
 # =============================================
 # file system related
 # =============================================
@@ -25,6 +27,7 @@ def find_files(directory, pattern):
             if fnmatch.fnmatch(basename, pattern):
                 filename = os.path.join(root, basename)
                 yield filename
+
 
 def file_name_without_extension(fn):
     import os
@@ -39,6 +42,7 @@ def make_sure_path_exists(path_or_fn):
     except OSError as exception:
         if exception.errno != errno.EEXIST:
             raise
+
 
 def load_json_file(file_name):
     import json
@@ -97,6 +101,7 @@ def get_chunks(array, chunk_size, indices=False, right_close=False):
 
 def downsample_by_step(l, step):
     return l[::step]
+
 
 def downsample_by_step_include_last(l, step=5):
     down_l = downsample_by_step(l, step)

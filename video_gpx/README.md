@@ -42,6 +42,9 @@
       - "raw":;
       - "snapped":;
       - "confidences":;
+      - v_max:
+      - v_avg:
+      - v_median:
   - $r/gpx_video_match.csv  # mapping between GPX/[track_name].gpx and [video_name].MP4, and information of gpx quality
 
 # TRACE2SEGS: GET SEGMENT RATIO FOR SANPPED TRACES
@@ -59,7 +62,6 @@
 > TODO: a bash script to call upload_video.py to iterate all video files and store result in a csv file
 - script: upload_video.py  # $py
 - Input:
-  - $py-oauth2.json
   - CLIENT_SECRETS_FILE
   - $r/$split/DCIM/???_VIRB/[video_name]_[cnt].MP4
 - Process:

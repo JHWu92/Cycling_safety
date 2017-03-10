@@ -3,13 +3,16 @@ import subprocess
 import os
 import glob
 import math
-import pandas as pd
-import xmltodict
 import datetime
 import json
+
+import pandas as pd
+import xmltodict
+import numpy as np
+
 from snap2road import snap2road
 from utils import *
-from geom_helper import distance_diff
+from geom_helper import distance_diff, haversine
 
 
 # =============================================
@@ -214,6 +217,14 @@ def get_chunk_size(args, size):
 # =============================================
 # split one gpx and corresponding video
 # =============================================
+def get_speed_stats(trace, tms):
+    tm_dff = [diff_in_sec(*x) for x in zip(tms[1:], tms)]
+    dist = [haversine(lon1, lat1, lon2, lat2) for (lon1, lat1),(lon2, lat2) in zip(trace, trace[1:])]
+    v_avg = sum(dist)/sum(tm_dff)
+    speed = np.array(dist) / np.array(tm_dff)
+    return {'v_avg': v_avg, 'v_max': speed.max(), 'v_median': np.median(speed)}
+
+
 def split_one_gpx_video(args, video_name, lon_lats, timestamps, sub_vname_template, json_file):
     # preprocess locations and timestamps
     # fill in timestamps gap
@@ -230,10 +241,10 @@ def split_one_gpx_video(args, video_name, lon_lats, timestamps, sub_vname_templa
     # get chunk size based on args
     chunk_size = get_chunk_size(args, len(aligned))
     if args.verbose: print 'video is cut by %d seconds' % chunk_size
-    # get chunks based on long stop and largest chunk second size
-    chunks = []
+    # get start and end indices of clips based on long stop and largest chunk size(measured in second)
+    clips = []
     for i, j in split_points:
-        chunks.extend(list(even_chunks(aligned[i:j+1], chunk_size, right_close=True)))
+        clips.extend(list(even_chunks(aligned[i:j+1], chunk_size, right_close=True)))
 
     # get one cmd for split a video into server parts
     # one cmd is usually faster than several cmd
@@ -243,13 +254,15 @@ def split_one_gpx_video(args, video_name, lon_lats, timestamps, sub_vname_templa
     # store snapped gpx traces in json file
     json_data = []
 
-    for i, chunk in enumerate(chunks):
+    for i, clip in enumerate(clips):
         # get information about a part of video
-        # print chunk
+        # print clip
         sub_vname = sub_vname_template.format(i)
-        svtime, evtime = second2vtime(chunk[0][0]), second2vtime(chunk[-1][0])
-        pts_lon_lat = [slt[1] for slt in chunk if slt[1]]
-        tms = [slt[2] for slt in chunk if slt[2]]
+        svtime, evtime = second2vtime(clip[0][0]), second2vtime(clip[-1][0])
+        pts_lon_lat = [slt[1] for slt in clip if slt[1]]
+        tms = [slt[2] for slt in clip if slt[2]]
+        # get statistics of velocity for a clip
+        v_stat = get_speed_stats(pts_lon_lat, tms)
 
         # add cmd specifying one part of video
         split_cmd.append(split_cmd_part(sub_vname, svtime, evtime))
@@ -257,6 +270,7 @@ def split_one_gpx_video(args, video_name, lon_lats, timestamps, sub_vname_templa
         # snap to road
         snapped_res = snap2road(pts_lon_lat, tms)
         snapped_res['video_name'] = sub_vname
+        snapped_res.update(v_stat)
         json_data.append(snapped_res)
 
         if args.verbose:
