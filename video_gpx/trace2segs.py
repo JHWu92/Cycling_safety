@@ -139,9 +139,14 @@ def trace2segs(segs, trace, tms=(), need_snap=True, pause=False, bfr_crs=3559, c
     return {'segs': res, '#pts_no_segs': pts_no_segs.shape[0]}
 
 
-def parse_json_of_one_video(args, segs, video_snapped, clip_quality_res, segs_lin_res):
+def parse_json_of_one_video(args, segs, video_snapped, clip_quality_res, segs_lin_res, processed_clips):
     for snapped_res in video_snapped:
         clip_name = snapped_res['clip_name']
+
+        if clip_name in processed_clips:
+            if args.verbose:
+                print 'skip clip:', clip_name
+            continue
 
         if args.verbose:
             print 'processing clip:', clip_name
@@ -174,6 +179,14 @@ def find_segs_for_clips(args):
     print 'loading segment file...'
     segs = gp.read_file(args.segs)
 
+    processed_clips = {}
+    existing_segs_for_clips, existing_clips_quality = None, None
+    if not args.start_over and os.path.exists(args.clips_quality_csv):
+        print 'loading existing trace2segs output...'
+        existing_segs_for_clips = pd.read_csv(args.segs_for_clips_csv, index_col=0)
+        existing_clips_quality = pd.read_csv(args.clips_quality_csv, index_col=0)
+        processed_clips = set(existing_clips_quality.clip_name)
+
     match_file = pd.read_csv(args.match_file)
     snapped_files = match_file.json_file.values
     segs_lin_res = []
@@ -187,13 +200,17 @@ def find_segs_for_clips(args):
 
         print 'processing clips of video:', sfile
         video_snapped = load_json_file(sfile)
-        parse_json_of_one_video(args, segs, video_snapped, clip_quality_res, segs_lin_res)
+        parse_json_of_one_video(args, segs, video_snapped, clip_quality_res, segs_lin_res, processed_clips)
 
-    print 'saving segments result and clips quality'
+    print 'saving segments result and clips quality...'
     segs_lin_res = pd.concat(segs_lin_res, ignore_index=True)
     segs_lin_res[index_seg] = segs_lin_res[index_seg].astype(int)
-    segs_lin_res.to_csv(args.segs_for_clips_csv)
     clip_quality_res = pd.DataFrame.from_dict(clip_quality_res)
+    if isinstance(existing_clips_quality, pd.DataFrame):
+        segs_lin_res = existing_segs_for_clips.append(segs_lin_res, ignore_index=True)
+        clip_quality_res = existing_clips_quality.append(clip_quality_res, ignore_index=True)
+
+    segs_lin_res.to_csv(args.segs_for_clips_csv)
     clip_quality_res.to_csv(args.clips_quality_csv)
 
 
@@ -211,7 +228,7 @@ if __name__ == "__main__":
     parser.add_argument('--clips-quality-csv', default='clips_quality.csv', help='clips quality')
     # test/debug argument, default False if not specified
     parser.add_argument('-v', '--verbose', help='be verbose of the output', action='store_true')
-
+    parser.add_argument('--start-over', help='if specified, ignore existing trace2segs results', action='store_true')
     args = parser.parse_args()
 
     # change to working root directory
