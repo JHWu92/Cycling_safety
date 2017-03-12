@@ -64,7 +64,7 @@
   - Common usage: $python trace2segs.py  #TODO: finish arguments
 - Output:
   - $r/segs_for_clips.csv 
-  - $r/clips_quality.csv  # some clips have no segment, e.g. crossing road(103_VIRB/VIRB0007_001.MP4)
+  - $r/clips_quality.csv  # some clips have no segment, e.g. crossing road(103_VIRB/VIRB0007_001.MP4); some clips have no snapped point at all
 
 
 # UPLOAD VIDEOS CLIPS
