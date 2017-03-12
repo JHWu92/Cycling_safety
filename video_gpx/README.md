@@ -25,37 +25,46 @@
 
 # SPLIT VIDEO AND GPX
 - script: split_vidoe_gpx.py
+  - arguments: 
+    - $r=root/directory/in/server
+    - $split: directory to store video_clips and snapped traces (default: ./split)
+    - For information of different options: $ python split_video_gpx --help
+  - Common usage: $ python split_video_gpx.py -r $r -l 30
 - require package: 
   - command line package: ffmpeg
   - python package: subprocess, xmltodict
 - Input: 
-  - $r=root/directory/in/server
+  - videos and gpx in $r
 - Process:
   - split video ($r/DCIM/*/*.MP4) and gpx ($r/GPX/*.gpx)
-  - Common usage: $ python split_video_gpx.py -i $r -l 30 -o $split
-  - For information of different options: $ python split_video_gpx --help
 - Output:
+  - $r/gpx_video_match.csv  # mapping between GPX/[track_name].gpx and [video_name].MP4, and information of gpx quality
   - $r/$split/DCIM/???_VIRB/
     - [video_name]_[cnt].MP4  # clips of original [video_name].MP4
     - [video_name].json  # snapped result of gpx, list of dict with the following keys:
-      - "video_name": [video_name]_[cnt].MP4;
-      - "raw":;
-      - "snapped":;
-      - "confidences":;
-      - v_max:
-      - v_avg:
-      - v_median:
-  - $r/gpx_video_match.csv  # mapping between GPX/[track_name].gpx and [video_name].MP4, and information of gpx quality
+      - clip_name: [video_name]_[cnt].MP4;
+      - duration_clip: duration (in seconds) of this clip;
+      - raw: list of dict {"batch": No.X batch of the clip traces; "raw_len": number of points; "raw": list of (lon lat) points}
+      - snapped: list of dict {"batch": No.X batch of the clip traces; "sub_batch": one snap request can return multiple snapped traces; "snapped_len": number of snapped points; "confidence": confidence of this snapped traces; "snapped": list of (lon lat) points}
+      - v_max: maximum velocity computed by raw_traces of this clip;
+      - v_avg: average velocity of this clip;
+      - v_median: median velocity of this clip;
+
 
 # TRACE2SEGS: GET SEGMENT RATIO FOR SANPPED TRACES
 - script: trace2segs.py
+  - arguments:
+    - $segs: the path to the segment file (require)
+    - $r: the root directory the same as split_video_gpx.py
+  - For information of different options: $ python trace2segs --help
+  - Common usage: $ python trace2segs.py -r $r --segs $segs
 - Input: 
   - $r/$split/DCIM/???_VIRB/[video_name].json
 - Process:
   - Common usage: $python trace2segs.py  #TODO: finish arguments
-  - For information of different options: $ python trace2segs --help
 - Output:
-  - $r/trace2segs_result.csv  #
+  - $r/segs_for_clips.csv 
+  - $r/clips_quality.csv  # some clips have no segment, e.g. crossing road(103_VIRB/VIRB0007_001.MP4)
 
 
 # UPLOAD VIDEOS CLIPS

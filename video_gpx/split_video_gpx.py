@@ -273,6 +273,8 @@ def split_one_gpx_video(args, video_name, lon_lats, timestamps, vclip_template, 
         snapped_res = snap2road(pts_lon_lat, tms)
         snapped_res['clip_name'] = clip_name
         snapped_res['duration_clip'] = duration_clip
+        snapped_res['start'] = svtime
+        snapped_res['end'] = evtime
         snapped_res.update(v_stat)
         json_data.append(snapped_res)
 
@@ -315,7 +317,7 @@ def main(args):
 
     # parse gpx_files
     gpx_files = glob.glob("GPX/*.gpx") if not args.test else ['GPX/Track_2017-02-21 113002.gpx']
-    print 'begin spliting video and gpx, #gpx_file = {}'.format(len(gpx_files))
+    print 'begin spliting video and gpx, #gpx_file = {} before has_video check'.format(len(gpx_files))
     gpx_video_match = []
     for gpx_f in gpx_files:
         # extract information

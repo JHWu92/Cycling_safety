@@ -1,15 +1,15 @@
 # coding=utf-8
 from collections import Counter
 from itertools import chain
+import os
 
 import pandas as pd
 import geopandas as gp
-import numpy as np
-
 from shapely.geometry import Point
 
 from utils import *
-from geom_helper import pts2segs, haversine
+from geom_helper import pts2segs
+from constants import index_seg
 
 
 def seg_disambiguation(list_of_seg_candidates, window_size=3, debug=False, decrease_weight=0.0, keep_tie=False):
@@ -137,3 +137,91 @@ def trace2segs(segs, trace, tms=(), need_snap=True, pause=False, bfr_crs=3559, c
 
     res = pd.DataFrame(segs_lin_ref, columns=['index_seg', 'start', 'end', 'ratio', 'length', 'ratio_before_round'])
     return {'segs': res, '#pts_no_segs': pts_no_segs.shape[0]}
+
+
+def parse_json_of_one_video(args, segs, video_snapped, clip_quality_res, segs_lin_res):
+    for snapped_res in video_snapped:
+        clip_name = snapped_res['clip_name']
+
+        if args.verbose:
+            print 'processing clip:', clip_name
+
+        # find segments for a clip, in terms of linear reference
+        snapped_df = pd.DataFrame.from_dict(snapped_res['snapped'])
+        snapped_trace = list(chain(*snapped_df.snapped.values))
+        segs_res = trace2segs(segs, snapped_trace, need_snap=False, length_col='SHAPE_Length')
+        segs_lin = segs_res['segs']
+        segs_lin['clip_name'] = clip_name
+        segs_lin_res.append(segs_lin)
+
+        # record quality (# pts without segment, velocity) of a clip
+        quality = {
+            'clip_name': clip_name,
+            'v_avg': snapped_res['v_avg'],
+            'v_median': snapped_res['v_median'],
+            'v_max': snapped_res['v_max'],
+            'duration_clip': snapped_res['duration_clip'],
+            'start': snapped_res['start'],
+            'end': snapped_res['end'],
+            'num_pts_no_segs': segs_res['#pts_no_segs'],
+            'clip_no_seg': len(segs_lin) == 0
+        }
+        clip_quality_res.append(quality)
+
+
+def find_segs_for_clips(args):
+
+    print 'loading segment file...'
+    segs = gp.read_file(args.segs)
+
+    match_file = pd.read_csv(args.match_file)
+    snapped_files = match_file.json_file.values
+    segs_lin_res = []
+    clip_quality_res = []
+
+    for sfile in snapped_files:
+        if not os.path.exists(sfile):
+            if args.verbose:
+                print 'does not exist: %s' % sfile
+            continue
+
+        print 'processing clips of video:', sfile
+        video_snapped = load_json_file(sfile)
+        parse_json_of_one_video(args, segs, video_snapped, clip_quality_res, segs_lin_res)
+
+    print 'saving segments result and clips quality'
+    segs_lin_res = pd.concat(segs_lin_res, ignore_index=True)
+    segs_lin_res[index_seg] = segs_lin_res[index_seg].astype(int)
+    segs_lin_res.to_csv(args.segs_for_clips_csv)
+    clip_quality_res = pd.DataFrame.from_dict(clip_quality_res)
+    clip_quality_res.to_csv(args.clips_quality_csv)
+
+
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(description='find corresponding segments for each clip')
+
+    parser.add_argument('--segs', help='segments file', required=True)
+    parser.add_argument('-r', '--root-dir', type=str, help='root directory containing videos and gps traces, ' +
+                                                           'it is the working directory(chdir to it)')
+    parser.add_argument('--match-file', default='gpx_video_match.csv',
+                        help='match between gpx, video and snapped file, it will be saved in the input-directory')
+    parser.add_argument('--segs-for-clips-csv', default='segs_for_clips.csv', help='segs_for clips')
+    parser.add_argument('--clips-quality-csv', default='clips_quality.csv', help='clips quality')
+    # test/debug argument, default False if not specified
+    parser.add_argument('-v', '--verbose', help='be verbose of the output', action='store_true')
+
+    args = parser.parse_args()
+
+    # change to working root directory
+    if args.root_dir:
+        os.chdir(args.root_dir)
+
+    if args.verbose:
+        print '===========arguments==========='
+        print args
+        print '===========current working directory==========='
+        print os.getcwd()
+
+    find_segs_for_clips(args)
