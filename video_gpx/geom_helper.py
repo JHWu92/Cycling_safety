@@ -73,26 +73,33 @@ def pts2segs(pts, lns, bfr_crs, init_crs=4326, close_jn_dist=5, far_jn_dist=20):
 
     close_jn = pts_crs.copy()
     close_jn.geometry = close_jn.buffer(close_jn_dist)
-    close_jn = gp.tools.sjoin(close_jn, lns_crs)[['index_right']]
+    try:
+        close_jn = gp.tools.sjoin(close_jn, lns_crs)[['index_right']]
+    except ValueError:  # no segment is matched during close join
+        close_jn = pd.DataFrame([], columns=['index_right'])
 
     close_jn_pts = set(pd.unique(close_jn.index))
     far_jn = pts_crs[~pts_crs.index.isin(close_jn_pts)].copy()
     
     if not far_jn.empty:
         far_jn.geometry = far_jn.buffer(far_jn_dist)
-        far_jn = gp.tools.sjoin(far_jn, lns_crs)[['index_right']]
-        # calculate haversine distance
-        far_jn = pd.merge(lns[['geometry']], far_jn, left_index=True, right_on=['index_right'])
-        far_jn = pd.merge(pts[['geometry']], far_jn, left_index=True, right_index=True)
-        far_jn['dis'] = far_jn.apply(lambda x: ptfromln(x.geometry_x, x.geometry_y), axis=1)
-        # keep ln with minimum distance to pt
-        far_jn = far_jn.groupby(level=0).apply(lambda x: x.iloc[x.dis.values.argmin()][['index_right']])
-        pts_has_ln = close_jn.append(far_jn).reset_index()
+        try:
+            far_jn = gp.tools.sjoin(far_jn, lns_crs)[['index_right']]
+            # calculate haversine distance
+            far_jn = pd.merge(lns[['geometry']], far_jn, left_index=True, right_on=['index_right'])
+            far_jn = pd.merge(pts[['geometry']], far_jn, left_index=True, right_index=True)
+            far_jn['dis'] = far_jn.apply(lambda x: ptfromln(x.geometry_x, x.geometry_y), axis=1)
+            # keep ln with minimum distance to pt
+            far_jn = far_jn.groupby(level=0).apply(lambda x: x.iloc[x.dis.values.argmin()][['index_right']])
+        except ValueError:  # no segment is matched during far join
+            far_jn = pd.DataFrame([], columns=['index_right'])
     else:
-        pts_has_ln = close_jn.reset_index()
+        far_jn = pd.DataFrame([], columns=['index_right'])
 
+    pts_has_ln = close_jn.append(far_jn).reset_index()
     pts_has_ln.columns = [index_pt, index_ln]
-
+    pts_has_ln = pts_has_ln.astype(int)
     pts_no_ln = pts[~pts.index.isin(pd.unique(pts_has_ln[index_pt]))].copy()
+
     return pts_has_ln, pts_no_ln
 
