@@ -225,7 +225,7 @@ def get_speed_stats(trace, tms):
     return {'v_avg': v_avg, 'v_max': speed.max(), 'v_median': np.median(speed)}
 
 
-def split_one_gpx_video(args, video_name, lon_lats, timestamps, sub_vname_template, json_file):
+def split_one_gpx_video(args, video_name, lon_lats, timestamps, vclip_template, json_file):
     # preprocess locations and timestamps
     # fill in timestamps gap
     fill_gpx, fill_timestamps = fill_gpx_gap(lon_lats, timestamps)
@@ -257,25 +257,28 @@ def split_one_gpx_video(args, video_name, lon_lats, timestamps, sub_vname_templa
     for i, clip in enumerate(clips):
         # get information about a part of video
         # print clip
-        sub_vname = sub_vname_template.format(i)
+        clip_name = vclip_template.format(i)
         svtime, evtime = second2vtime(clip[0][0]), second2vtime(clip[-1][0])
-        pts_lon_lat = [slt[1] for slt in clip if slt[1]]
-        tms = [slt[2] for slt in clip if slt[2]]
+        pts_lon_lat = [sec_loc_tms[1] for sec_loc_tms in clip if sec_loc_tms[1]]
+        tms = [sec_loc_tms[2] for sec_loc_tms in clip if sec_loc_tms[2]]
+        duration_clip = len(pts_lon_lat)
+
         # get statistics of velocity for a clip
         v_stat = get_speed_stats(pts_lon_lat, tms)
 
         # add cmd specifying one part of video
-        split_cmd.append(split_cmd_part(sub_vname, svtime, evtime))
+        split_cmd.append(split_cmd_part(clip_name, svtime, evtime))
 
         # snap to road
         snapped_res = snap2road(pts_lon_lat, tms)
-        snapped_res['video_name'] = sub_vname
+        snapped_res['clip_name'] = clip_name
+        snapped_res['duration_clip'] = duration_clip
         snapped_res.update(v_stat)
         json_data.append(snapped_res)
 
         if args.verbose:
             print 'sub video name = %s, starting at %s and ending at %s, with %d locations and %d timestamps ' % (
-                sub_vname, svtime, evtime, len(pts_lon_lat), len(tms))
+                clip_name, svtime, evtime, len(pts_lon_lat), len(tms))
 
     # use command line tool ffmpeg to split video via subprocess
     split_cmd = ' '.join(split_cmd)
@@ -297,8 +300,8 @@ def split_one_gpx_video(args, video_name, lon_lats, timestamps, sub_vname_templa
 def main(args):
 
     # change to the directory with videos
-    if args.input_directory:
-        os.chdir(args.input_directory)
+    if args.root_dir:
+        os.chdir(args.root_dir)
 
     if args.verbose:
         print '===========split videos with arguments==========='
@@ -306,22 +309,27 @@ def main(args):
         print '===========current working directory==========='
         print os.getcwd()
         print '===========output directory==========='
-        print os.path.join(os.getcwd(), args.output_directory)
+        print os.path.join(os.getcwd(), args.split_dir)
 
     start_time = datetime.datetime.now()
 
     # parse gpx_files
     gpx_files = glob.glob("GPX/*.gpx") if not args.test else ['GPX/Track_2017-02-21 113002.gpx']
-
+    print 'begin spliting video and gpx, #gpx_file = {}'.format(len(gpx_files))
     gpx_video_match = []
     for gpx_f in gpx_files:
         # extract information
         video_name, lon_lats, timestamps = parse_gpx(gpx_f)
+
+        # file names for the output
+        video_name_no_ext = file_name_without_extension(video_name)
+        json_file = os.path.join(args.split_dir, video_name_no_ext + '.json')
+
         # quality control
         has_video = os.path.isfile(video_name)
         is_bad_max = bad_quality_max_diff(timestamps, thres=args.bad_time_diff)
         is_bad_int = bad_quality_diff_not_int(timestamps)
-        gpx_video_match.append((gpx_f, video_name, has_video, is_bad_max, is_bad_int))
+        gpx_video_match.append((gpx_f, video_name, json_file, has_video, is_bad_max, is_bad_int))
 
         # skip parsing the trace,
         # if the video for a gpx can't be found, or the quality of of gpx is bad
@@ -331,47 +339,53 @@ def main(args):
                     gpx_f, has_video, is_bad_max, is_bad_int)
             continue
 
-        # file names for the output
-        video_name_no_ext = file_name_without_extension(video_name)
-        sub_vname_template = os.path.join(args.output_directory, video_name_no_ext + "_{:03d}.MP4")
-        json_file = os.path.join(args.output_directory, video_name_no_ext + '.json')
-        make_sure_path_exists(os.path.dirname(sub_vname_template))
+        # name template for video clips
+        vclip_template = os.path.join(args.split_dir, video_name_no_ext + "_{:03d}.MP4")
+        # make sure directory for the output exists
+        make_sure_path_exists(os.path.dirname(vclip_template))
         make_sure_path_exists(os.path.dirname(json_file))
 
         # split video and gpx trace; store snap2road(trace) as json file
-        split_one_gpx_video(args, video_name, lon_lats, timestamps, sub_vname_template, json_file)
+        split_one_gpx_video(args, video_name, lon_lats, timestamps, vclip_template, json_file)
 
         print 'handled video: %s, gpx: %s' % (video_name, gpx_f), costs(start_time)
 
     # save the gpx files and corresponding video name
-    pd.DataFrame(gpx_video_match, columns=['gpx', 'vfile', 'match', 'bad_max', 'bad_int']).to_csv('gpx_video_match.csv')
-    print 'saving gpx_video_match.csv'
+    pd.DataFrame(gpx_video_match, columns=['gpx', 'vfile', 'json_file', 'match', 'bad_max', 'bad_int'])\
+        .to_csv(args.match_file)
+    print 'saving', args.match_file
 
 
 if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description='Split video and corresponding gpx trace')
-    parser.add_argument('-i', '--input-directory', help='the input  directory of videos and gps traces', type=str)
-    parser.add_argument('-o', '--output-directory', type=str, default='split',
-                        help='the output directory of splited videos and snapped gps traces')
 
+    # frequent use arguments
+    parser.add_argument('-r', '--root-dir', type=str, help='root directory containing videos and gps traces, ' +
+                        'it is the working directory(chdir to it)')
     parser.add_argument('-l', help='maximum duration for sub videos (seconds)', type=int, default=30)
+
+    # output argument
+    parser.add_argument('-s', '--split-dir', type=str, default='split',
+                        help='the split directory of videos clips and snapped gps traces')
+    parser.add_argument('--match-file', default='gpx_video_match.csv',
+                        help='match between gpx, video and snapped file, it will be saved in the input-directory')
+
+    # hyper parameters
     parser.add_argument('--short-stop', help='the max length of short stop', type=int, default=10)
     parser.add_argument('--bad-time-diff', type=int, default=10,
                         help='the maximum time different between two consecutive timestamps for good quality')
     parser.add_argument('--stop-thres', type=float, default=0.05,
                         help='Defining stop: the threshold of distance between two consecutive coordinates')
+    parser.add_argument('--smooth', help='smooth long stop detection', action='store_false')  # default True
 
-    # default False if not specified
+    # test/debug argument, default False if not specified
     parser.add_argument('-v', '--verbose', help='be verbose of the output', action='store_true')
     parser.add_argument('--json-indent', action='store_true', help='indent output snap to road json file')
     parser.add_argument('-y', '--overwrite', action='store_true', help='over write existing video without asking')
     parser.add_argument('--no-video', help='not to split the videos', action='store_true')
     parser.add_argument('--test', action='store_true', help='run on test gpx files')
-
-    # default True if not specified
-    parser.add_argument('--smooth', help='smooth long stop detection', action='store_false')
 
     args = parser.parse_args()
 
