@@ -140,6 +140,7 @@ def trace2segs(segs, trace, tms=(), need_snap=True, pause=False, bfr_crs=3559, c
 
 
 def parse_json_of_one_video(args, segs, video_snapped, clip_quality_res, segs_lin_res, processed_clips):
+    # TODO: efficiency problem: rtree index is built for every clip: concat all clip traces before apply trace2segs
     for snapped_res in video_snapped:
         clip_name = snapped_res['clip_name']
 
@@ -153,11 +154,13 @@ def parse_json_of_one_video(args, segs, video_snapped, clip_quality_res, segs_li
 
         # find segments for a clip, in terms of linear reference
         snapped_df = pd.DataFrame.from_dict(snapped_res['snapped'])
-        snapped_trace = list(chain(*snapped_df.snapped.values))
-        segs_res = trace2segs(segs, snapped_trace, need_snap=False, length_col='SHAPE_Length')
-        segs_lin = segs_res['segs']
-        segs_lin['clip_name'] = clip_name
-        segs_lin_res.append(segs_lin)
+        no_snapped_pts = snapped_df.empty
+        if not no_snapped_pts:
+            snapped_trace = list(chain(*snapped_df.snapped.values))
+            segs_res = trace2segs(segs, snapped_trace, need_snap=False, length_col='SHAPE_Length')
+            segs_lin = segs_res['segs']
+            segs_lin['clip_name'] = clip_name
+            segs_lin_res.append(segs_lin)
 
         # record quality (# pts without segment, velocity) of a clip
         quality = {
@@ -169,7 +172,8 @@ def parse_json_of_one_video(args, segs, video_snapped, clip_quality_res, segs_li
             'start': snapped_res['start'],
             'end': snapped_res['end'],
             'num_pts_no_segs': segs_res['#pts_no_segs'],
-            'clip_no_seg': len(segs_lin) == 0
+            'clip_no_seg': len(segs_lin) == 0,
+            'no_snapped_pts': no_snapped_pts
         }
         clip_quality_res.append(quality)
 
