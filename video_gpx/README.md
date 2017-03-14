@@ -15,6 +15,8 @@
   - DCIM/10?_VIRB  # 480p videos after face blurring by Youtube and manual plate blurring
   - GPX/  # all gpx data, no sub directory
     - Track_yyyy-mm-dd HHMMSS.gpx  # [track_name].gpx
+  - client_secrets.json  # youtube client secrets for uploading
+  - segments.geojson  # segments network file
 
 ## Video preprocessing:
 1. Backup raw video(720/1080p without any preprocessing) in $r/raw_video
@@ -72,15 +74,12 @@
 
 
 # UPLOAD VIDEOS CLIPS
-> TODO: a bash script to call upload_video.py to iterate all video files and store result in a csv file
-- script: upload_video.py  # $py
+- script: upload_video_in_dir.py -r $r
 - Input:
-  - CLIENT_SECRETS_FILE
+  - $r/client_secrets.json
   - $r/$split/DCIM/???_VIRB/[video_name]_[cnt].MP4
-- Process:
-  - ??
 - Output:
-  - $r/upload_result.csv  # video_clip_path, parent_dir, video_name, video_clip_cnt, url
+  - $r/upload_result.log  # log time \t {'uploaded': statues of upload, 'videoId': url id for a uploaded clip, 'response': if videoId can't find in response; 'error': http error during upload}
 
 
 # COMBINE SPLIT, TRACE2SEGS, UPLOAD RESULT

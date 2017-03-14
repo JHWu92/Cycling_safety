@@ -1,10 +1,15 @@
 #!/usr/bin/python
+import argparse
+import shlex
+import json
 import os
 import httplib
 import httplib2
 import random
 import sys
 import time
+
+import logging
 
 from apiclient.discovery import build
 from apiclient.errors import HttpError
@@ -109,12 +114,12 @@ def initialize_upload(youtube, options):
         media_body=MediaFileUpload(options.file, chunksize=-1, resumable=True)
     )
 
-    resumable_upload(insert_request, args)
+    return resumable_upload(insert_request)
 
 
 # This method implements an exponential backoff strategy to resume a
 # failed upload.
-def resumable_upload(insert_request, args):
+def resumable_upload(insert_request):
     response = None
     error = None
     retry = 0
@@ -123,13 +128,11 @@ def resumable_upload(insert_request, args):
             status, response = insert_request.next_chunk()
             if 'id' in response:
                 videoId = response['id']
-                with open(args.resultFile, 'a') as f:
-                    f.write('True\t%s\t%s\t%s\t%s\n' % (args.file, args.vfile, args.clipID, videoId))
-
+                return {'videoId': videoId, 'uploaded': 'succeeded'}
             else:
-                with open(args.resultFile, 'a') as f:
-                    f.write('False\t%s\t%s\t%s\t%s\n' % (args.file, args.vfile, args.clipID, None))
-                exit("The upload failed with an unexpected response: %s" % response)
+                print ("The upload failed with an unexpected response: %s" % response)
+                return {'uploaded': 'no video id', 'response': response}
+
         except HttpError as e:
             if e.resp.status in RETRIABLE_STATUS_CODES:
                 error = "A retriable HTTP error %d occurred:\n%s" % (e.resp.status,
@@ -151,26 +154,65 @@ def resumable_upload(insert_request, args):
             time.sleep(sleep_seconds)
 
 
-if __name__ == '__main__':
-    argparser.add_argument("--file", required=True, help="Video file to upload")
-    argparser.add_argument("--title", help="Video title", default="Test Title")
-    argparser.add_argument("--category", default="28")
-    argparser.add_argument("--privacyStatus", choices=VALID_PRIVACY_STATUSES,
-                           default=VALID_PRIVACY_STATUSES[0], help="Video privacy status. Default 0: public")
-
-    # argument for output
-    argparser.add_argument("--resultFile", help="the file path to store upload result", default='upload_result.tsv')
-    argparser.add_argument("--vfile", help="vfile written in result file to match other file", default='')
-    argparser.add_argument("--clipID", help="clip id of vfile", default='')
-    argparser.add_argument("--verbose", action='store_true', help="verbose on output")
-
-    args = argparser.parse_args()
-    # print args
-    if not os.path.exists(args.file):
-        exit("Please specify a valid file using the --file= parameter. Or the file can not be found")
-
-    youtube = get_authenticated_service(args)
+def parse_args(cmd=None):
+    if isinstance(cmd, (str, unicode)):
+        cmd = shlex.split(cmd)
     try:
-        initialize_upload(youtube, args)
-    except HttpError as e:
-        print ("An HTTP error %d occurred:\n%s", e.resp.status, e.content)
+        argparser.add_argument("--file", required=True, help="Video file to upload")
+        argparser.add_argument("--title", help="Video title", default="Test Title")
+        argparser.add_argument("--category", default="28")
+        argparser.add_argument("--privacyStatus", choices=VALID_PRIVACY_STATUSES,
+                               default=VALID_PRIVACY_STATUSES[0], help="Video privacy status. Default 0: public")
+
+        # argument for output
+        argparser.add_argument("--upload-logger", help="the file path to store upload result", default='upload_result.log')
+        argparser.add_argument("--verbose", action='store_true', help="verbose on output")
+    except argparse.ArgumentError as e:
+        pass
+
+    args = argparser.parse_args(cmd) if cmd is not None else argparser.parse_args()
+    return args
+
+
+def log_msg(logger, args, upload_result):
+    upload_result['title'] = args.title
+    upload_result['clip_name'] = args.file
+    msg = json.dumps(upload_result)
+    logger.info(msg)
+
+
+def set_Logger(args):
+    logger = logging.getLogger(args.upload_logger)
+    logger.setLevel(logging.DEBUG)
+    fh = logging.FileHandler(args.upload_logger)
+    fh.setLevel(logging.DEBUG)
+    formatter = logging.Formatter("%(asctime)s\t%(message)s")
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+    return logger
+
+
+class Upload:
+    def __init__(self, cmd=None):
+        self.args = parse_args(cmd)
+
+    def upload(self):
+        if not os.path.exists(self.args.file):
+            return {'uploaded': 'no clip file'}
+        yt = get_authenticated_service(self.args)
+        try:
+            return initialize_upload(yt, self.args)
+        except HttpError as e:
+            return {'upload': 'http error', 'error': 'http status: {}, content: {}'.format(e.resp.status, e.content)}
+
+    def get_args(self):
+        return self.args
+
+
+if __name__ == '__main__':
+
+    upload = Upload()
+    upload_result = upload.upload()
+    args = upload.get_args()
+    logger = set_Logger(args)
+    log_msg(logger, args, upload_result)
