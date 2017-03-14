@@ -58,10 +58,14 @@
     - $r: the root directory the same as split_video_gpx.py
   - For information of different options: $ python trace2segs --help
   - Common usage: $ python trace2segs.py -r $r --segs $segs
+- requirement:
+  - sudo apt-get install libspatialindex-dev
+  - sudo pip install rtree
+  - sudo pip install geopandas
 - Input: 
-  - $r/$split/DCIM/???_VIRB/[video_name].json
+  - splited and snapped to road clip traces: $r/$split/DCIM/???_VIRB/[video_name].json
 - Process:
-  - Common usage: $python trace2segs.py  #TODO: finish arguments
+  - load clip traces and apply pts2segs to traces then apply seg_disambiguous function
 - Output:
   - $r/segs_for_clips.csv 
   - $r/clips_quality.csv  # some clips have no segment, e.g. crossing road(103_VIRB/VIRB0007_001.MP4); some clips have no snapped point at all
