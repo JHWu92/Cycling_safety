@@ -319,6 +319,7 @@ def main(args):
     gpx_files = glob.glob("GPX/*.gpx") if not args.test else ['GPX/Track_2017-02-21 113002.gpx']
     print 'begin spliting video and gpx, #gpx_file = {} before has_video check'.format(len(gpx_files))
     gpx_video_match = []
+    handled_cnt = 0
     for gpx_f in gpx_files:
         # extract information
         video_name, lon_lats, timestamps = parse_gpx(gpx_f)
@@ -349,13 +350,14 @@ def main(args):
 
         # split video and gpx trace; store snap2road(trace) as json file
         split_one_gpx_video(args, video_name, lon_lats, timestamps, vclip_template, json_file)
-
-        print 'handled video: %s, gpx: %s' % (video_name, gpx_f), costs(start_time)
+        handled_cnt += 1
+        print handled_cnt, 'handled video: %s, gpx: %s' % (video_name, gpx_f), costs(start_time)
 
     # save the gpx files and corresponding video name
     pd.DataFrame(gpx_video_match, columns=['gpx', 'vfile', 'json_file', 'match', 'bad_max', 'bad_int'])\
         .to_csv(args.match_file)
     print 'saving', args.match_file
+    print 'handled file {}/{}'.format(handled_cnt, len(gpx_files))
 
 
 if __name__ == "__main__":

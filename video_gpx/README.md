@@ -16,12 +16,12 @@
   - GPX/  # all gpx data, no sub directory
     - Track_yyyy-mm-dd HHMMSS.gpx  # [track_name].gpx
   - client_secrets.json  # youtube client secrets for uploading
-  - segments.geojson  # segments network file
+  - segments_dc.geojson  # segments network file
 
 ## Video preprocessing:
 1. Backup raw video(720/1080p without any preprocessing) in $r/raw_video
 2. Upload raw video to YouTube, apply face blurring. It takes about 1 day for a 20 minute 1080p video. Blurring is parallel.
-3. After blurring, transfer HD to 480p, manual blur car plates.
+3. After blurring, transfer HD to 480p, manual blur car plates.  // Youtube plate blur
 4. Upload/sync 480p processed videos to hornbake server in $r/DCIM
 
 
