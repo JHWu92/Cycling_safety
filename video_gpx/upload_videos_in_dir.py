@@ -20,14 +20,17 @@ def get_uploaded_clips(log_file):
 
     with open(log_file) as f:
         lines = [eval(line.strip().split('\t')[1]) for line in f]
-    df = pd.DataFrame.from_dict(lines)
-    return set(df[~df.videoId.isnull()].clip_name)
-
+    if lines:
+        df = pd.DataFrame.from_dict(lines)
+        return set(df[~df.videoId.isnull()].clip_name)
+    return set()
 
 def main(args):
     # change to working root directory
     if args.root_dir:
         os.chdir(args.root_dir)
+    if args.start_over:
+        os.remove(args.upload_logger)
     logger = set_Logger(args)
 
     # resume upload
@@ -40,11 +43,13 @@ def main(args):
     print 'we have {} clips, {} of them are uploaded, {} are bad quality, {} to go'.format(
         len(clips), len(uploaded_clips), len(bad_quality_clips[bad_quality_clips==True]), len(clips_to_upload))
 
-    for clip_name in clips_to_upload.clip_name.values:
+    for cnt, clip_name in enumerate(clips_to_upload.clip_name.values):
+        if cnt>10 and args.test:
+            break
         direct_folder, clip_fn = parse_clip_name(clip_name)
         title = '{}-{}'.format(direct_folder, clip_fn)
 
-        print 'uploading file: %s...' % clip_name
+        print cnt, 'uploading file: %s...' % clip_name
         cmd = '--file "{clip_name}" --title {title} --upload-logger {upload_logger}'.format(
             clip_name=clip_name, title=title, upload_logger=args.upload_logger)
 
@@ -62,12 +67,11 @@ if __name__ == '__main__':
 
     # test/debug argument, default False if not specified
     parser.add_argument('-v', '--verbose', help='be verbose of the output', action='store_true')
-    parser.add_argument('--start-over', help='if specified, ignore existing trace2segs results', action='store_true')
-
+    parser.add_argument('--start-over', help='if specified, delete existing upload log results', action='store_true')
+    parser.add_argument('--test', help='if specified, upload top 20 videos', action='store_true')
+    
     # directory = r"Sample Data/test_upload_videos_in_dir/"
     args = parser.parse_args()
 
-    cmd = '-r test_data -v'
-    args = parser.parse_args(cmd.split())
     print args
     main(args)

@@ -75,7 +75,11 @@
 
 
 # UPLOAD VIDEOS CLIPS
+- note:
+  - go to https://console.developers.google.com/apis/credentials, create a other type client-secret pair, download json file as client_secrets.json
 - script: upload_video_in_dir.py -r $r
+  - required packaged:
+    - sudo pip install google-api-python-client
 - Input:
   - $r/client_secrets.json
   - $r/$split/DCIM/???_VIRB/[video_name]_[cnt].MP4

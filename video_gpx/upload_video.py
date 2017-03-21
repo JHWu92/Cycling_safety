@@ -162,7 +162,7 @@ def parse_args(cmd=None):
         argparser.add_argument("--title", help="Video title", default="Test Title")
         argparser.add_argument("--category", default="28")
         argparser.add_argument("--privacyStatus", choices=VALID_PRIVACY_STATUSES,
-                               default=VALID_PRIVACY_STATUSES[0], help="Video privacy status. Default 0: public")
+                               default=VALID_PRIVACY_STATUSES[2], help="Video privacy status. Default 2: unlisted")
 
         # argument for output
         argparser.add_argument("--upload-logger", help="the file path to store upload result", default='upload_result.log')
@@ -195,8 +195,10 @@ def set_Logger(args):
 class Upload:
     def __init__(self, cmd=None):
         self.args = parse_args(cmd)
+        print self.args 
 
     def upload(self):
+        print 'uploading', os.path.exists(self.args.file)
         if not os.path.exists(self.args.file):
             return {'uploaded': 'no clip file'}
         yt = get_authenticated_service(self.args)
@@ -213,6 +215,7 @@ if __name__ == '__main__':
 
     upload = Upload()
     upload_result = upload.upload()
+    print upload_result
     args = upload.get_args()
     logger = set_Logger(args)
     log_msg(logger, args, upload_result)
