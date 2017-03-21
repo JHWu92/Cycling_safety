@@ -54,6 +54,7 @@
 
 
 # TRACE2SEGS: GET SEGMENT RATIO FOR SANPPED TRACES
+- TODO: efficiency problem: rtree index is built for every clip: concat all clip traces before apply trace2segs @def parse_json_of_one_video
 - script: trace2segs.py
   - arguments:
     - $segs: the path to the segment file (require)
