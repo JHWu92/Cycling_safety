@@ -22,7 +22,7 @@ $con=mysqli_connect($host, $db_user, $db_pwd, $db_name);
 if(mysqli_connect_errno()){  die("failed to connect to mysql".mysqli_connect_error()); }
 
 # Build SQL SELECT statement and return the geometry as a WKB element
-$sql = 'SELECT * FROM RoadSegment';
+$sql = 'SELECT * FROM RoadSegment where sumCnt>0';
 # Try query or error
 $rs = $con->query($sql);
 if (!$rs) {
