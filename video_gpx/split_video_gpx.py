@@ -157,7 +157,7 @@ def second2vtime(sec):
 
 
 def split_cmd_part(sub_vname, svtime, evtime):
-    return "-vcodec copy -acodec copy -ss {} -to {} {}".format(svtime, evtime, sub_vname)
+    return "-vcodec h264 -b:v 2048k -acodec copy -ss {} -to {} {}".format(svtime, evtime, sub_vname)
 
 
 def smooth_nonstop(stops, window=3, percentage=0.8):
@@ -284,6 +284,8 @@ def split_one_gpx_video(args, video_name, lon_lats, timestamps, vclip_template, 
 
     # use command line tool ffmpeg to split video via subprocess
     split_cmd = ' '.join(split_cmd)
+    if args.cmd:
+        print split_cmd
 
     # execute the command line and split the video
     if not args.no_video:
@@ -323,7 +325,8 @@ def main(args):
     for gpx_f in gpx_files:
         # extract information
         video_name, lon_lats, timestamps = parse_gpx(gpx_f)
-
+        if video_name!='DCIM/105_VIRB/VIRB0020.MP4':
+            continue
         # file names for the output
         video_name_no_ext = file_name_without_extension(video_name)
         json_file = os.path.join(args.split_dir, video_name_no_ext + '.json')
@@ -390,6 +393,7 @@ if __name__ == "__main__":
     parser.add_argument('-y', '--overwrite', action='store_true', help='over write existing video without asking')
     parser.add_argument('--no-video', help='not to split the videos', action='store_true')
     parser.add_argument('--test', action='store_true', help='run on test gpx files')
+    parser.add_argument('--cmd',  action='store_true', help='print cmd used in splitting videos')
 
     args = parser.parse_args()
 
