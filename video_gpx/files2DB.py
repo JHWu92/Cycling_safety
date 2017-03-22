@@ -34,20 +34,21 @@ def parse_arguments(cmd=None):
                                                            'it is the working directory(chdir to it)')
     parser.add_argument('--upload-logger', default='upload_video.log', help='record uploaded result, clip-url pair')
     parser.add_argument('--segs-for-clips-csv', default='segs_for_clips.csv', help='segs_for clips')
-    parser.add_argument('--segs', help='segments file', required=True)
+    parser.add_argument('--segs', help='segments file')
     args = parser.parse_args(cmd) if cmd is not None else parser.parse_args()
     return args
 
 
 def main(args):
-    print 'tranforming segments'
-    segs = transform_save_segments(args.segs)
+    if args.segs:
+        print 'tranforming segments'
+        segs = transform_save_segments(args.segs)
 
     print 'saving clips url and videoRoadSeg'
     df_log = parse_upload_log(args.upload_logger)
     df_log_uploaded = df_log[~df_log.videoId.isnull()]
     df_segs_clips = pd.read_csv(args.segs_for_clips_csv, index_col=0)
-    clips_uploaded_with_segs = df_segs_clips.merge(df_log_uploaded)[['index_seg', 'clip_name', 'title', 'videoId']]
+    clips_uploaded_with_segs = df_segs_clips.merge(df_log_uploaded)[['index_seg', 'clip_name', 'title', 'videoId', 'ratio']]
     clips_uploaded_with_segs['empty_col'] = ''
     clips_uploaded_with_segs['empty_col2'] = ''
     clips_uploaded_with_segs['empty_col3'] = ''
@@ -55,8 +56,8 @@ def main(args):
     clips_uploaded_with_segs[['empty_col', 'clip_name', 'title', 'videoId']].to_csv(
         '2DB_video.csv', header=None, index=None)
 
-    clips_uploaded_with_segs[['empty_col', 'empty_col2', 'empty_col3', 'clip_name', 'index_seg']].to_csv(
-        '2DB_VideoRoadSeg.csv', header=None, index=None)
+    clips_uploaded_with_segs[['empty_col', 'clip_name', 'index_seg', 'ratio']].to_csv(
+        '2DB_video2seg_temp.csv', header=None, index=None)
 
 
 if __name__ == "__main__":
