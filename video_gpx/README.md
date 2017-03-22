@@ -18,11 +18,19 @@
   - client_secrets.json  # youtube client secrets for uploading
   - segments_dc.geojson  # segments network file
 
-## Video preprocessing:
+## file matching:
+1. Each GPX file contains corresponding MP4 file path, starting from DCIM/
+2. *split_video_gpx.py* outputs *gpx_video_match.csv*, storing information about GPX-MP4 mapping and GPX quality
+3. Based on the snapped trace from *split_video_gpx.py*, *trace2segs.py* output *segs_for_clips.csv*, storing clip_name-index_seg mapping. (**It's critical to keep index of segments file unchanged**)
+4. Based on *clips_quality.csv* from *trace2segs.py*, *upload_videos_in_dir.py* uploads clips in good quality and output *upload_video.log*, storing clip_name-URL mapping. (**each time a clip is uploaded, even with the same title, the URL is different.**)
+
+
+# Video manual preprocessing:
 1. Backup raw video(720/1080p without any preprocessing) in $r/raw_video
 2. Upload raw video to YouTube, apply face blurring. It takes about 1 day for a 20 minute 1080p video. Blurring is parallel.
-3. After blurring, transfer HD to 480p, manual blur car plates.  // Youtube plate blur
-4. Upload/sync 480p processed videos to hornbake server in $r/DCIM
+3. After blurring, manual blur car plates on Youtube.
+4. Download blurred videos and convert to 480p(854x480) by ffmpeg -i XX.MP4 -s 854X480 XX_new.MP4
+5. scp/rsync processed videos to hornbake server in $r/DCIM
 
 
 # SPLIT VIDEO AND GPX
