@@ -299,6 +299,25 @@ def split_one_gpx_video(args, video_name, lon_lats, timestamps, vclip_template, 
 
 
 # =============================================
+# resume split process
+# =============================================
+def existing_match_file(match_file, start_over):
+    if start_over or not os.path.exists(match_file):
+        return pd.DataFrame(), {}
+    # resume: skip split videos
+    existing_df = pd.read_csv(match_file, index_col=0)
+    existing_df = existing_df[existing_df['match']]
+    skip_gpx_names = set(existing_df.gpx)
+    return existing_df, skip_gpx_names
+
+
+def save_match_file(new_processed, existing_match, match_file):
+    new_processed = pd.DataFrame(new_processed, columns=['gpx', 'vfile', 'json_file', 'match', 'bad_max', 'bad_int'])
+    existing_match.append(new_processed, ignore_index=True).to_csv(match_file)
+    print 'saving', match_file
+
+
+# =============================================
 # lopping through all gpx and corresponding video
 # =============================================
 def main(args):
@@ -320,13 +339,20 @@ def main(args):
     # parse gpx_files
     gpx_files = glob.glob("GPX/*.gpx") if not args.test else ['GPX/Track_2017-02-21 113002.gpx']
     print 'begin spliting video and gpx, #gpx_file = {} before has_video check'.format(len(gpx_files))
+
+    # existing_match_file
+    existing_match, processed_gpx = existing_match_file(args.match_file, args.start_over)
+
+    # begin process
     gpx_video_match = []
-    handled_cnt = 0
     for gpx_f in gpx_files:
+        # skip processed file, if start-over, processed_gpx is {}
+        if gpx_f in processed_gpx:
+            continue
+
         # extract information
         video_name, lon_lats, timestamps = parse_gpx(gpx_f)
-        if video_name!='DCIM/105_VIRB/VIRB0020.MP4':
-            continue
+
         # file names for the output
         video_name_no_ext = file_name_without_extension(video_name)
         json_file = os.path.join(args.split_dir, video_name_no_ext + '.json')
@@ -353,14 +379,12 @@ def main(args):
 
         # split video and gpx trace; store snap2road(trace) as json file
         split_one_gpx_video(args, video_name, lon_lats, timestamps, vclip_template, json_file)
-        handled_cnt += 1
-        print handled_cnt, 'handled video: %s, gpx: %s' % (video_name, gpx_f), costs(start_time)
+        print len(gpx_video_match), 'handled video: %s, gpx: %s' % (video_name, gpx_f), costs(start_time)
 
     # save the gpx files and corresponding video name
-    pd.DataFrame(gpx_video_match, columns=['gpx', 'vfile', 'json_file', 'match', 'bad_max', 'bad_int'])\
-        .to_csv(args.match_file)
-    print 'saving', args.match_file
-    print 'handled file {}/{}'.format(handled_cnt, len(gpx_files))
+    save_match_file(gpx_video_match, existing_match, args.match_file)
+    print 'total gpx files: {}, processed last time: {}, this time: {}'.format(
+        len(gpx_files), len(processed_gpx),len(gpx_video_match))
 
 
 if __name__ == "__main__":
@@ -372,6 +396,7 @@ if __name__ == "__main__":
     parser.add_argument('-r', '--root-dir', type=str, help='root directory containing videos and gps traces, ' +
                         'it is the working directory(chdir to it)')
     parser.add_argument('-l', help='maximum duration for sub videos (seconds)', type=int, default=30)
+    parser.add_argument('--start-over', help='if specified, ignore existing match-file', action='store_true')
 
     # output argument
     parser.add_argument('-s', '--split-dir', type=str, default='split',
