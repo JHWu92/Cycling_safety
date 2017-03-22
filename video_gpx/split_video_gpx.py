@@ -342,9 +342,10 @@ def main(args):
 
     # existing_match_file
     existing_match, processed_gpx = existing_match_file(args.match_file, args.start_over)
-
+    print 'existing_match: {}'.format(len(existing_match))
     # begin process
     gpx_video_match = []
+    handled_cnt = 0
     for gpx_f in gpx_files:
         # skip processed file, if start-over, processed_gpx is {}
         if gpx_f in processed_gpx:
@@ -379,12 +380,13 @@ def main(args):
 
         # split video and gpx trace; store snap2road(trace) as json file
         split_one_gpx_video(args, video_name, lon_lats, timestamps, vclip_template, json_file)
-        print len(gpx_video_match), 'handled video: %s, gpx: %s' % (video_name, gpx_f), costs(start_time)
+        handled_cnt += 1
+        print handled_cnt, 'handled video: %s, gpx: %s' % (video_name, gpx_f), costs(start_time)
 
     # save the gpx files and corresponding video name
     save_match_file(gpx_video_match, existing_match, args.match_file)
-    print 'total gpx files: {}, processed last time: {}, this time: {}'.format(
-        len(gpx_files), len(processed_gpx),len(gpx_video_match))
+    print 'total gpx files: {}, processed last time: {}, this time: {}, remaining {} has no match video'.format(
+        len(gpx_files), len(processed_gpx), handled_cnt, len(gpx_video_match)-handled_cnt)
 
 
 if __name__ == "__main__":
