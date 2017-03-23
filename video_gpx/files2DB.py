@@ -46,16 +46,14 @@ def main(args):
 
     print 'saving clips url and videoRoadSeg'
     df_log = parse_upload_log(args.upload_logger)
+    df_log['empty_col'] = ''
     df_log_uploaded = df_log[~df_log.videoId.isnull()]
+    df_log_uploaded[['empty_col', 'clip_name', 'title', 'videoId']].to_csv(
+        '2DB_video.csv', header=None, index=None)
+
     df_segs_clips = pd.read_csv(args.segs_for_clips_csv, index_col=0)
     clips_uploaded_with_segs = df_segs_clips.merge(df_log_uploaded)[['index_seg', 'clip_name', 'title', 'videoId', 'ratio']]
     clips_uploaded_with_segs['empty_col'] = ''
-    clips_uploaded_with_segs['empty_col2'] = ''
-    clips_uploaded_with_segs['empty_col3'] = ''
-
-    clips_uploaded_with_segs[['empty_col', 'clip_name', 'title', 'videoId']].to_csv(
-        '2DB_video.csv', header=None, index=None)
-
     clips_uploaded_with_segs[['empty_col', 'clip_name', 'index_seg', 'ratio']].to_csv(
         '2DB_video2seg_temp.csv', header=None, index=None)
 

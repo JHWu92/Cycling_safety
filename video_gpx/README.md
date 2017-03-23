@@ -23,6 +23,7 @@
 2. *split_video_gpx.py* outputs *gpx_video_match.csv*, storing information about GPX-MP4 mapping and GPX quality
 3. Based on the snapped trace from *split_video_gpx.py*, *trace2segs.py* output *segs_for_clips.csv*, storing clip_name-index_seg mapping. (**It's critical to keep index of segments file unchanged**)
 4. Based on *clips_quality.csv* from *trace2segs.py*, *upload_videos_in_dir.py* uploads clips in good quality and output *upload_video.log*, storing clip_name-URL mapping. (**each time a clip is uploaded, even with the same title, the URL is different.**)
+5. In DB of rating platform, rating is connect to video via vid(auto increased, **unstable**, how to handle subsequent importing data)
 
 
 # Video manual preprocessing:
