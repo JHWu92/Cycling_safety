@@ -50,6 +50,14 @@
         return $rid;
     }
     
+    function select_rate_cnt_by_uid($con, $uid){
+        global $TABLE_RATING;
+        $sql = "SELECT count(1) from $TABLE_RATING WHERE uid=$uid";
+        $result=mysqli_query($con, $sql);
+        $row = mysqli_fetch_row($result);
+        return $row[0];
+    }
+    
     function update_user_survey($con, $user_id, $dict_survey){
         global $TABLE_USERS;
         if($dict_survey){

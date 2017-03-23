@@ -1,7 +1,19 @@
 <?php
     session_start();
     include_once('config.inc.php');
-    $email = $_SESSION[$SESS_EMAIL];
+    include_once('db_helper.php');
+    include_once('check-login.php');
+    $ty = "";
+    if(login($_SESSION)){
+        $email = $_SESSION[$SESS_EMAIL];
+        $uid = $_SESSION[$SESS_USER_ID];
+        
+        $con=mysqli_connect($host, $db_user, $db_pwd, $db_name);
+        if(mysqli_connect_errno()){ die("failed to connect to mysql:" . mysqli_connect_error()); }
+        $cnt = select_rate_cnt_by_uid($con, $uid);
+        
+        $ty = "Thank you, $email! You've rated $cnt videos. Appreciate your contribution.<br>";
+    }
     session_destroy();
     
 ?>
@@ -57,9 +69,9 @@
 <body>
     
 <div class="container">
-
-    <h2>Thank you! <?=$email?>. Here is our cycling safety map for D.C. so far.</h2>
-     <h2>If you want to continue rating, go back to <a href="index.html">Home page</a>. Appreciate your contribution.</h2>
+    <h2><?=$ty?> </h2>
+    <h2>Here is our cycling safety map for D.C. so far.</h2>
+     <h2>If you want to continue rating, go back to <a href="index.html">Home page</a>. </h2>
         
     <div id='map'></div>
 </div>
@@ -68,11 +80,11 @@
     function getColor(score, ratio) {
         d = score/ratio;
         console.log(score, ratio, d);
-        return d > 4 ? '#005824' :
-               d > 3  ? '#238b45' :
-               d > 2  ? '#41ae76' :
-               d > 1  ? '#66c2a4' :
-                          '#99d8c9';
+        return d > 4 ? '#1a9641' :
+               d > 3  ? '#a6d96a' :
+               d > 2  ? '#ffffbf' :
+               d > 1  ? '#fdae61' :
+                          '#d7191c';
     }
     
     $.getJSON('mysql2geojson.php', show_map);
@@ -122,12 +134,11 @@
         legend.onAdd = function (map) {
             var div = L.DomUtil.create('div', 'info legend');
             var grades = [0, 1, 2, 3, 4];
-            var labels = ['<1', '1~2', '2~3', '3~4', '4~5'];
+            var labels = ['dangerous', 'quite dangerous', 'normal', 'quite safe', 'safe'];
             // loop through our density intervals and generate a label with a colored square for each interval
             for (var i = 0; i < grades.length; i++) {
                 div.innerHTML +=
-                    '<i style="background:' + getColor(grades[i] + 0.1, 1) + '"></i> ' + '<label>' +
-                    grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1]  : '+') + '</label>'+ '<br>';
+                    '<i style="background:' + getColor(grades[i] + 0.1, 1) + '"></i> ' + '<label>' +labels[i] + '</label>'+ '<br>';
             }
             return div;
         };
