@@ -38,9 +38,9 @@
         mysqli_query($con, $sql_update);
     }
     
-    function insert_rate($con, $uid, $vid, $score, $comment, $tags){
+    function insert_rate($con, $uid, $vid, $score, $comment, $tags, $familiar_st){
         global $TABLE_RATING;
-        $sql = "INSERT $TABLE_RATING (uid, vid, score, comment, tags) VALUES ($uid, $vid, $score, '$comment', '$tags')";
+        $sql = "INSERT $TABLE_RATING (uid, vid, score, comment, tags, familiar) VALUES ($uid, $vid, $score, '$comment', '$tags', '$familiar_st')";
         $result = mysqli_query($con, $sql);
         if(!$result){  # if error happens when inserting
             echo mysqli_error($con)."<br>";

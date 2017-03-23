@@ -16,7 +16,7 @@
     $vid = $_SESSION[$SESS_VIDEO_ID];
     $tags = implode(',', $_POST['tag']);
     if(!empty($score)){
-        $rid = insert_rate($con, $uid, $vid, $score, $comment, $tags);
+        $rid = insert_rate($con, $uid, $vid, $score, $comment, $tags, $familiar_st);
     }
     mysqli_close($con);
     
