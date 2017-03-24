@@ -114,7 +114,8 @@
         // var layername = new L.LayerGroup():
         // L.geoJSON(data_var_name,  {style: set_style,onEachFeature: onEachFeature}).addTo(layername);
         var seg_rating_layer = new L.LayerGroup();
-        L.geoJSON(seg_rating, {style: style,onEachFeature: onEachFeature}).addTo(seg_rating_layer);
+        var geojson = L.geoJSON(seg_rating, {style: style,onEachFeature: onEachFeature});
+        geojson.addTo(seg_rating_layer);
         
         var check_layers = {
             // 'displaying text on html': layername,
@@ -122,10 +123,9 @@
         };
         
         var map = L.map('map', {
-            center: [38.9047829846, -77.0163424758],
-            zoom: 13,
             layers: [streets, seg_rating_layer] // initial layer
         });
+        map.fitBounds(geojson.getBounds());
         
         L.control.layers(radio_layers).addTo(map);    
                 
