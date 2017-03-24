@@ -49,13 +49,13 @@ def main(args):
         direct_folder, clip_fn = parse_clip_name(clip_name)
         title = '{}-{}'.format(direct_folder, clip_fn)
 
-        print cnt, 'uploading file: %s...' % clip_name
         cmd = '--file "{clip_name}" --title {title} --upload-logger {upload_logger}'.format(
             clip_name=clip_name, title=title, upload_logger=args.upload_logger)
 
         upload = Upload(cmd)
         upload_result = upload.upload()
         log_msg(logger, upload.get_args(), upload_result)
+        print cnt, 'file: %s, uploaded status: %s' % (clip_name, upload_result['upload'])
 
 
 if __name__ == '__main__':
