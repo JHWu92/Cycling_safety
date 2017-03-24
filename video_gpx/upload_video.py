@@ -205,7 +205,7 @@ class Upload:
         try:
             return initialize_upload(yt, self.args)
         except HttpError as e:
-            return {'upload': 'http error', 'error': 'http status: {}, content: {}'.format(e.resp.status, e.content)}
+            return {'uploaded': 'http error', 'error': 'http status: {}, content: {}'.format(e.resp.status, e.content)}
 
     def get_args(self):
         return self.args

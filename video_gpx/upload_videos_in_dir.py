@@ -55,8 +55,10 @@ def main(args):
         upload = Upload(cmd)
         upload_result = upload.upload()
         log_msg(logger, upload.get_args(), upload_result)
-        print cnt, 'file: %s, uploaded status: %s' % (clip_name, upload_result['upload'])
+        print cnt, 'file: %s, uploaded status: %s' % (clip_name, upload_result['uploaded'])
 
+
+def stop_if_exceed_limit()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='upload videos clips in the input directory')
