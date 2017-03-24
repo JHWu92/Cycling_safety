@@ -56,9 +56,17 @@ def main(args):
         upload_result = upload.upload()
         log_msg(logger, upload.get_args(), upload_result)
         print cnt, 'file: %s, uploaded status: %s' % (clip_name, upload_result['uploaded'])
+        if exceed_limit(upload_result):
+            print 'uploadLimitExceeded'
+            print upload_result
+            print 'stop uploading'
+            break
+            
 
-
-def stop_if_exceed_limit()
+def exceed_limit(upload_result):
+    if 'error.content' in upload_result and 'uploadLimitExceeded' in upload_result['error.content']:
+        return True
+    return False
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='upload videos clips in the input directory')
