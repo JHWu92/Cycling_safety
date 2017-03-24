@@ -61,7 +61,7 @@ def main(args):
             print upload_result
             print 'stop uploading'
             break
-            
+
 
 def exceed_limit(upload_result):
     if 'error.content' in upload_result and 'uploadLimitExceeded' in upload_result['error.content']:

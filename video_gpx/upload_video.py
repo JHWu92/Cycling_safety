@@ -195,10 +195,10 @@ def set_Logger(args):
 class Upload:
     def __init__(self, cmd=None):
         self.args = parse_args(cmd)
-        print self.args 
+        # print self.args
 
     def upload(self):
-        print 'uploading', os.path.exists(self.args.file)
+        # print 'uploading', os.path.exists(self.args.file)
         if not os.path.exists(self.args.file):
             return {'uploaded': 'no clip file'}
         yt = get_authenticated_service(self.args)
@@ -215,7 +215,7 @@ if __name__ == '__main__':
 
     upload = Upload()
     upload_result = upload.upload()
-    print upload_result
+    # print upload_result
     args = upload.get_args()
     logger = set_Logger(args)
     log_msg(logger, args, upload_result)
