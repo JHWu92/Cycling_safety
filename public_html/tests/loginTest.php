@@ -13,6 +13,8 @@ class loginTest extends DBFixtureTestCase{
         $this->assertTablesEqual($expectedTable, $queryTable);
         $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_EXP'], $res['head_url']);
         $this->assertEquals(4, $res[$GLOBALS['SESS_USER_ID']]);
+        $this->assertNull($res[$GLOBALS['SESS_EXPLV']]);
+        $this->assertNull($res[$GLOBALS['SESS_SURVEY']]);
     }
     
     public function testNoExp(){
@@ -24,6 +26,8 @@ class loginTest extends DBFixtureTestCase{
         $this->assertTablesEqual($expectedTable, $queryTable);
         $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_EXP'], $res['head_url']);
         $this->assertEquals(1, $res[$GLOBALS['SESS_USER_ID']]);
+        $this->assertNull($res[$GLOBALS['SESS_EXPLV']]);
+        $this->assertNull($res[$GLOBALS['SESS_SURVEY']]);
     }
     
     public function testNoSurvey(){
@@ -35,6 +39,8 @@ class loginTest extends DBFixtureTestCase{
         $this->assertTablesEqual($expectedTable, $queryTable);
         $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_SURVEY'], $res['head_url']);
         $this->assertEquals(2, $res[$GLOBALS['SESS_USER_ID']]);
+        $this->assertEquals('Fearless', $res[$GLOBALS['SESS_EXPLV']]);
+        $this->assertNull($res[$GLOBALS['SESS_SURVEY']]);
     }
     
     public function testHasSurvey(){
@@ -46,6 +52,8 @@ class loginTest extends DBFixtureTestCase{
         $this->assertTablesEqual($expectedTable, $queryTable);
         $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_RATE_VIDEO'], $res['head_url']);
         $this->assertEquals(3, $res[$GLOBALS['SESS_USER_ID']]);
+        $this->assertEquals('Interested', $res[$GLOBALS['SESS_EXPLV']]);
+        $this->assertEquals(1, $res[$GLOBALS['SESS_SURVEY']]);
     }
 
 }

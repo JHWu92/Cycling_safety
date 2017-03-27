@@ -25,8 +25,8 @@ error_reporting(E_ALL);
     $_SESSION[$SESS_EMAIL] = $email;  
     $_SESSION[$SESS_USER_ID] = $res[$SESS_USER_ID];
     $_SESSION[$SESS_LOGIN] = True;  // logged in
-    # $_SESSION[$SESS_EXPLV] = $exp_lvl;  // logged in
-    # $_SESSION[$SESS_SURVEY] = $has_survey;  // logged in
+    $_SESSION[$SESS_EXPLV] = $res[$SESS_EXPLV];  
+    $_SESSION[$SESS_SURVEY] = $res[$SESS_SURVEY];  
     
     
     //echo $head_url;    

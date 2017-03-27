@@ -31,6 +31,6 @@
         }else{
             $head_url = "Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_RATE_VIDEO'];
         }
-        return array($SESS_USER_ID=>$user_id, 'head_url'=>$head_url, 'result'=>$result);
+        return array($SESS_USER_ID=>$user_id, 'head_url'=>$head_url, $SESS_EXPLV=>$exp_lvl, $SESS_SURVEY=>$has_survey);
     }
 ?>
