@@ -1,6 +1,7 @@
 <?php
     session_start();    //Start session
     include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd, $TABLE_USERS, $DOMAIN_URL, $PAGE_RATE_VIDEO, $PAGE_SURVEY
+    require 'DBandRedirect.php';
 
     //parse data from form 
     $explv=$_POST[$SESS_EXPLV];
@@ -10,23 +11,18 @@
     $user_id = $_SESSION[$SESS_USER_ID];
     $has_survey = $_SESSION[$SESS_SURVEY];
     
-    // check whether the email exist against DB
     # Connect to MySQL database
-    $con=mysqli_connect($host, $db_user, $db_pwd, $db_name);
-    # if connection succeed
-    if(mysqli_connect_errno()){ die("failed to connect to mysql:" . mysqli_connect_error()); }
-
-    $sql = "UPDATE $TABLE_USERS SET $TABL_USERS_FIELD_EXP = '$explv' WHERE $TABL_USERS_FIELD_UID='$user_id'";
-    mysqli_query($con, $sql);
-    
-    if (empty($has_survey)){
-        $head_url = "Location: ".$DOMAIN_URL.$PAGE_SURVEY;
-    }else{
-        $head_url = "Location: ".$DOMAIN_URL.$PAGE_RATE_VIDEO;
+    try{
+        $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
+    }catch (PDOException $e) {
+        echo 'Connection failed: ' . $e->getMessage();
     }
+    
+    $res = handle_exp_lvl($pdo, $user_id, $has_survey, $explv);
+    
     //echo $head_url;    
     # redirect
-    header($head_url); 
+    header($res['head_url']); 
     return true;
 
 ?>
