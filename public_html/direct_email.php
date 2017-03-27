@@ -1,10 +1,8 @@
 <?php
-    ini_set(‘display_errors’, 1); 
-ini_set(‘display_startup_errors’, 1); 
-error_reporting(E_ALL);
+
     session_start();    //Start session
     include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd, $TABLE_USERS, $DOMAIN_URL, $PAGE_RATE_VIDEO, $PAGE_SURVEY
-    require 'checkEmail.php';
+    require 'DBandRedirect.php';
     //parse data from form 
     $email=$_POST[$SESS_EMAIL];
     
@@ -20,6 +18,7 @@ error_reporting(E_ALL);
     //if(mysqli_connect_errno()){ die("failed to connect to mysql:" . mysqli_connect_error()); }
 
     $res = handle_input_email($pdo, $email);
+    $pdo = null;
     
     // Store log in Info in session
     $_SESSION[$SESS_EMAIL] = $email;  

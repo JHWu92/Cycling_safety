@@ -33,4 +33,18 @@
         }
         return array($SESS_USER_ID=>$user_id, 'head_url'=>$head_url, $SESS_EXPLV=>$exp_lvl, $SESS_SURVEY=>$has_survey);
     }
+    
+    function handle_exp_lvl($pdo, $user_id, $has_survey, $explv){
+        include('config.inc.php'); 
+        
+        $sql = "UPDATE $TABLE_USERS SET $TABL_USERS_FIELD_EXP = '$explv' WHERE $TABL_USERS_FIELD_UID='$user_id'";
+        $pdo->exec($sql);
+        
+        if (empty($has_survey)){
+            $head_url = "Location: ".$DOMAIN_URL.$PAGE_SURVEY;
+        }else{
+            $head_url = "Location: ".$DOMAIN_URL.$PAGE_RATE_VIDEO;
+        }
+        return array('head_url'=>$head_url);
+    }
 ?>
