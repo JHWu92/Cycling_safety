@@ -15,36 +15,36 @@
 		<field name="sid">2</field>
 		<field name="segmentid">2</field>
 		<field name="index_seg">2</field>
-		<field name="sumScore">3.6</field>
-		<field name="sumRatio">0.9</field>
-		<field name="sumCnt">1</field>
+		<field name="sumScore">7.3</field>
+		<field name="sumRatio">2.2</field>
+		<field name="sumCnt">4</field>
 		<field name="geometry">geo2</field>
 	</row>
 	<row>
 		<field name="sid">3</field>
 		<field name="segmentid">3</field>
 		<field name="index_seg">3</field>
-		<field name="sumScore">0</field>
-		<field name="sumRatio">0</field>
-		<field name="sumCnt">0</field>
+		<field name="sumScore">5.8</field>
+		<field name="sumRatio">1.4</field>
+		<field name="sumCnt">3</field>
 		<field name="geometry">geo3</field>
 	</row>
 	<row>
 		<field name="sid">4</field>
 		<field name="segmentid">4</field>
 		<field name="index_seg">4</field>
-		<field name="sumScore">0</field>
-		<field name="sumRatio">0</field>
-		<field name="sumCnt">0</field>
+		<field name="sumScore">9.4</field>
+		<field name="sumRatio">2.4</field>
+		<field name="sumCnt">4</field>
 		<field name="geometry">geo4</field>
 	</row>
 	<row>
 		<field name="sid">5</field>
 		<field name="segmentid">5</field>
 		<field name="index_seg">5</field>
-		<field name="sumScore">0</field>
-		<field name="sumRatio">0</field>
-		<field name="sumCnt">0</field>
+		<field name="sumScore">1.5</field>
+		<field name="sumRatio">0.3</field>
+		<field name="sumCnt">1</field>
 		<field name="geometry">geo5</field>
 	</row>
 	<row>

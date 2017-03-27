@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="cyclings_test">
+	<table_data name="Rating">
+	<row>
+		<field name="rid">1</field>
+		<field name="uid">1</field>
+		<field name="email"></field>
+		<field name="vid">1</field>
+		<field name="score">5</field>
+		<field name="comment"></field>
+		<field name="tags"></field>
+		<field name="familiar"></field>
+	</row>
+	<row>
+		<field name="rid">2</field>
+		<field name="uid">1</field>
+		<field name="email"></field>
+		<field name="vid">2</field>
+		<field name="score">4</field>
+		<field name="comment"></field>
+		<field name="tags"></field>
+		<field name="familiar"></field>
+	</row>
+    	<row>
+		<field name="rid">3</field>
+		<field name="uid">1</field>
+		<field name="email"></field>
+		<field name="vid">4</field>
+		<field name="score">5</field>
+		<field name="comment"></field>
+		<field name="tags"></field>
+		<field name="familiar"></field>
+	</row>
+	</table_data>
+</database>
+</mysqldump>

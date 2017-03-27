@@ -22,6 +22,16 @@
 		<field name="tags"></field>
 		<field name="familiar"></field>
 	</row>
+    	<row>
+		<field name="rid">3</field>
+		<field name="uid">1</field>
+		<field name="email"></field>
+		<field name="vid">4</field>
+		<field name="score">5</field>
+		<field name="comment">saving comment</field>
+		<field name="tags">tag1,tag2</field>
+		<field name="familiar">0</field>
+	</row>
 	</table_data>
 </database>
 </mysqldump>
