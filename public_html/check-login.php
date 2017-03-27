@@ -1,14 +1,7 @@
 <?php
-    session_start();
     include_once('config.inc.php');  
-
     function login($SESS){
-        global $SESS_EMAIL, $SESS_USER_ID, $SESS_LOGIN;
-        if (isset($SESS[$SESS_EMAIL]) && isset($SESS[$SESS_USER_ID]) && $SESS[$SESS_LOGIN]==True) {
-            return True;
-        } else {
-            return False;
-        }     
+        return isset($SESS[$GLOBALS['SESS_USER_ID']]) && isset($SESS[$GLOBALS['SESS_EMAIL']]) && $SESS[$GLOBALS['SESS_LOGIN']];
     } 
     
     function redirect_if_not_login($SESS){
