@@ -1,0 +1,120 @@
+<?php
+require 'DBFixture.php';
+require dirname(__FILE__).'/../rateDB.php';
+include_once(dirname(__FILE__).'/../config.inc.php');
+class loginTest extends DBFixtureTestCase{
+    
+    public function testRateOnlyScore(){
+        # T15
+        $conn = $this->getConnection();            
+        $tags = array();
+        $post_data = array($GLOBALS['POST_SCORE']=>5, 'btn-rate'=>1, 'btn-done'=>null, 
+                                        $GLOBALS['POST_FAMILIAR_ST']=>'', $GLOBALS['POST_COMMENT']=>'', 
+                                        $GLOBALS['POST_TAG']=>$tags);
+        $sess_data = array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>4);
+        
+        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data);
+        
+        $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_RATE_VIDEO'], $res['head_url']);
+        $this->assertEquals(3, $res['rid']);
+        
+        $queryTable = $conn->createQueryTable('Rating', 'SELECT * FROM Rating');
+        $expectedTable = $this->getDataSet('insertRatingOnlyScore')->getTable('Rating');
+        $this->assertTablesEqual($expectedTable, $queryTable);
+    }
+    
+    public function testRateDoneForTodayOnlyScore(){
+        # T16
+        $conn = $this->getConnection();            
+        $tags = array();
+        $post_data = array($GLOBALS['POST_SCORE']=>5, 'btn-rate'=>null, 'btn-done'=>1, 
+                                        $GLOBALS['POST_FAMILIAR_ST']=>'', $GLOBALS['POST_COMMENT']=>'', 
+                                        $GLOBALS['POST_TAG']=>$tags);
+        $sess_data = array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>4);
+        
+        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data);
+        
+        $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_SHOW_MAP'], $res['head_url']);
+        $this->assertEquals(3, $res['rid']);
+        
+        $queryTable = $conn->createQueryTable('Rating', 'SELECT * FROM Rating');
+        $expectedTable = $this->getDataSet('insertRatingOnlyScore')->getTable('Rating');
+        $this->assertTablesEqual($expectedTable, $queryTable);
+    }
+    
+    public function testRateDoneForTodayNoScore(){
+        # T17
+        $conn = $this->getConnection();            
+        $tags = array('tag1','tag2');
+        $post_data = array($GLOBALS['POST_SCORE']=>null, 'btn-rate'=>null, 'btn-done'=>1, 
+                                        $GLOBALS['POST_FAMILIAR_ST']=>1, $GLOBALS['POST_COMMENT']=>'test done for today', 
+                                        $GLOBALS['POST_TAG']=>$tags);
+        $sess_data = array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>4);
+        
+        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data);
+        
+        $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_SHOW_MAP'], $res['head_url']);
+        $this->assertNull($res['rid']);
+        
+        $queryTable = $conn->createQueryTable('Rating', 'SELECT * FROM Rating');
+        $expectedTable = $this->getDataSet()->getTable('Rating');
+        $this->assertTablesEqual($expectedTable, $queryTable);
+    }
+    
+    public function testRateWithMoreInformation(){
+        # T18
+        $conn = $this->getConnection();
+        $tags = array('tag1','tag2');
+        $post_data = array($GLOBALS['POST_SCORE']=>5, 'btn-rate'=>1, 'btn-done'=>null, 
+                                        $GLOBALS['POST_FAMILIAR_ST']=>0, $GLOBALS['POST_COMMENT']=>'saving comment', 
+                                        $GLOBALS['POST_TAG']=>$tags);
+        $sess_data = array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>4);
+        
+        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data);
+        
+        $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_RATE_VIDEO'], $res['head_url']);
+        $this->assertEquals(3, $res['rid']);
+        
+        $queryTable = $conn->createQueryTable('Rating', 'SELECT * FROM Rating');
+        $expectedTable = $this->getDataSet('insertRatingWithMoreInformation')->getTable('Rating');
+        $this->assertTablesEqual($expectedTable, $queryTable);
+    }
+    
+    public function testRateSumPerSeg(){
+    # T19
+        $conn = $this->getConnection();
+        $post_data = array($GLOBALS['POST_SCORE']=>5, 'btn-rate'=>1);
+        $sess_data = array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>4);
+        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data);
+        
+        $post_data = array($GLOBALS['POST_SCORE']=>4, 'btn-rate'=>1);
+        $sess_data = array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>5);
+        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data);
+        
+        $post_data = array($GLOBALS['POST_SCORE']=>3, 'btn-rate'=>1);
+        $sess_data = array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>3);
+        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data);
+        
+        $post_data = array($GLOBALS['POST_SCORE']=>1, 'btn-rate'=>1);
+        $sess_data = array($GLOBALS['SESS_USER_ID']=>2, $GLOBALS['SESS_VIDEO_ID']=>4);
+        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data);
+        $post_data = array($GLOBALS['POST_SCORE']=>2, 'btn-rate'=>1);
+        $sess_data = array($GLOBALS['SESS_USER_ID']=>2, $GLOBALS['SESS_VIDEO_ID']=>3);
+        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data);
+    
+        $post_data = array($GLOBALS['POST_SCORE']=>3, 'btn-rate'=>1);
+        $sess_data = array($GLOBALS['SESS_USER_ID']=>2, $GLOBALS['SESS_VIDEO_ID']=>2);
+        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data);
+        
+        $post_data = array($GLOBALS['POST_SCORE']=>5, 'btn-rate'=>1);
+        $sess_data = array($GLOBALS['SESS_USER_ID']=>2, $GLOBALS['SESS_VIDEO_ID']=>6);
+        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data);
+    
+        $queryTable = $conn->createQueryTable('RoadSegment', 'SELECT * FROM RoadSegment');
+        $expectedTable = $this->getDataSet('RoadSegmentAfterSomeRating')->getTable('RoadSegment');
+        $this->assertTablesEqual($expectedTable, $queryTable);
+    }
+}
+
+
+?>
