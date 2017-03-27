@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="cyclings_test">
+	<table_data name="RoadSegment">
+	<row>
+		<field name="sid">1</field>
+		<field name="segmentid">1</field>
+		<field name="index_seg">1</field>
+		<field name="sumScore">2.5</field>
+		<field name="sumRatio">0.5</field>
+		<field name="sumCnt">1</field>
+		<field name="geometry">geo1</field>
+	</row>
+	<row>
+		<field name="sid">2</field>
+		<field name="segmentid">2</field>
+		<field name="index_seg">2</field>
+		<field name="sumScore">3.6</field>
+		<field name="sumRatio">0.9</field>
+		<field name="sumCnt">1</field>
+		<field name="geometry">geo2</field>
+	</row>
+	<row>
+		<field name="sid">3</field>
+		<field name="segmentid">3</field>
+		<field name="index_seg">3</field>
+		<field name="sumScore">0</field>
+		<field name="sumRatio">0</field>
+		<field name="sumCnt">0</field>
+		<field name="geometry">geo3</field>
+	</row>
+	<row>
+		<field name="sid">4</field>
+		<field name="segmentid">4</field>
+		<field name="index_seg">4</field>
+		<field name="sumScore">0</field>
+		<field name="sumRatio">0</field>
+		<field name="sumCnt">0</field>
+		<field name="geometry">geo4</field>
+	</row>
+	<row>
+		<field name="sid">5</field>
+		<field name="segmentid">5</field>
+		<field name="index_seg">5</field>
+		<field name="sumScore">0</field>
+		<field name="sumRatio">0</field>
+		<field name="sumCnt">0</field>
+		<field name="geometry">geo5</field>
+	</row>
+	<row>
+		<field name="sid">6</field>
+		<field name="segmentid">6</field>
+		<field name="index_seg">6</field>
+		<field name="sumScore">0</field>
+		<field name="sumRatio">0</field>
+		<field name="sumCnt">0</field>
+		<field name="geometry">geo6</field>
+	</row>
+	<row>
+		<field name="sid">7</field>
+		<field name="segmentid">7</field>
+		<field name="index_seg">7</field>
+		<field name="sumScore">0</field>
+		<field name="sumRatio">0</field>
+		<field name="sumCnt">0</field>
+		<field name="geometry">geo7</field>
+	</row>
+	</table_data>
+</database>
+</mysqldump>

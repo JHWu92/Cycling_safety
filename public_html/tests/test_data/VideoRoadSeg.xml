@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="cyclings_test">
+	<table_data name="VideoRoadSeg">
+	<row>
+		<field name="vrsid">1</field>
+		<field name="vid">1</field>
+		<field name="sid">1</field>
+		<field name="clip_name">clip1</field>
+		<field name="index_seg">1</field>
+		<field name="ratio">0.5</field>
+	</row>
+	<row>
+		<field name="vrsid">2</field>
+		<field name="vid">2</field>
+		<field name="sid">2</field>
+		<field name="clip_name">clip2</field>
+		<field name="index_seg">2</field>
+		<field name="ratio">0.9</field>
+	</row>
+	<row>
+		<field name="vrsid">3</field>
+		<field name="vid">3</field>
+		<field name="sid">2</field>
+		<field name="clip_name">clip3</field>
+		<field name="index_seg">2</field>
+		<field name="ratio">0.2</field>
+	</row>
+	<row>
+		<field name="vrsid">4</field>
+		<field name="vid">4</field>
+		<field name="sid">3</field>
+		<field name="clip_name">clip4</field>
+		<field name="index_seg">3</field>
+		<field name="ratio">0.3</field>
+	</row>
+	<row>
+		<field name="vrsid">5</field>
+		<field name="vid">4</field>
+		<field name="sid">4</field>
+		<field name="clip_name">clip4</field>
+		<field name="index_seg">4</field>
+		<field name="ratio">0.4</field>
+	</row>
+	<row>
+		<field name="vrsid">6</field>
+		<field name="vid">5</field>
+		<field name="sid">4</field>
+		<field name="clip_name">clip5</field>
+		<field name="index_seg">4</field>
+		<field name="ratio">1</field>
+	</row>
+	<row>
+		<field name="vrsid">7</field>
+		<field name="vid">6</field>
+		<field name="sid">3</field>
+		<field name="clip_name">clip6</field>
+		<field name="index_seg">3</field>
+		<field name="ratio">0.8</field>
+	</row>
+	<row>
+		<field name="vrsid">8</field>
+		<field name="vid">6</field>
+		<field name="sid">4</field>
+		<field name="clip_name">clip6</field>
+		<field name="index_seg">4</field>
+		<field name="ratio">0.6</field>
+	</row>
+	<row>
+		<field name="vrsid">9</field>
+		<field name="vid">6</field>
+		<field name="sid">5</field>
+		<field name="clip_name">clip6</field>
+		<field name="index_seg">5</field>
+		<field name="ratio">0.3</field>
+	</row>
+	</table_data>
+</database>
+</mysqldump>
