@@ -2,7 +2,8 @@
 import argparse
 import logging
 import os
-
+import time
+import datetime
 import pandas as pd
 
 from upload_video import Upload, log_msg, set_Logger
@@ -46,21 +47,26 @@ def main(args):
     for cnt, clip_name in enumerate(clips_to_upload.clip_name.values):
         if cnt>10 and args.test:
             break
-        direct_folder, clip_fn = parse_clip_name(clip_name)
-        title = '{}-{}'.format(direct_folder, clip_fn)
+        while True:
+            direct_folder, clip_fn = parse_clip_name(clip_name)
+            title = '{}-{}'.format(direct_folder, clip_fn)
 
-        cmd = '--file "{clip_name}" --title {title} --upload-logger {upload_logger}'.format(
-            clip_name=clip_name, title=title, upload_logger=args.upload_logger)
+            cmd = '--file "{clip_name}" --title {title} --upload-logger {upload_logger}'.format(
+                clip_name=clip_name, title=title, upload_logger=args.upload_logger)
 
-        upload = Upload(cmd)
-        upload_result = upload.upload()
-        log_msg(logger, upload.get_args(), upload_result)
-        print cnt, 'file: %s, uploaded status: %s' % (clip_name, upload_result['uploaded'])
-        if exceed_limit(upload_result):
-            print 'uploadLimitExceeded'
-            print upload_result
-            print 'stop uploading'
-            break
+            upload = Upload(cmd)
+            upload_result = upload.upload()
+            log_msg(logger, upload.get_args(), upload_result)
+            print cnt, 'file: %s, uploaded status: %s' % (clip_name, upload_result['uploaded'])
+            if exceed_limit(upload_result):
+                print 'uploadLimitExceeded'
+                print upload_result
+                print 'pause uploading for 3600 seconds', datetime.datetime.now()
+                time.sleep(3600)
+                print 'resume'
+            else:
+                time.sleep(20)
+                break
 
 
 def exceed_limit(upload_result):
