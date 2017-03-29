@@ -11,6 +11,7 @@
 		<field name="comment"></field>
 		<field name="tags"></field>
 		<field name="familiar"></field>
+		<field name="timestamp">2017-03-27 20:13:36</field>
 	</row>
 	<row>
 		<field name="rid">2</field>
@@ -21,6 +22,7 @@
 		<field name="comment"></field>
 		<field name="tags"></field>
 		<field name="familiar"></field>
+		<field name="timestamp">2017-03-27 20:13:36</field>
 	</row>
     	<row>
 		<field name="rid">3</field>
@@ -31,6 +33,7 @@
 		<field name="comment"></field>
 		<field name="tags"></field>
 		<field name="familiar"></field>
+		<field name="timestamp">2017-03-27 20:13:36</field>
 	</row>
 	</table_data>
 </database>

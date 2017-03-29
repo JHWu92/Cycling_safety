@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="cyclings_test">
+	<table_data name="loginLog">
+	<row>
+		<field name="lid">1</field>
+		<field name="user_id">1</field>
+		<field name="timestamp">2017-03-27 20:16:28</field>
+	</row>
+	<row>
+		<field name="lid">2</field>
+		<field name="user_id">2</field>
+		<field name="timestamp">2017-03-27 20:16:28</field>
+	</row>
+	<row>
+		<field name="lid">3</field>
+		<field name="user_id">3</field>
+		<field name="timestamp">2017-03-27 20:16:28</field>
+	</row>
+	<row>
+		<field name="lid">4</field>
+		<field name="user_id">3</field>
+		<field name="timestamp">2017-03-28 20:16:28</field>
+	</row>
+	</table_data></database>
+</mysqldump>
+
