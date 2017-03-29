@@ -1,6 +1,6 @@
 <?php
 require 'DBFixture.php';
-require dirname(__FILE__).'/../DBandRedirect.php';
+require dirname(__FILE__).'/../emailExpSurveyDBandRedirect.php';
 include_once(dirname(__FILE__).'/../config.inc.php');
 class loginTest extends DBFixtureTestCase{
 
@@ -38,11 +38,16 @@ class loginTest extends DBFixtureTestCase{
         $email = 'no-survey@g.com';
         $res = handle_input_email(self::$pdo, $email);
         $queryTable = $conn->createQueryTable('Users', 'SELECT * FROM Users');
+        # No modification on existing DB
         $expectedTable = $this->getDataSet()->getTable('Users');
         $this->assertTablesEqual($expectedTable, $queryTable);
+        # correct URL
         $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_SURVEY'], $res['head_url']);
+        # correct user_id
         $this->assertEquals(2, $res[$GLOBALS['SESS_USER_ID']]);
+        # correct exp lvl
         $this->assertEquals('Fearless', $res[$GLOBALS['SESS_EXPLV']]);
+        # correct has no survey
         $this->assertNull($res[$GLOBALS['SESS_SURVEY']]);
     }
     
@@ -52,11 +57,16 @@ class loginTest extends DBFixtureTestCase{
         $email = 'has-survey@g.com';
         $res = handle_input_email(self::$pdo, $email);
         $queryTable = $conn->createQueryTable('Users', 'SELECT * FROM Users');
+        # No modification on existing DB
         $expectedTable = $this->getDataSet()->getTable('Users');
         $this->assertTablesEqual($expectedTable, $queryTable);
+        # correct URL
         $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_RATE_VIDEO'], $res['head_url']);
+        # correct user_id
         $this->assertEquals(3, $res[$GLOBALS['SESS_USER_ID']]);
+        # correct exp lvl
         $this->assertEquals('Interested', $res[$GLOBALS['SESS_EXPLV']]);
+        # correct has survey
         $this->assertEquals(1, $res[$GLOBALS['SESS_SURVEY']]);
     }
     
@@ -77,6 +87,18 @@ class loginTest extends DBFixtureTestCase{
         $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_RATE_VIDEO'], $res['head_url']);
         
     }
-
+    
+    public function testSkipSurvey(){
+        $conn = $this->getConnection();
+        $user_id = 1;
+        $res = handle_survey(self::$pdo, $user_id);
+        $queryTable = $conn->createQueryTable('Users', 'SELECT * FROM Users');
+        # No modification on existing DB
+        $expectedTable = $this->getDataSet()->getTable('Users');
+        $this->assertTablesEqual($expectedTable, $queryTable);
+        $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_RATE_VIDEO'], $res['head_url']);
+         
+        
+    }
 }
 ?>
