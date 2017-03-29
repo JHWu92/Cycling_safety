@@ -1,6 +1,6 @@
 <?php
    
-    function parseFormAndInsertRating($pdo, $post_data, $sess_data){
+    function parseFormAndInsertRating($pdo, $post_data, $sess_data, $timestamp){
         include('config.inc.php');
         $familiar_st = $post_data[$POST_FAMILIAR_ST];
         $score = $post_data[$POST_SCORE];
@@ -13,7 +13,7 @@
         }
 
         if(!empty($score)){
-            $sql = "INSERT $TABLE_RATING (uid, vid, score, comment, tags, familiar) VALUES ($uid, $vid, $score, '$comment', '$tags', '$familiar_st')";
+            $sql = "INSERT $TABLE_RATING (uid, vid, score, comment, tags, familiar, timestamp) VALUES ($uid, $vid, $score, '$comment', '$tags', '$familiar_st', '$timestamp')";
             $pdo->exec($sql);
             $rid = $pdo->lastInsertId(); 
         }
