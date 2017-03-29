@@ -77,9 +77,7 @@
 </div>
 
 <script>
-    function getColor(score, ratio) {
-        d = score/ratio;
-        console.log(score, ratio, d);
+    function getColor(d) {
         return d > 4 ? '#1a9641' :
                d > 3  ? '#a6d96a' :
                d > 2  ? '#ffffbf' :
@@ -90,7 +88,7 @@
     $.getJSON('mysql2geojson.php', show_map);
     function show_map(seg_rating){
         // use the color property to set the color on html
-        function style(feature) { return { color: getColor(feature.properties.sumScore, feature.properties.sumRatio)};}
+        function style(feature) { return { color: getColor(feature.properties.safetyScore)};}
         // display all properties for each segment
         function onEachFeature(feature,layer){
             var popUpContent = '';
@@ -123,7 +121,9 @@
         };
         
         var map = L.map('map', {
-            layers: [streets, seg_rating_layer] // initial layer
+            layers: [streets, seg_rating_layer], // initial layer
+            center: [38.9047829846, -77.0163424758],
+            zoom: 13,
         });
         map.fitBounds(geojson.getBounds());
         
