@@ -48,15 +48,15 @@
         return array('head_url'=>$head_url);
     }
     
-    function handle_survey($pdo, $user_id){
+    function handle_survey($pdo, $user_id, $post_data){
         include('config.inc.php');
         $cols_update = array();
         # get post form variables
         foreach($SURVEY_COLS as $col){
-            if(empty($_POST[$col])){
+            if(empty($post_data[$col])){
                 continue;
             }
-            array_push($cols_update, "$col=$_POST[$col]");
+            array_push($cols_update, "$col=$post_data[$col]");
         }
         
 

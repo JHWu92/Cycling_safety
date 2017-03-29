@@ -88,13 +88,20 @@ class loginTest extends DBFixtureTestCase{
         
     }
     
-    public function testSkipSurvey(){
+    public function testSaveSurvey(){
+        # T9
         $conn = $this->getConnection();
-        $user_id = 1;
-        $res = handle_survey(self::$pdo, $user_id);
+        $user_id = 2;
+        $post_data = array(
+            $GLOBALS['TB_U_COL_BK_PURPOSE']=>1,
+            $GLOBALS['TB_U_COL_GENDER']=>2,
+            $GLOBALS['TB_U_COL_DRIVER']=>1,
+            $GLOBALS['TB_U_COL_BK_TYPE']=>4,
+        );
+        $res = handle_survey(self::$pdo, $user_id, $post_data);
         $queryTable = $conn->createQueryTable('Users', 'SELECT * FROM Users');
-        # No modification on existing DB
-        $expectedTable = $this->getDataSet()->getTable('Users');
+        # update survey correctly
+        $expectedTable = $this->getDataSet('updateSurveyUsers')->getTable('Users');
         $this->assertTablesEqual($expectedTable, $queryTable);
         $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_RATE_VIDEO'], $res['head_url']);
          

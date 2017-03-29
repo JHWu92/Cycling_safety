@@ -17,7 +17,7 @@
     }
     
     
-    $res = handle_survey($pdo, $user_id);
+    $res = handle_survey($pdo, $user_id, $_POST);
     header($res['head_url']); 
     return true;
 
