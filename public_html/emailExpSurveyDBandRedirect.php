@@ -1,5 +1,14 @@
 <?php
-
+    function logLogin($pdo, $user_id, $timestamp){
+        include('config.inc.php'); 
+        $sql = "INSERT INTO $TABLE_LOGINLOG (`$TABL_USERS_FIELD_UID`, `$TB_COL_TIMESTAMP`) VALUES ($user_id, '$timestamp')";
+        $result_insert = $pdo->exec($sql);
+        if(!$result_insert){  # if error happens when inserting
+                die("<h3>error happens in logging your login, click <a href='/index.html'>HERE</a> to enter your email again</h3>");
+        }
+        
+    }
+    
     function handle_input_email($pdo, $email){
         include('config.inc.php'); 
         # check if user exists
@@ -23,6 +32,7 @@
             $exp_lvl = $result[$TABL_USERS_FIELD_EXP];
             $has_survey = $result[$TABL_USERS_FIELD_SURVEY];
         }
+        
         
         if(empty($exp_lvl)){
             $head_url = "Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_EXP'];

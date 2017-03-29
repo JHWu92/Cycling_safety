@@ -18,6 +18,9 @@
     //if(mysqli_connect_errno()){ die("failed to connect to mysql:" . mysqli_connect_error()); }
 
     $res = handle_input_email($pdo, $email);
+    
+    $timestamp = date('Y-m-d h:i:s');
+    logLogin($pdo, $res[$SESS_USER_ID], $timestamp);
     $pdo = null;
     
     // Store log in Info in session

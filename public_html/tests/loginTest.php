@@ -104,7 +104,24 @@ class loginTest extends DBFixtureTestCase{
         $expectedTable = $this->getDataSet('updateSurveyUsers')->getTable('Users');
         $this->assertTablesEqual($expectedTable, $queryTable);
         $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_RATE_VIDEO'], $res['head_url']);
-         
+    }
+    
+    public function testLoginLog(){
+        # T21
+        $conn = $this->getConnection();
+        $data = array(
+            [1, '2017-03-28 10:16:28'],
+            [3, '2017-03-28 12:16:28'],
+            [2, '2017-03-28 22:18:38'],
+            [3, '2017-03-28 22:20:48'],
+        );
+        foreach($data as $login){
+            logLogin(self::$pdo, $login[0], $login[1]);
+        }
+        $queryTable = $conn->createQueryTable('loginLog', 'SELECT * FROM loginLog');
+        # update survey correctly
+        $expectedTable = $this->getDataSet('loginLog')->getTable('loginLog');
+        $this->assertTablesEqual($expectedTable, $queryTable);
         
     }
 }
