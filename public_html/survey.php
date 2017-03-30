@@ -25,16 +25,19 @@
 </head>
 
 <body>
-<div  style="margin: 0 15%; padding: 10px 40px;">
-    <h2>Survey (optional)</h2>
-   <h4>It is of great help for the project to understand how cycling safety perceptions are affected by demographic and socioeconomic factors.</h4>
-  <h4>There are 11 questions in this survey. None of these questions are required. If a question is uncomfortable for you to answer, just skip it.</h4> 
-  <h4>if you prefer not to provide this information, please click <a href="<?=$PAGE_RATE_VIDEO?>" class="btn btn-default">No, thank you</a></h4>
-</div>
+
 <form method="post" action="<?=$PAGE_SURVEY_SAVE?>">
 
     <button id='fixedbutton' class="btn btn-primary center-block" type="submit">Submit and <br> Start Rating!</button>
     <div class="container" width="70%">
+        <div class="row">
+            <div class="col-sm-12">
+        
+    <h2>Survey (optional)</h2>
+   <h4>It is of great help for the project to understand how cycling safety perceptions are affected by demographic and socioeconomic factors.</h4>
+  <h4>There are 11 questions in this survey. None of these questions are required. If a question is uncomfortable for you to answer, just skip it.</h4> 
+  <h4>if you prefer not to provide this information, please click <a href="<?=$PAGE_RATE_VIDEO?>" class="btn btn-default">No, thank you</a></h4>
+        </div></div>
         <div class="spacer20"></div>   
         <div class="row">
             <div class="col-sm-12">
