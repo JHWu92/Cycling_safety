@@ -11,7 +11,8 @@
         echo 'Connection failed: ' . $e->getMessage();
     }
    
-    $res=parseFormAndInsertRating($pdo,$_POST, $_SESSION);
+    $timestamp = date('Y-m-d h:i:s');
+    $res=parseFormAndInsertRating($pdo,$_POST, $_SESSION, $timestamp);
     $pdo = null;
     
 
