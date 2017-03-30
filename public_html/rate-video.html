@@ -40,24 +40,24 @@ $(document).ready(function(){
             
                 <!-- left col -->
                 <div class="col-md-5">
-                    <div class="border height-300">
+                    <div class="border">
                          
                          <!-- rate score -->
-                        <label for="radioBtn" style='display:block;'><label style="color:red"> * </label>How safe is this area for you to ride?</label>
+                        <label for="radioBtn" style='display:block;'><label style="color:red"> * &nbsp;&nbsp;</label>How safe is this area for you to ride?</label>
                         <div class="margin-left-bottom">
-                            <label class='not-bold'><input type="radio" name="score" id="score1" value="1" required> <b>1</b> (too dangerous, I would never ride here)<br></label>
-                            <label class='not-bold'><input type="radio" name="score" id="score2" value="2" required> <b>2</b> (a bit dangerous, I wouldn't ride here unless I have to)<br></label>
-                            <label class='not-bold'><input type="radio" name="score" id="score3" value="3" required> <b>3</b> (fair, I need to be cautious to ride here)<br></label>
-                            <label class='not-bold'><input type="radio" name="score" id="score4" value="4" required> <b>4</b> (quite safe, I would easily ride here)<br></label>
-                            <label class='not-bold'><input type="radio" name="score" id="score5" value="5" required> <b>5</b> (very safe, even a kid could ride here)<br></label>
+                            <div class="row"><label class='not-bold'><input type="radio" name="score" id="score1" value="1" required>&nbsp;<b>1</b>&nbsp;(too dangerous, I would never ride here)<br></label></div>
+                            <div class="row"><label class='not-bold'><input type="radio" name="score" id="score2" value="2" required>&nbsp;<b>2</b>&nbsp;(a bit dangerous, I wouldn't ride here unless I have to)<br></label></div>
+                            <div class="row"><label class='not-bold'><input type="radio" name="score" id="score3" value="3" required>&nbsp;<b>3</b>&nbsp;(fair, I need to be cautious to ride here)<br></label></div>
+                            <div class="row"><label class='not-bold'><input type="radio" name="score" id="score4" value="4" required>&nbsp;<b>4</b>&nbsp;(quite safe, I would easily ride here)<br></label></div>
+                            <div class="row"><label class='not-bold'><input type="radio" name="score" id="score5" value="5" required>&nbsp;<b>5</b>&nbsp;(very safe, even a kid could ride here)<br></label></div>
                         </div><!-- /rate score -->
                         <div class="divider"></div>
                         
                         <!-- familiar with street -->
                         <label>Are you familiar with this Street?</label>
-                        <div class='margin-left-bottom'> 
-                            <label class='not-bold'><input type="radio" name='familiar' id='f1' value="yes" /> Yes</label><br>
-                            <label class='not-bold'><input type="radio" name='familiar' id='f2' value="no" /> No</label>
+                        <div class='margin-left'> 
+                            <div class="row"><label class='not-bold'><input type="radio" name='familiar' id='f1' value="yes" />&nbsp;Yes</label></div>
+                            <div class="row"><label class='not-bold'><input type="radio" name='familiar' id='f2' value="no" />&nbsp;No</label></div>
                         </div><!-- /familiar with street -->
                         
                     </div><!-- border div -->
@@ -65,30 +65,30 @@ $(document).ready(function(){
                  
                  <!-- middle col: tags and comment -->
                 <div class="col-md-6">
-                    <div class="border height-300"><!-- border div -->
-                        <label for="description">Why did you give the video this rating?</label>
+                    <div class="border"><!-- border div -->
+                        <label for="description" ><label style="color:red">&nbsp;&nbsp;</label>Why did you give the video this rating?</label>
                         
                         <!-- reasons for rating score -->
                         <div class='margin-left-bottom'> 
                             <div class="row">
-                                <div class="col-md-4"><label>traffic:</label></div>
-                                <div class="col-md-4"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag1" value="traf_1"> appropriate</label></div>
-                                <div class="col-md-4"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag2" value="traf_0"> too much</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag1" value="traffic">&nbsp;traffic</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag2" value="among-cars">&nbsp;cycling among cars</label></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label>bike lane/side walk:</label></div>
-                                <div class="col-md-4"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag3" value="lane_1"> good condition</label></div>
-                                <div class="col-md-4"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag4" value="lane_0"> There isn't any</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag3" value="bike-lane">&nbsp;bike lane</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag4" value="switch-lanes">&nbsp;switch lanes</label></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label>weather:</label></div>
-                                <div class="col-md-4"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag5" value="weather_1">Pleasant</label></div>
-                                <div class="col-md-4"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag6" value="weather_0">too bad</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag5" value="weather">&nbsp;weather</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag6" value="neighborhood">&nbsp;neighborhood</label></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4"><label>neighborhood</label></div>
-                                <div class="col-md-4"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag7" value="nbrh_1">safe</label></div>
-                                <div class="col-md-4"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag8" value="nbrh_0">unsafe/crime</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag7" value="pedestrian-crossing">&nbsp;pedestrian crossing</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag8" value="car-crossing">&nbsp;car crossing</label></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag7" value="pedestrian-crossing">&nbsp;pedestrian crossing</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag8" value="car-crossing">&nbsp;car crossing</label></div>
                             </div>
                         </div> <!-- /reasons for rating score -->
                         
@@ -103,16 +103,26 @@ $(document).ready(function(){
                 <!-- right col: submit button -->
                 <div class="col-md-1 margin-top">
                     <div id="wrapper" class="tooltip-wrapper disabled" data-placement="bottom" data-title="Please finish the video before rating">
-                        <button id='btn-rate' name='btn-rate'  class="btn btn-primary" type="submit"  disabled="">Rate <br>this<br> video</button>
-                    </div><br><br><br><br><br><br><br><br>
-                    <button id='btn-done' name='btn-done' class="btn btn-default" type="submit" >Done <br>for <br>today</button>
+                        <button id='btn-rate' name='btn-rate'  class="btn btn-primary margin-top" type="submit"  disabled="">Rate <br>this<br> video</button>
+                    </div>
+                    <button id='btn-done' name='btn-done' class="btn btn-default margin-top" type="submit" style="float:None;">Done <br>for <br>today</button>
                 </div><!-- right col: submit button -->
                 
             </div> <!-- /end row with three col-->
         </form>
   </div>   
+  <div class='spacer20'></div>
    
-
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted footer-text">
+                Cycling Safety project is designed and operated by the <a href="http://www.urbancomputinglab.org">Urban Computing Lab</a> at the <a href="http://www.umd.edu/">University of Maryland.</a> If you have any suggestion or question, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>
+            </p>
+            <p class="text-muted footer-text">
+                <span id="application-version">Last updated: 2017-03-30</span>
+            </p>
+        </div>
+    </footer>
 
 </body>
 </html>
