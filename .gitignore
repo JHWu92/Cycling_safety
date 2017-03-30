@@ -9,5 +9,3 @@ upload video 2 server.txt
 video_gpx/client_secrets.json
 video_gpx/upload_video.py-oauth2.json
 video_gpx/test_data/2DB_RoadSegment.csv
-video_gpx/test_data/2DB_video.csv
-video_gpx/test_data/2DB_VideoRoadSeg.csv
