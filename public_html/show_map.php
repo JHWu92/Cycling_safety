@@ -23,7 +23,6 @@
 <head>
     <title>Cycling Safety Map</title>
 
-    <script src="js/script.js"></script>
     <link href="css/main.css" rel="stylesheet" >
 
     <script src="js/jquery-3.1.1.min.js"></script>
@@ -31,8 +30,8 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <script src="js/bootstrap.min.js"></script>
     <!-- leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <script src="js/leaflet.js"></script>
       
     <style>
         #map {
