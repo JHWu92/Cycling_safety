@@ -5,6 +5,7 @@
     require 'emailExpSurveyDBandRedirect.php';
     //parse data from form 
     $email=$_POST[$SESS_EMAIL];
+    $timezone = $_POST[$TB_COL_TIMEZONE];
     
     // check whether the email exist against DB
     # Connect to MySQL database
@@ -18,9 +19,10 @@
     //if(mysqli_connect_errno()){ die("failed to connect to mysql:" . mysqli_connect_error()); }
 
     $res = handle_input_email($pdo, $email);
-    
-    $timestamp = date('Y-m-d h:i:s');
-    logLogin($pdo, $res[$SESS_USER_ID], $timestamp);
+
+    $date = new DateTime( "now", new DateTimeZone("UTC") );
+    $timestamp = $date->format('Y-m-d H:i:s');    
+    logLogin($pdo, $res[$SESS_USER_ID], $timestamp, $timezone);
     $pdo = null;
     
     // Store log in Info in session
@@ -29,6 +31,7 @@
     $_SESSION[$SESS_LOGIN] = True;  // logged in
     $_SESSION[$SESS_EXPLV] = $res[$SESS_EXPLV];  
     $_SESSION[$SESS_SURVEY] = $res[$SESS_SURVEY];  
+    $_SESSION[$TB_COL_TIMEZONE]= $timezone ;
     
     
     //echo $head_url;    

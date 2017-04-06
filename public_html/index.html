@@ -14,7 +14,12 @@
 
     <!-- keep banner position -->
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function(){                
+            // get timezone
+            var visitortime = new Date();
+            var visitortimezone = "GMT " + -visitortime.getTimezoneOffset()/60;
+            $('#timezone').val(visitortimezone);
+            
             var jumboHeight = $('.jumbotron').outerHeight();
             function parallax(){
                 var scrolled = $(window).scrollTop();
@@ -107,6 +112,7 @@
                     <div class="spacer30"></div>   <!-- add space -->
                     <label for="inputEmail" >Email address</label>
                     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="email">
+                    <input type="hidden" id="timezone", name='timezone'>
                     <div class="spacer30"></div>   <!-- add space -->
                     <button class="btn" id="participate-button">Participate</button>
                     <div class="spacer20"></div>   <!-- add space -->

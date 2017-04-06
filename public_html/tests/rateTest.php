@@ -13,7 +13,8 @@ class loginTest extends DBFixtureTestCase{
                                         $GLOBALS['POST_TAG']=>$tags);
         $sess_data = array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>4);
         $timestamp = '2017-03-27 20:13:36';
-        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data,$timestamp);
+        $timezone = 'GMT -4';
+        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data, $timestamp, $timezone);
         
         $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_RATE_VIDEO'], $res['head_url']);
         $this->assertEquals(3, $res['rid']);
@@ -32,8 +33,9 @@ class loginTest extends DBFixtureTestCase{
                                         $GLOBALS['POST_TAG']=>$tags);
         $sess_data = array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>4);
         $timestamp = '2017-03-27 20:13:36';
+        $timezone = 'GMT -4';
         
-        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data, $timestamp);
+        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data, $timestamp, $timezone);
         
         $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_SHOW_MAP'], $res['head_url']);
         $this->assertEquals(3, $res['rid']);
@@ -52,8 +54,9 @@ class loginTest extends DBFixtureTestCase{
                                         $GLOBALS['POST_TAG']=>$tags);
         $sess_data = array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>4);
         $timestamp = '2017-03-27 20:13:36';
+        $timezone = 'GMT -4';
         
-        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data, $timestamp);
+        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data, $timestamp, $timezone);
         
         $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_SHOW_MAP'], $res['head_url']);
         $this->assertNull($res['rid']);
@@ -72,8 +75,9 @@ class loginTest extends DBFixtureTestCase{
                                         $GLOBALS['POST_TAG']=>$tags);
         $sess_data = array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>4);
         $timestamp = '2017-03-27 20:13:36';
+        $timezone = 'GMT -4';
         
-        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data, $timestamp);
+        $res = parseFormAndInsertRating(self::$pdo,$post_data, $sess_data, $timestamp, $timezone);
         
         $this->assertEquals("Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_RATE_VIDEO'], $res['head_url']);
         $this->assertEquals(3, $res['rid']);
@@ -87,6 +91,7 @@ class loginTest extends DBFixtureTestCase{
     # T19
         $conn = $this->getConnection();
         $timestamp = '2017-03-27 20:13:36';
+        $timezone = 'GMT -4';
         $data = array(
             [array($GLOBALS['POST_SCORE']=>5, 'btn-rate'=>1), array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>4)],
             [array($GLOBALS['POST_SCORE']=>4, 'btn-rate'=>1), array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>5)],
@@ -97,7 +102,7 @@ class loginTest extends DBFixtureTestCase{
             [array($GLOBALS['POST_SCORE']=>5, 'btn-rate'=>1), array($GLOBALS['SESS_USER_ID']=>2, $GLOBALS['SESS_VIDEO_ID']=>6)],
             );
         foreach($data as $rate){
-            $res = parseFormAndInsertRating(self::$pdo,$rate[0], $rate[1], $timestamp);
+            $res = parseFormAndInsertRating(self::$pdo,$rate[0], $rate[1], $timestamp, $timezone);
         }
     
         $queryTable = $conn->createQueryTable('RoadSegment', 'SELECT * FROM RoadSegment');

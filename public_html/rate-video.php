@@ -11,8 +11,10 @@
         echo 'Connection failed: ' . $e->getMessage();
     }
    
-    $timestamp = date('Y-m-d h:i:s');
-    $res=parseFormAndInsertRating($pdo,$_POST, $_SESSION, $timestamp);
+    $date = new DateTime( "now", new DateTimeZone("UTC") );
+    $timestamp = $date->format('Y-m-d H:i:s');    
+    $timezone = $_SESSION[$TB_COL_TIMEZONE];
+    $res=parseFormAndInsertRating($pdo,$_POST, $_SESSION, $timestamp, $timezone);
     $pdo = null;
     
 

@@ -1,7 +1,7 @@
 <?php
-    function logLogin($pdo, $user_id, $timestamp){
+    function logLogin($pdo, $user_id, $timestamp, $timezone){
         include('config.inc.php'); 
-        $sql = "INSERT INTO $TABLE_LOGINLOG (`$TABL_USERS_FIELD_UID`, `$TB_COL_TIMESTAMP`) VALUES ($user_id, '$timestamp')";
+        $sql = "INSERT INTO $TABLE_LOGINLOG (`$TABL_USERS_FIELD_UID`, `$TB_COL_TIMESTAMP`, `$TB_COL_TIMEZONE`) VALUES ($user_id, '$timestamp', '$timezone')";
         $result_insert = $pdo->exec($sql);
         if(!$result_insert){  # if error happens when inserting
                 die("<h3>error happens in logging your login, click <a href='/index.html'>HERE</a> to enter your email again</h3>");
