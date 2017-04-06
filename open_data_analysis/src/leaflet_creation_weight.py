@@ -24,7 +24,7 @@ template = """
 <script src="{file_name}.js" type="text/javascript"></script>
 
 <script>
-    function set_style(feature){{return {{color: feature.properties.color}};}}
+    function set_style(feature){{return {{color: feature.properties.color, weight: feature.properties.weight}};}}
 
     function onEachFeature(feature,layer){{
         var popUpContent = '';
@@ -123,6 +123,7 @@ def clean_init_layers(init_layers, allow_style, binding_data):
 def create_leaflet(html_title, file_path, file_name, lat, lon, zoom, init_layers, map_layers, binding_data, width=700, height=700):
 
     allow_style = ['light', 'dark', 'outdoors', 'satellite', 'streets']
+    init_layers = [ly+'_layer'  if ly not in allow_style else ly for ly in init_layers]
     if len(set(map_layers)-set(allow_style))!=0:
         raise ValueError('allow map style layers is %s' % str(allow_style))
     init_layers = clean_init_layers(init_layers, allow_style, binding_data)
@@ -152,17 +153,15 @@ def create_map_visualization(html_title, file_path, file_name, lat, lon, zoom,
                              init_layers, map_layers, binding_data, gpdfs, width=700, height=700):
     """
     example:
-    html_title = 'openstreetmap elements'
+    html_title = 'some title'
     file_path = ''
-    file_name = 'test creation of leaflet'
+    file_name = 'map vis'
     lon, lat = -77.0908494, 38.9045525  #D.C.
     zoom = 12
-    init_layers = ['streets', 'stsg']
+    init_layers = ['streets', 'ly1']
     map_layers = ['light','streets', 'satellite']
-    binding_data=[['stsg','street segment'],['stsg1','street segment1']]
-    # gpdf1['color'] = '#aa0'
-    # gpdf2['color'] = '#0a0'
-    gpdfs = [gpdf1, gpdf2]
+    binding_data=[['ly1','layer1']]
+    gpdfs = [gpdf1]
     create_map_visualization(html_title, file_path, file_name, lat, lon, zoom, init_layers, map_layers, binding_data, gpdfs)
     """
     assert len(binding_data)==len(gpdfs)
