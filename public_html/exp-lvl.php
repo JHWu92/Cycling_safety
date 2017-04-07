@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to Cycling Safety Project</title>
+    <title>Cycling Safety Project</title>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -36,9 +36,9 @@
                         </label>
                         <ul class="text-align-left">
                             <h3>Fearless</h3>
-                            <li>Cycling is strong part of their identity</li>
-                            <li>Generally undeterred by motor vehicles</li>
-                            <li>Will consider cycling even in the absence of any visible bike facility</li>
+                            <li>Cycling is strong part of your identity</li>
+                            <li>You are generally undeterred by motor vehicles</li>
+                            <li>You will consider cycling even in the absence of any visible bike facility</li>
                         </ul>
                 </div><!-- /exp lvl Fearless -->
                 
@@ -50,9 +50,9 @@
                         </label>
                         <ul class="text-align-left">
                             <h3>Confident</h3>
-                            <li>Cycling is a part of their identity</li>
-                            <li>Slightly or moderately comfortable sharing the road with motor vehicles</li>
-                            <li>Will consider cycling if the route is mostly on a bike facility</li>
+                            <li>Cycling is a part of your identity</li>
+                            <li>You are slightly or moderately comfortable sharing the road with motor vehicles</li>
+                            <li>You will consider cycling if the route is mostly on a bike facility</li>
                         </ul>
                 </div><!-- /exp lvl confident -->
                 
@@ -64,9 +64,9 @@
                         </label>
                         <ul class="text-align-left">
                             <h3>Interested</h3>
-                            <li>Do not identify as a cyclist</li>
-                            <li>Not comfortable sharing the road with motor vehicles without a visible bike facility</li>
-                            <li>Interested in cycling if the route is on a bike facility</li>
+                            <li>You do not identify yourself as a cyclist</li>
+                            <li>You are not comfortable sharing the road with motor vehicles without a visible bike facility</li>
+                            <li>You are Interested in cycling if the route is on a bike facility</li>
                         </ul>
                 </div><!-- /exp lvl interested -->
                 
@@ -78,9 +78,9 @@
                         </label>
                         <ul class="text-align-left">
                             <h3>Reluctant</h3>
-                            <li>Do not identify as a cyclist</li>
-                            <li>Not comfortable sharing the road with motor vehicles without a visible bike facility</li>
-                            <li>Not interested in cycling</li>
+                            <li>You do not identify yourself as a cyclist</li>
+                            <li>You are not comfortable sharing the road with motor vehicles without a visible bike facility</li>
+                            <li>You are not interested in cycling</li>
                         </ul>
                 </div><!-- /exp lvl reluctant -->
                 
