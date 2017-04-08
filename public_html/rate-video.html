@@ -72,27 +72,27 @@ $(document).ready(function(){
                         <div class='margin-left-bottom'> 
                             <div class="row">
                                 <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag1" value="traffic">&nbsp;traffic</label></div>
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag2" value="among-cars">&nbsp;intersection design</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag2" value="intersection design">&nbsp;intersection design</label></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag3" value="bike-lane">&nbsp;bike lane design</label></div>
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag4" value="switch-lanes">&nbsp;driving quality</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag3" value="bike lane design">&nbsp;bike lane design</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag4" value="driving quality">&nbsp;driving quality</label></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag5" value="weather">&nbsp;bike lane blocked (vehicle)</label></div>
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag6" value="neighborhood">&nbsp;road quality (paving)</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag5" value="bike lane blocked (vehicle)">&nbsp;bike lane blocked (vehicle)</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag6" value="road quality (paving)">&nbsp;road quality (paving)</label></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag7" value="pedestrian-crossing">&nbsp;bike lane blocked (construction)</label></div>
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag8" value="cross-intersection">&nbsp;hill</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag7" value="bike lane blocked (construction)">&nbsp;bike lane blocked (construction)</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag8" value="hill">&nbsp;hill</label></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag9" value="pedestrian-crossing">&nbsp;dooring potential</label></div>
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag10" value="cross-intersection">&nbsp;neighborhood security</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag9" value="dooring potential">&nbsp;dooring potential</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag10" value="neighborhood security">&nbsp;neighborhood security</label></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag11" value="bus-stop">&nbsp;pedestrians crossing</label></div>
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag12" value="construction">&nbsp;weather</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag11" value="pedestrians crossing">&nbsp;pedestrians crossing</label></div>
+                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag12" value="weather">&nbsp;weather</label></div>
                             </div>
                         </div> <!-- /reasons for rating score -->
                         
@@ -106,8 +106,9 @@ $(document).ready(function(){
                 
                 <!-- right col: submit button -->
                 <div class="col-md-1 margin-top">
+                    <input type="hidden" name="watched" value="" id='watched'>
                     <div id="wrapper" class="tooltip-wrapper disabled" data-placement="bottom" data-title="Please watch the video before rating">
-                        <button id='btn-rate' name='btn-rate'  class="btn btn-primary margin-top" type="submit"  disabled="">Save and <br> continue rating</button>
+                        <button id='btn-rate' name='btn-rate'  class="btn btn-primary margin-top" type="submit"  disabled="">Save and <br> continue <br>rating</button>
                     </div>
                     <button id='btn-done' name='btn-done' class="btn btn-default margin-top" type="submit" style="float:None;">Done rating <br>for today</button>
                 </div><!-- right col: submit button -->

@@ -8,11 +8,12 @@
         $uid = $sess_data[$SESS_USER_ID];
         $vid = $sess_data[$SESS_VIDEO_ID];
         $tags = $post_data[$POST_TAG];
+        $watched = $post_data[$POST_WATCHED];
         if(is_array($tags)){
             $tags = implode(',', $tags);
         }
 
-        if(!empty($score)){
+        if(!empty($score) && !empty($watched)){
             $sql = "INSERT $TABLE_RATING (uid, vid, score, comment, tags, familiar, $TB_COL_TIMESTAMP, $TB_COL_TIMEZONE) VALUES ($uid, $vid, $score, '$comment', '$tags', '$familiar_st', '$timestamp', '$timezone')";
             $pdo->exec($sql);
             $rid = $pdo->lastInsertId(); 

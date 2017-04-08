@@ -17,6 +17,7 @@ function changeVid() {
                                 document.getElementById("btn-rate").className = document.getElementById("btn-rate").className.replace("disabled","");
                                 $('#wrapper').tooltip('disable');
                                 document.getElementById("btn-rate").disabled=false;
+                                document.getElementById("watched").value = 'True';
                         }
                     }
                 }
