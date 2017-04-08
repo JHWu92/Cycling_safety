@@ -12,7 +12,7 @@
         if(mysqli_connect_errno()){ die("failed to connect to mysql:" . mysqli_connect_error()); }
         $cnt = select_rate_cnt_by_uid($con, $uid);
         
-        $ty = "Thank you, $email! You've rated $cnt videos. Appreciate your contribution.<br>";
+        $ty = "Thank you $email! You've rated $cnt videos. We really appreciate your contribution.<br>";
     }
     session_destroy();
     
@@ -21,7 +21,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cycling Safety Map</title>
+    <title>Cycling Safety Project</title>
 
     <link href="css/main.css" rel="stylesheet" >
 
@@ -69,12 +69,10 @@
     
 <div class="container">
     <h2><?=$ty?> </h2>
-    <h2>Here is our cycling safety map for D.C. so far.</h2>
-     <h2>If you want to continue rating, go back to <a href="index.html">Home page</a>. </h2>
-        
+    <h2>Here is our cycling safety map for D.C., thanks to contributions from you and other cyclists.</h2>
+     <h2>If you want to continue rating, click  <a href="index.html">here</a>. Otherwise, thanks again and come back soon! Remember, the more you rate, the higher the chances of winning a gift card! (we will make the winners public at the end of August)</h2>
     <div id='map'></div>
 </div>
-
 <script>
     function getColor(d) {
         return d > 4 ? '#1a9641' :
@@ -146,6 +144,13 @@
     }
 
 </script>
-    
+
+<footer class="footer">
+        <div class="container">
+            <p class="text-muted footer-text">
+   Cycling Safety project is designed and lead by the <a href="http://www.urbancomputinglab.org">Urban Computing Lab</a> at the <a href="http://www.umd.edu/">University of Maryland</a> with support from the National Science Foundation <a href="http://www.nsf.gov">National Science Foundation. </a>  If you have any suggestion or question, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>
+            </p>
+        </div>
+    </footer>    
 </body>
     
