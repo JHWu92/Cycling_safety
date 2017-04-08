@@ -33,13 +33,13 @@ $(document).ready(function(){
     <div class="container">
         <div class="row" id="not-login"></div>
         <!-- row containing the Youtube Video -->
-        <div class="row"><div class="col"><div id="player"></div></div></div>
+        <div class="row"><div class="col-lg-12"><div id="player"></div></div></div>
         <div class='spacer20'></div>
         <form method="post" action="rate-video.php">
             <div class="row"> <!-- row with three col -->
             
                 <!-- left col -->
-                <div class="col-md-5">
+                <div class="col-lg-5">
                     <div class="border">
                          
                          <!-- rate score -->
@@ -64,35 +64,35 @@ $(document).ready(function(){
                  </div> <!-- /left col  with rate score-->
                  
                  <!-- middle col: tags and comment -->
-                <div class="col-md-6">
+                <div class="col-lg-6">
                     <div class="border"><!-- border div -->
                         <label for="description" ><label style="color:red">&nbsp;&nbsp;</label>Why did you give the video this rating?</label>
                         
                         <!-- reasons for rating score -->
                         <div class='margin-left-bottom'> 
                             <div class="row">
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag1" value="traffic">&nbsp;traffic</label></div>
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag2" value="intersection design">&nbsp;intersection design</label></div>
+                                <div class="col-sm-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag1" value="traffic">&nbsp;traffic</label></div>
+                                <div class="col-sm-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag2" value="intersection design">&nbsp;intersection design</label></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag3" value="bike lane design">&nbsp;bike lane design</label></div>
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag4" value="driving quality">&nbsp;driving quality</label></div>
+                                <div class="col-sm-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag3" value="bike lane design">&nbsp;bike lane design</label></div>
+                                <div class="col-sm-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag4" value="driving quality">&nbsp;driving quality</label></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag5" value="bike lane blocked (vehicle)">&nbsp;bike lane blocked (vehicle)</label></div>
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag6" value="road quality (paving)">&nbsp;road quality (paving)</label></div>
+                                <div class="col-sm-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag5" value="bike lane blocked (vehicle)">&nbsp;bike lane blocked (vehicle)</label></div>
+                                <div class="col-sm-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag6" value="road quality (paving)">&nbsp;road quality (paving)</label></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag7" value="bike lane blocked (construction)">&nbsp;bike lane blocked (construction)</label></div>
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag8" value="hill">&nbsp;hill</label></div>
+                                <div class="col-sm-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag7" value="bike lane blocked (construction)">&nbsp;bike lane blocked (construction)</label></div>
+                                <div class="col-sm-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag8" value="hill">&nbsp;hill</label></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag9" value="dooring potential">&nbsp;dooring potential</label></div>
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag10" value="neighborhood security">&nbsp;neighborhood security</label></div>
+                                <div class="col-sm-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag9" value="dooring potential">&nbsp;dooring potential</label></div>
+                                <div class="col-sm-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag10" value="neighborhood security">&nbsp;neighborhood security</label></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag11" value="pedestrians crossing">&nbsp;pedestrians crossing</label></div>
-                                <div class="col-md-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag12" value="weather">&nbsp;weather</label></div>
+                                <div class="col-sm-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag11" value="pedestrians crossing">&nbsp;pedestrians crossing</label></div>
+                                <div class="col-sm-6"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag12" value="weather">&nbsp;weather</label></div>
                             </div>
                         </div> <!-- /reasons for rating score -->
                         
@@ -105,12 +105,12 @@ $(document).ready(function(){
                 </div><!-- /middle border: tags and comment -->
                 
                 <!-- right col: submit button -->
-                <div class="col-md-1 margin-top">
+                <div class="col-sm-1 margin-top">
                     <input type="hidden" name="watched" value="" id='watched'>
                     <div id="wrapper" class="tooltip-wrapper disabled" data-placement="bottom" data-title="Please watch the video before rating">
-                        <button id='btn-rate' name='btn-rate'  class="btn btn-primary margin-top" type="submit"  disabled="">Save and <br> continue <br>rating</button>
+                        <button id='btn-rate' name='btn-rate'  class="btn btn-primary margin-top" type="submit"  disabled="">Save and<br>continue<br>rating</button>
                     </div>
-                    <button id='btn-done' name='btn-done' class="btn btn-default margin-top" type="submit" style="float:None;">Done rating <br>for today</button>
+                    <button id='btn-done' name='btn-done' class="btn btn-default margin-top" type="submit" style="float:None;">Done<br>rating<br>for today</button>
                 </div><!-- right col: submit button -->
                 
             </div> <!-- /end row with three col-->

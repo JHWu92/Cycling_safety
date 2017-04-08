@@ -35,7 +35,7 @@
       
     <style>
         #map {
-            width: 90%;
+            width: 100%;
             height: 700px;
         }
         .legend {
