@@ -3,5 +3,12 @@
 .ipynb_checkpoints/
 *.osm
 *.sqlite3
-*.MP4
+
 */config.inc.php
+*.MP4
+upload video 2 server.txt
+video_gpx/client_secrets.json
+video_gpx/upload_video.py-oauth2.json
+video_gpx/test_data/2DB_RoadSegment.csv
+
+

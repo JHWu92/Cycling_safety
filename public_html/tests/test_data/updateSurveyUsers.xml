@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="cyclings_test">
+	<table_data name="Users">
+	<row>
+		<field name="user_id">1</field>
+		<field name="email">no-exp@g.com</field>
+		<field name="experienceLevel" xsi:nil="true" />
+		<field name="has_survey" xsi:nil="true" />
+		<field name="bk_purpose" xsi:nil="true" />
+		<field name="age" xsi:nil="true" />
+		<field name="ethnicity" xsi:nil="true" />
+		<field name="edu" xsi:nil="true" />
+		<field name="marital" xsi:nil="true" />
+		<field name="gender" xsi:nil="true" />
+		<field name="driver" xsi:nil="true" />
+		<field name="car" xsi:nil="true" />
+		<field name="household_income" xsi:nil="true" />
+		<field name="residence" xsi:nil="true" />
+		<field name="bk_type" xsi:nil="true" />
+	</row>
+	<row>
+		<field name="user_id">2</field>
+		<field name="email">no-survey@g.com</field>
+		<field name="experienceLevel">Fearless</field>
+		<field name="has_survey">1</field>
+		<field name="bk_purpose">1</field>
+		<field name="age" xsi:nil="true" />
+		<field name="ethnicity" xsi:nil="true" />
+		<field name="edu" xsi:nil="true" />
+		<field name="marital" xsi:nil="true" />
+		<field name="gender">2</field>
+		<field name="driver">1</field>
+		<field name="car" xsi:nil="true" />
+		<field name="household_income" xsi:nil="true" />
+		<field name="residence" xsi:nil="true" />
+		<field name="bk_type">4</field>
+	</row>
+	<row>
+		<field name="user_id">3</field>
+		<field name="email">has-survey@g.com</field>
+		<field name="experienceLevel">Interested</field>
+		<field name="has_survey">1</field>
+		<field name="bk_purpose">1</field>
+		<field name="age" xsi:nil="true" />
+		<field name="ethnicity" xsi:nil="true" />
+		<field name="edu" xsi:nil="true" />
+		<field name="marital" xsi:nil="true" />
+		<field name="gender" xsi:nil="true" />
+		<field name="driver" xsi:nil="true" />
+		<field name="car" xsi:nil="true" />
+		<field name="household_income" xsi:nil="true" />
+		<field name="residence" xsi:nil="true" />
+		<field name="bk_type" xsi:nil="true" />
+	</row>
+	</table_data>
+</database>
+</mysqldump>

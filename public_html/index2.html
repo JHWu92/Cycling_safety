@@ -1,0 +1,193 @@
+<html>
+<!--<html slick-uniqueid="3"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+<head>
+    <title>Clycling Safety Project</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap-accessibility.css" rel="stylesheet">
+    <link href="./css/fonts.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap-accessibility.min.js"></script>
+
+    <!-- keep banner position -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var jumboHeight = $('.jumbotron').outerHeight();
+            function parallax(){
+                var scrolled = $(window).scrollTop();
+                $('.banner').css('height', (jumboHeight-scrolled) + 'px');
+            }
+            $(window).scroll(function(e){
+                console.log(jumboHeight);
+            	parallax();
+            });
+        });
+    </script>
+    <style type="text/css">
+        .vertical-alignment-helper {
+            display:table;
+            height: 100%;
+            margin: 0 auto;
+            pointer-events:none;
+        }
+        .vertical-align-center {
+            /* To center vertically */
+            display: table-cell;
+            vertical-align: middle;
+            pointer-events:none;
+        }
+        .modal-content {
+            /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+            width:inherit;
+            height:inherit;
+            /* To center horizontally */
+            margin: 0 auto;
+            pointer-events:all;
+        }
+    </style>
+</head>
+
+<body>
+
+<div style="position: fixed; top: 40%; left: 3%; font-size: 20px">
+    <a class='btn btn-primary' href='/index2.html'>style2</a>
+</div>
+    
+ <!-- Modal Sign in pop-up -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <form id="myform" method="post" action="check-email.php">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h3 class="modal-title">Welcome to Cycling Safety Project!</h3>
+                      <h4>We have a raffle for every participant. The more video you rate, the more likely you win. Winners will be notified via email.</h4>
+                    </div>
+                    <div class="modal-body">
+                        <label for="inputEmail" >Email address</label>
+                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="email">
+                        <div class="spacer30"></div>   <!-- add space -->
+                        <button id='btn-participate' class="btn btn-lg btn-primary center-block" type="submit">Sign in or Sign up</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+    <!-- banner -->
+    <div class="banner"></div>
+    <div class="jumbotron">
+        <div class="text-bg">
+        <h1>Cycling Safety Project</h1>      
+    	  <p><strong>We provide accurate, city-wide cycling safety maps to improve the cycling conditions of cities. Join us!</strong></p>
+         </div>
+    </div>     
+
+    <div class="container">
+        <!-- Two step header -->
+        <div class="row">
+            <div class="col-md-12 height-200-pixel">
+                <h1 class="text-center landing-page-header">
+                    Two simple step to help us build the clycling safety map for cities!
+                </h1>
+            </div>
+        </div><!-- /two step header -->
+        
+        <!-- two step pic -->
+        <div class="row">            
+            <!-- left: step one pic+text -->
+            <div class="col-md-6" style="padding-left:10%">
+                <figure>
+                    <img src="./cyclingsafety_files/Step1.png" class="img-responsive center-block" align="" width="90%">
+                    <figcaption class="text-center" align="right">Step1: Watch videos recorded by cyclists</figcaption>
+                </figure>
+               
+            </div>
+
+            <!-- right: step two pic+text -->
+            <div class="col-md-6" style="padding-right:10%">
+                <figure>
+                    <img src="./cyclingsafety_files/Step2.png" class="img-responsive center-block" align="" width="90%">
+                    <figcaption class="text-center">Step2: Rating safety level for road segments</figcaption>
+                 </figure>
+            </div>
+            
+        </div><!-- /two step pic -->
+        
+        <div class="spacer20"></div><!-- add space -->
+        
+        <!-- participate btn -->
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4  text-center">
+                    <a class="btn" data-toggle="modal" data-target="#myModal" id="participate-button">Participate</a>
+            </div>
+            <div class="col-md-4"></div>
+        </div><!-- end participate btn -->
+        
+        <div class="spacer20"></div><!-- add space -->
+        
+        <!-- Content: explaining the project  -->
+        <div class="row">
+            <div class="col-lg-12">
+                <p>We focus on the automatic computation of cycling safety maps (also known as stress or comfort maps) using various types of open and crowdsourced data, such as traffic history data, road condition etc. Your data will help us to train the machine learning model, so that we could use it to automatically detect safety level of road segment in other places and cities. These maps will help for cycling route choice.</p>
+            </div>
+        </div><!-- End Content: explaining the project  -->
+
+        <div class="spacer20"></div><!-- add space -->
+        
+        <!-- demo of safety level map -->
+        <div class="row">
+            <!-- One pic -->
+            <div class="col-md-6">
+                <figure>
+                    <img src="./cyclingsafety_files/DCSafety0.png" alt="A map of Washington, D.C." class="img-responsive center-block" align="">
+                    <figcaption class="text-center">Part of Washington, D.C.</figcaption>
+                </figure>
+            </div>
+            <!-- One pic -->
+            <div class="col-md-6">
+                <figure>
+                    <img src="./cyclingsafety_files/DCSafety1.png" alt="Safety level of each segment are visualized on the map" class="img-responsive center-block" align="">
+                    <figcaption class="text-center">Same Street Map with Safety Level Colored</figcaption>
+                </figure>
+            </div>
+            <div class="spacer30"></div>
+        </div><!-- end demo of safety level map -->
+
+        <div class="spacer20"></div>   <!-- add space -->
+        
+        <!-- participate btn -->
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4  text-center">
+                    <a class="btn" data-toggle="modal" data-target="#myModal" id="participate-button">Participate</a>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <!-- end participate btn -->
+    </div>
+    <!-- End Container -->
+
+    <div class="spacer20"></div>   
+    <!-- add space -->
+    
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted footer-text">
+                Cycling Safety project is designed and operated by the <a href="http://www.urbancomputinglab.org">Urban Computing Lab</a> at the <a href="http://www.umd.edu/">University of Maryland</a>
+            </p>
+            <p class="text-muted footer-text">
+                <span id="application-version">Last updated: 2017-02-02</span>
+            </p>
+        </div>
+    </footer>
+
+</body></html>

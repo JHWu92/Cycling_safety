@@ -1,13 +1,31 @@
 window.addEventListener('load', changeVid);
 
 function changeVid() {
-
+    var player;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("video").src = "https://www.youtube.com/embed/" + this.responseText;
+            player = new YT.Player('player', {
+                height: '480px',
+                width: '100%',
+                videoId: this.responseText,
+                playerVars:{rel:0},
+                events: { 
+                    'onStateChange': function (event) {
+                        switch (event.data) {
+                            case 0:
+                                document.getElementById("btn-rate").className = document.getElementById("btn-rate").className.replace("disabled","");
+                                $('#wrapper').tooltip('disable');
+                                document.getElementById("btn-rate").disabled=false;
+                                document.getElementById("watched").value = 'True';
+                        }
+                    }
+                }
+            });
         }
     };
+
     xmlhttp.open("GET", "display_vid.php", true);
     xmlhttp.send();
 }
+

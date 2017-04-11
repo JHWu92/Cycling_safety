@@ -1,0 +1,11 @@
+<phpunit  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/6.0/phpunit.xsd"
+         extensionsDirectory="../">
+    <php>
+        <var name="DB_DSN" value="mysql:dbname=cyclings_test;host=localhost" />
+        <var name="DB_USER" value="cyclings_jiahui" />
+        <var name="DB_PASSWD" value="@2n54a=@]ZQ4" />
+        <var name="DB_DBNAME" value="cyclings_test" />
+         <ini name="display_errors" value="true"/>
+    </php>
+</phpunit>

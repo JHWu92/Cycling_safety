@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="cyclings_test">
+	<table_data name="RoadSegment">
+	<row>
+		<field name="sid">1</field>
+		<field name="segmentid">1</field>
+		<field name="index_seg">1</field>
+		<field name="sumScore">2.5</field>
+		<field name="sumRatio">0.5</field>
+		<field name="sumCnt">1</field>
+		<field name="geometry">LINESTRING (-77.01364744974134 38.95628407404581, -77.01364954534746 38.95638271430447, -77.01364989424467 38.95639721757051, -77.01365014578222 38.95650576713359, -77.01365027756435 38.95659143571616)</field>
+	</row>
+	<row>
+		<field name="sid">2</field>
+		<field name="segmentid">2</field>
+		<field name="index_seg">2</field>
+		<field name="sumScore">7.3</field>
+		<field name="sumRatio">2.2</field>
+		<field name="sumCnt">4</field>
+		<field name="geometry">LINESTRING (-77.01357027112063 38.95449738339135, -77.01357467072947 38.95457899779149, -77.01358937341928 38.95484473998947, -77.01361730045228 38.9554869361089, -77.01361787949676 38.95549837654004, -77.01362123887805 38.95556954145447)</field>
+	</row>
+	<row>
+		<field name="sid">3</field>
+		<field name="segmentid">3</field>
+		<field name="index_seg">3</field>
+		<field name="sumScore">5.8</field>
+		<field name="sumRatio">1.4</field>
+		<field name="sumCnt">3</field>
+		<field name="geometry">LINESTRING (-77.01362123887805 38.95556954145447, -77.01362436659224 38.95563584193096, -77.01364116244076 38.95598545077841, -77.0136450046077 38.95616759746044, -77.01364744974134 38.95628407404581)</field>
+	</row>
+	<row>
+		<field name="sid">4</field>
+		<field name="segmentid">4</field>
+		<field name="index_seg">4</field>
+		<field name="sumScore">9.4</field>
+		<field name="sumRatio">2.4</field>
+		<field name="sumCnt">4</field>
+		<field name="geometry">LINESTRING (-77.01324339541158 38.95121574594209, -77.01341299691173 38.95130072642582, -77.01341369022012 38.95130667180713, -77.01341808234666 38.9513505415972, -77.01343405409706 38.95162313012426, -77.01345018694728 38.95213741057403, -77.01345516104712 38.95220812494055, -77.01346048293019 38.9522838844613)</field>
+	</row>
+	<row>
+		<field name="sid">5</field>
+		<field name="segmentid">5</field>
+		<field name="index_seg">5</field>
+		<field name="sumScore">1.5</field>
+		<field name="sumRatio">0.3</field>
+		<field name="sumCnt">1</field>
+		<field name="geometry">LINESTRING (-77.01346048293019 38.9522838844613, -77.01346534072451 38.95235333768064, -77.01347355382521 38.95247008337707, -77.01349671347256 38.95292571908052, -77.01350854196875 38.95324758323242, -77.01351167268689 38.95333081929012)</field>
+	</row>
+	<row>
+		<field name="sid">6</field>
+		<field name="segmentid">6</field>
+		<field name="index_seg">6</field>
+		<field name="sumScore">0</field>
+		<field name="sumRatio">0</field>
+		<field name="sumCnt">0</field>
+		<field name="geometry">LINESTRING (-77.01351167268689 38.95333081929012, -77.01351457168497 38.95340883057642, -77.01351596382683 38.95344954779709, -77.01354860933503 38.95403670303796, -77.01356274640149 38.95436253048512, -77.01356598764639 38.95441973261443, -77.01357027112063 38.95449738339135)</field>
+	</row>
+	<row>
+		<field name="sid">7</field>
+		<field name="segmentid">7</field>
+		<field name="index_seg">7</field>
+		<field name="sumScore">0</field>
+		<field name="sumRatio">0</field>
+		<field name="sumCnt">0</field>
+		<field name="geometry">LINESTRING (-77.01239193659748 38.9508361022552, -77.01234856964504 38.95089366972041, -77.01223392367461 38.95104574145057, -77.01204153978975 38.95130682121423, -77.01194723815085 38.95143476470719, -77.01168237327896 38.9517941151788, -77.01153888919112 38.95198474448669, -77.01141178287865 38.95215366207694, -77.01134972955431 38.95223996736828, -77.01134442397441 38.9522479852457, -77.01134303993538 38.95225023744811, -77.01133704255646 38.95226077770855, -77.01133173741759 38.95227158814972, -77.01132735523778 38.95228257866661, -77.0113236652701 38.95229365919902, -77.01132066754346 38.95230500991239, -77.01131859274835 38.95231636053627, -77.01131721018066 38.95232789125856, -77.01131675053101 38.95233933180869, -77.01131698309513 38.95235086237454)</field>
+	</row>
+	</table_data>
+</database>
+</mysqldump>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Safe Cycling Project Rate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<!-- jquery -->
+<script src="js/jquery-3.1.1.min.js"></script>
+ <!-- Bootstrap -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/bootstrap.min.js"></script>
+<!-- Youtube API -->
+<script type="text/javascript" src="http://www.youtube.com/player_api"> </script>
+
+
+<!--Custom JS and CSS -->
+  <link href="css/style.css" rel="stylesheet" >
+  <link href="css/main.css" rel="stylesheet" >
+  <script type="text/javascript" src="js/check-login.js"></script>
+  <script src="js/displayVid.js"></script>
+<script>
+$(document).ready(function(){
+    $('.tooltip-wrapper').tooltip({position: "bottom"}); 
+    $("#btn-done").click(function(){
+        $("input[name=score]").removeAttr("required");
+    });
+});
+</script>
+</head>
+
+<body>
+    <div style="position: fixed; top: 20%; left: 3%; font-size: 20px">
+        <a class='btn btn-primary' href='/rate-video.html'>style1</a><br><br>
+        <a class='btn btn-primary' href='/rate-video3.html'>style3</a>
+    </div>
+    <div class="container">
+        <div class="row" id="not-login"></div>
+        <!-- row containing the Youtube Video -->
+        <div class="row"><div class="col"><div id="player"></div></div></div>
+        <div class='spacer20'></div>
+        <form method="post" action="rate-video.php">
+            <div class="row"> <!-- row with three col -->
+            
+                <!-- left col -->
+                <div class="col-md-5">
+                    <div class="border height-300">
+ 
+                         <!-- rate score -->
+                        <label for="radioBtn" style='display:block;'><label style="color:red"> * </label>How safe is this area for you to ride?</label>
+                        <div class="margin-left-bottom">
+                            <label class='not-bold'><input type="radio" name="score" id="score1" value="1" required> <b>1</b> (too dangerous, I would never ride here)<br></label>
+                            <label class='not-bold'><input type="radio" name="score" id="score2" value="2" required> <b>2</b> (a bit dangerous, I wouldn't ride here unless I have to)<br></label>
+                            <label class='not-bold'><input type="radio" name="score" id="score3" value="3" required> <b>3</b> (fair, I need to be cautious to ride here)<br></label>
+                            <label class='not-bold'><input type="radio" name="score" id="score4" value="4" required> <b>4</b> (quite safe, I would easily ride here)<br></label>
+                            <label class='not-bold'><input type="radio" name="score" id="score5" value="5" required> <b>5</b> (very safe, even a kid could ride here)<br></label>
+                        </div><!-- /rate score -->
+                        <div class="divider"></div>
+                        
+                        <!-- familiar with street -->
+                        <label>Are you familiar with this Street? (Street Name: XXXX)</label>
+                        <div class='margin-left-bottom'> 
+                            <label class='not-bold'><input type="radio" name='familiar' id='f1' value="1" /> Yes</label><br>
+                            <label class='not-bold'><input type="radio" name='familiar' id='f2' value="0" /> No</label>
+                        </div><!-- /familiar with street -->
+                    </div><!-- border div -->
+                 </div> <!-- /left col  with rate score-->
+                 
+                
+                <!-- middle col: submit button -->
+                <div class="col-md-1 margin-top">
+                    <div id="wrapper" class="tooltip-wrapper disabled" data-placement="bottom" data-title="Please finish the video before rating">
+                        <button id='btn-rate' name='btn-rate'  class="btn btn-primary" type="submit"  disabled=""><b>Rate <br>this<br> video</b></button>
+                    </div><br><br><br><br><br><br><br><br>
+                    <button id='btn-done' name='btn-done' class="btn btn-default" type="submit" ><b>Done <br>for <br>today</b></button>
+                </div><!-- middle col: submit button -->
+                
+                 <!-- right col: tags and comment -->
+                <div class="col-md-6">
+                    <div class="border height-300"><!-- border div -->
+                        <label for="description">Why did you give the video this rating?</label>
+                        
+                        <!-- reasons for rating score -->
+                        <div class='margin-left-bottom'> 
+                            <div class="row">
+                                <div class="col-md-4"><label>traffic:</label></div>
+                                <div class="col-md-4"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag1" value="traf_1"> appropriate</label></div>
+                                <div class="col-md-4"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag2" value="traf_0"> too much</label></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label>bike lane/side walk:</label></div>
+                                <div class="col-md-4"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag3" value="lane_1"> good condition</label></div>
+                                <div class="col-md-4"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag4" value="lane_0"> There isn't any</label></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label>weather:</label></div>
+                                <div class="col-md-4"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag5" value="weather_1">Pleasant</label></div>
+                                <div class="col-md-4"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag6" value="weather_0">too bad</label></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><label>neighborhood</label></div>
+                                <div class="col-md-4"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag7" value="nbrh_1">safe</label></div>
+                                <div class="col-md-4"><label class='not-bold'><input type="checkbox" name="tag[]" id="tag8" value="nbrh_0">unsafe/crime</label></div>
+                            </div>
+                        </div> <!-- /reasons for rating score -->
+                        
+                        <div class="divider"></div>
+                        
+                        <label for="description">Other reasons</label>
+                        <textarea class="form-control" id='comment' rows="2" name="comment"></textarea>
+                        
+                    </div><!-- /border div -->
+                </div><!-- /right border: tags and comment -->
+                
+            </div> <!-- /end row with three col-->
+        </form>
+  </div>   
+   
+
+
+</body>
+</html>

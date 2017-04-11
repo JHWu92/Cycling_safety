@@ -42,6 +42,7 @@ def getGpxNames():
 #returns a tuple where first value is the video name and secondvalue is the duration
 def getDataFromGpx():
     gpxTup = getGpxNames()
+    print gpxTup
     videoList = []
     for gpx in gpxTup[1]:
         with open(gpxTup[0]+"/"+gpx) as f:
@@ -57,6 +58,7 @@ def getDataFromGpx():
                     loc = Location(lat, long)
                     locations.append(loc)
                 length = doc['extensions']['gpxtrkx:TrackStatsExtension']['gpxtrkx:TotalElapsedTime']
+                print "name={}, duration={}, len_coords={}".format(vid_name, length, len(locations))
                 videoList.append(Video(name=vid_name,duration=length,cords=locations))
     return videoList
 
@@ -78,14 +80,17 @@ def splitVideo(video, times):
         name = video.name[:video.name.rfind(".")] + ("_%d.MP4" % n)
         split_cmd += (" -vcodec copy -acodec copy" + " -ss " + str(times[n]) + " -to " + str(times[n+1])  +
                      " " + name )
+        print times[n], times[n+1]
 
+        # TODO: the location split is wrong
         cSplit = int(video.duration)/limit
         splitcords = []
+        print cSplit
         for i in range(cSplit*(n), cSplit*(n+1)-1):
             splitcords.append(video.cords[i])
         splitVideos.append(Video(name=name, cords=splitcords, duration=len(splitcords)))
 
-    output = subprocess.Popen(split_cmd , shell=True, stdout=subprocess.PIPE).stdout.read()
+    # output = subprocess.Popen(split_cmd , shell=True, stdout=subprocess.PIPE).stdout.read()
     return splitVideos
 
 def transformLocationData(video, split_length):
@@ -100,64 +105,65 @@ def transformLocationData(video, split_length):
     return gps
 
 def main(args):
+    l_option = None
+    b_option = None
+    # args[3] is command line argument for the number of seconds
+    # args[2] is the option (will be a 10 second split default if nothing is supplied
+    # args[1] is the directory of the file
+    # args[0] is the file location
+    if len(args) >3:
+        print args[1]
+        os.chdir(args[1])
+        if args[2] == '-l':
+            l_option = int(args[3])
+        elif args[2] == '-b':  # Split number of chunks desired
+            b_option = int(args[3])
+            # split_length = int(video_length) / int(args[3])
+        else:  ##split length is 10 by default
+            l_option = 10
+
+    elif len(args) >=2:
+        # args[2] is command line argument for the number of seconds
+        # args[1] is the option (will be a 10 second split default if nothing is supplied
+        # args[0] is the file location
+        if args[1] == '-l':
+            l_option = int(args[3])
+        elif args[1] == '-b': #Split number of chunks desired
+            b_option = int(args[3])
+        else: ##split length is 10 by default
+            l_option = 10
+    else:
+        print "missing or incorrect arguments"
 
     videos = getDataFromGpx()
     json_data = []
+    print len(videos)
+
     for v in videos:
-        filename = v.name
         video_length = int(v.duration) #Split by the length of chunk desired
         times = []
-        # args[3] is command line argument for the number of seconds
-        # args[2] is the option (will be a 10 second split default if nothing is supplied
-        # args[1] is the directory of the file
-        # args[0] is the file location
-        if len(args) >3:
-            os.chdir(args[1])
-            if args[2] == '-l':
-                split_length = int(args[3])
-            elif args[2] == '-b':  # Split number of chunks desired
-                split_length = int(video_length) / int(args[3])
-            else:  ##split length is 10 by default
-                split_length = 10
-
-            for x in range(0, (video_length + 1), split_length):
-                if x <= video_length:
-                    times.append(x)
-            if video_length not in times:
-                times.append(video_length)
-            c_times = convertTimes(times)
-            splits = splitVideo(video=v, times=c_times)
-            for split in splits:
-                split.cords = transformLocationData(video=split, split_length=split_length)
-                json_data.append({split.name: split.cords})
-            with open('%s.json'%v.name[:v.name.rfind(".")], 'w+') as outfile:
-                json.dump(json_data, outfile)
-        if len(args) >=2:
-            # args[2] is command line argument for the number of seconds
-            # args[1] is the option (will be a 10 second split default if nothing is supplied
-            # args[0] is the file location
-            if args[1] == '-l':
-                split_length = int(args[2])
-            elif args[1] == '-b': #Split number of chunks desired
-                split_length = int(video_length)/int(args[2])
-                print "Split length %d" % split_length
-            else: ##split length is 10 by default
-                split_length = 10
-
-            for x in range(0, (video_length + 1), split_length):
-                if x <= video_length:
-                    times.append(x)
-            if video_length not in times:
-                times.append(video_length)
-            c_times = convertTimes(times)
-            splits = splitVideo(video=v, times=c_times)
-            for split in splits:
-                split.cords = transformLocationData(video=split, split_length=split_length)
-                json_data.append({split.name:split.cords})
-            with open('%s.json'%v.name[:v.name.rfind(".")], 'w+') as outfile:
-                json.dump(json_data, outfile)
+        print 'l_option={},b_option={}'.format(l_option, b_option)
+        if l_option:
+            split_length = l_option
         else:
-            print "missing or incorrect arguments"
+            split_length = int(video_length) / b_option
+
+        for x in range(0, (video_length + 1), split_length):
+            if x <= video_length:  # in case x exceed video_length
+                times.append(x)
+        # add the end point of video_length
+        if video_length not in times:
+            times.append(video_length)
+        print times
+
+        c_times = convertTimes(times)
+        splits = splitVideo(video=v, times=c_times)
+        for split in splits:
+            split.cords = transformLocationData(video=split, split_length=split_length)
+            json_data.append({split.name: split.cords})
+        with open('%s.json'%v.name[:v.name.rfind(".")], 'w+') as outfile:
+            json.dump(json_data, outfile)
+
 
 
 def snap_to_road(service, df):
@@ -185,4 +191,5 @@ def snap_to_road(service, df):
     return new_gps
 
 if __name__ == '__main__':
-    main(sys.argv)
+    # main(sys.argv)
+    main(['','Sample Data' , '-l', '20'])
