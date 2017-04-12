@@ -64,8 +64,8 @@
                         </label>
                         <ul class="text-align-left">
                             <h3>Interested</h3>
-                            <li>You do not identify yourself as a cyclist</li>
-                            <li>You are not comfortable sharing the road with motor vehicles without a visible bike facility</li>
+                            <li>You do not identify yourself as a regular cyclist</li>
+                            <li>You are not very comfortable sharing the road with motor vehicles without a visible bike facility</li>
                             <li>You are Interested in cycling if the route is on a bike facility</li>
                         </ul>
                 </div><!-- /exp lvl interested -->
