@@ -1,14 +1,20 @@
 <?php
-    function logLogin($pdo, $user_id, $timestamp, $timezone){
+    function logLogin($pdo, $user_id, $timestamp, $timezone, $userAgent, $isMobile, $isTablet, $isAndroid, $isIOS){
         include('config.inc.php'); 
-        $sql = "INSERT INTO $TABLE_LOGINLOG (`$TABL_USERS_FIELD_UID`, `$TB_COL_TIMESTAMP`, `$TB_COL_TIMEZONE`) VALUES ($user_id, '$timestamp', '$timezone')";
+        $sql = <<<EOT
+            INSERT INTO $TABLE_LOGINLOG 
+                (`$TABL_USERS_FIELD_UID`, `$TB_COL_TIMESTAMP`, `$TB_COL_TIMEZONE`, `$TB_COL_USERAGENT`, `$TB_COL_ISMOBILE`, `$TB_COL_ISTABLET`, `$TB_COL_ISANDROID`, `$TB_COL_ISIOS`) 
+            VALUES 
+                ($user_id, '$timestamp', '$timezone', '$userAgent', '$isMobile', '$isTablet', '$isAndroid', '$isIOS')
+EOT;
         $result_insert = $pdo->exec($sql);
         if(!$result_insert){  # if error happens when inserting
                 die("<h3>error happens in logging your login, click <a href='/index.html'>HERE</a> to enter your email again</h3>");
         }
         
     }
-    
+
+
     function handle_input_email($pdo, $email){
         include('config.inc.php'); 
         # check if user exists

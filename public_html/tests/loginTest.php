@@ -109,14 +109,15 @@ class loginTest extends DBFixtureTestCase{
     public function testLoginLog(){
         # T21
         $conn = $this->getConnection();
+        $user_agent = 'agent4';
         $data = array(
-            [1, '2017-03-28 10:16:28', 'GMT -4'],
-            [3, '2017-03-28 12:16:28', 'GMT -4'],
-            [2, '2017-03-28 22:18:38', 'GMT -4'],
-            [3, '2017-03-28 22:20:48', 'GMT -4'],
+            [1, '2017-03-28 10:16:28', 'GMT -4', $user_agent, '', '', '', ''],
+            [3, '2017-03-28 12:16:28', 'GMT -4', $user_agent, 1, '', 1, ''],
+            [2, '2017-03-28 22:18:38', 'GMT -4', $user_agent, 1, 1, 1, ''],
+            [3, '2017-03-28 22:20:48', 'GMT -4', $user_agent, 1, '', '', 1],
         );
         foreach($data as $login){
-            logLogin(self::$pdo, $login[0], $login[1], $login[2]);
+            logLogin(self::$pdo, $login[0], $login[1], $login[2], $login[3], $login[4], $login[5], $login[6], $login[7]);
         }
         $queryTable = $conn->createQueryTable('loginLog', 'SELECT * FROM loginLog');
         # update survey correctly

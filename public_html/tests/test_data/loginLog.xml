@@ -7,48 +7,88 @@
 		<field name="user_id">1</field>
 		<field name="UTCts">2017-03-26 20:16:28</field>
             <field name="timezone">GMT -4</field>
+            <field name="userAgent">agent1</field>
+            <field name="isMobile"></field>
+            <field name="isTablet"></field>
+            <field name="isAndroid"></field>
+            <field name="isIOS"></field>
 	</row>
 	<row>
 		<field name="lid">2</field>
 		<field name="user_id">2</field>
 		<field name="UTCts">2017-03-26 20:16:28</field>
             <field name="timezone">GMT -4</field>
+            <field name="userAgent">agent2</field>
+            <field name="isMobile"></field>
+            <field name="isTablet"></field>
+            <field name="isAndroid"></field>
+            <field name="isIOS"></field>
 	</row>
 	<row>
 		<field name="lid">3</field>
 		<field name="user_id">3</field>
 		<field name="UTCts">2017-03-26 20:16:28</field>
             <field name="timezone">GMT -4</field>
+            <field name="userAgent">agent3</field>
+            <field name="isMobile"></field>
+            <field name="isTablet"></field>
+            <field name="isAndroid"></field>
+            <field name="isIOS"></field>
 	</row>
-	<row>
+    	<row>
 		<field name="lid">4</field>
 		<field name="user_id">3</field>
 		<field name="UTCts">2017-03-27 20:16:28</field>
             <field name="timezone">GMT -4</field>
-      </row>
+            <field name="userAgent">agent4</field>
+            <field name="isMobile"></field>
+            <field name="isTablet"></field>
+            <field name="isAndroid"></field>
+            <field name="isIOS"></field>
+	</row>
 	<row>
 		<field name="lid">5</field>
 		<field name="user_id">1</field>
 		<field name="UTCts">2017-03-28 10:16:28</field>
             <field name="timezone">GMT -4</field>
+            <field name="userAgent">agent4</field>
+            <field name="isMobile"></field>
+            <field name="isTablet"></field>
+            <field name="isAndroid"></field>
+            <field name="isIOS"></field>
 	</row>
 	<row>
 		<field name="lid">6</field>
 		<field name="user_id">3</field>
 		<field name="UTCts">2017-03-28 12:16:28</field>
             <field name="timezone">GMT -4</field>
+            <field name="userAgent">agent4</field>
+            <field name="isMobile">1</field>
+            <field name="isTablet"></field>
+            <field name="isAndroid">1</field>
+            <field name="isIOS"></field>
 	</row>
 	<row>
 		<field name="lid">7</field>
 		<field name="user_id">2</field>
 		<field name="UTCts">2017-03-28 22:18:38</field>
             <field name="timezone">GMT -4</field>
+            <field name="userAgent">agent4</field>
+            <field name="isMobile">1</field>
+            <field name="isTablet">1</field>
+            <field name="isAndroid">1</field>
+            <field name="isIOS"></field>
 	</row>
 	<row>
 		<field name="lid">8</field>
 		<field name="user_id">3</field>
 		<field name="UTCts">2017-03-28 22:20:48</field>
             <field name="timezone">GMT -4</field>
+            <field name="userAgent">agent4</field>
+            <field name="isMobile">1</field>
+            <field name="isTablet"></field>
+            <field name="isAndroid"></field>
+            <field name="isIOS">1</field>
 	</row>
 	</table_data></database>
 </mysqldump>

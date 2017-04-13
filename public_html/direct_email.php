@@ -3,6 +3,8 @@
     session_start();    //Start session
     include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd, $TABLE_USERS, $DOMAIN_URL, $PAGE_RATE_VIDEO, $PAGE_SURVEY
     require 'emailExpSurveyDBandRedirect.php';
+    require_once './mobiledetect/Mobile_Detect.php';
+
     //parse data from form 
     $email=$_POST[$SESS_EMAIL];
     $timezone = $_POST[$TB_COL_TIMEZONE];
@@ -22,7 +24,10 @@
 
     $date = new DateTime( "now", new DateTimeZone("UTC") );
     $timestamp = $date->format('Y-m-d H:i:s');    
-    logLogin($pdo, $res[$SESS_USER_ID], $timestamp, $timezone);
+    $useragent=$_SERVER['HTTP_USER_AGENT'];
+    $detect = new Mobile_Detect;    
+    logLogin($pdo, $res[$SESS_USER_ID], $timestamp, $timezone, $useragent, 
+        $detect->isMobile(), $detect->isTablet(), $detect->isAndroidOS(),$detect->isIOS());
     $pdo = null;
     
     // Store log in Info in session
