@@ -148,7 +148,7 @@
 <footer class="footer">
         <div class="container">
             <p class="text-muted footer-text">
-   Cycling Safety project is designed and lead by the <a href="http://www.urbancomputinglab.org">Urban Computing Lab</a> at the <a href="http://www.umd.edu/">University of Maryland</a> with support from the National Science Foundation <a href="http://www.nsf.gov">National Science Foundation. </a>  If you have any suggestion or question, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>
+   Cycling Safety project is designed and lead by the <a href="http://www.urbancomputinglab.org">Urban Computing Lab</a> at the <a href="http://www.umd.edu/">University of Maryland</a> with support from the <a href="http://www.nsf.gov">National Science Foundation. </a>  If you have any suggestion or question, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>
             </p>
         </div>
     </footer>    

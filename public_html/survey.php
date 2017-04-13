@@ -22,6 +22,9 @@
         right: 3%; 
         font-size:20px;
     }
+    label {
+        font-size:18px;
+    }
   </style>
 </head>
 
@@ -32,7 +35,7 @@
     <button id='fixedbutton' class="btn btn-primary center-block" type="submit">Submit and <br> Start Rating!</button>
     <div class="container" width="70%">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-lg-12">
         
     <h2>Survey (optional)</h2>
    <h4>This survey is optional, but we would greatly appreciate if you could provide answers for some or all of the 11 questions. We will use this information to understand how cycling safety perceptions might be affected by personal demographic or socioeconomic factors. All your information is treated in a confidential manner. </h4>
@@ -40,7 +43,7 @@
         </div></div>
         <div class="spacer20"></div>   
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-lg-12">
                 <h3>(1) Which one of the following best describes your type of biking?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="<?=$TB_U_COL_BK_PURPOSE?>">Mainly utility biking – traveling from one location to another</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="<?=$TB_U_COL_BK_PURPOSE?>">Mainly recreational biking – biking for recreation, leisure, and health</label></div>
@@ -49,7 +52,7 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-lg-12">
                 <h3>(2) How old are you?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="<?=$TB_U_COL_AGE?>">Under 18 years old</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="<?=$TB_U_COL_AGE?>">18-24 years old</label></div>
@@ -63,7 +66,7 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-lg-12">
             <h3>(3) Ethnicity origin (or Race): Please specify your ethnicity.</h3>
                 <div class="radio"><label><input type="radio" value="1" name="<?=$TB_U_COL_ETHNICITY?>">White</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="<?=$TB_U_COL_ETHNICITY?>">Hispanic or Latino</label></div>
@@ -75,9 +78,9 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-lg-12">
                 <h3>(4) Education: What is the highest degree or level of school you have completed? If currently enrolled, highest degree received.</h3>
-                <div class="radio"><label><input type="radio" value="1" name="<?=$TB_U_COL_EDU?>"></label>Nursery school to some high school, no diploma</div>
+                <div class="radio"><label><input type="radio" value="1" name="<?=$TB_U_COL_EDU?>">Nursery school to some high school, no diploma</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="<?=$TB_U_COL_EDU?>">High school graduate, diploma or the equivalent (for example: GED)</label></div>
                 <div class="radio"><label><input type="radio" value="3" name="<?=$TB_U_COL_EDU?>">Some college credit, no degree</label></div>
                 <div class="radio"><label><input type="radio" value="4" name="<?=$TB_U_COL_EDU?>">Associate degree</label></div>
@@ -89,7 +92,7 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-lg-12">
                 <h3>(5) Marital Status: What is your marital status?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="<?=$TB_U_COL_MARITAL?>">Single, never married</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="<?=$TB_U_COL_MARITAL?>">Married or domestic partnership</label></div>
@@ -100,7 +103,7 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-lg-12">
                 <h3>(6) Gender: To which gender identity do you most identify?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="<?=$TB_U_COL_GENDER?>">Female</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="<?=$TB_U_COL_GENDER?>">Male</label></div>
@@ -112,7 +115,7 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-lg-12">
                 <h3>(7) Driver's license: Do you currently have a valid driver's license?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="<?=$TB_U_COL_DRIVER?>">Yes</label></div>
                 <div class="radio"><label><input type="radio" value="0" name="<?=$TB_U_COL_DRIVER?>">No</label></div>
@@ -120,7 +123,7 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-lg-12">
                 <h3>(8) Private car: Do you currently have easy access to a car, including a Zipcar, a Car2Go, etc.?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="<?=$TB_U_COL_CAR?>">Yes</label></div>
                 <div class="radio"><label><input type="radio" value="0" name="<?=$TB_U_COL_CAR?>">No</label></div>
@@ -128,7 +131,7 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-lg-12">
                 <h3>(9) Household Income: What is your total household income?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="<?=$TB_U_COL_HHINCOME?>">Less than $24,999</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="<?=$TB_U_COL_HHINCOME?>">$25,000 to $39,999</label></div>
@@ -142,7 +145,7 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-lg-12">
                 <h3>(10) Time of Residence: How long have you lived in the DC region?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="<?=$TB_U_COL_RESIDENCE?>">Never</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="<?=$TB_U_COL_RESIDENCE?>">Less than 3 months</label></div>
@@ -154,7 +157,7 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-lg-12">
                 <h3>(11) Type of bicycle : What type of bicycle do you usually ride?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="<?=$TB_U_COL_BK_TYPE?>">CaBi Bike (Shared bike in the DC region)</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="<?=$TB_U_COL_BK_TYPE?>">Road Bike</label></div>
@@ -177,7 +180,7 @@
 <footer class="footer">
         <div class="container">
             <p class="text-muted footer-text">
-   Cycling Safety project is designed and lead by the <a href="http://www.urbancomputinglab.org">Urban Computing Lab</a> at the <a href="http://www.umd.edu/">University of Maryland</a> with support from the National Science Foundation <a href="http://www.nsf.gov">National Science Foundation. </a>  If you have any suggestion or question, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>
+   Cycling Safety project is designed and lead by the <a href="http://www.urbancomputinglab.org">Urban Computing Lab</a> at the <a href="http://www.umd.edu/">University of Maryland</a> with support from the <a href="http://www.nsf.gov">National Science Foundation. </a>  If you have any suggestion or question, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>
             </p>
         </div>
     </footer>

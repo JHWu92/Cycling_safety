@@ -13,6 +13,10 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/main.css" rel="stylesheet" >
     <link href="css/img-button.css" rel="stylesheet" >
+    
+    <style type="text/css">
+        li {font-size: 18px;}
+    </style>
 </head>
 
 <body>
@@ -35,7 +39,7 @@
                           <img src="cyclingsafety_files/c1.png" /> 
                         </label>
                         <ul class="text-align-left">
-                            <h3>Fearless</h3>
+                            <h2>Fearless</h2>
                             <li>Cycling is strong part of your identity</li>
                             <li>You are generally undeterred by motor vehicles</li>
                             <li>You will consider cycling even in the absence of any visible bike facility</li>
@@ -49,7 +53,7 @@
                           <img src="cyclingsafety_files/c2.png" /> 
                         </label>
                         <ul class="text-align-left">
-                            <h3>Confident</h3>
+                            <h2>Confident</h2>
                             <li>Cycling is a part of your identity</li>
                             <li>You are slightly or moderately comfortable sharing the road with motor vehicles</li>
                             <li>You will consider cycling if the route is mostly on a bike facility</li>
@@ -63,7 +67,7 @@
                           <img src="cyclingsafety_files/c3.png"/> 
                         </label>
                         <ul class="text-align-left">
-                            <h3>Interested</h3>
+                            <h2>Interested</h2>
                             <li>You do not identify yourself as a regular cyclist</li>
                             <li>You are not very comfortable sharing the road with motor vehicles without a visible bike facility</li>
                             <li>You are Interested in cycling if the route is on a bike facility</li>
@@ -77,7 +81,7 @@
                           <img src="cyclingsafety_files/c4.png"/> 
                         </label>
                         <ul class="text-align-left">
-                            <h3>Reluctant</h3>
+                            <h2>Reluctant</h2>
                             <li>You do not identify yourself as a cyclist</li>
                             <li>You are not comfortable sharing the road with motor vehicles without a visible bike facility</li>
                             <li>You are not interested in cycling</li>
@@ -90,15 +94,18 @@
         <div class="spacer20"></div>   <!-- add space -->
         <div class="row text-center">
             <div class="col-md-4"></div>
-            <div class="col-md-4"><button class="btn btn-lg btn-primary" type="submit" style='width:60%'>Submit</button></div>
+            <div class="col-md-4"><button class="btn btn-lg btn-primary" type="submit" style='width:60%; padding: 20px; font-size:20px'><big><b>Submit</b></big></button></div>
             <div class="col-md-4"></div>
         </div>
     </div>
 </form>
+            
+        <div class="spacer20"></div>   <!-- add space -->
+        <div class="spacer20"></div>   <!-- add space -->
 <footer class="footer">
         <div class="container">
             <p class="text-muted footer-text">
-   Cycling Safety project is designed and lead by the <a href="http://www.urbancomputinglab.org">Urban Computing Lab</a> at the <a href="http://www.umd.edu/">University of Maryland</a> with support from the National Science Foundation <a href="http://www.nsf.gov">National Science Foundation. </a>  If you have any suggestion or question, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>
+   Cycling Safety project is designed and lead by the <a href="http://www.urbancomputinglab.org">Urban Computing Lab</a> at the <a href="http://www.umd.edu/">University of Maryland</a> with support from the <a href="http://www.nsf.gov">National Science Foundation. </a>  If you have any suggestion or question, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>
             </p>
         </div>
     </footer>
