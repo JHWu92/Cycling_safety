@@ -44,7 +44,7 @@
                 <h3>(1) Which one of the following best describes your type of biking?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="<?=$TB_U_COL_BK_PURPOSE?>">Mainly utility biking – traveling from one location to another</label></div>
                 <div class="radio"><label><input type="radio" value="2" name="<?=$TB_U_COL_BK_PURPOSE?>">Mainly recreational biking – biking for recreation, leisure, and health</label></div>
-                <div class="radio"><label><input type="radio" value="3" name="<?=$TB_U_COL_BK_PURPOSE?>">About 50 : 50 between 1 and 2 above.</label></div>
+                <div class="radio"><label><input type="radio" value="3" name="<?=$TB_U_COL_BK_PURPOSE?>">50% utility, 50% recreational</label></div>
             </div>
         </div>
         <br>
@@ -121,7 +121,7 @@
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <h3>(8) Private car: Do you currently have easy access to a car, including a Zip car, a Car2Go, etc.?</h3>
+                <h3>(8) Private car: Do you currently have easy access to a car, including a Zipcar, a Car2Go, etc.?</h3>
                 <div class="radio"><label><input type="radio" value="1" name="<?=$TB_U_COL_CAR?>">Yes</label></div>
                 <div class="radio"><label><input type="radio" value="0" name="<?=$TB_U_COL_CAR?>">No</label></div>
             </div>
