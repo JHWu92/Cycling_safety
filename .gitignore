@@ -3,7 +3,7 @@
 .ipynb_checkpoints/
 *.osm
 *.sqlite3
-
+*DB-backup
 */config.inc.php
 *.MP4
 upload video 2 server.txt
