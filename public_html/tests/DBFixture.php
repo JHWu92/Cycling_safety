@@ -61,7 +61,7 @@ class DBFixtureTestCase extends TestCase
         foreach ($allTables as $table) {
         	// drop table
         	$conn = $this->getConnection();
-        	self::$pdo->exec("TRUNCATE `$table`;");
+        	#self::$pdo->exec("TRUNCATE `$table`;");
         }
         parent::tearDown();
     }
