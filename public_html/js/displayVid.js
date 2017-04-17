@@ -9,7 +9,7 @@ function changeVid() {
                 height: '480px',
                 width: '100%',
                 videoId: this.responseText,
-                playerVars:{rel:0},
+                playerVars:{rel:0, autohide:0,},
                 events: { 
                     'onStateChange': function (event) {
                         switch (event.data) {
