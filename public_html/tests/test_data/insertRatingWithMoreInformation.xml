@@ -13,6 +13,9 @@
 		<field name="familiar"></field>
 		<field name="UTCts">2017-03-27 20:13:36</field>
             <field name="timezone">GMT -4</field>
+            <field name="watched">1</field>
+            <field name="interaction">started,2017-04-17T18:08:22.623Z,256.395875;end,2017-04-17T18:08:40.000Z,260.223;</field>
+            <field name="lid">1</field>
 	</row>
 	<row>
 		<field name="rid">2</field>
@@ -25,6 +28,9 @@
 		<field name="familiar"></field>
 		<field name="UTCts">2017-03-27 20:13:36</field>
             <field name="timezone">GMT -4</field>
+            <field name="watched">1</field>
+            <field name="interaction">started,2017-04-17T18:09:22.623Z,6.395875;end,2017-04-17T18:09:40.000Z,20.223;</field>
+            <field name="lid">1</field>
 	</row>
     	<row>
 		<field name="rid">3</field>
@@ -37,6 +43,9 @@
 		<field name="familiar">0</field>
 		<field name="UTCts">2017-03-27 20:13:36</field>
             <field name="timezone">GMT -4</field>
+            <field name="watched">1</field>
+            <field name="interaction">intersection_test</field>
+            <field name="lid">2</field>
 	</row>
 	</table_data>
 </database>

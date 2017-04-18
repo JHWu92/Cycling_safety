@@ -1,0 +1,75 @@
+<html>
+<head>
+<!-- Youtube API -->
+<script type="text/javascript" src="http://www.youtube.com/player_api"> </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+  var tag = document.createElement('script');
+  tag.id = 'iframe-demo';
+  tag.src = 'https://www.youtube.com/iframe_api';
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('existing-iframe-example', {
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange,
+        }
+    });
+  
+  }
+  function onPlayerReady(event) {
+    document.getElementById('existing-iframe-example').style.borderColor = '#FF6D00';
+    console.log(event.target.getCurrentTime());
+      $('#log-api').append("playerready  "+event.target.getCurrentTime()+"  ;");
+      
+  }
+  function changeBorderColor(event) {
+    var color;
+    playerStatus = event.data;
+    if (playerStatus == -1) {
+      color = "#37474F"; // unstarted = gray
+      $('#log-api').append("unstarted  "+event.target.getCurrentTime()+"  ;");
+    } else if (playerStatus == 0) {
+      color = "#FFFF00"; // ended = yellow
+      $('#log-api').append("ended  "+event.target.getCurrentTime()+"  ;");
+    } else if (playerStatus == 1) {
+      var visitortime = new Date().toISOString();
+      color = "#33691E"; // playing = green
+      $('#log-api').append("playing, "+visitortime+", "+event.target.getCurrentTime()+"  ;");
+      $('#log-input').val($('#log-input').val()+"playing,"+visitortime);
+    } else if (playerStatus == 2) {
+      color = "#DD2C00"; // paused = red
+      $('#log-api').append("paused  "+event.target.getCurrentTime()+"  ;");
+    } else if (playerStatus == 3) {
+      color = "#AA00FF"; // buffering = purple
+      $('#log-api').append("buffering  "+event.target.getCurrentTime()+"  ;");
+    } else if (playerStatus == 5) {
+      color = "#FF6DOO"; // video cued = orange
+      $('#log-api').append("cued  "+event.target.getCurrentTime()+"  ;");
+    }
+    if (color) {
+      document.getElementById('existing-iframe-example').style.borderColor = color;
+    }
+  }
+  function onPlayerStateChange(event) {
+    changeBorderColor(event);
+  }
+</script>
+</head>
+
+<body>
+
+<iframe id="existing-iframe-example"
+        width="640" height="360"
+        src="https://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1"
+        frameborder="0"
+        style="border: solid 4px #37474F"
+></iframe>
+
+<div id='log-api'>log api:</div>
+<input type="text" value="input:" id='log-input'/>
+</body>

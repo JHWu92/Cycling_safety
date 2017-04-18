@@ -7,6 +7,8 @@
         $comment = $post_data[$POST_COMMENT];
         $uid = $sess_data[$SESS_USER_ID];
         $vid = $sess_data[$SESS_VIDEO_ID];
+        $lid = $sess_data[$SESS_LOGIN_ID];
+        $interaction = $post_data[$POST_INTERACTION];
         $tags = $post_data[$POST_TAG];
         $watched = $post_data[$POST_WATCHED];
         if(is_array($tags)){
@@ -14,7 +16,12 @@
         }
 
         if(!empty($score) && !empty($watched)){
-            $sql = "INSERT $TABLE_RATING (uid, vid, score, comment, tags, familiar, $TB_COL_TIMESTAMP, $TB_COL_TIMEZONE) VALUES ($uid, $vid, $score, '$comment', '$tags', '$familiar_st', '$timestamp', '$timezone')";
+            $sql = <<<EOT
+            INSERT $TABLE_RATING 
+                (uid, vid, score, comment, tags, familiar, $TB_COL_TIMESTAMP, $TB_COL_TIMEZONE, $TB_COL_WATCHED, $TB_COL_INTERACTION, $TB_COL_LID) 
+            VALUES 
+                ($uid, $vid, $score, '$comment', '$tags', '$familiar_st', '$timestamp', '$timezone', '$watched', '$interaction', '$lid')
+EOT;
             $pdo->exec($sql);
             $rid = $pdo->lastInsertId(); 
         }

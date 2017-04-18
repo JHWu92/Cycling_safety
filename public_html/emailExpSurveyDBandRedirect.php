@@ -10,8 +10,9 @@ EOT;
         $result_insert = $pdo->exec($sql);
         if(!$result_insert){  # if error happens when inserting
                 die("<h3>error happens in logging your login, click <a href='/index.html'>HERE</a> to enter your email again</h3>");
-        }
-        
+        }        
+        $lid = $pdo->lastInsertId(); 
+        return $lid;
     }
 
 

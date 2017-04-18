@@ -26,13 +26,14 @@
     $timestamp = $date->format('Y-m-d H:i:s');    
     $useragent=$_SERVER['HTTP_USER_AGENT'];
     $detect = new Mobile_Detect;    
-    logLogin($pdo, $res[$SESS_USER_ID], $timestamp, $timezone, $useragent, 
+    $lid = logLogin($pdo, $res[$SESS_USER_ID], $timestamp, $timezone, $useragent, 
         $detect->isMobile(), $detect->isTablet(), $detect->isAndroidOS(),$detect->isIOS());
     $pdo = null;
     
     // Store log in Info in session
     $_SESSION[$SESS_EMAIL] = $email;  
     $_SESSION[$SESS_USER_ID] = $res[$SESS_USER_ID];
+    $_SESSION[$SESS_LOGIN_ID] = $lid;
     $_SESSION[$SESS_LOGIN] = True;  // logged in
     $_SESSION[$SESS_EXPLV] = $res[$SESS_EXPLV];  
     $_SESSION[$SESS_SURVEY] = $res[$SESS_SURVEY];  
