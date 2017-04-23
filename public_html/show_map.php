@@ -1,17 +1,26 @@
 <?php
+
     session_start();
     require_once 'config.inc.php';
-    require_once 'db_helper.php';
     require_once 'check-login.php';
     $ty = "";
     if(login($_SESSION)){
         $email = $_SESSION[$SESS_EMAIL];
         $uid = $_SESSION[$SESS_USER_ID];
         
-        $con=mysqli_connect($host, $db_user, $db_pwd, $db_name);
-        if(mysqli_connect_errno()){ die("failed to connect to mysql:" . mysqli_connect_error()); }
-        $cnt = select_rate_cnt_by_uid($con, $uid);
+        try{
+            $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        }catch (PDOException $e) {
+            echo 'Connection failed: ' . $e->getMessage();
+        }
         
+        $sql = "SELECT count(1) from $TABLE_RATING WHERE uid=?";
+        $sth = $pdo->prepare($sql);
+        $sth->execute(array($uid));
+        $result = $sth->fetch();
+        $cnt = $result[0];
+            
         $ty = "Thank you $email! You've rated $cnt videos. We really appreciate your contribution.<br>";
     }
     session_destroy();
