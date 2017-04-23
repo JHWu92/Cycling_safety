@@ -24,6 +24,7 @@ session_start();    //Start session
 require_once 'config.inc.php';  //$db_name, $host, $db_user, $db_pwd 
 try{
     $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }catch (PDOException $e) {
     echo 'Connection failed: ' . $e->getMessage();
 }
@@ -70,6 +71,10 @@ $sql = "SELECT URL FROM Video WHERE vid=$vid";
 $select = $pdo->prepare($sql);
 $select->execute();
 $res = $select->fetch(PDO::FETCH_ASSOC);
+    
+# clear pdo connection
+$pdo = null;
+
 echo($res[$TABL_VIDEO_FIELD_URL]);
 
 ?>

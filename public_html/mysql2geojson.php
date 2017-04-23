@@ -37,14 +37,18 @@ function echoGeojson($pdo){
 # Connect to MySQL database
 try{
     $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }catch (PDOException $e) {
     echo 'Connection failed: ' . $e->getMessage();
 }
 $geojson = echoGeojson($pdo);
 
+# clear pdo connection
+$pdo = null;
+
 header('Content-type: application/json');
 echo $geojson;
-$pdo = NULL;
+
     
 
 ?>

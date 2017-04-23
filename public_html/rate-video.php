@@ -7,6 +7,7 @@
     # Connect to MySQL database
     try{
         $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }catch (PDOException $e) {
         echo 'Connection failed: ' . $e->getMessage();
     }
@@ -15,9 +16,10 @@
     $timestamp = $date->format('Y-m-d H:i:s');    
     $timezone = $_SESSION[$TB_COL_TIMEZONE];
     $res=parseFormAndInsertRating($pdo,$_POST, $_SESSION, $timestamp, $timezone);
+    
+    # clear pdo connection
     $pdo = null;
     
-
     # redirect
     header($res['head_url']); 
     return true;

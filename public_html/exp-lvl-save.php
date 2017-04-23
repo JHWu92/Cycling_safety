@@ -14,11 +14,15 @@
     # Connect to MySQL database
     try{
         $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }catch (PDOException $e) {
         echo 'Connection failed: ' . $e->getMessage();
     }
     
     $res = handle_exp_lvl($pdo, $user_id, $has_survey, $explv);
+    
+    # clear pdo connection
+    $pdo = null;
     
     //echo $head_url;    
     # redirect

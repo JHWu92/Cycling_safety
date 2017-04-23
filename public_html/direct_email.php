@@ -13,6 +13,7 @@
     # Connect to MySQL database
     try{
         $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }catch (PDOException $e) {
         echo 'Connection failed: ' . $e->getMessage();
     }
@@ -28,6 +29,8 @@
     $detect = new Mobile_Detect;    
     $lid = logLogin($pdo, $res[$SESS_USER_ID], $timestamp, $timezone, $useragent, 
         $detect->isMobile(), $detect->isTablet(), $detect->isAndroidOS(),$detect->isIOS());
+    
+    # clear pdo connection
     $pdo = null;
     
     // Store log in Info in session

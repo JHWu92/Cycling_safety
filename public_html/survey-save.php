@@ -12,12 +12,17 @@
     # Connect to MySQL database
     try{
         $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }catch (PDOException $e) {
         echo 'Connection failed: ' . $e->getMessage();
     }
     
     
     $res = handle_survey($pdo, $user_id, $_POST);
+    
+    # clear pdo connection
+    $pdo = null;
+    
     header($res['head_url']); 
     return true;
 
