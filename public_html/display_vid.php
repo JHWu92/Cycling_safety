@@ -40,9 +40,9 @@ if( $num_vids == 0){
 }
 
 
-$sql = "SELECT vid FROM Rating WHERE uid =$_SESSION[$SESS_USER_ID]";
+$sql = "SELECT vid FROM Rating WHERE uid = ?";
 $select = $pdo->prepare($sql);
-$select->execute();
+$select->execute(array($_SESSION[$SESS_USER_ID]));
 $rated_arr = toArr($select);
 
 $valid_vids = array();
@@ -67,9 +67,9 @@ else{
 
 $_SESSION[$SESS_VIDEO_ID] = $vid;
 
-$sql = "SELECT URL FROM Video WHERE vid=$vid";
+$sql = "SELECT URL FROM Video WHERE vid=?";
 $select = $pdo->prepare($sql);
-$select->execute();
+$select->execute(array($vid));
 $res = $select->fetch(PDO::FETCH_ASSOC);
     
 # clear pdo connection

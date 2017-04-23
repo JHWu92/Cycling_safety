@@ -23,9 +23,11 @@
             INSERT $TABLE_RATING 
                 (uid, vid, score, comment, tags, familiar, $TB_COL_TIMESTAMP, $TB_COL_TIMEZONE, $TB_COL_WATCHED, $TB_COL_INTERACTION, $TB_COL_LID) 
             VALUES 
-                ($uid, $vid, $score, '$comment', '$tags', '$familiar_st', '$timestamp', '$timezone', '$watched', '$interaction', '$lid')
+                (:uid, :vid, :score, :comment, :tags, :familiar_st, :timestamp, :timezone, :watched, :interaction, :lid)
 EOT;
-            $pdo->exec($sql);
+            $sth= $pdo->prepare($sql);
+            $sth->execute(array(':uid' => $uid, ':vid' => $vid, ':score' => $score, ':comment' => "$comment", ':tags' => "$tags", ':familiar_st' => "$familiar_st", ':timestamp' => "$timestamp", ':timezone' => "$timezone", ':watched' => "$watched", ':interaction' => "$interaction", ':lid' => "$lid"));
+
             $rid = $pdo->lastInsertId(); 
         }
         // which button is clicked
