@@ -12,7 +12,7 @@ function compare($a,$b)
 function toArr($res){
 	$arr = array();
 
-	while($row = $res->fetch_assoc()){
+	while($row = $res->fetch(PDO::FETCH_ASSOC)){
 		arr.array_push($arr, $row["vid"]);
 	}
 	return $arr;
@@ -22,25 +22,27 @@ session_start();    //Start session
 
 # Connect to MySQL database
 require_once 'config.inc.php';  //$db_name, $host, $db_user, $db_pwd 
-$con=mysqli_connect($host, $db_user, $db_pwd, $db_name);
-    
-if(mysqli_connect_errno())
-{
-	echo"failed to connect to mysql:".mysqli_connect_error();
+try{
+    $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
+}catch (PDOException $e) {
+    echo 'Connection failed: ' . $e->getMessage();
 }
 
 $sql = "SELECT vid FROM Video";
-$all_vids = $con->query($sql);
-$vids_arr = toArr($all_vids);
-$num_vids = count($vids_arr);
+$select = $pdo->prepare($sql);
+$select->execute();
+$num_vids=$select->rowCount();
+$vids_arr = toArr($select);
 
-if( $all_vids->num_rows == 0){
+if( $num_vids == 0){
 	echo "ERROR: Missing videos";
 }
 
+
 $sql = "SELECT vid FROM Rating WHERE uid =$_SESSION[$SESS_USER_ID]";
-$rated_vids = $con->query($sql);
-$rated_arr = toArr($rated_vids);
+$select = $pdo->prepare($sql);
+$select->execute();
+$rated_arr = toArr($select);
 
 $valid_vids = array();
 
@@ -62,11 +64,12 @@ else{
         $vid = $valid_vids[$rand];
 }
 
-$sql = "SELECT URL FROM Video WHERE vid=$vid";
 $_SESSION[$SESS_VIDEO_ID] = $vid;
-$url = $con->query($sql);
-$res = $url->fetch_assoc();
+
+$sql = "SELECT URL FROM Video WHERE vid=$vid";
+$select = $pdo->prepare($sql);
+$select->execute();
+$res = $select->fetch(PDO::FETCH_ASSOC);
 echo($res[$TABL_VIDEO_FIELD_URL]);
 
 ?>
-
