@@ -21,7 +21,7 @@ function toArr($res){
 session_start();    //Start session
 
 # Connect to MySQL database
-include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd 
+require_once 'config.inc.php';  //$db_name, $host, $db_user, $db_pwd 
 $con=mysqli_connect($host, $db_user, $db_pwd, $db_name);
     
 if(mysqli_connect_errno())

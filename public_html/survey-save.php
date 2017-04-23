@@ -1,7 +1,7 @@
 <?php
    session_start();    //Start session
-    include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd, $PAGE_RATE_VIDEO, $DOMAIN_URL
-    include_once('check-login.php');
+    require_once 'config.inc.php';  //$db_name, $host, $db_user, $db_pwd, $PAGE_RATE_VIDEO, $DOMAIN_URL
+    require_once 'check-login.php';
     require 'emailExpSurveyDBandRedirect.php';
     
     redirect_if_not_login($_SESSION);

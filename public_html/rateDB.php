@@ -1,7 +1,10 @@
 <?php
    
+    require_once 'config.inc.php';
     function parseFormAndInsertRating($pdo, $post_data, $sess_data, $timestamp, $timezone){
-        include('config.inc.php');
+        global $TABLE_RATING, $TB_COL_TIMESTAMP, $TB_COL_TIMEZONE, $TB_COL_WATCHED, $TB_COL_INTERACTION, $TB_COL_LID, $DOMAIN_URL, $PAGE_RATE_VIDEO, $PAGE_SHOW_MAP;
+        global $POST_FAMILIAR_ST, $POST_SCORE, $POST_COMMENT, $SESS_USER_ID, $SESS_VIDEO_ID, $SESS_LOGIN_ID, $POST_INTERACTION, $POST_TAG, $POST_WATCHED;
+
         $familiar_st = $post_data[$POST_FAMILIAR_ST];
         $score = $post_data[$POST_SCORE];
         $comment = $post_data[$POST_COMMENT];

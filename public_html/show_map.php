@@ -1,8 +1,8 @@
 <?php
     session_start();
-    include_once('config.inc.php');
-    include_once('db_helper.php');
-    include_once('check-login.php');
+    require_once 'config.inc.php';
+    require_once 'db_helper.php';
+    require_once 'check-login.php';
     $ty = "";
     if(login($_SESSION)){
         $email = $_SESSION[$SESS_EMAIL];

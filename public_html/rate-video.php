@@ -1,8 +1,8 @@
 <?php
     session_start();	//resume the session
 
-    include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd, $PAGE_RATE_VIDEO, $DOMAIN_URL
-    require 'rateDB.php';
+    require_once 'config.inc.php';  //$db_name, $host, $db_user, $db_pwd, $PAGE_RATE_VIDEO, $DOMAIN_URL
+    require_once 'rateDB.php';
     
     # Connect to MySQL database
     try{

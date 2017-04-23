@@ -1,6 +1,8 @@
 <?php
+    require_once 'config.inc.php';
     function logLogin($pdo, $user_id, $timestamp, $timezone, $userAgent, $isMobile, $isTablet, $isAndroid, $isIOS){
-        include('config.inc.php'); 
+        global $TABLE_LOGINLOG, $TABL_USERS_FIELD_UID, $TB_COL_TIMESTAMP, $TB_COL_TIMEZONE, $TB_COL_USERAGENT, $TB_COL_ISMOBILE, $TB_COL_ISTABLET, $TB_COL_ISANDROID, $TB_COL_ISIOS;
+        
         $sql = <<<EOT
             INSERT INTO $TABLE_LOGINLOG 
                 (`$TABL_USERS_FIELD_UID`, `$TB_COL_TIMESTAMP`, `$TB_COL_TIMEZONE`, `$TB_COL_USERAGENT`, `$TB_COL_ISMOBILE`, `$TB_COL_ISTABLET`, `$TB_COL_ISANDROID`, `$TB_COL_ISIOS`) 
@@ -17,9 +19,10 @@ EOT;
 
 
     function handle_input_email($pdo, $email){
-        include('config.inc.php'); 
         # check if user exists
-
+        global $TABL_USERS_FIELD_UID, $TABL_USERS_FIELD_EXP, $TABL_USERS_FIELD_SURVEY, $TABLE_USERS;
+        global $SESS_USER_ID, $SESS_EXPLV, $SESS_SURVEY;
+        
         $sql="SELECT $TABL_USERS_FIELD_UID, $TABL_USERS_FIELD_EXP, $TABL_USERS_FIELD_SURVEY FROM  $TABLE_USERS WHERE email= '$email'";
         $select = $pdo->prepare($sql);
         $select->execute();
@@ -49,11 +52,12 @@ EOT;
             $head_url = "Location: ".$GLOBALS['DOMAIN_URL'].$GLOBALS['PAGE_RATE_VIDEO'];
         }
         return array($SESS_USER_ID=>$user_id, 'head_url'=>$head_url, $SESS_EXPLV=>$exp_lvl, $SESS_SURVEY=>$has_survey);
+        
     }
     
     function handle_exp_lvl($pdo, $user_id, $has_survey, $explv){
-        include('config.inc.php'); 
-        
+        global $TABLE_USERS, $TABL_USERS_FIELD_EXP, $TABL_USERS_FIELD_UID, $TABL_USERS_FIELD_SURVEY, $DOMAIN_URL, $PAGE_SURVEY, $PAGE_RATE_VIDEO, $SURVEY_COLS;
+
         $sql = "UPDATE $TABLE_USERS SET $TABL_USERS_FIELD_EXP = '$explv' WHERE $TABL_USERS_FIELD_UID='$user_id'";
         $pdo->exec($sql);
         
@@ -66,7 +70,8 @@ EOT;
     }
     
     function handle_survey($pdo, $user_id, $post_data){
-        include('config.inc.php');
+        global $TABLE_USERS, $TABL_USERS_FIELD_EXP, $TABL_USERS_FIELD_UID, $TABL_USERS_FIELD_SURVEY, $DOMAIN_URL, $PAGE_SURVEY, $PAGE_RATE_VIDEO, $SURVEY_COLS;
+
         $cols_update = array();
         # get post form variables
         foreach($SURVEY_COLS as $col){
@@ -75,7 +80,6 @@ EOT;
             }
             array_push($cols_update, "$col=$post_data[$col]");
         }
-        
 
         # user answer any questions
         if(!empty($cols_update)){

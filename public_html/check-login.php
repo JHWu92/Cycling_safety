@@ -1,5 +1,5 @@
 <?php
-    include_once('config.inc.php');  
+    require_once 'config.inc.php';  
     function login($SESS){
         return isset($SESS[$GLOBALS['SESS_USER_ID']]) && isset($SESS[$GLOBALS['SESS_EMAIL']]) && $SESS[$GLOBALS['SESS_LOGIN']];
     } 

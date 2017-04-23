@@ -1,7 +1,7 @@
 <?php
     session_start();    //Start session
-    include_once('config.inc.php');  //$db_name, $host, $db_user, $db_pwd, $TABLE_USERS, $DOMAIN_URL, $PAGE_RATE_VIDEO, $PAGE_SURVEY
-    require 'emailExpSurveyDBandRedirect.php';
+    require_once 'config.inc.php';  //$db_name, $host, $db_user, $db_pwd, $TABLE_USERS, $DOMAIN_URL, $PAGE_RATE_VIDEO, $PAGE_SURVEY
+    require_once 'emailExpSurveyDBandRedirect.php';
 
     //parse data from form 
     $explv=$_POST[$SESS_EXPLV];

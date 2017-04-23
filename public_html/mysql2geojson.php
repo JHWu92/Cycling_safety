@@ -1,6 +1,6 @@
 <?php
-include_once('geoPHP/geoPHP.inc');
-include_once('config.inc.php');  
+require_once 'geoPHP/geoPHP.inc';
+require_once 'config.inc.php';
 
 function wkt_to_json($wkt) {
     $geom = geoPHP::load($wkt,'wkt');
