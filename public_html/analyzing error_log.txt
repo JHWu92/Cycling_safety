@@ -1,3 +1,9 @@
+# TODO
+0. [x] change include, include_once, require to require_once to avoid open files repeatedly.
+1. [x] display vid change to pdo from mysqli
+2. [x] use not persistent connection: set $pdo=null;
+3. [x] set error reporting mode: $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+4. [x] use prepare sql statement
 
 ==========================================
 display_vid.php
