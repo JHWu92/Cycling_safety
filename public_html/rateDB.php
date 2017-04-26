@@ -18,13 +18,13 @@
             $tags = implode(',', $tags);
         }
         
-        if(!$uid | !$vid){  # if error happens when inserting
-            if(!$uid){ 
+        if(empty($uid) | empty($vid)){  # if error happens when inserting
+            if(empty($uid)){ 
                 error_log('The uid is missing');
             }else{
                 error_log('the vid is missing');
             }
-            die("<h3>We are sorry that some errors happen, click <a href='/index.html'>HERE</a> to enter your email again</h3>. If the problem persists, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>");
+            die('<h3>We are sorry that some errors happen, click <a href="/index.html">HERE</a> to enter your email again</h3>. If the problem persists, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>');
         }
         
         if(!empty($score) && !empty($watched)){
