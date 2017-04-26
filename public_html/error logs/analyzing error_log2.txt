@@ -1,0 +1,12 @@
+new error:
+
+session could be gone:
+1. no uid, no timezone, no vid;
+2. session_start() failed because of too many files
+
+too many file issues:
+1. require_once, failed to open stream: Too many open files in system (causing failed to parse uid from session($SESS_UID is not loaded))
+
+PDO issues:
+1. Class 'PDO' not found. Possibly because the same reason: too many open files, and failed to open php.inc
+2. new PDO() return null
