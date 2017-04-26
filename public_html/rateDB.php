@@ -17,7 +17,16 @@
         if(is_array($tags)){
             $tags = implode(',', $tags);
         }
-
+        
+        if(!$uid | !$vid){  # if error happens when inserting
+            if(!$uid){ 
+                error_log('The uid is missing');
+            }else{
+                error_log('the vid is missing');
+            }
+            die("<h3>We are sorry that some errors happen, click <a href='/index.html'>HERE</a> to enter your email again</h3>. If the problem persists, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>");
+        }
+        
         if(!empty($score) && !empty($watched)){
             $sql = <<<EOT
             INSERT $TABLE_RATING 
@@ -29,6 +38,7 @@ EOT;
             $sth->execute(array(':uid' => $uid, ':vid' => $vid, ':score' => $score, ':comment' => "$comment", ':tags' => "$tags", ':familiar_st' => "$familiar_st", ':timestamp' => "$timestamp", ':timezone' => "$timezone", ':watched' => "$watched", ':interaction' => "$interaction", ':lid' => "$lid"));
 
             $rid = $pdo->lastInsertId(); 
+            $sth = null;
         }
         // which button is clicked
         if (isset($post_data['btn-rate'])) {
