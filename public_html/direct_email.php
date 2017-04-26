@@ -12,10 +12,10 @@
     // check whether the email exist against DB
     # Connect to MySQL database
     try{
-        $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     }catch (PDOException $e) {
-        echo 'Connection failed: ' . $e->getMessage();
+        error_log('PDO Exception: '.$e);
+        die('Connection failed: ' . $e->getMessage());
     }
     //$con=mysqli_connect($host, $db_user, $db_pwd, $db_name);
     # if connection succeed

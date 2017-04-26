@@ -9,12 +9,11 @@
         $uid = $_SESSION[$SESS_USER_ID];
         
         try{
-            $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         }catch (PDOException $e) {
-            echo 'Connection failed: ' . $e->getMessage();
-        }
-        
+            error_log('PDO Exception: '.$e);
+            die('Connection failed: ' . $e->getMessage());
+        }        
         $sql = "SELECT count(1) from $TABLE_RATING WHERE uid=?";
         $sth = $pdo->prepare($sql);
         $sth->execute(array($uid));
