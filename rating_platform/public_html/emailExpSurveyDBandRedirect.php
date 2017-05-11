@@ -29,7 +29,8 @@ EOT;
         $select = $pdo->prepare($sql);
         $select->execute(array("$email"));
         $count=$select->rowCount();
-
+        $exp_lvl=null;
+        $has_survey = null;
         if($count == 0){  # this is a new user
             $sql_insert = "INSERT INTO $TABLE_USERS (Email) VALUES (?)";
             $insert = $pdo->prepare($sql_insert);

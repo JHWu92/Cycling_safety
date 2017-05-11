@@ -13,7 +13,7 @@ function toArr($res){
 	$arr = array();
 
 	while($row = $res->fetch(PDO::FETCH_ASSOC)){
-		arr.array_push($arr, $row["vid"]);
+		$arr.array_push($arr, $row["vid"]);
 	}
 	return $arr;
 }

@@ -5,15 +5,16 @@
         global $TABLE_RATING, $TB_COL_TIMESTAMP, $TB_COL_TIMEZONE, $TB_COL_WATCHED, $TB_COL_INTERACTION, $TB_COL_LID, $DOMAIN_URL, $PAGE_RATE_VIDEO, $PAGE_SHOW_MAP;
         global $POST_FAMILIAR_ST, $POST_SCORE, $POST_COMMENT, $SESS_USER_ID, $SESS_VIDEO_ID, $SESS_LOGIN_ID, $POST_INTERACTION, $POST_TAG, $POST_WATCHED;
 
-        $familiar_st = $post_data[$POST_FAMILIAR_ST];
-        $score = $post_data[$POST_SCORE];
-        $comment = $post_data[$POST_COMMENT];
+        $familiar_st = (isset($post_data[$POST_FAMILIAR_ST]) ? $post_data[$POST_FAMILIAR_ST] : null);
+        $score = (isset($post_data[$POST_SCORE]) ? $post_data[$POST_SCORE] : null);
+        $tags = (isset($post_data[$POST_TAG]) ? $post_data[$POST_TAG] : null);
+        $comment = (isset($post_data[$POST_COMMENT]) ? $post_data[$POST_COMMENT] : null);
+        $interaction = (isset($post_data[$POST_INTERACTION]) ? $post_data[$POST_INTERACTION] : null);
+        $watched = (isset($post_data[$POST_WATCHED]) ? $post_data[$POST_WATCHED] : null);
         $uid = $sess_data[$SESS_USER_ID];
         $vid = $sess_data[$SESS_VIDEO_ID];
         $lid = $sess_data[$SESS_LOGIN_ID];
-        $interaction = $post_data[$POST_INTERACTION];
-        $tags = $post_data[$POST_TAG];
-        $watched = $post_data[$POST_WATCHED];
+        
         if(is_array($tags)){
             $tags = implode(',', $tags);
         }
@@ -27,6 +28,7 @@
             die('<h3>We are sorry that some errors happen, click <a href="/index.html">HERE</a> to enter your email again</h3>. If the problem persists, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>');
         }
         
+        $rid = null;
         if(!empty($score) && !empty($watched)){
             $sql = <<<EOT
             INSERT $TABLE_RATING 

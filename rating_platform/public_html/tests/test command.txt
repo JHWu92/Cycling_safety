@@ -1,0 +1,16 @@
+# for server of host-cater
+php phpunit-6.0.phar --configuration public_html/tests/DBconfig.xml public_html/tests/loadDataFakeTest.php
+php phpunit-6.0.phar --configuration public_html/tests/DBconfig.xml public_html/tests/rateTest.php
+php phpunit-6.0.phar --configuration public_html/tests/DBconfig.xml public_html/tests/check-loginTest.php
+php phpunit-6.0.phar --configuration public_html/tests/DBconfig.xml public_html/tests/loginTest.php
+php phpunit-6.0.phar --configuration public_html/tests/DBconfig.xml public_html/tests/showMapTest.php
+php phpunit-6.0.phar --configuration public_html/tests/DBconfig.xml public_html/tests/largeVolumeTest.php
+
+
+# for server on AWS
+php phpunit-6.0.phar --configuration  html/tests/DBconfig.xml  html/tests/check-loginTest.php
+php phpunit-6.0.phar --configuration  html/tests/DBconfig.xml  html/tests/loginTest.php
+php phpunit-6.0.phar --configuration  html/tests/DBconfig.xml  html/tests/showMapTest.php
+php phpunit-6.0.phar --configuration  html/tests/DBconfig.xml  html/tests/rateTest.php
+php phpunit-6.0.phar --configuration  html/tests/DBconfig.xml  html/tests/largeVolumeTest.php
+

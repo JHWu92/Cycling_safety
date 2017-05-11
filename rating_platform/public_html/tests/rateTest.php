@@ -90,30 +90,7 @@ class loginTest extends DBFixtureTestCase{
         $expectedTable = $this->getDataSet('insertRatingWithMoreInformation')->getTable('Rating');
         $this->assertTablesEqual($expectedTable, $queryTable);
     }
-    
-    public function testRateSumPerSeg(){
-    # T19
-        $conn = $this->getConnection();
-        $timestamp = '2017-03-27 20:13:36';
-        $timezone = 'GMT -4';
-        $data = array(
-            [array($GLOBALS['POST_SCORE']=>5, 'btn-rate'=>1, $GLOBALS['POST_WATCHED']=>'1'), array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>4, $GLOBALS['SESS_LOGIN_ID']=>2)],
-            [array($GLOBALS['POST_SCORE']=>4, 'btn-rate'=>1, $GLOBALS['POST_WATCHED']=>'1'), array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>5, $GLOBALS['SESS_LOGIN_ID']=>2)],
-            [array($GLOBALS['POST_SCORE']=>3, 'btn-rate'=>1, $GLOBALS['POST_WATCHED']=>'1'), array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>3, $GLOBALS['SESS_LOGIN_ID']=>2)],
-            [array($GLOBALS['POST_SCORE']=>1, 'btn-rate'=>1, $GLOBALS['POST_WATCHED']=>'1'), array($GLOBALS['SESS_USER_ID']=>2, $GLOBALS['SESS_VIDEO_ID']=>4, $GLOBALS['SESS_LOGIN_ID']=>2)],
-            [array($GLOBALS['POST_SCORE']=>2, 'btn-rate'=>1, $GLOBALS['POST_WATCHED']=>'1'), array($GLOBALS['SESS_USER_ID']=>2, $GLOBALS['SESS_VIDEO_ID']=>3, $GLOBALS['SESS_LOGIN_ID']=>2)],
-            [array($GLOBALS['POST_SCORE']=>3, 'btn-rate'=>1, $GLOBALS['POST_WATCHED']=>'1'), array($GLOBALS['SESS_USER_ID']=>2, $GLOBALS['SESS_VIDEO_ID']=>2, $GLOBALS['SESS_LOGIN_ID']=>2)],
-            [array($GLOBALS['POST_SCORE']=>5, 'btn-rate'=>1, $GLOBALS['POST_WATCHED']=>'1'), array($GLOBALS['SESS_USER_ID']=>2, $GLOBALS['SESS_VIDEO_ID']=>6, $GLOBALS['SESS_LOGIN_ID']=>2)],
-            );
-        foreach($data as $rate){
-            $res = parseFormAndInsertRating(self::$pdo,$rate[0], $rate[1], $timestamp, $timezone);
-        }
-    
-        $queryTable = $conn->createQueryTable('RoadSegment', 'SELECT * FROM RoadSegment');
-        $expectedTable = $this->getDataSet('RoadSegmentAfterSomeRating')->getTable('RoadSegment');
-        $this->assertTablesEqual($expectedTable, $queryTable);
-    }
-    
+  
     public function testSubmitWithoutWatched(){
         $conn = $this->getConnection();
         $timestamp = '2017-03-27 20:13:36';
@@ -141,7 +118,31 @@ class loginTest extends DBFixtureTestCase{
     
     
         
+    }  
+    
+    public function testRateSumPerSeg(){
+    # T19
+        $conn = $this->getConnection();
+        $timestamp = '2017-03-27 20:13:36';
+        $timezone = 'GMT -4';
+        $data = array(
+            [array($GLOBALS['POST_SCORE']=>5, 'btn-rate'=>1, $GLOBALS['POST_WATCHED']=>'1'), array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>4, $GLOBALS['SESS_LOGIN_ID']=>2)],
+            [array($GLOBALS['POST_SCORE']=>4, 'btn-rate'=>1, $GLOBALS['POST_WATCHED']=>'1'), array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>5, $GLOBALS['SESS_LOGIN_ID']=>2)],
+            [array($GLOBALS['POST_SCORE']=>3, 'btn-rate'=>1, $GLOBALS['POST_WATCHED']=>'1'), array($GLOBALS['SESS_USER_ID']=>1, $GLOBALS['SESS_VIDEO_ID']=>3, $GLOBALS['SESS_LOGIN_ID']=>2)],
+            [array($GLOBALS['POST_SCORE']=>1, 'btn-rate'=>1, $GLOBALS['POST_WATCHED']=>'1'), array($GLOBALS['SESS_USER_ID']=>2, $GLOBALS['SESS_VIDEO_ID']=>4, $GLOBALS['SESS_LOGIN_ID']=>2)],
+            [array($GLOBALS['POST_SCORE']=>2, 'btn-rate'=>1, $GLOBALS['POST_WATCHED']=>'1'), array($GLOBALS['SESS_USER_ID']=>2, $GLOBALS['SESS_VIDEO_ID']=>3, $GLOBALS['SESS_LOGIN_ID']=>2)],
+            [array($GLOBALS['POST_SCORE']=>3, 'btn-rate'=>1, $GLOBALS['POST_WATCHED']=>'1'), array($GLOBALS['SESS_USER_ID']=>2, $GLOBALS['SESS_VIDEO_ID']=>2, $GLOBALS['SESS_LOGIN_ID']=>2)],
+            [array($GLOBALS['POST_SCORE']=>5, 'btn-rate'=>1, $GLOBALS['POST_WATCHED']=>'1'), array($GLOBALS['SESS_USER_ID']=>2, $GLOBALS['SESS_VIDEO_ID']=>6, $GLOBALS['SESS_LOGIN_ID']=>2)],
+            );
+        foreach($data as $rate){
+            $res = parseFormAndInsertRating(self::$pdo,$rate[0], $rate[1], $timestamp, $timezone);
+        }
+    
+        $queryTable = $conn->createQueryTable('RoadSegment', 'SELECT * FROM RoadSegment');
+        $expectedTable = $this->getDataSet('RoadSegmentAfterSomeRating')->getTable('RoadSegment');
+        $this->assertTablesEqual($expectedTable, $queryTable);
     }
+    
 }
 
 
