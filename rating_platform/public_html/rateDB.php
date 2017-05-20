@@ -22,10 +22,12 @@
         if(empty($uid) | empty($vid)){  # if error happens when inserting
             if(empty($uid)){ 
                 error_log('The uid is missing');
+                die('<h3>We are sorry that the connection is lost, click <a href="/index.html">HERE</a> to log in again</h3>. If the problem persists, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>');
+                
             }else{
                 error_log('the vid is missing');
+                die('<h3>We failed to load the next video for you, click <a href="/index.html">HERE</a> to log in again</h3>. If the problem persists, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>');
             }
-            die('<h3>We are sorry that some errors happen, click <a href="/index.html">HERE</a> to enter your email again</h3>. If the problem persists, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>');
         }
         
         $rid = null;
