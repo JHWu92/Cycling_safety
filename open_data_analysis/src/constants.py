@@ -58,13 +58,8 @@ fn_poi_osm_dc = 'poi_osm_dc.geojson'
 fn_poi_distr_dc = 'poi_distr_dc.csv'
 fn_poi_seg_cvrg_dc = 'poi_seg_coverage_dc.html'
 fn_poi_boxplot_per_seg_dc = 'poi_boxplot_per_seg_dc.html'
-fn_feature_poi_dc = 'feature_poi_dc.csv'
-# Bike facilities
-fn_feature_bk_facs_dc = 'feature_bk_facs_dc.csv'
-# network feature
+# intersection file
 fn_intxn_dc = 'intxn_dc.csv'
-fn_feature_seg_as_node_dc = 'feature_seg_as_node_dc.csv'
-fn_feature_seg_as_edge_dc = 'feature_seg_as_edge_dc.csv'
 # opendata.dc.gov
 fn_oepndc_bk_dc = 'raw_data/opendc/Bike_Lane_Street_RightofWay.csv'
 fn_311_dc = 'raw_data/opendc/Cityworks_Service_Requests.csv'
@@ -76,12 +71,36 @@ fns_crime_dc = {
     2016: 'raw_data/opendc/Crime_Incidents_in_2016.geojson',
     2017: 'raw_data/opendc/Crime_Incidents_in_2017.geojson',
 }
-fn_oepndc_bk_dc = 'feature_opendc_bk_dc.csv'
+
+# features for dc
+fn_feature_seg_attr_dc = 'feature_seg_attribute_dc.csv'
+fn_feature_poi_dc = 'feature_poi_dc.csv'
+fn_feature_bk_facs_dc = 'feature_bk_facs_dc.csv'   # bike facility from osm
+fn_feature_seg_as_node_dc = 'feature_seg_as_node_dc.csv'
+fn_feature_seg_as_edge_dc = 'feature_seg_as_edge_dc.csv'
 fn_feature_crash_dc = 'feature_crash_dc.csv'
 fn_feature_311_dc = 'feature_311_dc.csv'
 fn_feature_vision0_dc = 'feature_vision0_dc.csv'
 fn_feature_crime_dc = 'feature_crime_dc.csv'
+fn_feature_mov_dc = 'feature_mov_violations_dc.csv'
+fn_feature_parking_dc = 'feature_parking_violations_dc.csv'
+fn_feature_oepndc_bk_dc = 'feature_opendc_bk_dc.csv'
 
+fn_features_dc = {
+    'seg_attr': fn_feature_seg_attr_dc,
+    'poi': fn_feature_poi_dc, 
+    'bk_osm': fn_feature_bk_facs_dc, 
+    'net_SaN': fn_feature_seg_as_node_dc, 
+    'net_SaE': fn_feature_seg_as_edge_dc, 
+    'crash': fn_feature_crash_dc,
+    '311': fn_feature_311_dc, 
+    'v0': fn_feature_vision0_dc, 
+    'crime': fn_feature_crime_dc, 
+    'moving': fn_feature_mov_dc, 
+    'parking': fn_feature_parking_dc, 
+    'bk_opendc': fn_feature_oepndc_bk_dc}
+
+fn_target_ltc_dc = 'feature_lts_dc.csv'
 
 # ====================================================================== =========================
 # ###################################################################### non city specific constants
