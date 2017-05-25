@@ -15,11 +15,4 @@ html-backup
 
 
 rating_platform/credentials (1).csv
-open_data_analysis/data/raw_data/Cityworks_Service_Requests.csv
-open_data_analysis/data/raw_data/opendc/Cityworks_Service_Requests.csv
-open_data_analysis/data/raw_data/opendc/Crime_Incidents_in_2016.geojson
-open_data_analysis/data/raw_data/opendc/Crime_Incidents_in_2017.geojson
-open_data_analysis/data/raw_data/opendc/Crime_Incidents_in_2014.geojson
-open_data_analysis/data/raw_data/opendc/Crashes_in_the_District_of_Columbia.csv
-open_data_analysis/data/raw_data/opendc/Crime_Incidents_in_2015.geojson
-open_data_analysis/data/raw_data/opendc/Vision_Zero_Safety_dc.csv
+open_data_analysis/data/raw_data/opendc/*
