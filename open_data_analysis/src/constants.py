@@ -1,3 +1,6 @@
+# all fn_ variable below is prefixed with dir_data
+dir_data= 'data/'
+
 # ###################################################################### =========================
 # ###################################################################### Philly
 # ###################################################################### =========================
@@ -62,6 +65,22 @@ fn_feature_bk_facs_dc = 'feature_bk_facs_dc.csv'
 fn_intxn_dc = 'intxn_dc.csv'
 fn_feature_seg_as_node_dc = 'feature_seg_as_node_dc.csv'
 fn_feature_seg_as_edge_dc = 'feature_seg_as_edge_dc.csv'
+# opendata.dc.gov
+fn_oepndc_bk_dc = 'raw_data/opendc/Bike_Lane_Street_RightofWay.csv'
+fn_311_dc = 'raw_data/opendc/Cityworks_Service_Requests.csv'
+fn_crash_dc = 'raw_data/opendc/Crashes_in_the_District_of_Columbia.csv'
+fn_vision0_dc = 'raw_data/opendc/Vision_Zero_Safety_dc.csv'
+fns_crime_dc = {
+    2014: 'raw_data/opendc/Crime_Incidents_in_2014.geojson',
+    2015: 'raw_data/opendc/Crime_Incidents_in_2015.geojson',
+    2016: 'raw_data/opendc/Crime_Incidents_in_2016.geojson',
+    2017: 'raw_data/opendc/Crime_Incidents_in_2017.geojson',
+}
+fn_oepndc_bk_dc = 'feature_opendc_bk_dc.csv'
+fn_feature_crash_dc = 'feature_crash_dc.csv'
+fn_feature_311_dc = 'feature_311_dc.csv'
+fn_feature_vision0_dc = 'feature_vision0_dc.csv'
+fn_feature_crime_dc = 'feature_crime_dc.csv'
 
 
 # ====================================================================== =========================
