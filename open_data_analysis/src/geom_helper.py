@@ -267,6 +267,31 @@ def objs_near_segs_store(objs_near, dir, fn_objs, fn_segs):
 
 
 # ########## functions assigning ln(segment) to objs #############
+def pts2segs_by_chunk(gpdf, segs, epsg, chunk=10**5):
+    import pandas as pd
+    if len(gpdf) > chunk:
+        list_pts_has_ln, list_pts_no_ln = [], []
+        size = len(gpdf)
+        print 'size of data:', size, '# chunks:', size*1.0/chunk
+        start = 0
+        end = min(start+chunk, size)
+        while(start< size):
+            print 'matching chunk:', start, end
+            pts_has_ln, pts_no_ln=pts2segs(gpdf[start:end], segs, epsg)
+            list_pts_has_ln.append(pts_has_ln)
+            list_pts_no_ln.append(pts_no_ln)
+
+            start = end
+            end = min(start+chunk, size)
+        pts_has_ln = pd.concat(list_pts_has_ln, ignore_index=True)
+        pts_no_ln = pd.concat(list_pts_no_ln)
+    else:
+        print 'pts2segs ing...'
+        pts_has_ln, pts_no_ln=pts2segs(gpdf, segs, epsg)
+        
+    return pts_has_ln, pts_no_ln
+    
+    
 def pts2segs(pts, lns, bfr_crs, init_crs=4326, close_jn_dist=5, far_jn_dist=20):
     """
     1. close jn: buffer pts in bfr_crs with close_jn_dist, use sjoin to find segment(s) intersected with buffered pts
