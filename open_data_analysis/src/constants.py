@@ -84,7 +84,7 @@ fn_feature_vision0_dc = 'feature_vision0_dc.csv'
 fn_feature_crime_dc = 'feature_crime_dc.csv'
 fn_feature_mov_dc = 'feature_mov_violations_dc.csv'
 fn_feature_parking_dc = 'feature_parking_violations_dc.csv'
-fn_feature_oepndc_bk_dc = 'feature_opendc_bk_dc.csv'
+fn_feature_oepndc_bk_dc = 'feature_bk_opendc_dc.csv'
 
 # features that are meaningful to have a "total" count column.
 features_for_total = ['crash', '311', 'crime', 'v0', 'moving', 'parking', 'poi', 'bk_opendc']
