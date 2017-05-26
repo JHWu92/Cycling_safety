@@ -3,12 +3,12 @@ import pandas as pd
 import numpy as np
 from src.constants import fn_features_dc, dir_data, index_seg, features_for_total
 
-def load_joint_features(years=(2014,2015,2016,2017), how='NO_TOTAL'):
+def load_joint_features(years=(2014,2015,2016,2017), how='NO_TOTAL', verbose=False):
     """
     for each feature files: get dummies, dummy_na=True; fillna with 0; encode each feature names with ftr_name_No
     return joint features and code book
     """
-    features = load_separate_features()
+    features = load_separate_features(verbose=verbose)
     joint_features = []
     ftr_code2desc = {}
     for name, df in features.items():
@@ -27,14 +27,14 @@ def load_joint_features(years=(2014,2015,2016,2017), how='NO_TOTAL'):
     return joint_features, ftr_code2desc
 
 
-def load_separate_features():
+def load_separate_features(verbose=True):
     """
     get dummies, dummy_na=True
     fillna with 0
     """
     features = {}
     for name, fn in fn_features_dc.items():
-        print 'loading feature:', fn
+        if verbose:  print 'loading feature:', fn
         df = pd.read_csv(dir_data + fn, index_col=0)
         if index_seg in df.columns:
             df.set_index('index_seg', inplace=True)
