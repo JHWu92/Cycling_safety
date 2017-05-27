@@ -103,7 +103,7 @@ fn_features_dc = {
     'parking': fn_feature_parking_dc, 
     'bk_opendc': fn_feature_oepndc_bk_dc}
 
-fn_target_ltc_dc = 'feature_lts_dc.csv'
+fn_target_lts_dc = 'feature_lts_dc.csv'
 
 # ====================================================================== =========================
 # ###################################################################### non city specific constants
