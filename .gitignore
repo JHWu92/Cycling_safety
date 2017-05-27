@@ -16,3 +16,4 @@ html-backup
 
 rating_platform/credentials (1).csv
 open_data_analysis/data/raw_data/opendc/*
+open_data_analysis/data/cross_validation/*
