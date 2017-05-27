@@ -1,11 +1,13 @@
 # coding=utf-8
+from datetime import datetime as dtm
+import os
+
 from sklearn import linear_model, svm, tree, ensemble, neural_network, naive_bayes
-from sklearn.metrics import mean_squared_error, f1_score, accuracy_score, roc_auc_score, classification_report
+from sklearn.metrics import mean_squared_error, f1_score, accuracy_score
 from sklearn.model_selection import GridSearchCV
 import numpy as np
-from datetime import datetime as dtm
 import pandas as pd
-import os
+
 
 def bounded_round(arr, mini, maxi):
     arr_round = arr.round()
@@ -24,7 +26,8 @@ def fillna(df, how='mean'):
 
 def sk_models(reg=True, cls=True, stoplist=('SVM', 'SVR', 'GDBreg', 'GDBcls')):
     """
-    return sk models with names by regression and/or classification. 
+    return sk models with names by regression and/or classification.
+    default stoplist is ('SVM', 'SVR', 'GDBreg', 'GDBcls') because they are too slow
     """
     reg_models = {
         'ols': linear_model.LinearRegression(),
@@ -62,6 +65,10 @@ def sk_models(reg=True, cls=True, stoplist=('SVM', 'SVR', 'GDBreg', 'GDBcls')):
         models['cls'] = cls_models
     return models
 
+
+# ################################################
+# Grid search cross validation
+# ################################################
 
 def cv_default_params():
     # GDBreg's parameters are deliberately cut down.
@@ -122,6 +129,16 @@ def cv_default_params():
 
 
 def grid_cv_models(x, y, models, params, path='', n_jobs=4, cv=5, save_res=True, redo=False, verbose=False):
+    """
+    regression model is evaluated by neg_mean_squared_error
+    classification model is evaluated by f1_weighted
+    iterate over models' keys, get tuning parameters based on key, if no matched paramters, that model will be skipped
+    if not redo and the result exists, optimum parameters will be loaded using model.set_params(**loaded)
+    :return:
+        index: (kind, name);
+        each line is the best parameters for that model;
+        type of column "best_model" is sklearn models.
+    """
     path_cv_best = os.path.join(path, 'cv_%d_best_models.csv' % cv)
 
     if os.path.exists(path_cv_best) and not redo:
@@ -189,7 +206,39 @@ def grid_cv_models(x, y, models, params, path='', n_jobs=4, cv=5, save_res=True,
     return df_cv
 
 
-def evaluate_scalable_cls(model, train_x, train_y, test_x, test_y):
+# ################################################
+# Evaluate cv-ed models on test set
+# Evaluators for different prediction tasks
+# ################################################
+
+def evaluate_grid_cv(df_cv, train_x, train_y, test_x, test_y, evaluator, path='', cv=5, save_res=True):
+    """
+    df_cv: results from :func:: grid_cv_models()
+    evaluator: such as :func:: evaluator_scalable_cls()
+    save_res: True->save to path/cv_%d_best_models_evaluation.csv % cv
+    return evaluation result as pd.DF, columns are defined by evaluator
+    """
+    results = {}
+    for (kind, name), model in df_cv.best_model.iteritems():
+        results[kind,name] = evaluator(model, train_x, train_y, test_x, test_y)
+
+    df_results = pd.DataFrame(results).T
+    if 'test_f1' in df_results.columns:
+        df_results.sort_values(by='test_f1', ascending=False, inplace=True)
+
+    if save_res:
+        df_results.to_csv(os.path.join(path, 'cv_%d_best_models_evaluation.csv' % cv))
+
+    return df_results
+
+
+def evaluator_scalable_cls(model, train_x, train_y, test_x, test_y):
+    """
+    Evaluator for scalable classification. E.g. Ys are 1, 2, 3, 4
+    Both regression and classification will be used.
+    prediction by regression will be round up (bounded by max and min of Ys) as a class label
+    :return: metrics: mse, accuracy and weighted f1, for both train and test
+    """
     min_y, max_y = train_y.min(), train_y.max()
 
     model.fit(train_x, train_y)
@@ -219,16 +268,33 @@ def evaluate_scalable_cls(model, train_x, train_y, test_x, test_y):
     return result
 
 
-def evaluate_grid_cv(df_cv, train_x, train_y, test_x, test_y, evaluation, fn=None):
+# ################################################
+# Visualization cross validation result
+# ################################################
 
-    results = {}
-    for (kind, name), model in df_cv.best_model.iteritems():
-        results[kind,name] = evaluation(model, train_x, train_y, test_x, test_y)
+def vis_evaluation(path, cv):
+    df_eval = pd.read_csv(os.path.join(path, 'cv_%d_best_models_evaluation.csv' % cv))
+    return df_eval.plot()
 
-    df_results = pd.DataFrame(results).T
-    if 'test_f1' in df_results.columns:
-        df_results.sort_values(by='test_f1', ascending=False, inplace=True)
-    if fn:
-        df_results.to_csv(fn)
 
-    return df_results
+def vis_grid_cv_one_model(fn):
+    df = pd.read_csv(fn, index_col=0)
+    return df[['mean_test_score', 'mean_train_score']].boxplot()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
