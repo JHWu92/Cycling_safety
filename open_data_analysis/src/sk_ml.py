@@ -11,8 +11,8 @@ import pandas as pd
 
 def bounded_round(arr, mini, maxi):
     arr_round = arr.round()
-    arr_round[arr_round<mini] = mini
-    arr_round[arr_round>maxi] = maxi
+    arr_round[arr_round < mini] = mini
+    arr_round[arr_round > maxi] = maxi
     return arr_round
 
 
@@ -30,30 +30,30 @@ def sk_models(reg=True, cls=True, stoplist=('SVM', 'SVR', 'GDBreg', 'GDBcls')):
     default stoplist is ('SVM', 'SVR', 'GDBreg', 'GDBcls') because they are too slow
     """
     reg_models = {
-        'ols': linear_model.LinearRegression(),
-        'ridge': linear_model.Ridge(),
-        'lasso': linear_model.Lasso(),
-        'DTreg': tree.DecisionTreeRegressor(),
-        'RFreg': ensemble.RandomForestRegressor(),
-        'ADAreg': ensemble.AdaBoostRegressor(),
-        'BAGreg': ensemble.BaggingRegressor(),
-        'GDBreg': ensemble.GradientBoostingRegressor(),
-        'SVR': svm.SVR(),
+        'ols'      : linear_model.LinearRegression(),
+        'ridge'    : linear_model.Ridge(),
+        'lasso'    : linear_model.Lasso(),
+        'DTreg'    : tree.DecisionTreeRegressor(),
+        'RFreg'    : ensemble.RandomForestRegressor(),
+        'ADAreg'   : ensemble.AdaBoostRegressor(),
+        'BAGreg'   : ensemble.BaggingRegressor(),
+        'GDBreg'   : ensemble.GradientBoostingRegressor(),
+        'SVR'      : svm.SVR(),
         'linearSVR': svm.LinearSVR(),
-        'MLPreg': neural_network.MLPRegressor(),
+        'MLPreg'   : neural_network.MLPRegressor(),
     }
 
     cls_models = {
         'logistics': linear_model.LogisticRegression(),
-        'DTcls': tree.DecisionTreeClassifier(),
-        'RFcls': ensemble.RandomForestClassifier(),
-        'ADAcls': ensemble.AdaBoostClassifier(),
-        'BAGcls': ensemble.BaggingClassifier(),
-        'GDBcls': ensemble.GradientBoostingClassifier(),
-        'SVM': svm.SVC(),
+        'DTcls'    : tree.DecisionTreeClassifier(),
+        'RFcls'    : ensemble.RandomForestClassifier(),
+        'ADAcls'   : ensemble.AdaBoostClassifier(),
+        'BAGcls'   : ensemble.BaggingClassifier(),
+        'GDBcls'   : ensemble.GradientBoostingClassifier(),
+        'SVM'      : svm.SVC(),
         'linearSVM': svm.LinearSVC(),
-        'MLPcls': neural_network.MLPClassifier(),
-        'GNBcls': naive_bayes.GaussianNB(),
+        'MLPcls'   : neural_network.MLPClassifier(),
+        'GNBcls'   : naive_bayes.GaussianNB(),
     }
 
     models = {}
@@ -73,7 +73,7 @@ def sk_models(reg=True, cls=True, stoplist=('SVM', 'SVR', 'GDBreg', 'GDBcls')):
 def cv_default_params():
     # GDBreg's parameters are deliberately cut down.
     params_gdb = {'n_estimators': [10, 50, 100], 'max_features': [0.1, 0.5, 1.], 'learning_rate': np.logspace(-4, 1, 3),
-                  'max_depth': [3, 10, 50]},
+                  'max_depth'   : [3, 10, 50]},
     params_rf = {'n_estimators': [10, 30, 50, 100, 256, 500], 'max_features': [0.1, 0.3, 0.5, 1.]}
     params_ada = {'n_estimators': [10, 30, 50, 100, 256, 500], 'learning_rate': np.logspace(-4, 1, 5)}
     params_bag = {'n_estimators': [10, 30, 50, 100, 256, 500], 'max_features': [0.4, 0.7, 1.0]}
@@ -96,36 +96,88 @@ def cv_default_params():
 
     params_reg = {
         # regression
-        'ols': {},
-        'ridge': {'alpha': np.logspace(0, 2, 10)},
-        'lasso': {'alpha': np.logspace(0, 2, 10)},
-        'DTreg': {'max_depth': [3, 5, 10, 30, 50], 'max_features': [0.1, 0.3, 0.5, 1.]},
-        'RFreg': params_rf,
-        'ADAreg': params_ada,
-        'BAGreg': params_bag,
-        'GDBreg': params_gdb,
-        'SVR': params_svr,
+        'ols'      : {},
+        'ridge'    : {'alpha': np.logspace(0, 2, 10)},
+        'lasso'    : {'alpha': np.logspace(0, 2, 10)},
+        'DTreg'    : {'max_depth': [3, 5, 10, 30, 50], 'max_features': [0.1, 0.3, 0.5, 1.]},
+        'RFreg'    : params_rf,
+        'ADAreg'   : params_ada,
+        'BAGreg'   : params_bag,
+        'GDBreg'   : params_gdb,
+        'SVR'      : params_svr,
         'linearSVR': {'C': Cs, 'loss': ['epsilon_insensitive', 'squared_epsilon_insensitive'], 'epsilon': [0, 0.1, 1]},
-        'MLPreg': {'hidden_layer_sizes': [(5, 2), (20, 5), (100, 20), (100, 20, 5)],
-                   'learning_rate': ['constant', 'adaptive'], 'max_iter': [10000]},
+        'MLPreg'   : {'hidden_layer_sizes': [(5, 2), (20, 5), (100, 20), (100, 20, 5)],
+                      'learning_rate'     : ['constant', 'adaptive'], 'max_iter': [10000]},
     }
 
     params_cls = {
         'logistics': {'C': np.logspace(-4, 2, 4), 'penalty': ['l1', 'l2']},
-        'DTcls': {'max_depth': [3, 5, 10, 30, 50], 'max_features': [0.1, 0.3, 0.5, 1.],
-                  'criterion': ['gini', 'entropy']},
-        'RFcls': params_rf,
-        'ADAcls': params_ada,
-        'BAGcls': params_bag,
-        'GDBcls': params_gdb,
-        'SVM': params_svm,
+        'DTcls'    : {'max_depth': [3, 5, 10, 30, 50], 'max_features': [0.1, 0.3, 0.5, 1.],
+                      'criterion': ['gini', 'entropy']},
+        'RFcls'    : params_rf,
+        'ADAcls'   : params_ada,
+        'BAGcls'   : params_bag,
+        'GDBcls'   : params_gdb,
+        'SVM'      : params_svm,
         'linearSVM': {'C': Cs, 'loss': ['hinge', 'squared_hinge']},
-        'MLPcls': {'hidden_layer_sizes': [(5, 2), (20, 5), (100, 20), (100, 20, 5)],
-                   'learning_rate': ['constant', 'adaptive'], 'max_iter': [10000]},
-        'GNBcls': {},
+        'MLPcls'   : {'hidden_layer_sizes': [(5, 2), (20, 5), (100, 20), (100, 20, 5)],
+                      'learning_rate'     : ['constant', 'adaptive'], 'max_iter': [10000]},
+        'GNBcls'   : {},
     }
 
     return {'cls': params_cls, 'reg': params_reg}
+
+
+def grid_cv_a_model(x, y, model, param, kind, name, path='', n_jobs=4, cv=5, verbose=False, redo=False, save_res=True):
+    """
+    cv a model, return cv result of the best model
+    if model result exists, load the existing best parameters setting, but without grid_cv_time
+    """
+    scoring = 'neg_mean_squared_error' if kind == 'reg' else 'f1_weighted'
+    path_model_res = os.path.join(path, 'cv_%d_model_%s.csv' % (cv, name))
+
+    if os.path.exists(path_model_res) and not redo:
+        model_res = pd.read_csv(path_model_res, index_col=0)
+        best = model_res.iloc[0].to_dict()
+        param = eval(best['params'])
+        result = {'grid_cv_time': None, 'score': scoring, 'model_name': name, 'kind': kind,
+                  'mean_test': best['mean_test_score'], 'mean_train': best['mean_train_score'],
+                  'mean_fit_time': best['mean_fit_time'], 'best_params': param, 'best_model': model.set_params(**param),
+                  }
+        print 'loaded existing result for model:', name
+        return result
+
+    sub_start = dtm.now()
+    print sub_start, 'CVing: kind = {}, model = {}'.format(kind, name)
+    clf = GridSearchCV(model, param, n_jobs=n_jobs, cv=cv, scoring=scoring)
+    clf.fit(x, y)
+    sub_end = dtm.now()
+
+    df = pd.DataFrame(clf.cv_results_).sort_values(by='mean_test_score', ascending=False)
+    if save_res:
+        df.to_csv(path_model_res)
+
+    test_score, train_score, fit_time = df[['mean_test_score', 'mean_train_score', 'mean_fit_time']].values[0]
+
+    if verbose:
+        print 'score: %s, best test = %.3f, train = %.3f, mean_fit_time = %f' % (
+            scoring, test_score, train_score, fit_time)
+        print 'best params', clf.best_params_
+        print sub_end, sub_end - sub_start
+        print
+
+    result = {
+        'grid_cv_time' : sub_end - sub_start,
+        'score'        : scoring,
+        'model_name'   : name,
+        'kind'         : kind,
+        'mean_test'    : test_score,
+        'mean_train'   : train_score,
+        'mean_fit_time': fit_time,
+        'best_params'  : clf.best_params_,
+        'best_model'   : clf.best_estimator_,
+    }
+    return result
 
 
 def grid_cv_models(x, y, models, params, path='', n_jobs=4, cv=5, save_res=True, redo=False, verbose=False):
@@ -141,8 +193,9 @@ def grid_cv_models(x, y, models, params, path='', n_jobs=4, cv=5, save_res=True,
     """
     path_cv_best = os.path.join(path, 'cv_%d_best_models.csv' % cv)
 
+    # if cv best result exists and not redeo, load existing parameters
     if os.path.exists(path_cv_best) and not redo:
-        loaded_df_cv_res = pd.read_csv(path_cv_best, index_col=[0,1])
+        loaded_df_cv_res = pd.read_csv(path_cv_best, index_col=[0, 1])
         best_models = []
         for (kind, name), row in loaded_df_cv_res.iterrows():
             param = eval(row.best_params)
@@ -152,49 +205,22 @@ def grid_cv_models(x, y, models, params, path='', n_jobs=4, cv=5, save_res=True,
         print 'loaded existing cv-ed best parameters'
         return loaded_df_cv_res
 
+    # redo or result not exists
     cv_results = []
     start = dtm.now()
     for kind in ['reg', 'cls']:
         if kind not in models:
             continue
-        scoring = 'neg_mean_squared_error' if kind == 'reg' else 'f1_weighted'
-
         for name, model in models[kind].items():
             if name not in params[kind]:
-                print 'model', name, 'doesnt have params, skipping it'
-                continue
+                print 'model', name, 'doesnt have tuning params, use {} instead'
+                param = {}
+            else:
+                param = params[kind][name]
 
-            param = params[kind][name]
-            sub_start = dtm.now()
-            print sub_start, 'CVing: kind = {}, model = {}'.format(kind, name)
-            clf = GridSearchCV(model, param, n_jobs=n_jobs, cv=cv, scoring=scoring)
-            clf.fit(x, y)
-            sub_end = dtm.now()
-
-            df = pd.DataFrame(clf.cv_results_).sort_values(by='mean_test_score', ascending=False)
-            test_score, train_score, fit_time = df[['mean_test_score', 'mean_train_score', 'mean_fit_time']].values[0]
-
-            if verbose:
-                print 'score: %s, best test = %.3f, train = %.3f, mean_fit_time = %f' % (
-                    scoring, test_score, train_score, fit_time)
-                print 'best params', clf.best_params_
-                print sub_end, sub_end - sub_start
-                print
-
-            result = {
-                'grid_cv_time': sub_end - sub_start,
-                'score': scoring,
-                'model_name': name,
-                'kind': kind,
-                'mean_test': test_score,
-                'mean_train': train_score,
-                'mean_fit_time': fit_time,
-                'best_params': clf.best_params_,
-                'best_model': clf.best_estimator_,
-            }
+            result = grid_cv_a_model(x, y, model, param, kind, name,
+                                     path=path, n_jobs=n_jobs, cv=cv, verbose=verbose, redo=redo, save_res=save_res)
             cv_results.append(result)
-            if save_res:
-                df.to_csv(path + 'cv_%d_model_%s.csv' % (cv, name))
 
     end = dtm.now()
     print 'finished CV', end, end - start
@@ -220,7 +246,7 @@ def evaluate_grid_cv(df_cv, train_x, train_y, test_x, test_y, evaluator, path=''
     """
     results = {}
     for (kind, name), model in df_cv.best_model.iteritems():
-        results[kind,name] = evaluator(model, train_x, train_y, test_x, test_y)
+        results[kind, name] = evaluator(model, train_x, train_y, test_x, test_y)
 
     df_results = pd.DataFrame(results).T
     if 'test_f1' in df_results.columns:
@@ -258,12 +284,12 @@ def evaluator_scalable_cls(model, train_x, train_y, test_x, test_y):
     f1_test = f1_score(test_y, test_pred_round, average='weighted')
 
     result = {
-        'train_f1': f1_train,
+        'train_f1' : f1_train,
         'train_acc': acc_train,
         'train_mse': mse_train,
-        'test_f1': f1_test,
-        'test_acc': acc_test,
-        'test_mse': mse_test,
+        'test_f1'  : f1_test,
+        'test_acc' : acc_test,
+        'test_mse' : mse_test,
     }
     return result
 
@@ -280,21 +306,3 @@ def vis_evaluation(path, cv):
 def vis_grid_cv_one_model(fn):
     df = pd.read_csv(fn, index_col=0)
     return df[['mean_test_score', 'mean_train_score']].boxplot()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
