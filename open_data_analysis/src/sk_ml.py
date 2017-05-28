@@ -70,7 +70,7 @@ def sk_models(reg=True, cls=True, stoplist=('SVM', 'SVR', 'GDBreg', 'GDBcls')):
 # Grid search cross validation
 # ################################################
 
-def cv_default_params():
+def grid_cv_default_params():
     # GDBreg's parameters are deliberately cut down.
     params_gdb = {'n_estimators': [10, 50, 100], 'max_features': [0.1, 0.5, 1.], 'learning_rate': np.logspace(-4, 1, 3),
                   'max_depth'   : [3, 10, 50]},
@@ -79,19 +79,19 @@ def cv_default_params():
     params_bag = {'n_estimators': [10, 30, 50, 100, 256, 500], 'max_features': [0.4, 0.7, 1.0]}
 
     # SVM/SVR is way too slow
-    Cs = np.logspace(-4, 2, 3)
-    GAMMAs = [1e-5, 1e-3, 1e-1]
+    c_s = np.logspace(-4, 2, 3)
+    gamma_s = [1e-5, 1e-3, 1e-1]
 
     params_svm = [
-        {'kernel': ['rbf'], 'C': Cs, 'gamma': GAMMAs},
-        {'kernel': ['sigmoid'], 'C': Cs, 'gamma': GAMMAs},
-        {'kernel': ['poly'], 'C': Cs, 'gamma': GAMMAs, 'degree': [3]},
+        {'kernel': ['rbf'], 'C': c_s, 'gamma': gamma_s},
+        {'kernel': ['sigmoid'], 'C': c_s, 'gamma': gamma_s},
+        {'kernel': ['poly'], 'C': c_s, 'gamma': gamma_s, 'degree': [3]},
     ]
 
     params_svr = [
-        {'kernel': ['rbf'], 'C': Cs, 'gamma': GAMMAs},
-        {'kernel': ['sigmoid'], 'C': Cs, 'gamma': GAMMAs},
-        {'kernel': ['poly'], 'C': Cs, 'gamma': GAMMAs, 'degree': [3]},
+        {'kernel': ['rbf'], 'C': c_s, 'gamma': gamma_s},
+        {'kernel': ['sigmoid'], 'C': c_s, 'gamma': gamma_s},
+        {'kernel': ['poly'], 'C': c_s, 'gamma': gamma_s, 'degree': [3]},
     ]
 
     params_reg = {
@@ -105,7 +105,7 @@ def cv_default_params():
         'BAGreg'   : params_bag,
         'GDBreg'   : params_gdb,
         'SVR'      : params_svr,
-        'linearSVR': {'C': Cs, 'loss': ['epsilon_insensitive', 'squared_epsilon_insensitive'], 'epsilon': [0, 0.1, 1]},
+        'linearSVR': {'C': c_s, 'loss': ['epsilon_insensitive', 'squared_epsilon_insensitive'], 'epsilon': [0, 0.1, 1]},
         'MLPreg'   : {'hidden_layer_sizes': [(5, 2), (20, 5), (100, 20), (100, 20, 5)],
                       'learning_rate'     : ['constant', 'adaptive'], 'max_iter': [10000]},
     }
@@ -119,7 +119,7 @@ def cv_default_params():
         'BAGcls'   : params_bag,
         'GDBcls'   : params_gdb,
         'SVM'      : params_svm,
-        'linearSVM': {'C': Cs, 'loss': ['hinge', 'squared_hinge']},
+        'linearSVM': {'C': c_s, 'loss': ['hinge', 'squared_hinge']},
         'MLPcls'   : {'hidden_layer_sizes': [(5, 2), (20, 5), (100, 20), (100, 20, 5)],
                       'learning_rate'     : ['constant', 'adaptive'], 'max_iter': [10000]},
         'GNBcls'   : {},
