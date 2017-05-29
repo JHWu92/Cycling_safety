@@ -15,7 +15,7 @@ def load_joint_features(years=(2014,2015,2016,2017), how='NO_TOTAL', verbose=Fal
         ftr = df.copy()
         ftr = filter_year(ftr, years=years)
         if name in features_for_total:
-            ftr = filter_total(ftr, how=how)
+            ftr = filter_total(ftr, name, how=how)
         ftr,mapping = encode_col(ftr, name)
         ftr = ftr.groupby(level=0).sum()
 
@@ -52,15 +52,15 @@ def filter_year(ftr, years=(2014, 2015, 2016, 2017), keep_year=False):
     return ftr
 
 
-def filter_total(ftr, how='NO_TOTAL'):
+def filter_total(ftr, name, how='NO_TOTAL'):
     assert how in ('NO_TOTAL', 'TOTAL'), 'only allow two options: NO_TOTAL and TOTAL'
     if how=='NO_TOTAL':
         new_columns = [c for c in ftr.columns if 'total' not in c]
     else:
         new_columns = [c for c in ftr.columns if 'total' in c]
         if not new_columns:
-            ftr['total'] = ftr.sum(axis=1)
-            new_columns = ['total']
+            ftr[name + '_total'] = ftr.sum(axis=1)
+            new_columns = [name + '_total']
     if 'YEAR' in ftr.columns and 'YEAR' not in new_columns:
         new_columns = ['YEAR','MONTH']+new_columns
     return ftr[new_columns]
