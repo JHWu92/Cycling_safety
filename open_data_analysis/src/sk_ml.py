@@ -7,21 +7,7 @@ from sklearn.metrics import mean_squared_error, f1_score, accuracy_score, confus
 from sklearn.model_selection import GridSearchCV
 import numpy as np
 import pandas as pd
-
-
-def bounded_round(arr, mini, maxi):
-    arr_round = arr.round()
-    arr_round[arr_round < mini] = mini
-    arr_round[arr_round > maxi] = maxi
-    return arr_round
-
-
-def fillna(df, how='mean'):
-    """df is the dataset
-    """
-    if how == 'mean':
-        return df.fillna(df.mean())
-    return df.fillna(how)
+from sklearn.preprocessing import MinMaxScaler
 
 
 def sk_models(reg=True, cls=True, stoplist=('SVM', 'SVR', 'GDBreg', 'GDBcls')):
@@ -64,6 +50,35 @@ def sk_models(reg=True, cls=True, stoplist=('SVM', 'SVR', 'GDBreg', 'GDBcls')):
         for name in stoplist: cls_models.pop(name, None)
         models['cls'] = cls_models
     return models
+
+
+# ################################################
+# helper
+# ################################################
+
+def bounded_round(arr, mini, maxi):
+    arr_round = arr.round()
+    arr_round[arr_round < mini] = mini
+    arr_round[arr_round > maxi] = maxi
+    return arr_round
+
+
+# ################################################
+# pre-processing
+# ################################################
+
+def fillna(df, how='mean'):
+    """df is the dataset
+    """
+    if how == 'mean':
+        return df.fillna(df.mean())
+    return df.fillna(how)
+
+
+def scaler_by_name(name):
+    """return sklearn scaler by name (MinMaxScaler,)"""
+    norm_choices = {'MinMaxScaler': MinMaxScaler()}
+    return norm_choices[name]
 
 
 # ################################################
@@ -128,7 +143,8 @@ def grid_cv_default_params():
     return {'cls': params_cls, 'reg': params_reg}
 
 
-def grid_cv_a_model(x, y, model, param, kind, name, path='', n_jobs=4, cv=5, verbose=False, redo=False, save_res=True, fit_when_load=True):
+def grid_cv_a_model(x, y, model, param, kind, name, path='', n_jobs=4, cv=5, verbose=False, redo=False, save_res=True,
+                    fit_when_load=True):
     """
     cv a model, return cv result of the best model
     if model result exists, load the existing best parameters setting, but without grid_cv_time
@@ -143,12 +159,12 @@ def grid_cv_a_model(x, y, model, param, kind, name, path='', n_jobs=4, cv=5, ver
         best = model_res.iloc[0].to_dict()
         param = eval(best['params'])
         model.set_params(**param)
-        if fit_when_load: 
-            if verbose: 
+        if fit_when_load:
+            if verbose:
                 print 'fitting model', kind, name
-            model.fit(x,y)
-        result = {'grid_cv_time': None, 'score': scoring, 'model_name': name, 'kind': kind,
-                  'mean_test': best['mean_test_score'], 'mean_train': best['mean_train_score'],
+            model.fit(x, y)
+        result = {'grid_cv_time' : None, 'score': scoring, 'model_name': name, 'kind': kind,
+                  'mean_test'    : best['mean_test_score'], 'mean_train': best['mean_train_score'],
                   'mean_fit_time': best['mean_fit_time'], 'best_params': param, 'best_model': model,
                   }
         print 'loaded existing result for model:', name
@@ -187,7 +203,8 @@ def grid_cv_a_model(x, y, model, param, kind, name, path='', n_jobs=4, cv=5, ver
     return result
 
 
-def grid_cv_models(x, y, models, params, path='', n_jobs=4, cv=5, save_res=True, redo=False, verbose=False, fit_when_load=True):
+def grid_cv_models(x, y, models, params, path='', n_jobs=4, cv=5, save_res=True, redo=False, verbose=False,
+                   fit_when_load=True):
     """
     regression model is evaluated by neg_mean_squared_error
     classification model is evaluated by f1_weighted
@@ -232,7 +249,8 @@ def grid_cv_models(x, y, models, params, path='', n_jobs=4, cv=5, save_res=True,
                 param = params[kind][name]
 
             result = grid_cv_a_model(x, y, model, param, kind, name,
-                                     path=path, n_jobs=n_jobs, cv=cv, verbose=verbose, redo=redo, save_res=save_res, fit_when_load=fit_when_load)
+                                     path=path, n_jobs=n_jobs, cv=cv, verbose=verbose, redo=redo, save_res=save_res,
+                                     fit_when_load=fit_when_load)
             cv_results.append(result)
 
     end = dtm.now()
