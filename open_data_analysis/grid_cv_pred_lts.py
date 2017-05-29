@@ -13,7 +13,7 @@ from src.sk_ml import *
 if __name__ == '__main__':
     fna = 0.0
     years = (2014, 2015, 2016, 2017)
-    total = 'TOTAL'
+    total = 'NO_TOTAL'
     normalization = 'MinMaxScaler'
 
     cv_dir = 'data/cross_validation/na_{}-year_{}-total_{}-norm_{}'.format(fna, years, total, normalization)
@@ -43,7 +43,7 @@ if __name__ == '__main__':
     test_x = scaler.transform(test_x)
 
     print 'get models and grid_cv tuning parameters'
-    models = sk_models()
+    models = sk_models(stoplist=())
     params = grid_cv_default_params()
 
     # run grid cv and save result

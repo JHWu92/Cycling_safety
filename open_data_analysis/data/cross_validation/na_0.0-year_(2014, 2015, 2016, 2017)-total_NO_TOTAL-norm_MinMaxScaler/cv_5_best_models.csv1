@@ -1,0 +1,67 @@
+kind,model_name,best_model,best_params,grid_cv_time,mean_fit_time,mean_test,mean_train,score
+reg,DTreg,"DecisionTreeRegressor(criterion='mse', max_depth=5, max_features=1.0,
+           max_leaf_nodes=None, min_impurity_split=1e-07,
+           min_samples_leaf=1, min_samples_split=2,
+           min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+           splitter='best')","{'max_features': 1.0, 'max_depth': 5}",0 days 00:00:23.646000000,0.920799970627,-0.594563056545,-0.566339279137,neg_mean_squared_error
+reg,linearSVR,"LinearSVR(C=0.10000000000000001, dual=True, epsilon=0, fit_intercept=True,
+     intercept_scaling=1.0, loss='squared_epsilon_insensitive',
+     max_iter=1000, random_state=None, tol=0.0001, verbose=0)","{'epsilon': 0, 'C': 0.10000000000000001, 'loss': 'squared_epsilon_insensitive'}",0 days 00:00:42.731000000,0.453399991989,-0.598184937797,-0.544471604312,neg_mean_squared_error
+reg,ADAreg,"AdaBoostRegressor(base_estimator=None, learning_rate=0.56234132519034907,
+         loss='linear', n_estimators=10, random_state=None)","{'n_estimators': 10, 'learning_rate': 0.56234132519034907}",0 days 00:27:07.232000000,4.37320008278,-0.634528581976,-0.621407088328,neg_mean_squared_error
+reg,MLPreg,"MLPRegressor(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(5, 2), learning_rate='adaptive',
+       learning_rate_init=0.001, max_iter=10000, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=None,
+       shuffle=True, solver='adam', tol=0.0001, validation_fraction=0.1,
+       verbose=False, warm_start=False)","{'learning_rate': 'adaptive', 'max_iter': 10000, 'hidden_layer_sizes': (5, 2)}",0 days 00:05:46.148000000,18.3674000263,-0.593923588481,-0.437333007723,neg_mean_squared_error
+reg,BAGreg,"BaggingRegressor(base_estimator=None, bootstrap=True,
+         bootstrap_features=False, max_features=0.7, max_samples=1.0,
+         n_estimators=500, n_jobs=1, oob_score=False, random_state=None,
+         verbose=0, warm_start=False)","{'max_features': 0.7, 'n_estimators': 500}",0 days 00:54:29.889000000,317.419799995,-0.410707496709,-0.0561101976043,neg_mean_squared_error
+reg,lasso,"Lasso(alpha=1.0, copy_X=True, fit_intercept=True, max_iter=1000,
+   normalize=False, positive=False, precompute=False, random_state=None,
+   selection='cyclic', tol=0.0001, warm_start=False)",{'alpha': 1.0},0 days 00:00:12.143000000,0.595800018311,-1.16971974129,-1.169536708,neg_mean_squared_error
+reg,ridge,"Ridge(alpha=7.7426368268112693, copy_X=True, fit_intercept=True,
+   max_iter=None, normalize=False, random_state=None, solver='auto',
+   tol=0.001)",{'alpha': 7.7426368268112693},0 days 00:00:12.959000000,0.764199972153,-0.597651074791,-0.552892816853,neg_mean_squared_error
+reg,RFreg,"RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
+           max_features=0.5, max_leaf_nodes=None, min_impurity_split=1e-07,
+           min_samples_leaf=1, min_samples_split=2,
+           min_weight_fraction_leaf=0.0, n_estimators=500, n_jobs=1,
+           oob_score=False, random_state=None, verbose=0, warm_start=False)","{'max_features': 0.5, 'n_estimators': 500}",0 days 00:40:55.301000000,237.97420001,-0.408342395336,-0.0556796233236,neg_mean_squared_error
+reg,ols,"LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)",{},0 days 00:00:05.232000000,1.69940004349,-4.93869253597e+20,-0.505475418192,neg_mean_squared_error
+cls,logistics,"LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l1', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False)","{'penalty': 'l1', 'C': 1.0}",0 days 00:01:36.325000000,10.3088000774,0.623673840215,0.656273747038,f1_weighted
+cls,DTcls,"DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=10,
+            max_features=1.0, max_leaf_nodes=None,
+            min_impurity_split=1e-07, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best')","{'max_features': 1.0, 'criterion': 'gini', 'max_depth': 10}",0 days 00:00:43.229000000,1.17039999962,0.615491447037,0.748300261658,f1_weighted
+cls,linearSVM,"LinearSVC(C=100.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='hinge', max_iter=1000, multi_class='ovr',
+     penalty='l2', random_state=None, tol=0.0001, verbose=0)","{'loss': 'hinge', 'C': 100.0}",0 days 00:00:48.372000000,12.0381999969,0.603277665981,0.697680511183,f1_weighted
+cls,MLPcls,"MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(100, 20), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=10000, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=None,
+       shuffle=True, solver='adam', tol=0.0001, validation_fraction=0.1,
+       verbose=False, warm_start=False)","{'learning_rate': 'constant', 'max_iter': 10000, 'hidden_layer_sizes': (100, 20)}",0 days 00:06:39.899000000,49.2677999973,0.643808746373,0.942245186899,f1_weighted
+cls,ADAcls,"AdaBoostClassifier(algorithm='SAMME.R', base_estimator=None,
+          learning_rate=0.56234132519034907, n_estimators=256,
+          random_state=None)","{'n_estimators': 256, 'learning_rate': 0.56234132519034907}",0 days 00:15:18.201000000,42.5927999973,0.636424276521,0.65451013633,f1_weighted
+cls,GNBcls,GaussianNB(priors=None),{},0 days 00:00:03.975000000,0.428800010681,0.426124507678,0.479342477085,f1_weighted
+cls,RFcls,"RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+            max_depth=None, max_features=0.3, max_leaf_nodes=None,
+            min_impurity_split=1e-07, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            n_estimators=500, n_jobs=1, oob_score=False, random_state=None,
+            verbose=0, warm_start=False)","{'max_features': 0.3, 'n_estimators': 500}",0 days 00:36:13.474000000,126.963199997,0.695327481975,1.0,f1_weighted
+cls,BAGcls,"BaggingClassifier(base_estimator=None, bootstrap=True,
+         bootstrap_features=False, max_features=0.7, max_samples=1.0,
+         n_estimators=500, n_jobs=1, oob_score=False, random_state=None,
+         verbose=0, warm_start=False)","{'max_features': 0.7, 'n_estimators': 500}",0 days 00:48:57.946000000,290.30999999,0.692432129193,1.0,f1_weighted
