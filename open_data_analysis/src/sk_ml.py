@@ -367,7 +367,10 @@ def show_important_features(tree_model, name="", top=None, labels=None, show_plt
     feature_size = len(importances)
     if hasattr(tree_model, 'estimators_') and set_std:
         # TODO: is it reasonable to flatten gradient boosting's estimators?
-        std = np.std([tree.feature_importances_ for tree in tree_model.estimators_.flatten()], axis=0)
+        estimators = tree_model.estimators_
+        if hasattr(estimators, 'flatten'):
+            estimators = estimators.flatten()
+        std = np.std([tree.feature_importances_ for tree in estimators], axis=0)
     else:
         std = np.zeros(feature_size)
     if labels is None:
