@@ -6,7 +6,9 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 
-def prepare_lts_dataset(scaler, fna=0.0, years=(2014,2015,2016,2017), total_or_not='total'):
+def prepare_lts_dataset(scaler, fna=0.0, years=(2014,2015,2016,2017), total_or_not='total', return_type='list'):
+    assert return_type in ('list', 'dict'), 'allowed return type: "list" or "dict"'
+
     print 'loading feature and fill NAN'
     ftr, mapping = load_joint_features(years=years, how=total_or_not)
     ftr = fillna(ftr, how=fna)
@@ -27,5 +29,9 @@ def prepare_lts_dataset(scaler, fna=0.0, years=(2014,2015,2016,2017), total_or_n
     scaler.fit(train_x)
     train_x = scaler.transform(train_x)
     test_x = scaler.transform(test_x)
-
-    return train_x, train_y, test_x, test_y
+    if return_type == 'list':
+        return train_x, train_y, test_x, test_y
+    elif return_type == 'dict':
+        return {'train_x': train_x, 'train_y': train_y, 'test_x': test_x, 'test_y': test_y}
+    else:
+        return None
