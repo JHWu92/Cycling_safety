@@ -138,6 +138,7 @@ def grid_cv_a_model(x, y, model, param, kind, name, path='', n_jobs=4, cv=5, ver
     path_model_res = os.path.join(path, 'cv_%d_model_%s.csv' % (cv, name))
 
     if os.path.exists(path_model_res) and not redo:
+        print 'loading existing model', kind, name
         model_res = pd.read_csv(path_model_res, index_col=0)
         best = model_res.iloc[0].to_dict()
         param = eval(best['params'])
@@ -347,9 +348,13 @@ def vis_grid_cv_one_model(fn):
     return df[['mean_test_score', 'mean_train_score']].boxplot()
 
 
-def show_important_features(tree_model, name="", top=None, labels=None, show_plt=True):
+def show_important_features(tree_model, name="", top=None, labels=None, show_plt=True, set_std=True):
     """
     Format tree_models feature importance as pd.df, along with a bar plot with error bar.
+
+    TODO:
+        the shape of estimators of gradient boosting is [n_estimator, n_classes(binary=1)].
+        not sure the difference per row. Right now just flatten all estimators to calculate std.
 
     :param tree_model: tree like model, mostly models in sklearn.ensemble.
     :param name: name to be shown in plot title
@@ -360,8 +365,9 @@ def show_important_features(tree_model, name="", top=None, labels=None, show_plt
     """
     importances = tree_model.feature_importances_
     feature_size = len(importances)
-    if hasattr(tree_model, 'estimators_'):
-        std = np.std([tree.feature_importances_ for tree in tree_model.estimators_], axis=0)
+    if hasattr(tree_model, 'estimators_') and set_std:
+        # TODO: is it reasonable to flatten gradient boosting's estimators?
+        std = np.std([tree.feature_importances_ for tree in tree_model.estimators_.flatten()], axis=0)
     else:
         std = np.zeros(feature_size)
     if labels is None:
@@ -373,12 +379,9 @@ def show_important_features(tree_model, name="", top=None, labels=None, show_plt
     imp = imp[:top]
 
     if show_plt:
-        import matplotlib.pyplot as plt
-        plt.figure()
-        plt.title("%s Feature importances - top %d / %d" % (name, top, len(importances)))
-        plt.bar(range(top), imp.importance, color="r", yerr=imp['std'], align="center")
-        plt.xticks(range(top), imp['label'])
-        plt.xlim([-1, top])
-        plt.show()
+        title = "%s Feature importances - top %d / %d %s" % (
+            name, top, len(importances), 'no errbar' if not set_std else 'with errbar')
+        imp_plt = imp.set_index('label')
+        imp_plt.importance.plot(kind='barh', xerr=imp_plt['std'], title=title, figsize=(10, 7))
 
     return imp
