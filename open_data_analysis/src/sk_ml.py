@@ -3,7 +3,7 @@ from datetime import datetime as dtm
 import os
 
 from sklearn import linear_model, svm, tree, ensemble, neural_network, naive_bayes
-from sklearn.metrics import mean_squared_error, f1_score, accuracy_score
+from sklearn.metrics import mean_squared_error, f1_score, accuracy_score, confusion_matrix
 from sklearn.model_selection import GridSearchCV
 import numpy as np
 import pandas as pd
@@ -128,10 +128,11 @@ def grid_cv_default_params():
     return {'cls': params_cls, 'reg': params_reg}
 
 
-def grid_cv_a_model(x, y, model, param, kind, name, path='', n_jobs=4, cv=5, verbose=False, redo=False, save_res=True):
+def grid_cv_a_model(x, y, model, param, kind, name, path='', n_jobs=4, cv=5, verbose=False, redo=False, save_res=True, fit_when_load=True):
     """
     cv a model, return cv result of the best model
     if model result exists, load the existing best parameters setting, but without grid_cv_time
+    when loading model, run empty model.fit(x,y) if fit_when_load=True
     """
     scoring = 'neg_mean_squared_error' if kind == 'reg' else 'f1_weighted'
     path_model_res = os.path.join(path, 'cv_%d_model_%s.csv' % (cv, name))
@@ -140,9 +141,14 @@ def grid_cv_a_model(x, y, model, param, kind, name, path='', n_jobs=4, cv=5, ver
         model_res = pd.read_csv(path_model_res, index_col=0)
         best = model_res.iloc[0].to_dict()
         param = eval(best['params'])
+        model.set_params(**param)
+        if fit_when_load: 
+            if verbose: 
+                print 'fitting model', kind, name
+            model.fit(x,y)
         result = {'grid_cv_time': None, 'score': scoring, 'model_name': name, 'kind': kind,
                   'mean_test': best['mean_test_score'], 'mean_train': best['mean_train_score'],
-                  'mean_fit_time': best['mean_fit_time'], 'best_params': param, 'best_model': model.set_params(**param),
+                  'mean_fit_time': best['mean_fit_time'], 'best_params': param, 'best_model': model,
                   }
         print 'loaded existing result for model:', name
         return result
@@ -180,12 +186,13 @@ def grid_cv_a_model(x, y, model, param, kind, name, path='', n_jobs=4, cv=5, ver
     return result
 
 
-def grid_cv_models(x, y, models, params, path='', n_jobs=4, cv=5, save_res=True, redo=False, verbose=False):
+def grid_cv_models(x, y, models, params, path='', n_jobs=4, cv=5, save_res=True, redo=False, verbose=False, fit_when_load=True):
     """
     regression model is evaluated by neg_mean_squared_error
     classification model is evaluated by f1_weighted
     iterate over models' keys, get tuning parameters based on key, if no matched paramters, that model will be skipped
     if not redo and the result exists, optimum parameters will be loaded using model.set_params(**loaded)
+    when loading model, run empty model.fit(x,y) if fit_when_load=True
     :return:
         index: (kind, name);
         each line is the best parameters for that model;
@@ -199,7 +206,12 @@ def grid_cv_models(x, y, models, params, path='', n_jobs=4, cv=5, save_res=True,
         best_models = []
         for (kind, name), row in loaded_df_cv_res.iterrows():
             param = eval(row.best_params)
-            best_models.append(models[kind][name].set_params(**param))
+            model = models[kind][name]
+            model.set_params(**param)
+            if fit_when_load:
+                if verbose: print 'fitting model', kind, name
+                model.fit(x, y)
+            best_models.append(model)
 
         loaded_df_cv_res.best_model = best_models
         print 'loaded existing cv-ed best parameters'
@@ -219,7 +231,7 @@ def grid_cv_models(x, y, models, params, path='', n_jobs=4, cv=5, save_res=True,
                 param = params[kind][name]
 
             result = grid_cv_a_model(x, y, model, param, kind, name,
-                                     path=path, n_jobs=n_jobs, cv=cv, verbose=verbose, redo=redo, save_res=save_res)
+                                     path=path, n_jobs=n_jobs, cv=cv, verbose=verbose, redo=redo, save_res=save_res, fit_when_load=fit_when_load)
             cv_results.append(result)
 
     end = dtm.now()
@@ -233,17 +245,23 @@ def grid_cv_models(x, y, models, params, path='', n_jobs=4, cv=5, save_res=True,
 
 
 # ################################################
-# Evaluate cv-ed models on test set
+# Evaluation
 # Evaluators for different prediction tasks
 # ################################################
 
 def evaluate_grid_cv(df_cv, train_x, train_y, test_x, test_y, evaluator, path='', cv=5, save_res=True):
     """
-    df_cv: results from :func:: grid_cv_models()
-    evaluator: such as :func:: evaluator_scalable_cls()
-    save_res: True->save to path/cv_%d_best_models_evaluation.csv % cv
-    return evaluation result as pd.DF, columns are defined by evaluator
+    This function is major for evaluate result from grid_cv_models. But it can be also used to evaluate df containing
+    different models. In this case, set save_res=False.
+
+    Parameters
+        df_cv: results from :func:: grid_cv_models(). index=(kind, name), 'best_model' is in columns.
+        evaluator: such as :func:: evaluator_scalable_cls()
+        save_res: True->save to path/cv_%d_best_models_evaluation.csv % cv
+    Return
+        evaluation result as pd.DF, columns are defined by evaluator
     """
+    print 'evaluating grid cv'
     results = {}
     for (kind, name), model in df_cv.best_model.iteritems():
         results[kind, name] = evaluator(model, train_x, train_y, test_x, test_y)
@@ -294,7 +312,28 @@ def evaluator_scalable_cls(model, train_x, train_y, test_x, test_y):
     return result
 
 
+def confusion_matrix_as_df(fitted_model, x, y, labels=None):
+    """
+    build a confusion matrix between y and fitted_model.predict(x)
+
+    parameters:
+        fitted_model: model from sklearn. It should already perform fit(train_x, train_y)
+        x,y: features and true labels
+        labels: index and column names of the return pd.df. If None, pd.unique(y) will be used
+
+    return：
+        confusion matrix in the form of pd.Dataframe
+    """
+
+    pred_y = fitted_model.predict(x)
+    if labels is None:
+        labels = pd.unique(y)
+    cfsn = confusion_matrix(y, pred_y, labels=labels)
+    return pd.DataFrame(cfsn, columns=labels, index=labels)
+
+
 # ################################################
+# Analysis of predictor
 # Visualization cross validation result
 # ################################################
 
@@ -306,3 +345,40 @@ def vis_evaluation(path, cv):
 def vis_grid_cv_one_model(fn):
     df = pd.read_csv(fn, index_col=0)
     return df[['mean_test_score', 'mean_train_score']].boxplot()
+
+
+def show_important_features(tree_model, name="", top=None, labels=None, show_plt=True):
+    """
+    Format tree_models feature importance as pd.df, along with a bar plot with error bar.
+
+    :param tree_model: tree like model, mostly models in sklearn.ensemble.
+    :param name: name to be shown in plot title
+    :param top: show top most important features. Default None, showing all features
+    :param labels: labels for features. Default None, range(len(tree_model.feature_importances_))
+    :param show_plt: Default True, visualize importance and std as error bar with maplotlib.pyplot.
+    :return: pd.df, columns = importance, label, std
+    """
+    importances = tree_model.feature_importances_
+    feature_size = len(importances)
+    if hasattr(tree_model, 'estimators_'):
+        std = np.std([tree.feature_importances_ for tree in tree_model.estimators_], axis=0)
+    else:
+        std = np.zeros(feature_size)
+    if labels is None:
+        labels = [i for i in range(len(importances))]
+    top = min(feature_size, top) if top is not None else feature_size
+
+    imp = pd.DataFrame(zip(importances, labels, std), columns=['importance', 'label', 'std'])
+    imp.sort_values('importance', ascending=False, inplace=True)
+    imp = imp[:top]
+
+    if show_plt:
+        import matplotlib.pyplot as plt
+        plt.figure()
+        plt.title("%s Feature importances - top %d / %d" % (name, top, len(importances)))
+        plt.bar(range(top), imp.importance, color="r", yerr=imp['std'], align="center")
+        plt.xticks(range(top), imp['label'])
+        plt.xlim([-1, top])
+        plt.show()
+
+    return imp
