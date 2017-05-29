@@ -323,7 +323,7 @@ def poi_per_seg_distribution(seg_poi_index, poi_near_seg):
     poi_per_seg = pd.DataFrame(poi_per_seg.items(),columns=[index_seg,'category'])
     for l in poi_categories:
         poi_per_seg[l] = poi_per_seg.category.apply(lambda x: x.get(l,0) if type(x)!=float else 0)
-    poi_per_seg['total'] = poi_per_seg[poi_categories].sum(axis=1)
+    poi_per_seg['poi_total'] = poi_per_seg[poi_categories].sum(axis=1)
     poi_per_seg.drop('category',axis=1,inplace=True)
     return poi_per_seg
 
@@ -374,7 +374,7 @@ def plot_poi_per_seg(poi_per_seg, cnt_segs, ipynb=False, path_cvrg=None, path_bo
         from plotly.offline import plot as pplot
     import plotly.graph_objs as pgo
     from constants import poi_categories
-    labels = ['total']+poi_categories
+    labels = ['poi_total']+poi_categories
 
     coverage_per_category = [poi_per_seg[poi_per_seg[label]!=0].shape[0]*1.0/cnt_segs for label in labels]
     data = [pgo.Bar(y=coverage_per_category, x = labels)]
