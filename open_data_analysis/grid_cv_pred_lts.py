@@ -13,7 +13,7 @@ from src.sk_ml import *
 if __name__ == '__main__':
     fna = 0.0
     years = (2014, 2015, 2016, 2017)
-    total = 'NO_TOTAL'
+    total = 'TOTAL'
     normalization = 'MinMaxScaler'
 
     cv_dir = 'data/cross_validation/na_{}-year_{}-total_{}-norm_{}'.format(fna, years, total, normalization)

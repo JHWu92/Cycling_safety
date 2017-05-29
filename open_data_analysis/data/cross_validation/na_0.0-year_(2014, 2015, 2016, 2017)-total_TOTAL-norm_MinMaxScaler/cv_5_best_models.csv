@@ -1,0 +1,86 @@
+kind,model_name,best_model,best_params,grid_cv_time,mean_fit_time,mean_test,mean_train,score
+reg,DTreg,"DecisionTreeRegressor(criterion='mse', max_depth=5, max_features=1.0,
+           max_leaf_nodes=None, min_impurity_split=1e-07,
+           min_samples_leaf=1, min_samples_split=2,
+           min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+           splitter='best')","{'max_features': 1.0, 'max_depth': 5}",,0.126999998093,-0.597902867708,-0.565178039395,neg_mean_squared_error
+reg,linearSVR,"LinearSVR(C=0.1, dual=True, epsilon=0, fit_intercept=True,
+     intercept_scaling=1.0, loss='squared_epsilon_insensitive',
+     max_iter=1000, random_state=None, tol=0.0001, verbose=0)","{'epsilon': 0, 'C': 0.1, 'loss': 'squared_epsilon_insensitive'}",,0.137799978256,-0.656902401781,-0.647493623914,neg_mean_squared_error
+reg,ADAreg,"AdaBoostRegressor(base_estimator=None, learning_rate=0.56234132519,
+         loss='linear', n_estimators=10, random_state=None)","{'n_estimators': 10, 'learning_rate': 0.5623413251903491}",,0.654399967194,-0.647862355701,-0.630460571359,neg_mean_squared_error
+reg,MLPreg,"MLPRegressor(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(100, 20, 5), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=10000, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=None,
+       shuffle=True, solver='adam', tol=0.0001, validation_fraction=0.1,
+       verbose=False, warm_start=False)","{'learning_rate': 'constant', 'max_iter': 10000, 'hidden_layer_sizes': (100, 20, 5)}",,5.24240002632,-0.481041096834,-0.426953580342,neg_mean_squared_error
+reg,BAGreg,"BaggingRegressor(base_estimator=None, bootstrap=True,
+         bootstrap_features=False, max_features=0.7, max_samples=1.0,
+         n_estimators=256, n_jobs=1, oob_score=False, random_state=None,
+         verbose=0, warm_start=False)","{'max_features': 0.7, 'n_estimators': 256}",,32.5897999763,-0.444752771917,-0.0611628858762,neg_mean_squared_error
+reg,SVR,"SVR(C=100.0, cache_size=200, coef0=0.0, degree=3, epsilon=0.1, gamma=0.1,
+  kernel='rbf', max_iter=-1, shrinking=True, tol=0.001, verbose=False)","{'kernel': 'rbf', 'C': 100.0, 'gamma': 0.1}",0 days 00:11:25.155000000,12.6285999298,-0.518772788038,-0.440687048012,neg_mean_squared_error
+reg,lasso,"Lasso(alpha=1.0, copy_X=True, fit_intercept=True, max_iter=1000,
+   normalize=False, positive=False, precompute=False, random_state=None,
+   selection='cyclic', tol=0.0001, warm_start=False)",{'alpha': 1.0},,0.0890000343323,-1.16971974129,-1.169536708,neg_mean_squared_error
+reg,ridge,"Ridge(alpha=1.0, copy_X=True, fit_intercept=True, max_iter=None,
+   normalize=False, random_state=None, solver='auto', tol=0.001)",{'alpha': 1.0},,0.061799955368,-0.651827184909,-0.639313586601,neg_mean_squared_error
+reg,RFreg,"RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
+           max_features=0.3, max_leaf_nodes=None, min_impurity_split=1e-07,
+           min_samples_leaf=1, min_samples_split=2,
+           min_weight_fraction_leaf=0.0, n_estimators=256, n_jobs=1,
+           oob_score=False, random_state=None, verbose=0, warm_start=False)","{'max_features': 0.3, 'n_estimators': 256}",,13.859400034,-0.437134796366,-0.0602600148866,neg_mean_squared_error
+reg,ols,"LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)",{},,0.0824000358582,-2.15304434232e+22,-0.641322643903,neg_mean_squared_error
+reg,GDBreg,"GradientBoostingRegressor(alpha=0.9, criterion='friedman_mse', init=None,
+             learning_rate=0.031622776601683791, loss='ls', max_depth=10,
+             max_features=0.5, max_leaf_nodes=None,
+             min_impurity_split=1e-07, min_samples_leaf=1,
+             min_samples_split=2, min_weight_fraction_leaf=0.0,
+             n_estimators=100, presort='auto', random_state=None,
+             subsample=1.0, verbose=0, warm_start=False)","{'max_features': 0.5, 'n_estimators': 100, 'learning_rate': 0.031622776601683791, 'max_depth': 10}",0 days 00:17:28.597000000,13.3512000084,-0.432913051187,-0.117620631582,neg_mean_squared_error
+cls,logistics,"LogisticRegression(C=100.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l1', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False)","{'penalty': 'l1', 'C': 100.0}",,23.7759999752,0.573308741154,0.582358688371,f1_weighted
+cls,DTcls,"DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=10,
+            max_features=1.0, max_leaf_nodes=None,
+            min_impurity_split=1e-07, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best')","{'max_features': 1.0, 'criterion': 'gini', 'max_depth': 10}",,0.210799980164,0.600758735652,0.740954292221,f1_weighted
+cls,SVM,"SVC(C=100.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=0.1, kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)","{'kernel': 'rbf', 'C': 100.0, 'gamma': 0.1}",0 days 00:13:49.239000000,11.4277999878,0.632948386528,0.683853484457,f1_weighted
+cls,linearSVM,"LinearSVC(C=0.1, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)","{'loss': 'squared_hinge', 'C': 0.1}",,0.465399980545,0.535021077737,0.540990493991,f1_weighted
+cls,MLPcls,"MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
+       beta_2=0.999, early_stopping=False, epsilon=1e-08,
+       hidden_layer_sizes=(100, 20), learning_rate='constant',
+       learning_rate_init=0.001, max_iter=10000, momentum=0.9,
+       nesterovs_momentum=True, power_t=0.5, random_state=None,
+       shuffle=True, solver='adam', tol=0.0001, validation_fraction=0.1,
+       verbose=False, warm_start=False)","{'learning_rate': 'constant', 'max_iter': 10000, 'hidden_layer_sizes': (100, 20)}",,6.40139994621,0.637734505031,0.676564823236,f1_weighted
+cls,ADAcls,"AdaBoostClassifier(algorithm='SAMME.R', base_estimator=None,
+          learning_rate=0.56234132519, n_estimators=100, random_state=None)","{'n_estimators': 100, 'learning_rate': 0.5623413251903491}",,3.3009999752,0.602933341814,0.613444440841,f1_weighted
+cls,GDBcls,"GradientBoostingClassifier(criterion='friedman_mse', init=None,
+              learning_rate=0.031622776601683791, loss='deviance',
+              max_depth=50, max_features=0.1, max_leaf_nodes=None,
+              min_impurity_split=1e-07, min_samples_leaf=1,
+              min_samples_split=2, min_weight_fraction_leaf=0.0,
+              n_estimators=100, presort='auto', random_state=None,
+              subsample=1.0, verbose=0, warm_start=False)","{'max_features': 0.1, 'n_estimators': 100, 'learning_rate': 0.031622776601683791, 'max_depth': 50}",0 days 00:46:58.921000000,74.0080000401,0.693118767943,1.0,f1_weighted
+cls,GNBcls,GaussianNB(priors=None),{},,0.0510000705719,0.192791906877,0.196189404082,f1_weighted
+cls,RFcls,"RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+            max_depth=None, max_features=0.1, max_leaf_nodes=None,
+            min_impurity_split=1e-07, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            n_estimators=500, n_jobs=1, oob_score=False, random_state=None,
+            verbose=0, warm_start=False)","{'max_features': 0.1, 'n_estimators': 500}",,12.3617999077,0.68604008264,1.0,f1_weighted
+cls,BAGcls,"BaggingClassifier(base_estimator=None, bootstrap=True,
+         bootstrap_features=False, max_features=0.7, max_samples=1.0,
+         n_estimators=500, n_jobs=1, oob_score=False, random_state=None,
+         verbose=0, warm_start=False)","{'max_features': 0.7, 'n_estimators': 500}",,66.9128000736,0.675516512767,1.0,f1_weighted
