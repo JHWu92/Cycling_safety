@@ -8,7 +8,7 @@
     try{
         $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     }catch (PDOException $e) {
-        error_log('PDO Exception: '.$e);
+        error_log('rate-video, PDO Exception: '.$e);
         die('Connection failed: ' . $e->getMessage());
     }
    

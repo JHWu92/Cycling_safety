@@ -7,6 +7,7 @@
     function redirect_if_not_login($SESS){
         if(!login($SESS)){
             global $DOMAIN_URL, $PAGE_LOGIN_FIRST;
+            error_log("not logged in, Session array: ".implode(",", $SESS));
             exit(header( "Location: $DOMAIN_URL$PAGE_LOGIN_FIRST"));
         }
         

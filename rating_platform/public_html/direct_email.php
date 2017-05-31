@@ -14,7 +14,7 @@
     try{
         $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     }catch (PDOException $e) {
-        error_log('PDO Exception: '.$e);
+        error_log('direct_email, PDO Exception: '.$e);
         die('Connection failed: ' . $e->getMessage());
     }
     //$con=mysqli_connect($host, $db_user, $db_pwd, $db_name);

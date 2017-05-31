@@ -1,5 +1,11 @@
 <?php
 
+session_start();    //Start session
+require_once 'check-login.php';
+redirect_if_not_login($_SESSION);
+
+$_SESSION[$SESS_VIDEO_ID] = null;
+require_once 'config.inc.php';  //$db_name, $host, $db_user, $db_pwd 
 function compare($a,$b)
 {
 	if ($a===$b)
@@ -18,14 +24,13 @@ function toArr($res){
 	return $arr;
 }
 
-session_start();    //Start session
 
 # Connect to MySQL database
-require_once 'config.inc.php';  //$db_name, $host, $db_user, $db_pwd 
+
 try{
     $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }catch (PDOException $e) {
-    error_log('PDO Exception: '.$e);
+    error_log('display_vid, PDO Exception: '.$e);
     die('Connection failed: ' . $e->getMessage());
 }
 

@@ -14,7 +14,8 @@ EOT;
         $sth->execute(array(':user_id' => $user_id, ':timestamp' => "$timestamp", ':timezone' => "$timezone", ':userAgent' => "$userAgent", ':isMobile' => "$isMobile", ':isTablet' => "$isTablet", ':isAndroid' => "$isAndroid", ':isIOS' => "$isIOS", ));
         $lid = $pdo->lastInsertId(); 
         if(!$lid){  # if error happens when inserting
-                die("<h3>error happens in logging your login, click <a href='/index.html'>HERE</a> to enter your email again</h3>");
+                error_log("failed to create login id/ insert into DB for user_id =$user_id");
+                die("<h3>error happens in during your logging in, click <a href='/index.html'>HERE</a> to enter your email again</h3>");
         }        
         return $lid;
     }
@@ -29,8 +30,7 @@ EOT;
         $select = $pdo->prepare($sql);
         $select->execute(array("$email"));
         $count=$select->rowCount();
-        $exp_lvl=null;
-        $has_survey = null;
+
         if($count == 0){  # this is a new user
             $sql_insert = "INSERT INTO $TABLE_USERS (Email) VALUES (?)";
             $insert = $pdo->prepare($sql_insert);
@@ -38,8 +38,11 @@ EOT;
             # get the auto-id
             $user_id = $pdo->lastInsertId(); 
             if(!$user_id){  # if error happens when inserting
+                error_log("failed to create user id/ insert into DB for email =$email");
                 die("<h3>error happens in creating your account, click <a href='/index.html'>HERE</a> to enter your email again</h3>");
             }
+            $exp_lvl=null;
+            $has_survey = null;
         }else{  # user exists
             $result = $select->fetch(PDO::FETCH_ASSOC);
             $user_id = $result[$TABL_USERS_FIELD_UID];

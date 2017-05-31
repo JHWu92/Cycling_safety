@@ -19,15 +19,14 @@
             $tags = implode(',', $tags);
         }
         
-        if(empty($uid) | empty($vid)){  # if error happens when inserting
-            if(empty($uid)){ 
-                error_log('The uid is missing');
-                die('<h3>We are sorry that the connection is lost, click <a href="/index.html">HERE</a> to log in again</h3>. If the problem persists, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>');
-                
-            }else{
-                error_log('the vid is missing');
-                die('<h3>We failed to load the next video for you, click <a href="/index.html">HERE</a> to log in again</h3>. If the problem persists, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>');
-            }
+        if(empty($uid)){ 
+            error_log('rateDB.php: The uid is missing');
+            die('<h3>We are sorry that the connection is lost, click <a href="/index.html">HERE</a> to log in again</h3>. If the problem persists, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>');
+            
+        }
+        if(empty($vid)){
+            error_log('rateDB.php: the vid is missing');
+            die('<h3>We failed to load the next video for you, click <a href="/index.html">HERE</a> to log in again</h3>. If the problem persists, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>');
         }
         
         $rid = null;
@@ -42,6 +41,10 @@ EOT;
             $sth->execute(array(':uid' => $uid, ':vid' => $vid, ':score' => $score, ':comment' => "$comment", ':tags' => "$tags", ':familiar_st' => "$familiar_st", ':timestamp' => "$timestamp", ':timezone' => "$timezone", ':watched' => "$watched", ':interaction' => "$interaction", ':lid' => "$lid"));
 
             $rid = $pdo->lastInsertId(); 
+            
+            if(!$rid){  # if error happens when inserting
+                    error_log("failed to insert rating for user_id =$uid, video = $vid");
+            }
             $sth = null;
         }
         // which button is clicked
