@@ -13,7 +13,7 @@ video_gpx/test_data/2DB_RoadSegment.csv
 html-backup
 
 
-
+rating_platform/load_test_db/*
 rating_platform/credentials (1).csv
 open_data_analysis/data/raw_data/opendc/*
 open_data_analysis/data/cross_validation/test/*
