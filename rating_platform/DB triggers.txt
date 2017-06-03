@@ -1,0 +1,40 @@
+CREATE TRIGGER `dec_SegScore` AFTER DELETE ON `Rating`
+ FOR EACH ROW BEGIN
+  UPDATE 
+    RoadSegment s,
+    VideoRoadSeg vs
+  SET 
+    sumCnt = sumCnt - 1, 
+    sumRatio = sumRatio - vs.ratio,
+    sumScore = sumScore - OLD.score * vs.ratio
+  where s.sid=vs.sid and vs.vid=OLD.vid;
+
+END
+
+
+CREATE TRIGGER `inc_SegScore` AFTER INSERT ON `Rating`
+ FOR EACH ROW BEGIN
+  UPDATE 
+    RoadSegment s,
+    VideoRoadSeg vs
+  SET 
+    sumCnt = sumCnt + 1, 
+    sumRatio = sumRatio + vs.ratio,
+    sumScore = sumScore + NEW.score * vs.ratio
+  where s.sid=vs.sid and vs.vid=NEW.vid;
+
+END
+
+
+CREATE TRIGGER `insert2VRS` AFTER INSERT ON `video2seg_temp`
+ FOR EACH ROW BEGIN
+  INSERT INTO `VideoRoadSeg` (vid, sid, clip_name, index_seg, ratio) 
+  VALUES 
+  (
+      (SELECT vid FROM `Video` v WHERE v.clip_name=NEW.clip_name LIMIT 1),
+      (SELECT sid FROM `RoadSegment` s WHERE s.index_seg=NEW.index_seg LIMIT 1),
+      NEW.clip_name, 
+      NEW.index_seg, 
+      New.ratio
+  );
+END
