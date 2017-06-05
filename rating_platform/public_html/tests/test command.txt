@@ -8,6 +8,7 @@ php phpunit-6.0.phar --configuration public_html/tests/DBconfig.xml public_html/
 
 
 # for server on AWS
+php phpunit-6.0.phar --configuration  html/tests/DBconfig.xml  html/tests/loadDataFakeTest.php
 php phpunit-6.0.phar --configuration  html/tests/DBconfig.xml  html/tests/check-loginTest.php
 php phpunit-6.0.phar --configuration  html/tests/DBconfig.xml  html/tests/loginTest.php
 php phpunit-6.0.phar --configuration  html/tests/DBconfig.xml  html/tests/showMapTest.php
