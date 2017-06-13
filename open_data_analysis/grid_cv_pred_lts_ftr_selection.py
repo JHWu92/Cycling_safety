@@ -36,9 +36,11 @@ if __name__ == '__main__':
             models = {'cls': {'RFcls': ensemble.RandomForestClassifier()}}
             params = grid_cv_default_params()
 
-            print 'run grid cv and save result'
+            print 'running grid cv'
             df_cv_res = grid_cv_models(train_x, train_y, models, params, path=cv_dir, verbose=True)
+            print 'saved grid cv result for each model'
 
-            print 'evaluate best model of each kind and save result'
+            print 'evaluating best model of each kind'
             df_eval = evaluate_grid_cv(df_cv_res, train_x, train_y, test_x, test_y, evaluator_scalable_cls, path=cv_dir)
+            print
 
