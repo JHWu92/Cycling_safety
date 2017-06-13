@@ -2,9 +2,9 @@
 
 import os
 
+from wKit.ML.sk_ml import scaler_by_name, sk_models, grid_cv_default_params, \
+    grid_cv_models, evaluate_grid_cv, evaluator_scalable_cls
 from src.pred_lts import prepare_lts_dataset
-from src.sk_ml import scaler_by_name, sk_models, grid_cv_default_params, grid_cv_models, evaluate_grid_cv, \
-    evaluator_scalable_cls
 
 if __name__ == '__main__':
     fna = 0.0
