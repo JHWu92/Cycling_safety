@@ -70,6 +70,8 @@ def bounded_round(arr, mini, maxi):
 def fillna(df, how='mean'):
     """df is the dataset
     """
+    if how is None or how=='None':
+        return df
     if how == 'mean':
         return df.fillna(df.mean())
     return df.fillna(how)
