@@ -2,12 +2,15 @@ import pandas as pd
 from constants import fn_features_dc, dir_data, index_seg, features_for_total
 
 
-def load_joint_features(years=(2014,2015,2016,2017), how='NO_TOTAL', verbose=False):
+def load_joint_features(years=(2014,2015,2016,2017), how='NO_TOTAL', na=None, verbose=False):
     """
-    for each feature files: get dummies, dummy_na=True; fillna with 0; encode each feature names with ftr_name_No
+    for each feature files:
+        1. get dummies, dummy_na=False;
+        2. fillna with na if na is not None, default None;
+        3. encode each feature names with ftr_name_No
     return joint features and code book
     """
-    features = load_separate_features(verbose=verbose)
+    features = load_separate_features(verbose=verbose, na=na)
     joint_features = []
     ftr_col2code = {}
     for name, df in features.items():
@@ -26,10 +29,10 @@ def load_joint_features(years=(2014,2015,2016,2017), how='NO_TOTAL', verbose=Fal
     return joint_features, ftr_col2code
 
 
-def load_separate_features(verbose=True):
+def load_separate_features(verbose=True, na=0):
     """
-    get dummies, dummy_na=True
-    fillna with 0
+    get dummies, dummy_na=False
+    fillna with na if na is not None
     """
     features = {}
     for name, fn in fn_features_dc.items():
@@ -37,8 +40,9 @@ def load_separate_features(verbose=True):
         df = pd.read_csv(dir_data + fn, index_col=0)
         if index_seg in df.columns:
             df.set_index('index_seg', inplace=True)
-        df = pd.get_dummies(df, dummy_na=True)
-        df.fillna(0, inplace=True)
+        df = pd.get_dummies(df, dummy_na=False)
+        if na is not None:
+            df.fillna(na, inplace=True)
         features[name] = df
     return features
 
