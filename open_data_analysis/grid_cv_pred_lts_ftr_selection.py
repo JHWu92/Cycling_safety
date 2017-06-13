@@ -5,6 +5,19 @@ from sklearn import ensemble
 from wKit.ML.sk_ml import scaler_by_name, sk_models, grid_cv_default_params, \
     grid_cv_models, evaluate_grid_cv, evaluator_scalable_cls
 from src.pred_lts import load_lts_dataset, prepro_lts_dataset
+import numpy as np
+
+
+def write_ftr_names(cv_dir, dataset):
+    ftr_name = dataset['ftr_name']
+    sup = dataset['selected_ftr']
+    keeps = np.array(ftr_name)[sup]
+    removes = np.array(ftr_name)[~sup]
+    with open(os.path.join(cv_dir, 'feature_names.txt'), 'wb') as f:
+        f.write('all\t%d' % len(ftr_name) + '\t' + ', '.join(ftr_name) + '\n')
+        f.write('keeps\t%d' % len(keeps) + '\t' + ', '.join(keeps) + '\n')
+        f.write('removes\t%d' % len(removes) + '\t' + ', '.join(removes) + '\n')
+
 
 if __name__ == '__main__':
     years = (2014, 2015, 2016, 2017)
@@ -31,6 +44,7 @@ if __name__ == '__main__':
             scaler = scaler_by_name(scaler_type)
             ds = prepro_lts_dataset(dataset, scaler, 0.0, selection=name, random_state=random_state)
             train_x, train_y, test_x, test_y = ds['train_x'], ds['train_y'], ds['test_x'], ds['test_y']
+            write_ftr_names(cv_dir, ds)
 
             print 'get models and grid_cv tuning parameters'
             models = {'cls': {'RFcls': ensemble.RandomForestClassifier()}}
