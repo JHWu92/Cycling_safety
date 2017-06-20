@@ -267,7 +267,7 @@ def objs_near_segs_store(objs_near, dir, fn_objs, fn_segs):
 
 
 # ########## functions assigning ln(segment) to objs #############
-def pts2segs_by_chunk(gpdf, segs, epsg, chunk=10**5):
+def pts2segs_by_chunk(gpdf, segs, epsg, chunk=10**5, close_jn_dist=5, far_jn_dist=20):
     import pandas as pd
     if len(gpdf) > chunk:
         list_pts_has_ln, list_pts_no_ln = [], []
@@ -277,7 +277,8 @@ def pts2segs_by_chunk(gpdf, segs, epsg, chunk=10**5):
         end = min(start+chunk, size)
         while(start< size):
             print 'matching chunk:', start, end
-            pts_has_ln, pts_no_ln=pts2segs(gpdf[start:end], segs, epsg)
+            pts_has_ln, pts_no_ln=pts2segs(gpdf[start:end], segs, epsg,
+                                           close_jn_dist=close_jn_dist, far_jn_dist=far_jn_dist)
             list_pts_has_ln.append(pts_has_ln)
             list_pts_no_ln.append(pts_no_ln)
 
