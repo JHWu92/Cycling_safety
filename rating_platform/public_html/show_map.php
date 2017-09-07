@@ -104,7 +104,7 @@
             layer.bindPopup(popUpContent);
         }
 
-        var mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic3VyYWpuYWlyIiwiYSI6ImNpdWoyZGQzYjAwMXkyb285b2Q5NmV6amEifQ.WBQAX7ur2T3kOLyi11Nybw';
+        var mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamVmZnd1IiwiYSI6ImNqN2F3cGNicTBsY3gzMXBsOWR1cjc4bzEifQ.dlG9RH8QJ8lb-Il6Mhsdaw';
         var light = L.tileLayer(mbUrl, {id: 'mapbox.light'});
         var streets = L.tileLayer(mbUrl, {id: 'mapbox.streets'});
         var satellite = L.tileLayer(mbUrl, {id: 'mapbox.satellite'});
