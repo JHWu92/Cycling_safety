@@ -1,6 +1,9 @@
 <?php
 
-session_start();    //Start session
+    if (!isset($_SESSION))
+    {
+        session_start();
+    }
 #require_once 'check-login.php';
 #redirect_if_not_login($_SESSION);
 

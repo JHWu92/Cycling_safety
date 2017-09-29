@@ -1,4 +1,8 @@
 <?php
+    if (!isset($_SESSION))
+    {
+        session_start();
+    }
     require_once 'config.inc.php';
     function logLogin($pdo, $user_id, $timestamp, $timezone, $userAgent, $isMobile, $isTablet, $isAndroid, $isIOS){
         global $TABLE_LOGINLOG, $TABL_USERS_FIELD_UID, $TB_COL_TIMESTAMP, $TB_COL_TIMEZONE, $TB_COL_USERAGENT, $TB_COL_ISMOBILE, $TB_COL_ISTABLET, $TB_COL_ISANDROID, $TB_COL_ISIOS;
