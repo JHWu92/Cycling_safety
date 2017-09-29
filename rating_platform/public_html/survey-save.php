@@ -24,7 +24,7 @@
     $pdo = null;
     
     header($res['head_url']); 
-    return true;
+    exit();
 
 
 ?>

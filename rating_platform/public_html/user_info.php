@@ -48,7 +48,7 @@
     }   
     # redirect
     header($head_url); 
-    return true;
+    exit();
         
 
 ?>
