@@ -81,6 +81,6 @@ $res = $select->fetch(PDO::FETCH_ASSOC);
 $pdo = null;
 
 echo($res[$TABL_VIDEO_FIELD_URL]);
-exit();
+
 
 ?>
