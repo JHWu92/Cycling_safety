@@ -78,7 +78,7 @@ EOT;
     }
     
     function handle_survey($pdo, $user_id, $post_data){
-        global $TABLE_USERS, $TABL_USERS_FIELD_EXP, $TABL_USERS_FIELD_UID, $TABL_USERS_FIELD_SURVEY, $DOMAIN_URL, $PAGE_SURVEY, $PAGE_RATE_VIDEO, $SURVEY_COLS;
+        global $TABLE_USERS, $TABL_USERS_FIELD_EXP, $TABL_USERS_FIELD_UID, $TABL_USERS_FIELD_SURVEY, $DOMAIN_URL, $PAGE_SURVEY, $PAGE_RATE_VIDEO, $SURVEY_COLS, $TB_U_COL_BK_TYPE, $TB_U_COL_BK_TYPE_OTHER;
 
         $cols_update_sql = array();
         $cols_update_data = array();
@@ -89,6 +89,12 @@ EOT;
             }
             array_push($cols_update_sql, "$col=?");
             array_push($cols_update_data, "$post_data[$col]");
+            # choose other as bk_type
+            if(($col==$TB_U_COL_BK_TYPE) and  ($post_data[$col]=='11')){
+                array_push($cols_update_sql, "$TB_U_COL_BK_TYPE_OTHER=?");
+                array_push($cols_update_data, "$post_data[$TB_U_COL_BK_TYPE_OTHER]");
+                
+            }
         }
 
         # user answer any questions

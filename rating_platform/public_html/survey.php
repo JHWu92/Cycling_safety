@@ -168,6 +168,10 @@
                 <div class="radio"><label><input type="radio" value="7" name="<?=$TB_U_COL_BK_TYPE?>">Folding Bike</label></div>
                 <div class="radio"><label><input type="radio" value="8" name="<?=$TB_U_COL_BK_TYPE?>">Recumbent Bike</label></div>
                 <div class="radio"><label><input type="radio" value="9" name="<?=$TB_U_COL_BK_TYPE?>">Tandem Bike</label></div>
+                <div class="radio"><label>
+                    <input type="radio" value="11" name="<?=$TB_U_COL_BK_TYPE?>">Other: </label>
+                    <input type ="text" name="<?=$TB_U_COL_BK_TYPE_OTHER?>" id="other_text"/></label>
+                </div>
                 <div class="radio"><label><input type="radio" value="10" name="<?=$TB_U_COL_BK_TYPE?>">Do not ride a bike</label></div>
             </div>
         </div>
