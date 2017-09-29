@@ -11,7 +11,11 @@
         error_log('rate-video, PDO Exception: '.$e);
         die('Connection failed: ' . $e->getMessage());
     }
-   
+    
+    if(!isset($_SESSION[$SESS_USER_ID])){
+        error_log('rate-video.php, no user id ');
+    }
+    
     $date = new DateTime( "now", new DateTimeZone("UTC") );
     $timestamp = $date->format('Y-m-d H:i:s');    
     $timezone = $_SESSION[$TB_COL_TIMEZONE];

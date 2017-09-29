@@ -4,10 +4,15 @@
     require_once 'check-login.php';
     require 'emailExpSurveyDBandRedirect.php';
     
-    redirect_if_not_login($_SESSION);
-
+    if(!isset($_SESSION[$SESS_USER_ID])){
+        error_log('survey-save.php, no user id ');
+    }
+    
+    redirect_if_not_login($_SESSION);    
+    
     // get session variables
     $user_id = $_SESSION[$SESS_USER_ID];
+    
     
     # Connect to MySQL database
     try{
