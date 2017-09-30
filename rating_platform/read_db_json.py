@@ -11,7 +11,7 @@ SURVEY_DICT= {
     'gender': ['No Info', 'Female', 'Male', 'Transgender – Female', 'Transgender – Male', 'Gender-variant / Non-conforming', 'Not listed', ],
     'driver': ['No Info', 'yes', 'no'],
     'car': ['No Info', 'yes', 'no'],
-    'household_income': ['BLANK', 'Less than \$24,999', '\$25,000 to \$39,999', '\$40,000 to \$54,999', '\$55,000 to \$69,999', '\$70,000 to \$84,999', '\$85,000 to \$99,999', '\$100,000 to \$149,999', '\$150,000 or more'],
+    'household_income': ['No Info', 'Less than $24,999', '$25,000 to $39,999', '$40,000 to $54,999', '$55,000 to $69,999', '$70,000 to $84,999', '$85,000 to $99,999', '$100,000 to $149,999', '$150,000 or more'],
     'residence': ['No Info', 'Never', '<3 months', '3-6 months', '6-12 months', '1-3 years', '>=3 years'],
     'bk_type': ['No Info', 'CaBi Bike (Shared bike in the DC region)', 'Road Bike', 'Mountain Bike', 'Hybrid Bike', 'Cruiser Bike', 'BMX Bike', 'Folding Bike', 'Recumbent Bike', 'Tandem Bike', 'Do not ride a bike'],
 }
