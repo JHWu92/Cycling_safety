@@ -13,7 +13,7 @@
     }
     
     if(!isset($_SESSION[$SESS_USER_ID])){
-        error_log('rate-video.php, no user id ');
+        error_log('rate-video.php, no user id , Session array: '.implode(",", $_SESSION).', post_data: '.implode(",", $_POST));
     }
     
     $date = new DateTime( "now", new DateTimeZone("UTC") );

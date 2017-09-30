@@ -5,7 +5,7 @@
     require 'emailExpSurveyDBandRedirect.php';
     
     if(!isset($_SESSION[$SESS_USER_ID])){
-        error_log('survey-save.php, no user id ');
+        error_log('survey-save.php, no user id , Session array: '.implode(",", $_SESSION).', post_data: '.implode(",", $_POST));
     }
     
     redirect_if_not_login($_SESSION);    

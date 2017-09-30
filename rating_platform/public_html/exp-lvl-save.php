@@ -5,7 +5,7 @@
 
     
     if(!isset($_SESSION[$SESS_USER_ID])){
-        error_log('exp-lvl-save.php, no user id ');
+        error_log('exp-lvl-save.php, no user id , Session array: '.implode(",", $_SESSION));
     }
     
     //parse data from form 

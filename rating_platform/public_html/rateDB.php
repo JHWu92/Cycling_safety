@@ -23,12 +23,12 @@
         }
         
         if(empty($uid)){ 
-            error_log('rateDB.php: The uid is missing');
+            error_log('rateDB.php: The uid is missing, Session array: '.implode(",", $sess_data).', post_data: '.implode(",", $post_data));
             die('<h3>We are sorry that the connection is lost, click <a href="/index.html">HERE</a> to log in again</h3>. If the problem persists, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>');
             
         }
         if(empty($vid)){
-            error_log('rateDB.php: the vid is missing');
+            error_log('rateDB.php: the vid is missing, Session array: '.implode(",", $sess_data).', post_data: '.implode(",", $post_data));
             die('<h3>We failed to load the next video for you, click <a href="/index.html">HERE</a> to log in again</h3>. If the problem persists, contact us at <a href="mailto:umdcyclingsafety@gmail.com">umdcyclingsafety@gmail.com</a>');
         }
         

@@ -2,6 +2,10 @@
     session_start();    //Start session
     require_once 'config.inc.php';  //$db_name, $host, $db_user, $db_pwd, $PAGE_RATE_VIDEO, $DOMAIN_URL
     
+    if(!isset($_SESSION[$SESS_USER_ID])){
+        error_log('survey.php, no user id , Session array: '.implode(",", $_SESSION));
+    }
+    
 ?>    
 
 <!DOCTYPE html>
