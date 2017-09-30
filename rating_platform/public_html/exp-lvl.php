@@ -1,8 +1,8 @@
 <?php
     session_start();    //Start session
+    require_once 'config.inc.php'; 
     #require_once 'check-login.php';
     #redirect_if_not_login($_SESSION);
-    
     
     if(!isset($_SESSION[$SESS_USER_ID])){
         error_log('exp-lvl.php, no user id ');
