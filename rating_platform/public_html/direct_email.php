@@ -8,6 +8,7 @@
     //parse data from form 
     $email=$_POST[$SESS_EMAIL];
     $timezone = $_POST[$TB_COL_TIMEZONE];
+    error_log('direct_email.php, before set Session, _SESSION: '.json_encode($_SESSION).', _POST: '.json_encode($_POST).', email: '.$email.', timezone: '.$timezone);
     
     // check whether the email exist against DB
     # Connect to MySQL database

@@ -22,6 +22,7 @@
             
         $ty = "Thank you $email! You've rated $cnt videos. We really appreciate your contribution.<br>";
     }
+    error_log('show_map.php. Logged out. Session array: '.json_encode($_SESSION));
     session_destroy();
     
 ?>

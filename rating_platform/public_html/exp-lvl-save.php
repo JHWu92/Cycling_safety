@@ -5,7 +5,7 @@
 
     
     if(!isset($_SESSION[$SESS_USER_ID])){
-        error_log('exp-lvl-save.php, no user id , Session array: '.implode(",", $_SESSION));
+        error_log('exp-lvl-save.php, no user id , Session array: '.json_encode($_SESSION).', _POST: '.json_encode($_POST));
     }
     
     //parse data from form 
@@ -15,7 +15,8 @@
     // get session variables
     $user_id = $_SESSION[$SESS_USER_ID];
     $has_survey = $_SESSION[$SESS_SURVEY];
-    
+    error_log('exp-lvl-save.php, user_id: '.$user_id.', has_survey: '.$has_survey.', explv: '.$explv);
+        
     # Connect to MySQL database
     try{
         $pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD'], array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));

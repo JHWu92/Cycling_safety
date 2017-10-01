@@ -3,12 +3,8 @@
     require_once 'config.inc.php'; 
     #require_once 'check-login.php';
     #redirect_if_not_login($_SESSION);
-    
-    if(!isset($_SESSION[$SESS_USER_ID])){
-        error_log('exp-lvl.php, no user id , Session array: '.implode(",", $_SESSION));
-    }
-    require_once 'config.inc.php';  //$db_name, $host, $db_user, $db_pwd, $TABLE_USERS, $DOMAIN_URL, $PAGE_RATE_VIDEO, $PAGE_SURVEY
-    
+    error_log('landed on exp-lvl.php, Session array: '.json_encode($_SESSION).', _POST: '.json_encode($_POST));
+
 ?>
 
 <!DOCTYPE html>
