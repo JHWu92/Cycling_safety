@@ -1,10 +1,8 @@
 <?php
     session_start();    //Start session
     require_once 'config.inc.php';  //$db_name, $host, $db_user, $db_pwd, $PAGE_RATE_VIDEO, $DOMAIN_URL
-    
-    if(!isset($_SESSION[$SESS_USER_ID])){
-        error_log('survey.php, no user id , Session array: '.json_encode($_SESSION).', _POST: '.json_encode($_POST));
-    }
+   
+    error_log('survey.php, Session array: '.json_encode($_SESSION).', _POST: '.json_encode($_POST));
     
 ?>    
 
