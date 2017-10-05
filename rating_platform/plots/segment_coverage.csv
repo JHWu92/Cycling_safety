@@ -1,0 +1,15 @@
+Segment Type,Number Segments in DC,Number Segments with ratings,Segments Coverage,Number Ratings
+Avenue,2259,104.0,4.60%,518.0
+Boulevard,73,-,-,-
+Circle,155,14.0,9.03%,44.0
+Crescent,34,-,-,-
+Crest,79,-,-,-
+ Drive,313,5.0,1.60%,42.0
+Lane,97,-,-,-
+Unlabeled,60,2.0,3.33%,4.0
+Parkway,57,2.0,3.51%,27.0
+Place,1080,-,-,-
+Road,1034,2.0,0.19%,21.0
+Street,8116,313.0,3.86%,1683.0
+Terrace,130,-,-,-
+Way,35,-,-,-
