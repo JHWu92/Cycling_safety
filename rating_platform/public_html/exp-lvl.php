@@ -20,6 +20,14 @@
     <style type="text/css">
         li {font-size: 18px;}
     </style>
+    <script>
+        
+$(document).ready(function(){
+        if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
+            $("#ie").html('This website is not compatible with IE. If you have trouble while using IE, please try other browsers. Thank you.');
+        }
+});
+     </script>
 </head>
 
 <body>
@@ -29,6 +37,7 @@
         <div class="row">
                 <h1>Welcome! <?=$_SESSION[$SESS_EMAIL]?></h1>
                 <p>Before you start, we would like to know your cycling experience level, please choose the type of experience that best fits you.</p>
+                <p id="ie"></p>
         </div>    
         <div class="spacer20"></div>   <!-- add space -->
     
