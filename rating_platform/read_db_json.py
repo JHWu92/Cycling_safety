@@ -54,14 +54,6 @@ def large_joint_table(date='2017-08-30', verbose=False):
     joint_table.score = joint_table.score.astype(float)
     return joint_table
 
-
-def exp_scale(exp):
-    """ ignore user with no exp lvl
-    """
-    if pd.isnull(exp):
-        return 0
-    return {'fearless': 4, 'confident': 3, 'interested': 2, 'reluctant': 1}[exp]
-    
     
 def load_joint_table2(date='2017-10-01'):
     dfs = {}
@@ -86,5 +78,4 @@ def load_joint_table2(date='2017-10-01'):
                          .merge(videos[['vid','URL']])).merge(users)
     joint_table.ratio = joint_table.ratio.astype(float) 
     joint_table.score = joint_table.score.astype(float)
-    joint_table['exp_weighted'] = joint_table.experienceLevel.apply(exp_scale)
     return joint_table
