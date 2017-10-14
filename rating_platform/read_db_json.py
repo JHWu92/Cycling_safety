@@ -17,10 +17,10 @@ SURVEY_DICT= {
 }
 SURVEY_COLS = ['bk_purpose', 'age', 'ethnicity', 'edu', 'marital', 'gender', 'driver','car', 'household_income', 'residence', 'bk_type']
 
-def weighted_seg_score(df, col_name='csl'):
+def weighted_seg_score(df, col_name='csl', score_col='score'):
     if df.shape[0]==0:
         return pd.DataFrame()
-    score = df.groupby('index_seg').apply(lambda x: (x.score* x.ratio).sum()/x.ratio.sum()).to_frame()
+    score = df.groupby('index_seg').apply(lambda x: (x[score_col]* x.ratio).sum()/x.ratio.sum()).to_frame()
     score.columns = [col_name]
     return score
 
