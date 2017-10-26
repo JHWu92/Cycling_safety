@@ -80,6 +80,32 @@ def amplify_fcir(row):
     if exp=='reluctant' and score>3:
         return score+1
     return score
+    
+def amplify_fcir3(row):
+    exp = row.experienceLevel
+    score = row.score
+    if exp=='fearless' and score<3:
+        return score-1
+    if exp=='confident' and score<2:
+        return score-0.5
+    if exp=='interested' and score>4:
+        return score+0.5
+    if exp=='reluctant' and score>3:
+        return score+1
+    return score
+    
+def amplify_fcir2(row):
+    exp = row.experienceLevel
+    score = row.score
+    if exp=='fearless' and score<3:
+        return score-1
+    if exp=='confident' and score<3:
+        return score-0.5
+    if exp=='interested' and score>3:
+        return score+0.5
+    if exp=='reluctant' and score>3:
+        return score+1
+    return score
 
 
 def amplify_fr(row):
