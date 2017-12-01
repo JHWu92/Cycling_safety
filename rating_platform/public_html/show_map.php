@@ -84,10 +84,10 @@
 </div>
 <script>
     function getColor(d) {
-        return d > 4 ? '#1a9641' :
-               d > 3  ? '#a6d96a' :
-               d > 2  ? '#ffffbf' :
-               d > 1  ? '#fdae61' :
+        return d > 4.5 ? '#1a9641' :
+               d > 3.5  ? '#a6d96a' :
+               d > 2.5  ? '#ffffbf' :
+               d > 1.5  ? '#fdae61' :
                           '#d7191c';
     }
     
@@ -139,7 +139,7 @@
         var legend = L.control({position: 'bottomright'});
         legend.onAdd = function (map) {
             var div = L.DomUtil.create('div', 'info legend');
-            var grades = [0, 1, 2, 3, 4];
+            var grades = [1, 1.5, 2.5, 3.5, 4.5];
             var labels = ['dangerous', 'quite dangerous', 'normal', 'quite safe', 'safe'];
             // loop through our density intervals and generate a label with a colored square for each interval
             for (var i = 0; i < grades.length; i++) {

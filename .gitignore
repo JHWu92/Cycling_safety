@@ -19,3 +19,4 @@ open_data_analysis/data/raw_data/opendc/*
 open_data_analysis/data/cross_validation/test/*
 open_data_analysis/data/cross_validation/year*
 rating_platform/public_html/error_logs/*
+cpanel.txt
