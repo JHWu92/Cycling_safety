@@ -26,7 +26,7 @@
     function set_style(feature){return {color: feature.properties.color};}
 
     function onEachFeature(feature,layer){
-        var popUpContent = '';
+        var popUpContent = 'id: '+ feature.id+'<br>';
         for (var key in feature.properties) {
             val = feature.properties[key];
             popUpContent += key + ':' + val + "<br>";
@@ -34,9 +34,16 @@
         layer.bindPopup(popUpContent);
     }
 
-    var mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamVmZnd1IiwiYSI6ImNqN2F3cGNicTBsY3gzMXBsOWR1cjc4bzEifQ.dlG9RH8QJ8lb-Il6Mhsdaw';
-    var light = L.tileLayer(mbUrl, {id: 'mapbox.light'});
-    var streets = L.tileLayer(mbUrl, {id: 'mapbox.streets'});
+//    var mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamVmZnd1IiwiYSI6ImNqN2F3cGNicTBsY3gzMXBsOWR1cjc4bzEifQ.dlG9RH8QJ8lb-Il6Mhsdaw';
+//    var light = L.tileLayer(mbUrl, {id: 'mapbox.light'});
+//    var streets = L.tileLayer(mbUrl, {id: 'mapbox.streets'});
+
+
+	// create the tile layer with correct attribution
+	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+	var streets = new L.TileLayer(osmUrl, {attribution: osmAttrib});		
+
     
     
     var stsg_layer = new L.LayerGroup();
@@ -50,7 +57,8 @@
     
     
     var check_layers = {
-        'light': light, 'streets': streets, 
+        // 'light': light, 
+        'streets': streets, 
     };
             
     

@@ -34,11 +34,20 @@
         layer.bindPopup(popUpContent);
     }
 
-    var mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamVmZnd1IiwiYSI6ImNqN2F3cGNicTBsY3gzMXBsOWR1cjc4bzEifQ.dlG9RH8QJ8lb-Il6Mhsdaw';
-    var light = L.tileLayer(mbUrl, {id: 'mapbox.light'});
-    var streets = L.tileLayer(mbUrl, {id: 'mapbox.streets'});
-    var satellite = L.tileLayer(mbUrl, {id: 'mapbox.satellite'});
+//    var mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamVmZnd1IiwiYSI6ImNqN2F3cGNicTBsY3gzMXBsOWR1cjc4bzEifQ.dlG9RH8QJ8lb-Il6Mhsdaw';
+//    var light = L.tileLayer(mbUrl, {id: 'mapbox.light'});
+//    var streets = L.tileLayer(mbUrl, {id: 'mapbox.streets'});
+//    var satellite = L.tileLayer(mbUrl, {id: 'mapbox.satellite'});
     
+	// create the tile layer with correct attribution
+	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+	var streets = new L.TileLayer(osmUrl, {attribution: osmAttrib});		
+var CartoDB_DarkMatter = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+	subdomains: 'abcd',
+	maxZoom: 19
+});
     
     var true_map_layer = new L.LayerGroup();
     L.geoJSON(true_map, {style: set_style,onEachFeature: onEachFeature}).addTo(true_map_layer);
@@ -47,9 +56,7 @@
     L.geoJSON(pred_map, {style: set_style,onEachFeature: onEachFeature}).addTo(pred_map_layer);
     
     
-    var check_layers = {
-        'light': light, 'streets': streets, 'satellite': satellite, 
-    };
+    var check_layers = {'streets': streets, 'CartoDB_DarkMatter':CartoDB_DarkMatter,};
             
     
     var radio_layers = {
