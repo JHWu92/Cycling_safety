@@ -79,7 +79,7 @@
 <div class="container">
     <h2><?=$ty?> </h2>
     <h2>Here is our current cycling safety map for D.C., thanks to contributions from you and other cyclists.</h2>
-     <h2>You've logged out. But if you want to continue rating, click  <a href="index.html">here</a>. Otherwise, thanks again and come back soon! Remember, the more you rate, the higher your chances of winning a gift card! (we will make the winners public in December)</h2>
+     <h2>You've logged out. But if you want to continue rating, click  <a href="index.html">here</a>. Otherwise, thanks again and come back soon! </h2>
     <div id='map'></div>
 </div>
 <script>
