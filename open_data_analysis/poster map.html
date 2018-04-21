@@ -8,9 +8,23 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
     <style>
+    .legend {
+        line-height: 18px;
+        color: #555;
+        background: white;
+        padding: 5px;
+        margin: 1px;
+    }
+    .legend i {
+        width: 18px;
+        height: 18px;
+        float: left;
+        margin-right: 8px;
+        opacity: 0.7;
+    } 
         #map {
-            width: 1000px;
-            height: 700px;
+            width: 1200px;
+            height: 900px;
         }
     </style>
 </head>
@@ -49,18 +63,32 @@ var CartoDB_DarkMatter = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fa
 	maxZoom: 19
 });
     
+    var CartoDB_Positron = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+	subdomains: 'abcd',
+	maxZoom: 19
+});
+var Esri_WorldTopoMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+});
+
     var true_map_layer = new L.LayerGroup();
     L.geoJSON(true_map, {style: set_style,onEachFeature: onEachFeature}).addTo(true_map_layer);
     
     var pred_map_layer = new L.LayerGroup();
     L.geoJSON(pred_map, {style: set_style,onEachFeature: onEachFeature}).addTo(pred_map_layer);
     
+    var diff_map_layer = new L.LayerGroup();
+    L.geoJSON(diff_map, {style: set_style,onEachFeature: onEachFeature}).addTo(diff_map_layer);
     
-    var check_layers = {'streets': streets, 'CartoDB_DarkMatter':CartoDB_DarkMatter,};
+    
+    var check_layers = { 'streets': streets, 'CartoDB_DarkMatter':CartoDB_DarkMatter, 'CartoDB_Positron':CartoDB_Positron,
+    'Esri_WorldTopoMap':Esri_WorldTopoMap
+    };
             
     
     var radio_layers = {
-        'actual map': true_map_layer, 'predicted map': pred_map_layer, 
+        'actual map': true_map_layer, 'predicted map': pred_map_layer, 'true-pred diff': diff_map_layer, 
     };
             
     
@@ -71,6 +99,27 @@ var CartoDB_DarkMatter = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fa
     });
     
     L.control.layers(check_layers, radio_layers).addTo(map);
+        function getColor(d) {
+        return d > 4.5 ? '#1a9641' :
+               d > 3.5  ? '#a6d96a' :
+               d > 2.5  ? '#ffffbf' :
+               d > 1.5  ? '#fdae61' :
+                          '#d7191c';
+    }
+            // legend on bottom right
+        var legend = L.control({position: 'topright'});
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'info legend');
+            var grades = [1, 1.5, 2.5, 3.5, 4.5];
+            var labels = ['dangerous', 'quite dangerous', 'normal', 'quite safe', 'safe'];
+            // loop through our density intervals and generate a label with a colored square for each interval
+            for (var i = 0; i < grades.length; i++) {
+                div.innerHTML +=
+                    '<i style="background:' + getColor(grades[i] + 0.1, 1) + '"></i> ' + '<label>' +labels[i] + '</label>'+ '<br>';
+            }
+            return div;
+        };
+        legend.addTo(map);
 </script>
 </body>
 </html>
