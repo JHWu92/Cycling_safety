@@ -105,13 +105,27 @@
             layer.bindPopup(popUpContent);
         }
 
-        var mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamVmZnd1IiwiYSI6ImNqN2F3cGNicTBsY3gzMXBsOWR1cjc4bzEifQ.dlG9RH8QJ8lb-Il6Mhsdaw';
-        var light = L.tileLayer(mbUrl, {id: 'mapbox.light'});
-        var streets = L.tileLayer(mbUrl, {id: 'mapbox.streets'});
-        var satellite = L.tileLayer(mbUrl, {id: 'mapbox.satellite'});
+//        var mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamVmZnd1IiwiYSI6ImNqN2F3cGNicTBsY3gzMXBsOWR1cjc4bzEifQ.dlG9RH8QJ8lb-Il6Mhsdaw';
+//        var light = L.tileLayer(mbUrl, {id: 'mapbox.light'});
+//        var streets = L.tileLayer(mbUrl, {id: 'mapbox.streets'});
+//        var satellite = L.tileLayer(mbUrl, {id: 'mapbox.satellite'});
+	// create the tile layer with correct attribution
+	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+	var streets = new L.TileLayer(osmUrl, {attribution: osmAttrib});		
+        var CartoDB_DarkMatter = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
+        	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+        	subdomains: 'abcd',
+        	maxZoom: 19
+        });
+    
+    var CartoDB_Positron = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+	subdomains: 'abcd',
+	maxZoom: 19});
         // the map style
         var radio_layers = {
-            'gray': light, 'street': streets, 'satellite': satellite, 
+        'CartoDB_DarkMatter': CartoDB_DarkMatter, 'streets': streets, 'CartoDB_Positron':CartoDB_Positron, 
         };
                 
         // add here if you need more layer
@@ -127,7 +141,7 @@
         };
         
         var map = L.map('map', {
-            layers: [streets, seg_rating_layer], // initial layer
+            layers: [CartoDB_Positron, seg_rating_layer], // initial layer
             center: [38.9047829846, -77.0163424758],
             zoom: 13,
         });
