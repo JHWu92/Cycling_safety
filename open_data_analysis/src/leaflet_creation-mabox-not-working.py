@@ -1,11 +1,4 @@
 # coding: utf8
-# layer options: http://leaflet-extras.github.io/leaflet-providers/preview/
-MAP_LAYERS = {
-    'dark_black': """L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',});
-    """,
-    'osm_mapnik': """L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
-     """,
-}
 template = """
 <!DOCTYPE html>
 <html>
@@ -42,7 +35,7 @@ template = """
         layer.bindPopup(popUpContent);
     }}
 
-    var mbUrl = 'https://api.tiles.mapbox.com/v4/{{id}}/{{z}}/{{x}}/{{y}}.png?access_token=pk.eyJ1Ijoic3VyYWpuYWlyIiwiYSI6ImNpdWoyZGQzYjAwMXkyb285b2Q5NmV6amEifQ.WBQAX7ur2T3kOLyi11Nybw';
+    var mbUrl = 'https://api.tiles.mapbox.com/v4/{{id}}/{{z}}/{{x}}/{{y}}.png?access_token=pk.eyJ1IjoiamVmZnd1IiwiYSI6ImNqN2F3cGNicTBsY3gzMXBsOWR1cjc4bzEifQ.dlG9RH8QJ8lb-Il6Mhsdaw';
     {map_style_layers}
     {bind_data_to_layers}
     {check_layers}
@@ -84,9 +77,9 @@ def get_map(lat, lon, zoom, init_layers):
 def get_map_style_layers(map_layers=['streets']):
     map_style_str = ''
     for s in map_layers:
-        map_style_str += 'var '+s+' = '+MAP_LAYERS[s]+'\n'
+        map_style_str += "var {s} = L.tileLayer(mbUrl, {{id: 'mapbox.{s}'}});\n    ".format(s=s)
     if not map_style_str:
-        map_style_str = MAP_LAYERS['dark-black']
+        map_style_str = "var streets = L.tileLayer(mbUrl, {{id: 'mapbox.streets'}});"
     return map_style_str
 
 
@@ -118,24 +111,22 @@ def get_check_radio_layers(binding_data,map_layers):
     return check_radio_layers
 
 
-def clean_init_layers(init_layers, binding_data):
+def clean_init_layers(init_layers, allow_style, binding_data):
     cleaned_init_layers = []
-    binding_data_layers = [b[0] for b in binding_data]
+    binding_data_layers = [b[0]+'_layer' for b in binding_data]
     for il in init_layers:
-        if il in MAP_LAYERS:
+        if il in allow_style or il in binding_data_layers:
             cleaned_init_layers.append(il)
-        if  il in binding_data_layers:
-            cleaned_init_layers.append(il+'_layer')
-            
     return cleaned_init_layers
 
 
 def create_leaflet(html_title, file_path, file_name, lat, lon, zoom, init_layers, map_layers, binding_data, width=700, height=700):
 
-    # allow_style = ['light', 'dark', 'outdoors', 'satellite', 'streets']
-    # if len(set(map_layers)-set(allow_style))!=0:
-    #     raise ValueError('allow map style layers is %s' % str(allow_style))
-    init_layers = clean_init_layers(init_layers, binding_data)
+    allow_style = ['light', 'dark', 'outdoors', 'satellite', 'streets']
+    if len(set(map_layers)-set(allow_style))!=0:
+        raise ValueError('allow map style layers is %s' % str(allow_style))
+    init_layers = clean_init_layers(init_layers, allow_style, binding_data)
+
     map = get_map(lat, lon, zoom, init_layers)
     map_style_str = get_map_style_layers(map_layers)
     bind_data_to_layers = get_bind_data_to_layers(binding_data)
@@ -161,18 +152,18 @@ def create_map_visualization(html_title, file_path, file_name, lat, lon, zoom,
                              init_layers, map_layers, binding_data, gpdfs, width=700, height=700):
     """
     example:
-    html_title = 'html title'
+    html_title = 'openstreetmap elements'
     file_path = ''
-    file_name = 'leaflet file'
-    lon, lat = -77.018479, 38.913237 #D.C.
-    zoom = 13
-    map_layers = MAP_LAYERS.keys()
-    init_layers = [list(map_layers)[0], 'csl']
-    binding_data=[['csl','spots of csl']]
+    file_name = 'test creation of leaflet'
+    lon, lat = -77.0908494, 38.9045525  #D.C.
+    zoom = 12
+    init_layers = ['streets', 'stsg']
+    map_layers = ['light','streets', 'satellite']
+    binding_data=[['stsg','street segment'],['stsg1','street segment1']]
     # gpdf1['color'] = '#aa0'
     # gpdf2['color'] = '#0a0'
-    gpdfs = [gpdf]
-    create_map_visualization(html_title, file_path, file_name, lat, lon, zoom, init_layers, map_layers, binding_data, gpdfs)   
+    gpdfs = [gpdf1, gpdf2]
+    create_map_visualization(html_title, file_path, file_name, lat, lon, zoom, init_layers, map_layers, binding_data, gpdfs)
     """
     assert len(binding_data)==len(gpdfs)
     create_leaflet(html_title, file_path, file_name, lat, lon, zoom, init_layers, map_layers, binding_data, width, height)
@@ -183,8 +174,8 @@ def test():
     html_title = 'openstreetmap elements'
     file_path = ''
     file_name = 'test creation of leaflet'
-    lon, lat = -77.018479, 38.913237 #D.C.
-    zoom = 14
+    lon, lat = -77.0908494, 38.9045525  #D.C.
+    zoom = 12
     init_layers = ['streets', 'stsg']
     map_layers = ['light','streets', 'satellite']
     binding_data=[['stsg','street segment'],['stsg1','street segment1']]
