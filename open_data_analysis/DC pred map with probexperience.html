@@ -7,17 +7,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+    <script
+          src="https://code.jquery.com/jquery-3.3.1.min.js"
+          integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+          crossorigin="anonymous"></script>
+    <script src="echarts.common.min.js"></script>
     <style>
-        #map {
-            width: 700px;
-            height: 700px;
-        }
+    html, body {
+        height:100%;
+        width:100%;
+        margin:0;
+        padding:0;
+    }
+    #map {
+        width: 100%;
+        height: 100%;
+    }
+    .column-2 {
+        float: left;
+        width: 20%;
+    }
+    .column-8 {
+        float: left;
+        width: 80%;
+        height: 100%
+    }
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
     </style>
 </head>
 <body>
 
-<!-- container for the map-->
-<div id='map'></div>
+<div class="row" style="height:100%">
+  <div class="column-2">
+      
+    <ul style="padding-right:20px">
+        <li>Model:  XGBoost</li>
+        <li>Ground Truth: ratings that collected until 2017-10-01</li>
+        <li>Weight Scheme: Experience</li>
+        <li>Features: Built-in + Social type + spatial autocorrelated features</li>
+    </ul>
+  </div>
+  <div class="column-8"><div id='map'></div></div>
+</div>
 
 <!-- geojson data file-->
 <script src="DC pred map with probexperience.js" type="text/javascript"></script>
@@ -36,7 +73,38 @@
         layer.bindPopup(popUpContent);
     }
 
-    var mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic3VyYWpuYWlyIiwiYSI6ImNpdWoyZGQzYjAwMXkyb285b2Q5NmV6amEifQ.WBQAX7ur2T3kOLyi11Nybw';
+    var legendData = ['Very dangerous', 'Dangerous', 'Normal', 'Safe', 'Very safe'];
+    var colorData = ['#d7191c' ,'#fdae61','#ffffbf','#a6d96a','#1a9641'];
+
+    function pieChartPopup(feature, layer){
+        layer.on('click', function (e) {
+            //console.log('click on layer');
+            //destroy any old popups that might be attached
+            if (layer._popup != undefined) {
+                layer.unbindPopup();
+            }
+            var id_name = 'popup_'+feature.properties.index_seg;
+            var div = $('<div id="'+id_name+'" class="popupGraph" style="width: 330px; height:200px;">hihi</div>')[0];
+            var popup = L.popup().setContent(div);
+            layer.bindPopup(popup, {maxWidth : 560}).openPopup();
+            
+            var myChart = echarts.init(div);
+            
+            var seriesData = [{name:'Very dangerous', value:feature.properties['very dangerous']}, {name:'Dangerous', value:feature.properties['dangerous']}, {name:'Normal', value:feature.properties['normal']}, {name:'Safe', value:feature.properties['safe']}, {name:'Very safe', value:feature.properties['very safe']}];
+            option = {
+                color: colorData,
+                title:{text: 'Predicted Safety Level Probability',textStyle:{fontSize:13},x:'center', },
+                tooltip : {trigger: 'item',formatter: "{b} : {d}%"},
+                legend: {left: 0,top:20,orient: 'vertical',data: legendData,},
+                series : [{type: 'pie', data: seriesData, radius: ['50%', '70%'],avoidLabelOverlap: false,label: {normal: {show: false,position: 'center'},emphasis: {show: true,textStyle: {fontSize: '12',color: 'black',}}},}]
+            };
+            
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        });
+    }
+
     var dark_black = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',});
     
 var osm_mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
@@ -44,14 +112,14 @@ var osm_mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
 
     
     var pred_map_layer = new L.LayerGroup();
-    L.geoJSON(pred_map, {style: set_style,onEachFeature: onEachFeature}).addTo(pred_map_layer);
+    L.geoJSON(pred_map, {style: set_style,onEachFeature: pieChartPopup}).addTo(pred_map_layer);
     
     var pred_map_proba_color_layer = new L.LayerGroup();
-    L.geoJSON(pred_map, {style: set_prob_color,onEachFeature: onEachFeature}).addTo(pred_map_proba_color_layer);
+    L.geoJSON(pred_map, {style: set_prob_color,onEachFeature: pieChartPopup}).addTo(pred_map_proba_color_layer);
     
     
     var true_map_layer = new L.LayerGroup();
-    L.geoJSON(pred_map, {style: set_true_color,onEachFeature: onEachFeature}).addTo(true_map_layer);
+    L.geoJSON(pred_map, {style: set_true_color,onEachFeature: pieChartPopup}).addTo(true_map_layer);
     
     
     var check_layers = {
@@ -67,9 +135,9 @@ var osm_mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
             
     
     var map = L.map('map', {
-        center: [38.9045525, -77.0908494],
-        zoom: 12,
-        layers: [osm_mapnik]
+        center: [38.925857, -77.031259],
+        zoom: 13,
+        layers: [dark_black]
     });
     
     L.control.layers(check_layers, radio_layers).addTo(map);
