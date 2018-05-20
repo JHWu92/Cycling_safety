@@ -6,13 +6,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/leaflet.groupedlayercontrol.min.css" />
+    
     <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+    <script src="js/leaflet.groupedlayercontrol.min.js"></script>
     <script
           src="https://code.jquery.com/jquery-3.3.1.min.js"
           integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
           crossorigin="anonymous"></script>
-    <script src="echarts.common.min.js"></script>
+    <script src="js/echarts.common.min.js"></script>
     <style>
     html, body {
         height:100%;
@@ -39,13 +42,35 @@
         display: table;
         clear: both;
     }
+    
+        .legend {
+            background: white;
+            line-height: 30px;
+            color: #555;
+        }
+        .legend i {
+            width: 18px;
+            height: 10px;
+            float: left;
+            margin-right: 8px;
+        }
+        .info {
+            padding: 6px 8px;
+            font: 14px/16px Arial, Helvetica, sans-serif;
+            background: white;
+            background: rgba(255,255,255,0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            
+        }
+
     </style>
 </head>
 <body>
 
-<div class="row" style="height:100%">
+<div class="row" style="height:100%; margin-left:10px">
   <div class="column-2">
-      
+     <p>It might take a while to load the predicted cycling safety level visualization. Once the map is loaded, you can click on each segment to see the prediction probability.</p>
     <ul style="padding-right:20px">
         <li>Model:  XGBoost</li>
         <li>Ground Truth: ratings that collected until 2017-10-01</li>
@@ -72,10 +97,14 @@
         }
         layer.bindPopup(popUpContent);
     }
-
     var legendData = ['Very dangerous', 'Dangerous', 'Normal', 'Safe', 'Very safe'];
     var colorData = ['#d7191c' ,'#fdae61','#ffffbf','#a6d96a','#1a9641'];
 
+    function groundTruthPopup(feature, layer){
+        var label = legendData[feature.properties['Ground Truth Level']-1];
+        layer.bindPopup('Ground Truth Level is: '+ label);
+    }
+    
     function pieChartPopup(feature, layer){
         layer.on('click', function (e) {
             //console.log('click on layer');
@@ -119,28 +148,62 @@ var osm_mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
     
     
     var true_map_layer = new L.LayerGroup();
-    L.geoJSON(pred_map, {style: set_true_color,onEachFeature: pieChartPopup}).addTo(true_map_layer);
+    L.geoJSON(true_map, {style: set_style,onEachFeature: groundTruthPopup}).addTo(true_map_layer);
     
+
     
-    var check_layers = {
-        'dark_black': dark_black, 'osm_mapnik': osm_mapnik, 
+    var baseLayers = {
+        'CartoDB Dark Style': dark_black, 'OpenStreetMap Style': osm_mapnik, 
     };
             
     
-    var radio_layers = {
+    var map_layers = {
         'ground truth map colored by safety level': true_map_layer, 
         'predicted map colored by safety level': pred_map_layer, 
         'predicted map colored by prediction probability': pred_map_proba_color_layer, 
     };
             
     
+    var groupedOverlays = {
+      "maps": map_layers
+    };
+    var options = {
+      // Make the "Landmarks" group exclusive (use radio inputs)
+      exclusiveGroups: ["maps"],
+    };
+
     var map = L.map('map', {
         center: [38.925857, -77.031259],
         zoom: 13,
-        layers: [dark_black]
+        layers: [dark_black, true_map_layer]
     });
     
-    L.control.layers(check_layers, radio_layers).addTo(map);
+    L.control.groupedLayers(baseLayers, groupedOverlays, options).addTo(map);
+    //L.control.layers(radio_layers, check_layers).addTo(map);
+    
+    
+    function getColor(d) {
+        return d > 4.5 ? '#1a9641' :
+               d > 3.5  ? '#a6d96a' :
+               d > 2.5  ? '#ffffbf' :
+               d > 1.5  ? '#fdae61' :
+                          '#d7191c';
+    }
+    // legend on bottom right
+    var legend = L.control({position: 'bottomright'});
+    legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info legend');
+        var grades = [1, 1.5, 2.5, 3.5, 4.5];
+        var labels = ['Very dangerous', 'Dangerous', 'Normal', 'Safe', ' Very safe'];
+        // loop through our density intervals and generate a label with a colored square for each interval
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+                '<i style="background:' + getColor(grades[i] + 0.1, 1) + '"></i> ' + '<label>' +labels[i] + '</label>'+ '<br>';
+        }
+        return div;
+    };
+    legend.addTo(map);
+    
 </script>
 </body>
 </html>
