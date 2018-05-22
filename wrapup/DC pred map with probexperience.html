@@ -178,8 +178,14 @@
         var colorData = ['#d7191c', '#fdae61', '#ffffbf', '#a6d96a', '#1a9641'];
 
         function groundTruthPopup(feature, layer) {
-            var label = legendData[feature.properties['Ground Truth Level'] - 1];
-            layer.bindPopup('Ground Truth Level is: ' + label);
+            var popUpContent = '';
+            var label = 'Ground Truth Level is: ' + legendData[feature.properties['Ground Truth Level'] - 1];
+            popUpContent += "<p>" + label + "</p>";
+            popUpContent += "<p>The following example cycling video covers "+feature.properties.ratio * 100+"% of this segment:</p>";
+            popUpContent += '<iframe width="500px" height="315" src="https://www.youtube.com/embed/'+feature.properties.URL+'?rel=0" frameborder="0" allowfullscreen></iframe>'
+            layer.bindPopup(popUpContent, {
+                    maxWidth: 560
+                });
         }
 
         function pieChartPopup(feature, layer) {
