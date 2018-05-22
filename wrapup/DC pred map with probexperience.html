@@ -178,13 +178,13 @@
         var colorData = ['#d7191c', '#fdae61', '#ffffbf', '#a6d96a', '#1a9641'];
 
         function groundTruthPopup(feature, layer) {
-            var popUpContent = '';
-            var label = 'Ground Truth Level is: ' + legendData[feature.properties['Ground Truth Level'] - 1];
+            var popUpContent = '<p><Strong>Near</Strong>: ' + feature.properties.display + ' (<a href="https://nominatim.openstreetmap.org/">reversed geocoded by Nominatim</a>)</p>';
+            var label = '<Strong>Ground Truth Level</Strong> is: ' + legendData[feature.properties['Ground Truth Level'] - 1];
             popUpContent += "<p>" + label + "</p>";
             popUpContent += "<p>The following example cycling video covers "+feature.properties.ratio * 100+"% of this segment:</p>";
             popUpContent += '<iframe width="500px" height="315" src="https://www.youtube.com/embed/'+feature.properties.URL+'?rel=0" frameborder="0" allowfullscreen></iframe>'
             layer.bindPopup(popUpContent, {
-                    maxWidth: 560
+                    maxWidth: 520
                 });
         }
 
@@ -195,14 +195,21 @@
                 if (layer._popup != undefined) {
                     layer.unbindPopup();
                 }
+                var label = '<Strong>Predicted Level</Strong> is: ' + legendData[feature.properties['pred_y'] - 1];
                 var id_name = 'popup_' + feature.properties.index_seg;
-                var div = $('<div id="' + id_name + '" class="popupGraph" style="width: 330px; height:200px;">hihi</div>')[0];
-                var popup = L.popup().setContent(div);
-                layer.bindPopup(popup, {
-                    maxWidth: 560
+                var popUpContent = '<div style="width:330px; overflow:auto; " > ' 
+                                 + '<p><Strong>Near</Strong>: ' + feature.properties.display + ' (<a href="https://nominatim.openstreetmap.org/">reversed geocoded by Nominatim</a>)</p>'
+                                 + "<p>" + label + "</p>"
+                                 + '<div id="' + id_name + '" class="popupGraph" style="width: 330px; height:200px;">hihi</div>'
+                                 + '</div>';
+//                var popUpContent = $(popUpContent)[0];
+//                var popup = L.popup().setContent(popUpContent);
+                layer.bindPopup(popUpContent, {
+                    maxWidth: 400
                 }).openPopup();
-
-                var myChart = echarts.init(div);
+                
+                var chartDiv = $("#"+id_name)[0];
+                var myChart = echarts.init(chartDiv);
 
                 var seriesData = [{
                     name: 'Very dangerous',
@@ -310,21 +317,21 @@
         true_map_layer.on('add', function() {
             showAlert('Ground Truth Map');
             console.log('true layer after add event');
-            map.fire('dataload');
+//            map.fire('dataload');
         });
         true_map_layer.on('remove', function() {
             console.log('true layer after remove event');
-            map.fire('dataloading');
+//            map.fire('dataloading');
         });
 
         pred_map_layer.on('add', function() {
             showAlert('Predicted Map');
             console.log('Predicted layer after add event');
-            map.fire('dataload');
+//            map.fire('dataload');
         });
         pred_map_layer.on('remove', function() {
             console.log('pred layer after remove event');
-            map.fire('dataloading');
+//            map.fire('dataloading');
         });
         
         
