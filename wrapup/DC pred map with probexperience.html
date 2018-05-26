@@ -42,7 +42,9 @@
     <link rel="stylesheet" href="css/Control.Loading.css" />
     <script src="js/Control.Loading.js"></script>
 
-<!--
+    <script src="js/L.Control.Button.js"></script>
+
+    <!--
     <script src="js/spin.min.js" charset="utf-8"></script>
     <script src="js/leaflet.spin.min.js" charset="utf-8"></script>
 -->
@@ -123,7 +125,7 @@
 </head>
 
 <body>
-
+    <button id="switch-map" role="button" class="btn btn-info hide" style="width:44px;height:44px">P</button>
     <div class="alert alert-success message text-center" id="success-alert">
         <button type="button" class="close" data-dismiss="alert">x</button>
         <strong id="map-name"></strong> is shown
@@ -178,14 +180,14 @@
         var colorData = ['#d7191c', '#fdae61', '#ffffbf', '#a6d96a', '#1a9641'];
 
         function groundTruthPopup(feature, layer) {
-            var popUpContent = '<p><Strong>Near</Strong>: ' + feature.properties.display + ' (<a href="https://nominatim.openstreetmap.org/">reversed geocoded by Nominatim</a>)</p>';
+            var popUpContent = '<p><Strong>Near</Strong>: ' + feature.properties.display.replace(', United States of America', '') + ' (<a href="https://nominatim.openstreetmap.org/">reversed geocoded by Nominatim</a>)</p>';
             var label = '<Strong>Ground Truth Level</Strong> is: ' + legendData[feature.properties['Ground Truth Level'] - 1];
             popUpContent += "<p>" + label + "</p>";
-            popUpContent += "<p>The following example cycling video covers "+feature.properties.ratio * 100+"% of this segment:</p>";
-            popUpContent += '<iframe width="500px" height="315" src="https://www.youtube.com/embed/'+feature.properties.URL+'?rel=0" frameborder="0" allowfullscreen></iframe>'
+            popUpContent += "<p>The following example cycling video covers " + feature.properties.ratio * 100 + "% of this segment:</p>";
+            popUpContent += '<iframe width="500px" height="315" src="https://www.youtube.com/embed/' + feature.properties.URL + '?rel=0" frameborder="0" allowfullscreen></iframe>'
             layer.bindPopup(popUpContent, {
-                    maxWidth: 520
-                });
+                maxWidth: 520
+            });
         }
 
         function pieChartPopup(feature, layer) {
@@ -197,18 +199,18 @@
                 }
                 var label = '<Strong>Predicted Level</Strong> is: ' + legendData[feature.properties['pred_y'] - 1];
                 var id_name = 'popup_' + feature.properties.index_seg;
-                var popUpContent = '<div style="width:330px; overflow:auto; " > ' 
-                                 + '<p><Strong>Near</Strong>: ' + feature.properties.display + ' (<a href="https://nominatim.openstreetmap.org/">reversed geocoded by Nominatim</a>)</p>'
-                                 + "<p>" + label + "</p>"
-                                 + '<div id="' + id_name + '" class="popupGraph" style="width: 330px; height:200px;">hihi</div>'
-                                 + '</div>';
-//                var popUpContent = $(popUpContent)[0];
-//                var popup = L.popup().setContent(popUpContent);
+                var popUpContent = '<div style="width:330px; overflow:auto; " > ' +
+                    '<p><Strong>Near</Strong>: ' + feature.properties.display.replace(', United States of America', '') + ' (<a href="https://nominatim.openstreetmap.org/">reversed geocoded by Nominatim</a>)</p>' +
+                    "<p>" + label + "</p>" +
+                    '<div id="' + id_name + '" class="popupGraph" style="width: 330px; height:200px;">hihi</div>' +
+                    '</div>';
+                //                var popUpContent = $(popUpContent)[0];
+                //                var popup = L.popup().setContent(popUpContent);
                 layer.bindPopup(popUpContent, {
                     maxWidth: 400
                 }).openPopup();
-                
-                var chartDiv = $("#"+id_name)[0];
+
+                var chartDiv = $("#" + id_name)[0];
                 var myChart = echarts.init(chartDiv);
 
                 var seriesData = [{
@@ -293,7 +295,7 @@
             //smoothFactor: 10,
         });
         pred_map_layer.addData(pred_map);
-        
+
 
         var true_map_layer = L.geoJSON(null, {
             style: set_style,
@@ -317,24 +319,24 @@
         true_map_layer.on('add', function() {
             showAlert('Ground Truth Map');
             console.log('true layer after add event');
-//            map.fire('dataload');
+            //            map.fire('dataload');
         });
         true_map_layer.on('remove', function() {
             console.log('true layer after remove event');
-//            map.fire('dataloading');
+            //            map.fire('dataload');
         });
 
         pred_map_layer.on('add', function() {
             showAlert('Predicted Map');
             console.log('Predicted layer after add event');
-//            map.fire('dataload');
+            //            map.fire('dataload');
         });
         pred_map_layer.on('remove', function() {
             console.log('pred layer after remove event');
-//            map.fire('dataloading');
+            //            map.fire('dataload');
         });
-        
-        
+
+
         var baseLayers = {
             'CartoDB Dark Style': dark_black,
             'OpenStreetMap Style': osm_mapnik,
@@ -348,24 +350,24 @@
         };
 
 
-        var groupedOverlays = {
-            "Cycling safety maps colored by safety level": map_layers
-        };
-        var options = {
-            // Make the "Landmarks" group exclusive (use radio inputs)
-            exclusiveGroups: ["Cycling safety maps colored by safety level"],
-            collapsed: false,
-        };
-
-
-        L.control.groupedLayers(baseLayers, groupedOverlays, options).addTo(map);
-        //L.control.layers(radio_layers, check_layers).addTo(map);
+        //        var groupedOverlays = {
+        //            "Cycling safety maps colored by safety level": map_layers
+        //        };
+        //        var options = {
+        //            // Make the "Landmarks" group exclusive (use radio inputs)
+        //            exclusiveGroups: ["Cycling safety maps colored by safety level"],
+        //            collapsed: false,
+        //        };
+        //
+        //        L.control.groupedLayers(baseLayers, groupedOverlays, options).addTo(map);
+        //        L.control.layers(baseLayers, check_layers).addTo(map);
+        L.control.layers(baseLayers).addTo(map);
 
         $('input[type=radio][name=leaflet-exclusive-group-layer-1]').change(function() {
             console.log('remove comes first before change event on layer control');
-//            map.spin(true);
+            //            map.spin(true);
         });
-        
+
         function getColor(d) {
             return d > 4.5 ? '#1a9641' :
                 d > 3.5 ? '#a6d96a' :
@@ -389,6 +391,51 @@
             return div;
         };
         legend.addTo(map);
+
+        $('#switch-map').removeClass('hide');
+        var button = new L.Control.Button(L.DomUtil.get('switch-map'), {
+            toggleButton: 'active'
+        });
+        button.addTo(map);
+        button.on('click', function() {
+            if (button.isToggled()) {
+                console.log('button switch to active, show Ground truth map');
+                map.fire('dataloading');
+                // delay 2 milliseconds to ensure dataloading is fired first.
+                setTimeout(function() {
+                    // if pred_map_layer is present, remove it
+                    if (map.hasLayer(pred_map_layer)) {
+                        map.removeLayer(pred_map_layer);
+                    }
+                    // if true_map_layer hasn't been shown, add it
+                    if (map.hasLayer(true_map_layer) === false) {
+                        map.addLayer(true_map_layer);
+                    }
+
+                    $('#switch-map').html("P").removeClass('btn-success').addClass('btn-info');
+                    map.fire('dataload');
+                }, 2);
+            } else {
+                console.log('button switch to not active, show predicted map');
+                map.fire('dataloading');
+                // delay 2 milliseconds to ensure dataloading is fired first.
+                setTimeout(function() {
+                    // if true_map_layer is present, remove it
+                    if (map.hasLayer(true_map_layer)) {
+                        map.removeLayer(true_map_layer);
+                    }
+                    // if pred_map_layer hasn't been shown, add it
+                    if (map.hasLayer(pred_map_layer) === false) {
+                        map.addLayer(pred_map_layer);
+                    }
+                    console.log('change button');
+                    $('#switch-map').html('G').removeClass('btn-info').addClass('btn-success');
+                    map.fire('dataload');
+                }, 2);
+            }
+        });
+
+        //        button._fireClick();
     </script>
 </body>
 
