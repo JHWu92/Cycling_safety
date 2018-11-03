@@ -1,0 +1,50 @@
+merge_survey_options = {
+    'age': {'< 18': '< 24', '18-24': '< 24'},
+    'ethnicity':{ 'Hispanic or Latino': 'minority',
+                  'Black or African American': 'minority',
+                  'Native American or American Indian': 'minority',
+                  'Asian / Pacific Islander': 'minority',
+                  'Other': 'Non-White'},
+    'edu': { 'Nursery school to some high school, no diploma': 'Other',
+              'High school graduate, diploma or the equivalent (for example: GED)': 'Other',
+              'Some college credit, no degree': 'Other',
+              'Associate degree': 'Other',
+              'Master’s degree': 'Master or Doctorate',
+              'Doctorate degree': 'Master or Doctorate',
+           },
+    'marital': {
+        'Widowed':'Widowed|Divorce|Separated',
+        'Divorced':'Widowed|Divorce|Separated',
+        'Separated':'Widowed|Divorce|Separated'},
+    'gender':{
+        'Transgender – Female': 'Other',
+        'Transgender – Male': 'Other',
+        'Gender-variant / Non-conforming': 'Other',
+        'Not listed': 'Other'
+    },
+    'household_income':{
+          'Less than \\$24,999': '<= \\$54,999',
+          '\\$25,000 to \\$39,999': '<= \\$54,999',
+          '\\$40,000 to \\$54,999': '<= \\$54,999',
+          '\\$55,000 to \\$69,999': '\\$55,000 to \\$84,999',
+          '\\$70,000 to \\$84,999': '\\$55,000 to \\$84,999',
+          '\\$85,000 to \\$99,999': '\\$85,000 to \\$149,999',
+          '\\$100,000 to \\$149,999': '\\$85,000 to \\$149,999',
+    },
+    'residence':{
+          'Never': '< 1 year or never',
+          '<3 months': '< 1 year or never',
+          '3-6 months': '< 1 year or never',
+          '6-12 months': '< 1 year or never',
+    },
+    'bk_type':{
+          'Mountain Bike': 'Other bikes or do not ride a bike',
+          'Cruiser Bike': 'Other bikes or do not ride a bike',
+          'BMX Bike': 'Other bikes or do not ride a bike',
+          'Folding Bike': 'Other bikes or do not ride a bike',
+          'Recumbent Bike': 'Other bikes or do not ride a bike',
+          'Tandem Bike': 'Other bikes or do not ride a bike',
+          'Do not ride a bike': 'Other bikes or do not ride a bike',
+          'other bk type': 'Other bikes or do not ride a bike'
+    },
+}
