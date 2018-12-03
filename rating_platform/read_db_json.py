@@ -54,6 +54,11 @@ def large_joint_table(date='2017-08-30', verbose=False):
     joint_table.score = joint_table.score.astype(float)
     return joint_table
 
+def get_dfs(date='2017-10-01'):
+    dfs = {}
+    for name in ['loginLog', 'Rating', 'RoadSegment', 'Users', 'Video', 'VideoRoadSeg']:
+        dfs[name] = pd.read_csv('DB-backup/%s/%s.csv' %(date, name), index_col=0)
+    return dfs
     
 def load_joint_table2(date='2017-10-01'):
     dfs = {}
