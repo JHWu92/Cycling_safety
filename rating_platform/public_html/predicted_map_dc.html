@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Predicted Cycling Safety in DC</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="js/echarts.common.min.js"></script>
+
+    <!-- Boostrap JS CSS-->
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script src="js/bootstrap.min.js"></script>
+
+    <!--leaflet js & css-->
+    <script>
+        L_PREFER_CANVAS = true;
+    </script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+      integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+      crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+      integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+      crossorigin=""></script>
+   
+    <!--  leaflet Plugins  -->
+    <link rel="stylesheet" href="css/leaflet.groupedlayercontrol.min.css" />
+    <script src="js/leaflet.groupedlayercontrol.min.js"></script>
+
+    <!-- Include the fullscreen control -->
+    <link rel="stylesheet" href="css/Control.FullScreen.css" />
+    <script src="js/Control.FullScreen.js"></script>
+
+    <!-- Include the loading control -->
+    <!-- Be aware of the loading order. Both controls (fullscreen and loading are using the Map.addInitHook).
+             So first loaded will be displayed first. To avoid it add the loading control manually. -->
+    <link rel="stylesheet" href="css/Control.Loading.css" />
+    <script src="js/Control.Loading.js"></script>
+
+    <script src="js/L.Control.Button.js"></script>
+
+    <script src="js/leaflet.ajax.min.js"></script>
+    <!--
+    <script src="js/spin.min.js" charset="utf-8"></script>
+    <script src="js/leaflet.spin.min.js" charset="utf-8"></script>
+-->
+
+    <style>
+        .message {
+            position: fixed;
+            top: 5%;
+            left: 40%;
+            width: 40%;
+            z-index: 9999;
+            font-size: 20px;
+            display: none;
+        }
+
+        .column-2 {
+            float: left;
+            width: 20%;
+            padding: 15px;
+        }
+
+        .column-8 {
+            float: left;
+            width: 80%;
+        }
+
+        /* Clear floats after the columns */
+
+        .row-float:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .fill {
+            min-height: 100%;
+            height: 100%;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        .legend {
+            background: white;
+            line-height: 30px;
+            color: #555;
+        }
+
+        .legend i {
+            width: 18px;
+            height: 10px;
+            float: left;
+            margin-right: 8px;
+        }
+
+        .info {
+            padding: 6px 8px;
+            font: 14px/16px Arial, Helvetica, sans-serif;
+            background: white;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="alert alert-success message text-center" id="success-alert">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong id="map-name"></strong>
+    </div>
+    <div class="row-float" style="height: 90%">
+        <div class="fill" style="width:100%">
+            <div id="map"></div>
+        </div>
+    </div>
+    <div class="row-float" style="height: 10%">
+        <div class="column-2">
+            <img src="cyclingsafety_files/ischool-umd-LOGO-1024x222.jpg" alt="UMD iSchool" style=" position: absolute;  bottom: 1%; width: 16%;">
+        </div>
+        <div class="column-8" style="margin-top: 10px;">
+            <p>The map shows predicted cycling safety levels for each street segment in DC. Clicking on the segment shows information about the street and the certainty of the safety label. These values are computed using a set of machine learning methods that predict cycling safety based on built environment and social characteristics of the street. More details in the paper:</p>
+            <p>Wu, Jiahui, Lingzi Hong, and Vanessa Frias-Martinez. "Predicting Perceived Cycling Safety Levels Using Open and Crowdsourced Data." <i>2018 IEEE International Conference on Big Data</i>. IEEE, 2018. </p>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        function set_style(feature) {
+            return {
+                color: feature.properties.color,
+                weight: 4,
+            };
+        }
+
+        function set_prob_color(feature) {
+            return {
+                color: feature.properties.proba_color
+            };
+        }
+
+        function set_true_color(feature) {
+            return {
+                color: feature.properties.ground_truth_color
+            };
+        }
+
+        var legendData = ['Very dangerous', 'Dangerous', 'Normal', 'Safe', 'Very safe'];
+        var colorData = ['#d7191c', '#fdae61', '#ffffbf', '#a6d96a', '#1a9641'];
+
+        function pieChartPopup(feature, layer) {
+            layer.on('click', function(e) {
+                i= Date.now();
+                //console.log('click on layer');
+                //destroy any old popups that might be attached
+                if (layer._popup != undefined) {
+                    //console.log('not popup');
+                    layer.unbindPopup();
+                }
+                var label = '<Strong>Predicted Level</Strong> is: ' + legendData[feature.properties['pred_y'] - 1];
+                var id_name = 'popup_' + feature.properties.index_seg;
+                var popUpContent = '<div style="width:330px; overflow:auto; " > ' +
+                    '<p><Strong>Near</Strong>: ' + feature.properties.display.replace(', United States of America', '') + ' (<a href="https://nominatim.openstreetmap.org/">reversed geocoded by Nominatim</a>)</p>' +
+                    "<p>" + label + "</p>" +
+                    '<div id="' + id_name+i + '" class="popupGraph" style="width: 330px; height:200px;"></div>' +
+                    '</div>';
+                //                var popUpContent = $(popUpContent)[0];
+                //                var popup = L.popup().setContent(popUpContent);
+                layer.bindPopup(popUpContent, {
+                    maxWidth: 400
+                }).openPopup();
+                
+                var chartDiv = $("#" + id_name+i)[0];
+                var myChart = echarts.init(chartDiv);
+
+                var seriesData = [{
+                    name: 'Very dangerous',
+                    value: feature.properties['very dangerous']
+                }, {
+                    name: 'Dangerous',
+                    value: feature.properties['dangerous']
+                }, {
+                    name: 'Normal',
+                    value: feature.properties['normal']
+                }, {
+                    name: 'Safe',
+                    value: feature.properties['safe']
+                }, {
+                    name: 'Very safe',
+                    value: feature.properties['very safe']
+                }];
+                option = {
+                    color: colorData,
+                    title: {
+                        text: 'Predicted Safety Level Probability',
+                        textStyle: {
+                            fontSize: 13
+                        },
+                        x: 'center',
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{b} : {d}%"
+                    },
+                    legend: {
+                        left: 0,
+                        top: 20,
+                        orient: 'vertical',
+                        data: legendData,
+                    },
+                    series: [{
+                        type: 'pie',
+                        data: seriesData,
+                        radius: ['50%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '12',
+                                    color: 'black',
+                                }
+                            }
+                        },
+                    }]
+                };
+
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+                
+            });
+        }
+
+        function showAlert(msg) {
+            $("#map-name").text(msg);
+            $("#success-alert").slideDown(500).delay(2000).slideUp(500);
+        }
+
+        var dark_black = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+        });
+
+        var osm_mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        });
+
+
+        var map = L.map('map', {
+            center: [38.905857, -77.031259],
+            zoom: 13,
+            layers: [dark_black],
+            // Tell the map to use a loading control
+            loadingControl: true,
+
+            // Tell the map to use a fullsreen control
+            fullscreenControl: true
+        });
+        
+        pred_maps = ['data/pred_0.geojson', 'data/pred_1.geojson','data/pred_2.geojson','data/pred_3.geojson', 
+                     'data/pred_4.geojson', 'data/pred_5.geojson','data/pred_6.geojson','data/pred_7.geojson', 
+                     'data/pred_8.geojson', 'data/pred_9.geojson','data/pred_10.geojson','data/pred_11.geojson', 
+                     'data/pred_12.geojson', 'data/pred_13.geojson','data/pred_14.geojson','data/pred_15.geojson', 
+                     'data/pred_16.geojson', 'data/pred_17.geojson','data/pred_18.geojson','data/pred_19.geojson',]
+        
+        var pred_map_layer = L.geoJson.ajax(pred_maps, {
+            style: set_style,
+            onEachFeature: pieChartPopup,
+            //smoothFactor: 10,
+        });
+//        pred_map_layer.addData(pred_map);
+        pred_ready=false;
+        map.fire('dataloading');
+        pred_map_layer.on('data:loaded',function() {
+            $("#pred_status").text('Loaded'); 
+            pred_ready=true;
+//            console.log('loaded');
+            map.fire('dataload');
+        });
+        pred_map_layer.addTo(map);
+
+       
+        prevZoom = 13;
+        map.on('zoomend', function () {
+            currentZoom = map.getZoom();
+            //console.log('current zoom'+currentZoom+', pred zoom'+prevZoom);
+            if ((prevZoom<=12 & currentZoom>12) | (prevZoom>=15 & currentZoom<15)) {
+                $("path").css("stroke-width", 4);
+            }else if (prevZoom<15 & currentZoom == 15){
+                $("path").css("stroke-width", 7);
+            }
+            else if (currentZoom == 12){
+                $("path").css("stroke-width", 3);
+            }
+            prevZoom = currentZoom;
+        });        
+        
+
+        var baseLayers = {
+            'CartoDB Dark Style': dark_black,
+            'OpenStreetMap Style': osm_mapnik,
+        };
+
+        L.control.layers(baseLayers).addTo(map);
+
+
+        function getColor(d) {
+            return d > 4.5 ? '#1a9641' :
+                d > 3.5 ? '#a6d96a' :
+                d > 2.5 ? '#ffffbf' :
+                d > 1.5 ? '#fdae61' :
+                '#d7191c';
+        }
+        // legend on bottom right
+        var legend = L.control({
+            position: 'bottomright'
+        });
+        legend.onAdd = function(map) {
+            var div = L.DomUtil.create('div', 'info legend');
+            var grades = [1, 1.5, 2.5, 3.5, 4.5];
+            var labels = ['Very dangerous', 'Dangerous', 'Normal', 'Safe', ' Very safe'];
+            // loop through our density intervals and generate a label with a colored square for each interval
+            for (var i = 0; i < grades.length; i++) {
+                div.innerHTML +=
+                    '<i style="background:' + getColor(grades[i] + 0.1, 1) + '"></i> ' + '<label>' + labels[i] + '</label>' + '<br>';
+            }
+            return div;
+        };
+        legend.addTo(map);
+
+
+        //        button._fireClick();
+    </script>
+</body>
+
+</html>
