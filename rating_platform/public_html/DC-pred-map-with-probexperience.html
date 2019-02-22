@@ -25,9 +25,13 @@
         L_PREFER_CANVAS = true;
     </script>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+      integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+      crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+      integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+      crossorigin=""></script>
+   
     <!--  leaflet Plugins  -->
     <link rel="stylesheet" href="css/leaflet.groupedlayercontrol.min.css" />
     <script src="js/leaflet.groupedlayercontrol.min.js"></script>
@@ -44,6 +48,7 @@
 
     <script src="js/L.Control.Button.js"></script>
 
+    <script src="js/leaflet.ajax.min.js"></script>
     <!--
     <script src="js/spin.min.js" charset="utf-8"></script>
     <script src="js/leaflet.spin.min.js" charset="utf-8"></script>
@@ -128,14 +133,21 @@
     <button id="switch-map" role="button" class="btn btn-info hide" style="width:44px;height:44px">P</button>
     <div class="alert alert-success message text-center" id="success-alert">
         <button type="button" class="close" data-dismiss="alert">x</button>
-        <strong id="map-name"></strong> is shown
+        <strong id="map-name"></strong>
     </div>
     <div class="row-float fill">
         <div class="column-2">
-            <p>It might take a while to load the predicted cycling safety level visualization. Once the map is loaded, you can click on each segment to see the prediction probability.</p>
-            <p>The ground truth ratings are collected until 2017-10-01</p>
+            <h3>Ground Truth Map</h3>
+            <p>A ground truth perceived cycling safety map is shown on the right. </p>
+            <p>Click on the segments to see the video clips used for rating collection. The ground truth ratings are collected until 2017-10-01.</p>
+            
+            <h3>Predicted Map</h3>
+            <p>Based on the ground truth map, we train machine learning models to predict the perceived cycling safety in the whole Washington D.C. area.</p>
+            <p>The predicted map data is large (about 14 Mb). Depending on your network, it may take a while (20~30 seconds) to load the predicted map when you open this page for the first time. </p>
+            <p>Status of the predicted map: <b id="pred_status">Still loading</b>. </p>
+            <p>Once the map is loaded, you can click on each segment to see the prediction probability.</p>
 
-            <img src='cyclingsafety_files/ischool-umd-LOGO-1024x222.jpg' alt="UMD iSchool" style=" position: absolute;  bottom: 1%; width: 16%;">
+            <img src="cyclingsafety_files/ischool-umd-LOGO-1024x222.jpg" alt="UMD iSchool" style=" position: absolute;  bottom: 1%; width: 16%;">
         </div>
         <div class="column-8 fill">
             <div id="map"></div>
@@ -144,12 +156,13 @@
 
 
     <!-- geojson data file-->
-    <script src="DC pred map with probexperience.js" type="text/javascript"></script>
+<!--    <script src="DC pred map with probexperience.js" type="text/javascript"></script>-->
 
     <script>
         function set_style(feature) {
             return {
-                color: feature.properties.color
+                color: feature.properties.color,
+                weight: 4,
             };
         }
 
@@ -189,9 +202,11 @@
 
         function pieChartPopup(feature, layer) {
             layer.on('click', function(e) {
+                i= Date.now();
                 //console.log('click on layer');
                 //destroy any old popups that might be attached
                 if (layer._popup != undefined) {
+                    //console.log('not popup');
                     layer.unbindPopup();
                 }
                 var label = '<Strong>Predicted Level</Strong> is: ' + legendData[feature.properties['pred_y'] - 1];
@@ -199,15 +214,15 @@
                 var popUpContent = '<div style="width:330px; overflow:auto; " > ' +
                     '<p><Strong>Near</Strong>: ' + feature.properties.display.replace(', United States of America', '') + ' (<a href="https://nominatim.openstreetmap.org/">reversed geocoded by Nominatim</a>)</p>' +
                     "<p>" + label + "</p>" +
-                    '<div id="' + id_name + '" class="popupGraph" style="width: 330px; height:200px;">hihi</div>' +
+                    '<div id="' + id_name+i + '" class="popupGraph" style="width: 330px; height:200px;"></div>' +
                     '</div>';
                 //                var popUpContent = $(popUpContent)[0];
                 //                var popup = L.popup().setContent(popUpContent);
                 layer.bindPopup(popUpContent, {
                     maxWidth: 400
                 }).openPopup();
-
-                var chartDiv = $("#" + id_name)[0];
+                
+                var chartDiv = $("#" + id_name+i)[0];
                 var myChart = echarts.init(chartDiv);
 
                 var seriesData = [{
@@ -269,6 +284,7 @@
                 if (option && typeof option === "object") {
                     myChart.setOption(option, true);
                 }
+                
             });
         }
 
@@ -286,50 +302,75 @@
         });
 
 
-        var pred_map_layer = L.geoJSON(null, {
-            style: set_style,
-            onEachFeature: pieChartPopup,
-            //smoothFactor: 10,
-        });
-        pred_map_layer.addData(pred_map);
-
-
-        var true_map_layer = L.geoJSON(null, {
-            style: set_style,
-            onEachFeature: groundTruthPopup,
-            //smoothFactor: 0,
-        });
-        true_map_layer.addData(true_map);
-
-
         var map = L.map('map', {
             center: [38.905857, -77.031259],
             zoom: 13,
-            layers: [dark_black, true_map_layer],
+            layers: [dark_black],
             // Tell the map to use a loading control
             loadingControl: true,
 
             // Tell the map to use a fullsreen control
             fullscreenControl: true
         });
-
+        
+        var pred_map_layer = L.geoJson.ajax('pred_map.json', {
+            style: set_style,
+            onEachFeature: pieChartPopup,
+            //smoothFactor: 10,
+        });
+//        pred_map_layer.addData(pred_map);
+        pred_ready=false;
+        map.fire('dataloading');
+        pred_map_layer.on('data:progress',function() {
+            $("#pred_status").text('Loaded'); 
+            pred_ready=true;
+//            console.log('loaded');
+            map.fire('dataload');
+        });
+        
+        var true_map_layer = L.geoJson.ajax('true_map.json', {
+            style: set_style,
+            onEachFeature: groundTruthPopup,
+            //smoothFactor: 0,
+        });
+//        true_map_layer.addData(true_map);
+        true_map_layer.addTo(map);
+        showAlert('Ground Truth Map');
+        
+//        pred_map_layer.eachLayer(function (layer) {layer.getElement().style.display = 'none';});
+        
+        prevZoom = 13;
+        map.on('zoomend', function () {
+            currentZoom = map.getZoom();
+            //console.log('current zoom'+currentZoom+', pred zoom'+prevZoom);
+            if ((prevZoom<=12 & currentZoom>12) | (prevZoom>=15 & currentZoom<15)) {
+                $("path").css("stroke-width", 4);
+            }else if (prevZoom<15 & currentZoom == 15){
+                $("path").css("stroke-width", 7);
+            }
+            else if (currentZoom == 12){
+                $("path").css("stroke-width", 3);
+            }
+            prevZoom = currentZoom;
+        });        
+        
         true_map_layer.on('add', function() {
-            showAlert('Ground Truth Map');
-            console.log('true layer after add event');
+//            showAlert('Ground Truth Map');
+            //console.log('true layer after add event');
             //            map.fire('dataload');
         });
         true_map_layer.on('remove', function() {
-            console.log('true layer after remove event');
+            //console.log('true layer after remove event');
             //            map.fire('dataload');
         });
 
         pred_map_layer.on('add', function() {
-            showAlert('Predicted Map');
-            console.log('Predicted layer after add event');
+//            showAlert('Predicted Map');
+            //console.log('Predicted layer after add event');
             //            map.fire('dataload');
         });
         pred_map_layer.on('remove', function() {
-            console.log('pred layer after remove event');
+            //console.log('pred layer after remove event');
             //            map.fire('dataload');
         });
 
@@ -361,7 +402,7 @@
         L.control.layers(baseLayers).addTo(map);
 
         $('input[type=radio][name=leaflet-exclusive-group-layer-1]').change(function() {
-            console.log('remove comes first before change event on layer control');
+            //console.log('remove comes first before change event on layer control');
             //            map.spin(true);
         });
 
@@ -395,40 +436,52 @@
         });
         button.addTo(map);
         button.on('click', function() {
-            if (button.isToggled()) {
-                console.log('button switch to active, show Ground truth map');
-                map.fire('dataloading');
-                // delay 2 milliseconds to ensure dataloading is fired first.
-                setTimeout(function() {
-                    // if pred_map_layer is present, remove it
-                    if (map.hasLayer(pred_map_layer)) {
-                        map.removeLayer(pred_map_layer);
-                    }
-                    // if true_map_layer hasn't been shown, add it
-                    if (map.hasLayer(true_map_layer) === false) {
-                        map.addLayer(true_map_layer);
-                    }
+            console.log(pred_ready);
+            if (!pred_ready){
+                showAlert('The predicted map is not ready. Please wait.');
+            }
+            else{
+                if (button.isToggled()) {
+    //                console.log('button switch to active, show Ground truth map');
+    //                map.fire('dataloading');
+                    // delay 2 milliseconds to ensure dataloading is fired first.
+                    setTimeout(function() {
+                        // if pred_map_layer is present, remove it
+                        //if (map.hasLayer(pred_map_layer)) {
+                        //    map.removeLayer(pred_map_layer);
+                        //}
+                        // if true_map_layer hasn't been shown, add it
+                        //if (map.hasLayer(true_map_layer) === false) {
+                        //    map.addLayer(true_map_layer);
+                        //}
+                        if (map.hasLayer(pred_map_layer) == false){setTimeout(function() {map.addLayer(pred_map_layer);}, 2);}
 
-                    $('#switch-map').html("P").removeClass('btn-success').addClass('btn-info');
-                    map.fire('dataload');
-                }, 2);
-            } else {
-                console.log('button switch to not active, show predicted map');
-                map.fire('dataloading');
-                // delay 2 milliseconds to ensure dataloading is fired first.
-                setTimeout(function() {
-                    // if true_map_layer is present, remove it
-                    if (map.hasLayer(true_map_layer)) {
-                        map.removeLayer(true_map_layer);
-                    }
-                    // if pred_map_layer hasn't been shown, add it
-                    if (map.hasLayer(pred_map_layer) === false) {
-                        map.addLayer(pred_map_layer);
-                    }
-                    console.log('change button');
-                    $('#switch-map').html('G').removeClass('btn-info').addClass('btn-success');
-                    map.fire('dataload');
-                }, 2);
+                        showAlert('Ground Truth Map');
+                        if (map.hasLayer(pred_map_layer) == true){
+                            pred_map_layer.eachLayer(function (layer) {layer.getElement().style.display = 'none';});
+                        }
+                        
+                        true_map_layer.eachLayer(function (layer) {layer.getElement().style.display = 'block';});
+                        $('#switch-map').html("P").removeClass('btn-success').addClass('btn-info');
+    //                    map.fire('dataload');
+                    }, 2);
+                } else {
+                    //console.log('button switch to not active, show predicted map');
+    //                map.fire('dataloading');
+                    // delay 2 milliseconds to ensure dataloading is fired first.
+                    setTimeout(function() {
+                        // if true_map_layer is present, remove it
+                        // if (map.hasLayer(true_map_layer)) {map.removeLayer(true_map_layer);}
+                        // if pred_map_layer hasn't been shown, add it
+
+                        showAlert('Predicted Map');
+                        if (map.hasLayer(pred_map_layer) == false){map.addLayer(pred_map_layer);}
+                        else{pred_map_layer.eachLayer(function (layer) {layer.getElement().style.display = 'block';});}
+                        true_map_layer.eachLayer(function (layer) {layer.getElement().style.display = 'none';});
+                        $('#switch-map').html('G').removeClass('btn-info').addClass('btn-success');
+    //                    map.fire('dataload');
+                    }, 2);
+                }
             }
         });
 
